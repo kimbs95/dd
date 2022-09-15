@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.myboot03.board.dao.BoardDAO">
+
+	<resultMap  id="articlesResult" type="articleVO">
+		<result property="level" column="levle" />
+		<result property="articleNO" column="articleNO" />
+		<result property="parentNO" column="parentNO" />
+		<result property="title" column="title" />
+		<result property="content" column="content" />
+		<result property="writeDate" column="writeDate" />
+		<result property="imageFileName" column="imageFileName" />
+	</resultMap>
+	
+<!-- 	<resultMap  id="imgResult" type="imageVO"> -->
+	<resultMap  id="imgResult" type="articleVO">
+		<result property="imageFileNO" column="imageFileNO" />
+		<result property="articleNO" column="articleNO" />
+		<result property="imageFileName" column="imageFileName" />
+	</resultMap>
+
+	<select id="selectAllArticlesList" resultMap="articlesResult">
+		<![CDATA[
+		SELECT tb.articleNo, tb.parentNo, fnc.level,tb.title,tb.content,tb.imageFileName,tb.writeDate,tb.id
+		FROM (SELECT function_hierarchical() AS articleNO, parentNO, @level AS LEVEL, title, content, imageFileName,writeDate, id FROM
+		(SELECT @start_with:=0,@articleNO:=@start_with, @level:=0) tbl JOIN t_board) fnc
+		left outer join t_board tb ON tb.articleNo = fnc.articleNo
+		]]>
+	</select>
+	
+	<!-- 단일이미지 추가 -->
+	
+	<insert id="insertNewArticle" parameterType="java.util.Map">
+		<![CDATA[
+		insert into t_board(articleNO, title,content,imageFileName, id)
+		VALUES(#{articleNO},#{title},#{content},#{imageFileName},#{id})
+		]]>
+	</insert>
+	
+	<select id="selectNewArticleNO" resultType="int">
+		<![CDATA[
+			SELECT max(articleNO)+1 from t_board
+		]]>
+	</select>
+	
+	
+	<!--  새글 추가기능 사용 -->
+	<select id="selectNewImageFileNO" resultType="int">
+		<![CDATA[
+			select nvl(max(imageFileNO),0) from t_imageFile
+		]]>
+	</select>
+	
+	<select id="selectImageFileList" resultMap="imgResult" parameterType="int">
+		<![CDATA[
+			select * from t_imageFile
+			where articleNO=#{articleNO}
+		]]>
+	</select>
+	
+	<insert id="insertNewImage" parameterType="java.util.Map">
+		INSERT INTO t_imageFile(imageFileNO, imageFileName, articleNO)
+		VALUES
+		<foreach item="item" collection="list"  separator=", " >
+					(#{item.imageFileNO}, 
+					#{item.imageFileName}, 
+					#{item.articleNO})
+		</foreach>
+
+	</insert>
+	
+	
+	<select id="selectArticle" resultType="articleVO" parameterType="int">
+		<![CDATA[
+			select * from t_board
+			where articleNO = #{articleNO}
+		]]>
+	</select>
+	
+	<!-- 답글추가  -->
+	<insert id="insertreplyArticle" parameterType="java.util.Map">
+		<![CDATA[
+			INSERT into t_board(articleNO,parentNO, title, content, id , imageFileName)
+			VALUES(#{articleNO},#{parentNO}, #{title}, #{content}, #{id}, null)
+		]]>
+	</insert>
+	
+	
+	<update id="updateArticle" parameterType="java.util.Map">
+			update t_board
+			set title =#{title},
+			content =#{content}
+			<if test="imageFileName != '' and imageFileName !=null ">
+			, imageFileName=#{imageFileName}
+			</if>
+			where articleNO =#{articleNO}
+		
+	</update>
+
+	<delete id="deleteArticle" parameterType="int">
+		<![CDATA[
+			delete from t_board
+			where articleNO =#{articleNO} or parentNO=#{parentNO}
+		]]>
+	</delete>
+
+
+
+	<!-- <resultMap id="memResult" type="memberVO">
+		<result property="id" column="id" />
+        <result property="pwd" column="pwd" />
+        <result property="name" column="name" />
+        <result property="email" column="email" />
+        <result property="joinDate" column="joinDate" />
+	</resultMap> 
+	
+	<resultMap id="memResult" type="java.util.HashMap">
+      <result property="id" column="id" />
+      <result property="pwd" column="pwd" />
+      <result property="name" column="name" />
+      <result property="email" column="email" />
+      <result property="joinDate" column="joinDate" />
+   </resultMap>
+
+
+	<select id="selectAllMemberList" resultMap="memResult">
+      <![CDATA[
+         select * from t_member	order by joinDate desc	 	
+      ]]>
+	</select>
+    
+     <insert id="insertMember"  parameterType="memberVO">
+		<![CDATA[
+		 insert into t_member(id,pwd, name, email)
+		 values(#{id}, #{pwd}, #{name}, #{email})
+		]]>      
+	</insert>
+	
+   
+   <update id="updateMember"  parameterType="memberVO">
+     <![CDATA[
+	     update t_member
+	     set pwd=#{pwd}, name=#{name}, email=#{email}
+	     where
+	     id=#{id}
+      ]]>      
+   </update> 
+     
+   <delete id="deleteMember"  parameterType="String">
+	<![CDATA[
+	   delete from  t_member
+	   where
+	   id=#{id}
+	]]>      
+  </delete>
+  <select id="loginById"  resultType="memberVO"   parameterType="memberVO" >
+	<![CDATA[
+		select * from t_member	
+		where id=#{id} and pwd=#{pwd}		
+	]]>
+  </select> -->
+</mapper>
