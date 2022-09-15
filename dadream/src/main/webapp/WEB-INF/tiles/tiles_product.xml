@@ -7,14 +7,15 @@
       <put-attribute name="title" value="" />
       <put-attribute name="header" value="/WEB-INF/views/product/headerpp.jsp" />
       <put-attribute name="body" value="" />
+      <put-attribute name="side" value="/WEB-INF/views/product/proside.jsp" />
       <put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp" />
    </definition>
 
-   <definition name="/main" extends="baseLayout">
+   <definition name="/productmain" extends="baseLayout">
       <put-attribute name="title" value="가구 메인페이지" />
-      <put-attribute name="body" value="/WEB-INF/views/product/product.jsp" />
+      <put-attribute name="body" value="/WEB-INF/views/product/mainpro.jsp" />
    </definition>
-
+   
 
    <definition name="/member/listMembers" extends="baseLayout">
       <put-attribute name="title" value="KBS님의회원목록창" />

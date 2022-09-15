@@ -1,0 +1,109 @@
+
+            
+        
+        #main1{
+            background-image:url("../image/prod1.png");
+            width: 1130px;
+            height: 250px;
+            display: inline-block;
+            /* margin: 15px ; */
+            
+        }
+        .search{
+			display:flex;
+			justify-content: center;
+			
+			
+		}
+        .search li{
+            margin-top: 80px;
+        }
+        .dealingsearch{
+			width: 400px;
+            height: 40px;
+           
+		}
+
+        ul{display: inline-block;
+            list-style-type: none;
+            justify-content: center;
+            
+            
+            
+        }
+        li button{
+            width: 100px;
+            
+            
+        }
+        #search{
+            text-align: center;
+            justify-content: center;
+            margin-left: 40px;
+        }
+        .img-button{
+            background: url(../images/pro.JPG);
+            width: 150px;
+            height: 150px;
+            margin: 15px;
+            
+        }
+        #main2{
+            width: 1130px;
+            /* margin: 15px; */
+            
+        }
+        #main2_1{
+            justify-content: center; /* 중앙 정렬*/
+        }
+        
+        #main3{
+            border: 1px solid red;
+            width: 1130px;
+            height: 300px;
+            /* margin: 15px; */
+            display: flex;
+            justify-content: space-evenly;
+            display: table;
+           border-collapse: collapse;
+        }
+        #avg-dong-price{
+            /* background:url(images/pro.JPG); */
+            width: 50%;
+            height: 200px;
+            margin: 50px 0 0 40px;
+            border: 1px solid black;
+            border-collapse: collapse;
+            display: table-cell;
+           
+        }
+        #avg-dong-price1{
+            /* background:url(images/pro.JPG); */
+            width: 50%;
+            height: 200px;
+            margin: 50px 40px 0 0px;
+            border: 1px solid black;
+            border-collapse: collapse;
+            display: table-cell;
+        }
+        #main4{
+            width: 1130;
+            /* margin: 15px; */
+            display: flex;
+            justify-content: center;
+        }
+        #main4 > div{
+            display: flex;
+            width: 150px;
+            height: 150px;
+            border: 1px solid black;
+            /* margin: 15px; */
+            justify-content: center;
+            
+        }
+       h2{
+        margin-left: 50px;
+       }
+       
+       
+       

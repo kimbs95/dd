@@ -12,7 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class ProductControllerImpl implements ProductController {
 
 	
-	@RequestMapping(value ={"/", "/main.do"} ,method=RequestMethod.GET)
+	@RequestMapping(value ={"/productmain.do"} ,method=RequestMethod.GET)
 	private ModelAndView main(HttpServletRequest request , HttpServletResponse response)
 		throws Exception{
 		String viewName =(String)request.getAttribute("viewName");
@@ -23,8 +23,8 @@ public class ProductControllerImpl implements ProductController {
 	}
 
 	
-	@RequestMapping(value ={"/pro.do"} ,method=RequestMethod.GET)
-	private ModelAndView pro(HttpServletRequest request , HttpServletResponse response)
+	@RequestMapping(value ="/dealingmain.do" ,method=RequestMethod.GET)
+	private ModelAndView main1(HttpServletRequest request , HttpServletResponse response)
 		throws Exception{
 		String viewName =(String)request.getAttribute("viewName");
 		ModelAndView mav =new ModelAndView();

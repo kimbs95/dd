@@ -11,56 +11,26 @@
   <meta charset="UTF-8">
 
   <style>
-    /* #container {
-        width: 100%;
-        margin: 0px auto;
-          text-align:center;
-        border: 0px solid #bcbcbc;
-      } 
-      #header {
-        padding: 5px;
-        margin-bottom: 5px;
-        border: 0px solid #bcbcbc;
-        background-color: lightgray;
-      }
-      */
-    body {
+   
+    #container {
       width: 100%;
     }
 
-    #container {
+    #header {}
+
+    #flex {
       display: flex;
       flex-direction: column;
       align-items: center;
     }
 
-    #header {
-      width: 100%;
-    }
-
     #side {
-      display: flex;
-      flex-direction: row-reverse;
+      position: fixed;
+      top: 20%;
+      right: 18%;
     }
 
-    #footer {
-      width: 100%;
-    }
-
-    /*
-      #content {
-        width: 75%;
-        padding: 5px;
-        margin-right: 5px;
-        float: left;
-        border: 0px solid #bcbcbc;
-      }
-      #footer {
-        clear: both;
-        padding: 5px;
-        border: 0px solid #bcbcbc;
-         background-color: lightgray;
-      } */
+    #footer {}
   </style>
   <title>
     <tiles:insertAttribute name="title" />
@@ -68,18 +38,24 @@
 </head>
 
 <body>
-  <div id="container">
-    <div id="header">
-      <tiles:insertAttribute name="header" />
-    </div>
-    <div id="content">
-      <tiles:insertAttribute name="body" />
-    </div>
-    <div id="footer">
-      <tiles:insertAttribute name="footer" />
+  <div id="body">
+    <div id="container">
+      <div id="header">
+        <tiles:insertAttribute name="header" />
+      </div>
+      <div id="flex">
+        <div id="content">
+          <tiles:insertAttribute name="body" />
+        </div>
+      </div>
+      <div id="side">
+        <tiles:insertAttribute name="side" />
+      </div>
+      <div id="footer">
+        <tiles:insertAttribute name="footer" />
+      </div>
     </div>
   </div>
- 
 </body>
 
 </html>
