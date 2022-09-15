@@ -1,44 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"   isELIgnored="false"
  %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
+
 <head>
     <meta charset="UTF-8">
     <title>하단부분</title>
     <!-- reset css -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
-    <style>
-        * {
-            box-sizing: border-box;
-            user-select: none;
-            margin: 0 auto;
-        }
-
-        .footer {
-            width: 1920px;
-            padding: 20px 40px;
-            background: gray;
-            display: flex;
-            align-items: center;
-            justify-content: space-around;
-
-        }
-
-        footer .footer_img img {
-            width: 300px;
-        }
-
-        .footer_content {
-            font-weight: bold;
-            margin-top: 20px;
-        }
-        .footerinfo {
-            /* margin: 20px 30px; */
-            font-weight: bold;
-        }
-    </style>
+    <!-- css -->
+    <link rel="stylesheet" href="/css/footer.css">
 </head>
+
 <body>
     <footer>
         <div class="footer">

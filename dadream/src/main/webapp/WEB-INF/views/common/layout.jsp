@@ -9,21 +9,45 @@
 
 <head>
   <meta charset="UTF-8">
-  
+
   <style>
-     /* #container {
+    /* #container {
         width: 100%;
         margin: 0px auto;
           text-align:center;
         border: 0px solid #bcbcbc;
-      } */
-      /*
+      } 
       #header {
         padding: 5px;
         margin-bottom: 5px;
         border: 0px solid #bcbcbc;
-         background-color: lightgray;
+        background-color: lightgray;
       }
+      */
+    body {
+      width: 100%;
+    }
+
+    #container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    #header {
+      width: 100%;
+    }
+
+    #side {
+      display: flex;
+      flex-direction: row-reverse;
+    }
+
+    #footer {
+      width: 100%;
+    }
+
+    /*
       #content {
         width: 75%;
         padding: 5px;
@@ -55,6 +79,7 @@
       <tiles:insertAttribute name="footer" />
     </div>
   </div>
+ 
 </body>
 
 </html>

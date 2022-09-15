@@ -1,0 +1,85 @@
+  /*html {
+        
+        }*/
+
+        * {
+            box-sizing: border-box;
+            user-select: none;
+            /* margin: 0 auto; */
+            justify-content: space-between;
+        }
+
+        /* 카테고리 css */
+        .pro_category {
+            margin-top: 30px;
+            margin-bottom: 10px;
+            width: 1130px;
+            height: auto;
+            display: flex;
+            justify-content: space-around;
+            padding: 20px 0;
+            background: rgb(146, 142, 142);
+        }
+
+        .pro_category_image img {
+            width: 50px;
+            height: 50px;
+            /* border: 1px solid rgb(0, 0, 0); */
+            border-radius: 4%;
+        }
+
+        /* 메인 슬라이더 이미지 */
+        .bx-wrapper {
+            /* position: absolute; */
+            width: 1130px;
+        }
+
+        .pro_slider {
+            width: 1130px;
+            height: auto;
+        }
+
+        .pro_slider_image {
+            margin: 0 auto;
+            width: 11300px;
+            height: 300px;
+        }
+
+        /* 베스트상품 css */
+        .pro_best_item {
+            width: 1130px;
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+
+        .pro_best_item ul {
+            margin-left: 35px;
+        }
+
+        .pro_best_item ul li {
+            width: 200px;
+            height: 300px;
+            margin: 10px 20px;
+        }
+
+        .pro_best_item ul li img {
+            width: 200px;
+            height: 300px;
+        }
+
+        /* 인테리어 목록css */
+        .pro_myhouse_introduce {
+            
+            width: 1130px;
+            height: auto;
+            display: flex;
+            justify-content: space-around;
+            margin: 10px 20px;
+            flex-wrap: wrap;
+        }
+
+        .pro_introduce img {
+            width: 280px;
+            height: 200px;
+        }

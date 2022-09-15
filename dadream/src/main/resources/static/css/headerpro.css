@@ -1,0 +1,116 @@
+* {
+            box-sizing: border-box;
+            user-select: none;
+            margin: 0 auto;
+        }
+
+
+        /* maintab */
+        .maintab {
+            margin-top: 10px;
+            margin-bottom: 20px;
+            display: flex;
+            background: rgb(238, 232, 232);
+        }
+
+        .maintab li {
+            padding: 20px 20px;
+            cursor: pointer;
+            font-size: 20px;
+            font-weight: bold;
+            width: 100%;
+            text-align: center;
+        }
+
+        .maintab .a:hover {
+            background-color: rgb(146, 142, 142);
+        }
+
+        .maintab .b:hover {
+            background-color: rgb(161, 117, 20);
+        }
+
+        .hide {
+            display: none;
+        }
+
+        .red {
+            background-color: rgb(146, 142, 142);
+        }
+
+        .blue {
+            background-color: rgb(161, 117, 20);
+        }
+
+
+
+        /* header */
+        .header {
+            width: 1920px;
+            margin: 20px 0 0 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header .Main_Logo {
+            width: 220px;
+            height: 50px;
+        }
+
+        .headerleft {
+            display: flex;
+        }
+
+        .headerleft h1 {
+            font-weight: bold;
+            font-size: 30px;
+            margin-left: 40px;
+            margin-top: 1%;
+            width: 140px;
+        }
+
+        .search form {
+            display: flex;
+            margin-top: 2.5%;
+            width: 450px;
+            margin-right: 50px;
+        }
+
+        .header .search form input {
+            width: 400px;
+            height: 40px;
+        }
+
+        .headerul ul {
+            /* display: flex; */
+            margin-top: 2%;
+            font-size: 18px;
+            margin-left: 100px;
+            width: 300px;
+        }
+
+        header .headerul ul select {
+            height: 40px;
+        }
+
+        .headerul ul li {
+            display: inline-flex;
+            font-weight: bold;
+            margin-right: 50px;
+        }
+
+        header .headerul ul a {
+            margin-top: 1.5%;
+            text-decoration: none;
+            color: black;
+        }
+
+        /* top버튼 */
+        .top {
+            text-decoration: none;
+            color: black;
+            position: fixed;
+            bottom: 100px;
+            right: 40px;
+        }

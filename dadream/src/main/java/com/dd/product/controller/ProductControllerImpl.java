@@ -22,4 +22,15 @@ public class ProductControllerImpl implements ProductController {
 		return mav;
 	}
 
+	
+	@RequestMapping(value ={"/pro.do"} ,method=RequestMethod.GET)
+	private ModelAndView pro(HttpServletRequest request , HttpServletResponse response)
+		throws Exception{
+		String viewName =(String)request.getAttribute("viewName");
+		ModelAndView mav =new ModelAndView();
+		mav.setViewName(viewName);
+		System.out.println("interceptor에서 온 viewName:"+viewName);
+		return mav;
+	}
+
 }
