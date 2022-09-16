@@ -17,111 +17,8 @@
     <title>매물 중개사</title>
     <!-- reset css -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
-    <style>
-        * {
-            box-sizing: border-box;
-            user-select: none;
-            margin: 0 auto;
-        }
-
-        /* maintab */
-        .maintab {
-            display: flex;
-            margin-top: 10px;
-            margin-bottom: 20px;
-            background: rgb(238, 232, 232);
-        }
-
-        .maintab li {
-            padding: 20px 20px;
-            cursor: pointer;
-            font-size: 20px;
-            font-weight: bold;
-            width: 100%;
-            text-align: center;
-        }
-
-        .maintab .a:hover {
-            background-color: rgb(146, 142, 142);
-        }
-
-        .maintab .b:hover {
-            background-color: rgb(161, 117, 20);
-        }
-
-        .hide {
-            display: none;
-        }
-
-        .red {
-            background-color: rgb(146, 142, 142);
-        }
-
-        .blue {
-            background-color: rgb(161, 117, 20);
-        }
-
-
-
-
-        /* header */
-        .header {
-            width: 1920px;
-            margin: 20px 0 0 30px;
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-        }
-
-        .headerleft .Main_Logo {
-            width: 220px;
-            height: 50px;
-        }
-
-        .headerleft {
-            display: flex;
-        }
-
-        .headerleft h1 {
-            font-weight: bold;
-            font-size: 30px;
-            margin-left: 40px;
-            margin-top: 1%;
-            width: 140px;
-        }
-
-        .headerul ul {
-            margin-top: 2%;
-            font-size: 18px;
-            margin-left: 100px;
-            width: 300px;
-        }
-
-        .headerul ul select {
-            height: 40px;
-        }
-
-        .headerul ul li {
-            display: inline-flex;
-            font-weight: bold;
-            margin-right: 50px;
-        }
-
-        header .headerul ul a {
-            margin-top: 1.5%;
-            text-decoration: none;
-            color: black;
-        }
-
-        /* top버튼 */
-        .top {
-            text-decoration: none;
-            color: black;
-            position: fixed;
-            bottom: 100px;
-            right: 40px;
-        }
-    </style>
+    <!-- css -->
+    <link rel="stylesheet" href="/css/headerm.css">
 </head>
 
 <body>
@@ -136,7 +33,7 @@
     <!-- header -->
     <header class="header">
         <div class="headerleft">
-            <a href="#"><img class="Main_Logo" src="../image/메인로고.png" alt="다드림 메인로고"></a>
+            <a href="#" style="width:200px;"><img class="Main_Logo" src="../image/메인로고.png" alt="다드림 메인로고"></a>
             <h1>중개사</h1>
         </div>
 
@@ -155,7 +52,7 @@
                         </a>
                     </select>
                 </li>
-                <a href="#">
+                <a href="${contextPath}/dealingmain.do">
                     <li>로그인</li>
                 </a>
             </ul>

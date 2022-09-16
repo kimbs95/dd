@@ -33,12 +33,12 @@
     <!-- header -->
     <header class="header">
         <div class="headerleft">
-            <a href="#"><img class="Main_Logo" src="../image/메인로고.png" alt="다드림 메인로고"></a>
+            <a href="#" style="width:200px;"><img class="Main_Logo" src="../image/메인로고.png" alt="다드림 메인로고"></a>
             <h1>판매자</h1>
         </div>
         <div class="search">
             <form action="">
-                <input type="text" placeholder="검색어 입력">
+                <input type="search" placeholder="검색어 입력">
                 <button type="submit">검색</button>
             </form>
         </div>

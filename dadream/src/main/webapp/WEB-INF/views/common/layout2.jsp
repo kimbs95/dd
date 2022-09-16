@@ -11,6 +11,7 @@
   <meta charset="UTF-8">
 
   <style>
+   
     #container {
       width: 100%;
     }
@@ -21,15 +22,6 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-
-
-    }
-
-    #img {
-
-      position: fixed;
-      top: 20%;
-      left: 1%;
     }
 
     #side {
@@ -52,9 +44,6 @@
         <tiles:insertAttribute name="header" />
       </div>
       <div id="flex">
-        <div id="img">
-          <tiles:insertAttribute name="img" />
-        </div>
         <div id="content">
           <tiles:insertAttribute name="body" />
         </div>

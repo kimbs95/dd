@@ -6,14 +6,21 @@
    <definition name="baseLayout"  template="/WEB-INF/views/common/layout.jsp">
       <put-attribute name="title" value="" />
       <put-attribute name="header" value="/WEB-INF/views/product/headerpp.jsp" />
+      <put-attribute name="img" value="" />
       <put-attribute name="body" value="" />
-      <put-attribute name="side" value="/WEB-INF/views/product/proside.jsp" />
+      <put-attribute name="side" value="" />
       <put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp" />
    </definition>
-
    <definition name="/productmain" extends="baseLayout">
       <put-attribute name="title" value="가구 메인페이지" />
       <put-attribute name="body" value="/WEB-INF/views/product/mainpro.jsp" />
+   </definition>
+   
+   <definition name="/product" extends="baseLayout">
+      <put-attribute name="title" value="가구 메인페이지" />
+      <put-attribute name="img" value="/WEB-INF/views/product/imgside.jsp" />
+	  <put-attribute name="body" value="/WEB-INF/views/product/product.jsp" />
+      <put-attribute name="side" value="/WEB-INF/views/product/proside.jsp" />
    </definition>
    
 

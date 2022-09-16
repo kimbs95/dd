@@ -1,9 +1,6 @@
  /* 슬라이드 화면 css */
     .slide {
-      margin-top: 20px;
-      margin-bottom: 20px;
       
-
       /* layout */
       display: flex;
       flex-wrap: nowrap;
@@ -15,9 +12,11 @@
       position: relative;
 
       /* size */
-      width: 1130px;
+      width: 600px;
+      height:500px;
       
     }
+    
 
     .slide_item {
       /* layout */
@@ -30,8 +29,8 @@
       left: 0px;
 
       /* size */
-      width: 1130px;
-      height: 350px;
+      width: 600px;
+      height:500px;
       /* flex item의 flex-shrink는 기본값이 1이므로 컨테이너 크기에 맞게 줄어드는데, 슬라이드를 구현할 것이므로 줄어들지 않도록 0을 준다. */
       flex-shrink: 0;
 
@@ -68,26 +67,6 @@
       right: 10px;
     }
 
-    /* 각 슬라이드가 변경되는 것을 시각적으로 확인하기 쉽도록 각 슬라이드별 색상 적용 */
-    .slide_item:nth-child(1) {
-      background-color: darkgoldenrod;
-    }
-
-    .slide_item:nth-child(2) {
-      background-color: aqua;
-    }
-
-    .slide_item:nth-child(3) {
-      background-color: blueviolet;
-    }
-
-    .slide_item:nth-child(4) {
-      background-color: burlywood;
-    }
-
-    .slide_item:nth-child(5) {
-      background-color: cornflowerblue;
-    }
 
     /* 페이지네이션 스타일 */
     ul,
@@ -125,6 +104,14 @@
     .pro_category_menu p{
       margin: 10px 0;
     }
-    .fixed{
-      position: fixed;
-    }
+    
+    
+    .bx-wrapper {
+	width:600px;
+	webkit-box-shadow: none;
+    box-shadow: none;
+	}
+    
+    
+    
+    

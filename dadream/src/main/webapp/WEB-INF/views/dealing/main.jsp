@@ -14,6 +14,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>부동산 메인</title>
+    <!-- css -->
     <link rel="stylesheet" type="text/css" href="/css/main.css">
     
 </head>
@@ -35,7 +36,7 @@
                 <li><button type="submit"></button></li>
             </ul> -->
             <form   action="" style="display:inline-flex;  margin-top: 25px;">
-                <input class="dealingsearch" type="search" name="검색" /><input type="submit" value="검색"></form>
+                <input class="dealingsearch" type="search" name="검색" placeholder="검색어 입력" /><input type="submit" value="검색"></form>
             </form>
         </div>        
     </div>
