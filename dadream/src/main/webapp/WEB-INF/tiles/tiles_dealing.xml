@@ -14,9 +14,9 @@
   
    <definition name="/dealingmain" extends="baseLayout2">
       <put-attribute name="title" value="매물 메인페이지" />
-      <put-attribute name="body" value="/WEB-INF/views/common/login.jsp" />
+      <put-attribute name="body" value="/WEB-INF/views/common/userform.jsp" />
    </definition>
-   <definition name="/dealingmain" extends="baseLayout2">
+   <definition name="/dealingmain2" extends="baseLayout2">
       <put-attribute name="title" value="매물 메인페이지" />
       <put-attribute name="body" value="/WEB-INF/views/dealing/main.jsp" />
    </definition>

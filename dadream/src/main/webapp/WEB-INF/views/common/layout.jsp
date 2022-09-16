@@ -21,12 +21,9 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-
-
     }
 
     #img {
-
       position: fixed;
       top: 20%;
       left: 1%;
