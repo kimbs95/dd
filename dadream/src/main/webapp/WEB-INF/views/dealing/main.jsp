@@ -3,6 +3,7 @@
     isELIgnored="false" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
 <%
   request.setCharacterEncoding("UTF-8");
 %> 
@@ -47,26 +48,16 @@
         </form>
             <!-- 추천매물 리스트 -->
             <div id="main2_1" style="display: flex;">
-                <form action="#">
-                    <input type="submit" class="img-button" value="">
-                     <!--매물 정보 텍스트창 구현 필요  -->
-                </form>
-                <form action="#">
-                    <input type="submit" class="img-button" value="">  
-                    <!--매물 정보 텍스트창 구현 필요  -->
-                </form>
-                <form action="#">
-                    <input type="submit" class="img-button" value=""> 
-                    <!--매물 정보 텍스트창 구현 필요  -->
-                </form>
-                <form action="#">
-                    <input type="submit" class="img-button" value=""> 
-                    <!--매물 정보 텍스트창 구현 필요  -->
-                </form>
-                <form action="#">
-                    <input type="submit" class="img-button" value=""> 
-                    <!--매물 정보 텍스트창 구현 필요  -->
-                </form>
+                <a class="img-button" href="${contextPath}/dealingview.do">
+                </a>
+                <a class="img-button" href="${contextPath}/dealingview.do">
+                </a>
+                <a class="img-button" style="background-color: green;" href="${contextPath}/dealingview.do">
+                </a>
+                <a class="img-button" href="${contextPath}/dealingview.do">
+                </a>
+                <a class="img-button" href="${contextPath}/dealingview.do">
+                </a>
             </div>
     </div>
     

@@ -20,14 +20,18 @@
 <body>
     <!-- maintab -->
     <ul class="maintab">
-        <li class="a red">부동산</li>
-        <li class="b">가구</li>
+        <a href="${contextPath}/dealingmain.do">
+            <li class="a ">부동산</li>
+        </a>
+        <a href="${contextPath}/productmain.do">
+            <li class="b">가구</li>
+        </a>
     </ul>
 
     <!-- header -->
     <header class="header">
         <div class="headerleft">
-            <a href="#" style="width:200px;"><img class="Main_Logo" src="/image/메인로고.png" alt="다드림 메인로고"></a>
+            <a href="${contextPath}/productmain.do" style="width:200px;"><img class="Main_Logo" src="/image/메인로고.png" alt="다드림 메인로고"></a>
         </div>
         <div class="search">
             <form action="">
@@ -37,10 +41,10 @@
         </div>
         <div class="headerul">
             <ul>
-                <a href="#">
+                <a href="${contextPath}/login.do">
                     <li>로그인</li>
                 </a>
-                <a href="#">
+                <a href="${contextPath}/userjoin.do">
                     <li>회원가입</li>
                 </a>
             </ul>

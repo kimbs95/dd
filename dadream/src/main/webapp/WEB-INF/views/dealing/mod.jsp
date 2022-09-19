@@ -19,67 +19,8 @@
     <!-- 파일업로드 드래그앤드롭 -->
     <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css"/>
-
-    <style>
-        * {
-            margin: 0px;
-            padding: 0px;
-       
-        }
-        /* 나중에 width길이 조정 필요할 수 있음 */
-        .first {
-            position: absolute;
-            width: 1130px;
-            height: auto;
-            left: 20%;
-        }
-
-        .dlImg {
-            display: flex;
-            margin: 0 0 0 20px;
-            flex-wrap: wrap;
-        }
-
-        .dlMain {
-            margin-bottom: 0px;
-        }
-
-        /* 나중에 width길이 조정 필요할 수 있음 */
-        .middle{
-            display: flex;
-            justify-content: space-between;
-            width: 1130px;
-           
-        }
-
-        .dlThumbnail1 {
-            display: flex;
-            position: relative;
-            margin: 10px 0 0 0;
-        }
-
-        .dlThumbnail2 {
-            width: 100px;
-            height: 100px;
-            margin-right: 10px;
-        }
-
-        .cg {
-            margin: 50px 0 0 20px;
-        }
-
-        .cg select, input {
-            width: 300px;
-        }
-
-        .bds02 {
-            margin: 100px 0 0 20px;
-            text-align: center;
-            width: 200px;
-            display: inline-block;
-        }
-
-    </style>
+    <!-- css -->
+    <link rel="stylesheet" href="/css/dealingmod.css">
 
 </head>
 <body>
@@ -155,7 +96,7 @@
     </div>
    
     <!--상품 설명div-->
-    <div class="">
+    <div class="dealingcon">
             <h3>건물이름</h3>
             <input type="text" name="dl_title" placeholder="건물명을 입력해주세요." size="50">
             <br><br>

@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"   isELIgnored="false"  %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
-
-
+<c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <%
   request.setCharacterEncoding("UTF-8");
 %>
@@ -25,15 +24,20 @@
 
     <!-- maintab -->
     <ul class="maintab">
-        <li class="a red">부동산</li>
-        <li class="b">가구</li>
+        <a href="${contextPath}/dealingmain.do">
+            <li class="a">부동산</li>
+        </a>
+        <a href="${contextPath}/productmain.do">
+            <li class="b">가구</li>
+        </a>
     </ul>
 
 
     <!-- header -->
     <header class="header">
         <div class="headerleft">
-            <a href="#" style="width:200px;"><img class="Main_Logo" src="../image/메인로고.png" alt="다드림 메인로고"></a>
+            <a href="${contextPath}/productmain.do" style="width:200px;"><img class="Main_Logo" src="../image/메인로고.png"
+                    alt="다드림 메인로고"></a>
             <h1>판매자</h1>
         </div>
         <div class="search">
@@ -46,12 +50,16 @@
             <ul>
                 <li>
                     <select name="" id="">
-                        <option value="" selected>상품등록</option>
+                        <option value="" selected>
+                            <a href="${contextPath}/productform.do">
+                                상품등록
+                            </a>
+                        </option>
                         <option value="">상품관리</option>
                         <option value="">계정관리</option>
                     </select>
                 </li>
-                <a href="#">
+                <a href="{contextPath}/login.do">
                     <li>로그인</li>
                 </a>
             </ul>

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"   isELIgnored="false"  %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
+<c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
 
 <%
@@ -25,7 +26,7 @@
     <div class="pro_category">
         <ul>
             <div class="pro_category_image">
-                <a href="">
+                <a href="${contextPath}/product.do">
                     <li>
                         <img src="../메인 카테고리 사진/책상.png">
                     </li>
@@ -34,7 +35,7 @@
         </ul>
         <ul>
             <div class="pro_category_image">
-                <a href="">
+                <a href="${contextPath}/product.do">
                     <li>
                         <img src="../메인 카테고리 사진/침대.png">
                     </li>
@@ -43,7 +44,7 @@
         </ul>
         <ul>
             <div class="pro_category_image">
-                <a href="">
+                <a href="${contextPath}/product.do">
                     <li>
                         <img src="../메인 카테고리 사진/의자.png">
                     </li>
@@ -52,7 +53,7 @@
         </ul>
         <ul>
             <div class="pro_category_image">
-                <a href="">
+                <a href="${contextPath}/product.do">
                     <li>
                         <img src="../메인 카테고리 사진/스텐드.png">
                     </li>
@@ -61,7 +62,7 @@
         </ul>
         <ul>
             <div class="pro_category_image">
-                <a href="">
+                <a href="${contextPath}/product.do">
                     <li>
                         <img src="../메인 카테고리 사진/거울.png">
                     </li>
@@ -70,7 +71,7 @@
         </ul>
         <ul>
             <div class="pro_category_image">
-                <a href="">
+                <a href="${contextPath}/product.do">
                     <li>
                         <img src="../메인 카테고리 사진/서랍장.png">
                     </li>
@@ -79,7 +80,7 @@
         </ul>
         <ul>
             <div class="pro_category_image">
-                <a href="">
+                <a href="${contextPath}/product.do">
                     <li>
                         <img src="../메인 카테고리 사진/소파.png">
                     </li>
@@ -88,7 +89,7 @@
         </ul>
         <ul>
             <div class="pro_category_image">
-                <a href="">
+                <a href="${contextPath}/product.do">
                     <li>
                         <img src="../메인 카테고리 사진/식탁.png">
                     </li>
@@ -97,7 +98,7 @@
         </ul>
         <ul>
             <div class="pro_category_image">
-                <a href="">
+                <a href="${contextPath}/product.do">
                     <li>
                         <img src="../메인 카테고리 사진/옷장.png">
                     </li>

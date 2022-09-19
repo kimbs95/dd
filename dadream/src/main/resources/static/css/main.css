@@ -2,7 +2,7 @@
             
         
         #main1{
-            background-image:url("../image/prod1.png");
+            background-image:url("../image/메인로고.png");
             width: 1130px;
             height: 250px;
             display: inline-block;
@@ -56,6 +56,9 @@
         #main2_1{
             justify-content: center; /* 중앙 정렬*/
         }
+        #main2_1 > input {
+	cursor:pointer;
+}
         
         #main3{
             border: 1px solid red;

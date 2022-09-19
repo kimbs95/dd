@@ -1,0 +1,100 @@
+* {
+            box-sizing: border-box;
+            margin: 0px;
+            padding: 0px;
+        }
+
+        .first>h1 {
+            font-weight: bold;
+            font-size: 22px;
+            margin-top: 20px;
+        }
+
+
+
+        .dlImg {
+            display: flex;
+            margin: 0 0 0 20px;
+            flex-wrap: wrap;
+        }
+
+
+
+        .middle {
+            display: flex;
+            justify-content: space-between;
+            width: 1130px;
+        }
+
+        .dlThumbnail1 {
+            display: flex;
+            /* position: relative; */
+            margin: 10px 0 0 5px;
+        }
+
+        .dlThumbnail2 {
+            width: 100px;
+            margin-right: 10px;
+        }
+
+        .dlComments {
+            border: 2px solid black;
+            text-align: center;
+        }
+
+        .dlComments>div {
+            line-height: 1.9;
+        }
+
+        .dlComments>div h3 {
+            font-weight: bold;
+        }
+
+        .dlComments1 {
+            width: 400px;
+            margin-top: 20px;
+            height: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .dlComments1 p {
+            border: 1px solid black;
+            width: 350px;
+        }
+
+        #dlComments2 {
+            display: flex;
+            justify-content: space-around;
+        }
+
+        #dlComments2 p {
+            border: 1px solid black;
+            width: 170px;
+        }
+
+        #dlComments3 {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+
+        #dlComments3 p {
+            border: 1px solid black;
+            width: 170px;
+        }
+
+        #dlComments4 {
+            display: flex;
+            margin-top: 40px;
+        }
+
+        #dlcontents {
+            margin-top: 100px;
+            width: 650px;
+        }
+
+        #reportbtn {
+            margin-top: 100px;
+        }

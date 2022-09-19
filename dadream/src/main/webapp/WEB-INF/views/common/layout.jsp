@@ -35,7 +35,9 @@
       right: 18%;
     }
 
-    #footer {}
+    #footer {
+      width: 100%;
+    }
   </style>
   <title>
     <tiles:insertAttribute name="title" />

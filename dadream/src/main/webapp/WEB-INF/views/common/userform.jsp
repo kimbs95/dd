@@ -19,9 +19,9 @@
 </head>
 
 <body>
-    <form class="userForm" action="#" method="post">
-        <fieldset style="width:500px">
-            <h1 style="margin: 10px;">회원가입</h1>
+    <form class="userform" action="#" method="post">
+        <fieldset >
+            <h1>회원가입</h1>
             <br><br>
             <div class="form1">
 
@@ -62,8 +62,15 @@
                 <div class="userformbtn">
                     <input type="text" id="phoneCheck" name="휴대폰인증" size="40" /> <button>인증번호 확인</button>
                 </div>
-                <br><br><br>
-                <input type="submit" value="회원가입" style="margin-left: 135px;">
+                 
+                <!--판매자 ,중개사 전용 태그-->
+                <c:if test="${member == '3' || member == '2'}">
+                 <h3>사업자 번호</h3>
+                 <div class="userformbtn">
+                     <input type="text" id="businessNum" name="businessNum" size="40" />
+                 </div>
+             </c:if>
+                <input type="submit" value="회원가입" style="margin-left: 135px; margin-top: 20px; width: 100px; height: 40px;">
             </div>
         </fieldset>
     </form>

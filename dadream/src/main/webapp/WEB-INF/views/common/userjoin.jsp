@@ -3,6 +3,7 @@
     isELIgnored="false" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
 <%
   request.setCharacterEncoding("UTF-8");
 %>
@@ -26,31 +27,25 @@
         <h3>가입하실 회원의 종류를 선택해주세요.</h3>
         <br><br><br><br><br><br><br><br>
         <div class="memberType">
-            <form id="member1" method="post" action="#">
+            <form id="member1" method="get" action="${contextPath}/userform.do">
                 <button type="submit">
-                    <a href="#">
                         <img src="../image/customer.png" />
                         <p>일반회원 가입</p>
                         <input type="hidden" name="member" value="1" />
-                    </a>
                 </button>
             </form>
-            <form id="member2" method="post" action="#">
+            <form id="member2" method="" action="${contextPath}/userform.do">
                 <button type="submit">
-                    <a href="#">
                         <img src="../image/seller.png" />
                         <p>판매자회원 가입</p>
                         <input type="hidden" name="member" value="2" />
-                    </a>
                 </button>
             </form>
-            <form id="member3" method="post" action="#">
+            <form id="member3" method="" action="${contextPath}/userform.do">
                 <button type="submit">
-                    <a href="#">
                         <img src="../image/broker.png" />
                         <p>중개사회원 가입</p>
                         <input type="hidden" name="member" value="3" />
-                    </a>
                 </button>
             </form>
         </div>

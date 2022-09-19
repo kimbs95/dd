@@ -24,7 +24,7 @@
 </head>
 <body>
     <div id="category-menubar">
-        <div id="selectbox" style="display: flex; width: 940px; height: 30px;">
+        <div id="selectbox" style="display: flex; width: 940px; height: 30px;margin-top: 30px;">
             <select id="asd" style="width: 100px; height: 25px; text-align: center;">
                 <option>건물형태</option>
                 <option>아파트</option>
@@ -87,15 +87,15 @@
     <div id="prs-position" style="display:flex; width: 700px;">
         <input type="button" value="현 위치" action="#"><!--코드 생성 해야함-->
         <address>&nbsp;대전광역시 서구 둔산동 오라클빌딩</address>
-        <button type="submit" name="매물검색" action="#" style="margin-left:40px;"></button><input type="text" size="30px" name="검색창" placeholder="내용을 입력해주세요.">
+        <button type="submit" value="매물검색" action="#" style="margin-left:40px;">매물검색</button><input type="text" size="30px" name="검색창" placeholder="내용을 입력해주세요.">
     </div>
 
-    <div id="map" style="border: 0.5px solid grey; width: 1920px; height: 960px; display: flex;">
-        <div id="mapview" style="border:0.3px solid black; width: 1200px; height: 959px;">
+    <div id="map" style=" display: flex; margin-top: 20px;">
+        <div id="mapview" style="border:0.3px solid black; width: 1100px; height: 959px;">
 
         </div>
 
-        <div id="dealing-list" style="border:0.3px solid black; width: 540px; height: 959px; margin-left: 180px; display: inline-block;">
+        <div id="dealing-list" style=" display: flex; flex-direction: column; margin-left: 20px;overflow-y: hidden;">
             <div id="list" style="border:0.5px solid black; width: 540px; height: 300px; margin-bottom: 20px;">
 
             </div>

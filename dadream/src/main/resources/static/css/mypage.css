@@ -1,0 +1,60 @@
+ .mypage {
+            width: 1460px;
+            margin: auto;
+            /* margin: 0px auto; */
+            /* height: 1920px; */
+            /* background-color: rgb(220, 219, 219);  */
+
+        }
+
+        #myroom {
+            width: 1130px;
+            height: 350px;
+            display: flex;
+            margin: 5px;
+            /* margin: 0px auto; */
+        }
+
+        #likeroom {
+            width: 1130px;
+            height: 350px;
+            display: flex;
+            margin: 27px;
+            /* margin: 0px auto; */
+
+        }
+
+        .report {
+            align-content: center;
+            margin: 0px;
+            /* margin: 0px auto; */
+        }
+
+        .table {
+            width: 1130px;
+            border-top: 1px solid #444444;
+            border-collapse: collapse;
+            /* margin: 0px auto; */
+        }
+
+        td,
+        th {
+            border-bottom: 1px solid #444444;
+            border-left: 1px solid #444444;
+            padding: 10px;
+            text-align: center;
+
+
+        }
+
+        td:first-child,
+        th:first-child {
+            border-left: none;
+            text-align: center;
+
+        }
+
+        th {
+            font-weight: 700;
+            background-color: gainsboro;
+        }
