@@ -3,12 +3,11 @@
 	"http://mybatis.org/dtd/mybatis-3-config.dtd">
 
 <configuration>
-	<!-- <typeAliases>
-		<typeAlias type="com.myboot03.member.vo.MemberVO"  alias="memberVO" />
-		<typeAlias type="com.myboot03.board.vo.ArticleVO" alias="articleVO" />
-	</typeAliases>  -->
+	<!-- <typeAliases> <typeAlias type="com.dd.dealing.vo.MemberVO" alias="memberVO" 
+		/> <typeAlias type="com.myboot03.board.vo.ArticleVO" alias="articleVO" /> 
+		</typeAliases> -->
 	<mappers>
-		<!-- <mapper resource="mybatis/mappers/member.xml" />
-		<mapper resource="mybatis/mappers/board.xml" />  -->
+		<mapper resource="mybatis/mappers/member.xml" />
+		<!-- <mapper resource="mybatis/mappers/board.xml" /> -->
 	</mappers>
 </configuration>

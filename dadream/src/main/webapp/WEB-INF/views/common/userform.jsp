@@ -6,6 +6,7 @@
 <%
   request.setCharacterEncoding("UTF-8");
 %>
+<c:set var ="contextPath" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,7 +20,7 @@
 </head>
 
 <body>
-    <form class="userform" action="#" method="post">
+    <form class="userform" action="${contextPath}/addMember.do" method="post">
         <fieldset >
             <h1>회원가입</h1>
             <br><br>
@@ -28,15 +29,15 @@
 
                 <h3>이름</h3>
                 <div class="userformbtn">
-                    <input type="text" id="userName" name="이름" size="40" /><br><br>
+                    <input type="text" id="userName" name="user_Name" size="40" /><br><br>
                 </div>
                 <h3>아이디</h3>
                 <div class="userformbtn">
-                    <input type="text" id="userId" name="아이디" size="40" /> <button>중복확인</button><br><br>
+                    <input type="text" id="userId" name="user_Id" size="40" /> <button>중복확인</button><br><br>
                 </div>
                 <h3>비밀번호</h3>
                 <div class="userformbtn">
-                    <input type="password" id="userPwd" name="비밀번호" size="40" /><br><br>
+                    <input type="password" id="userPwd" name="user_Pwd" size="40" /><br><br>
                 </div>
                 <h3>비밀번호 확인</h3>
                 <div class="userformbtn">
@@ -44,19 +45,19 @@
                 </div>
                 <h3>주소</h3>
                 <div class="userformbtn">
-                    <input type="text" id="userAddress1" name="우편주소" size="40" /> <button>우편번호</button><br><br>
+                    <input type="text" id="userAddress1" name="user_Address1" size="40" /> <button>우편번호</button><br><br>
                 </div>
                 <h3>상세주소</h3>
                 <div class="userformbtn">
-                    <input type="text" id="userAddress2" name="주소" size="40" /><br><br>
+                    <input type="text" id="userAddress2" name="user_Address2" size="40" /><br><br>
                 </div>
                 <h3>이메일</h3>
                 <div class="userformbtn">
-                    <input type="email" id="userEmail" name="이메일" size="40" /><br><br>
+                    <input type="email" id="userEmail" name="user_Email" size="40" /><br><br>
                 </div>
                 <h3>휴대폰 인증</h3>
                 <div class="userformbtn">
-                    <input type="text" id="phoneNumber" name="휴대폰" size="40" /> <button>인증번호 받기</button><br><br>
+                    <input type="text" id="phoneNumber" name="user_Phone" size="40" /> <button>인증번호 받기</button><br><br>
                 </div>
                 <h3>인증번호 입력</h3>
                 <div class="userformbtn">
