@@ -83,7 +83,7 @@
                 </div>
                 <div id="dlComments3">
                     <div>
-                        <h3>관리비</h3>
+                        <h3>가격</h3>
                         <p>15만원</p>
                     </div>
                     <div>

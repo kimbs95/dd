@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     isELIgnored="false" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
   request.setCharacterEncoding("UTF-8");
-%> 
-<c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
+%>
+<c:set var="contextPath" value="${pageContext.request.contextPath}" />
+<c:set var="result" value="${param.result }" />
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -36,23 +37,40 @@
     <!-- header -->
     <header class="header">
         <div class="headerleft">
-            <a href="${contextPath}/dealingmain.do" style="width:200px;"><img class="Main_Logo" src="../image/메인로고.png" alt="다드림 메인로고"></a>
+            <a href="${contextPath}/dealingmain.do" style="width:200px;"><img class="Main_Logo" src="../image/메인로고.png"
+                    alt="다드림 메인로고"></a>
         </div>
-       
+
         <div class="headerul">
             <ul>
                 <a href="${contextPath}/dealingform.do">
                     <li>매물등록</li>
                 </a>
-                <a href="${contextPath}/login.do">
-                    <li>로그인</li>
-                </a>
-                <a href="${contextPath}/userjoin.do">
-                    <li>회원가입</li>
-                </a>
+                <c:choose>
+                    <c:when test="${isLogOn == true  && member!= null}">
+                        <li>
+                            <h6>${member.user_Name}님</h6>
+                        </li>
+                        <a href="${contextPath}/logout.do">
+                            <li>로그아웃</li>
+                        </a>
+                    </c:when>
+                    <c:otherwise>
+                        <a href="${contextPath}/login.do">
+                            <li>로그인</li>
+                        </a>
+                        <a href="${contextPath}/userjoin.do">
+                            <li>회원가입</li>
+                        </a>
+                    </c:otherwise>
+                </c:choose>
             </ul>
         </div>
     </header>
+
+
+
+
 
 
     <!-- 내용물 -->

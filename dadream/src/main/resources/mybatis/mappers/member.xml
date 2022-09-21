@@ -17,15 +17,16 @@
         <result property="user_Address1" column="user_Address1" />
         <result property="user_Address2" column="user_Address2" />
         <result property="user_Address3" column="user_Address3" />
+        <result property="user_Business" column="user_Business" />
 	</resultMap> 
 	
 	
 	  <insert id="insertMember"  parameterType="memberVO">
 		<![CDATA[
-		 insert into user_t(user_Id ,user_Pwd, user_Name, user_Phone,user_Email,user_Level,user_Sign,user_Birth,user_Address1,user_Address2,user_Address3)
+		 insert into user_t(user_Id ,user_Pwd, user_Name, user_Phone,user_Email,user_Level,user_Sign,user_Birth,user_Address1,user_Address2,user_Address3,user_business)
 		 values(#{user_Id}, #{user_Pwd}, #{user_Name}, #{user_Phone},
 		 #{user_Email},#{user_Level},#{user_Sign},#{user_Birth},
-		 #{user_Address1},#{user_Address2},#{user_Address3})
+		 #{user_Address1},#{user_Address2},#{user_Address3},#{user_Business})
 		]]>      
 	</insert>
 	
@@ -33,10 +34,10 @@
 	
 	
 	
-<!-- 	<select id="loginById"  resultType="memberVO"   parameterType="memberVO" >
+ 	<select id="loginById"  resultType="memberVO"   parameterType="memberVO" >
 	<![CDATA[
 		select * from user_t	
 		where user_Id = #{user_Id} and user_Pwd = #{user_Pwd}		
 	]]>
-  </select> -->
+  </select> 
 	</mapper>

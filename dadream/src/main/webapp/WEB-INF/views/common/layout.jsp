@@ -11,11 +11,18 @@
   <meta charset="UTF-8">
 
   <style>
+    
+    li {
+      color: black;
+      
+    }
     #container {
       width: 100%;
     }
 
-    #header {}
+    #header {
+      width: 100%;
+    }
 
     #flex {
       display: flex;

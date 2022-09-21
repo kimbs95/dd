@@ -7,7 +7,7 @@
   request.setCharacterEncoding("UTF-8");
 %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
-
+<c:set var="result" value="${param.result }" />
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -27,7 +27,6 @@
             Kakao.init('24a6c15e2202626d02ee581aa3846810');
             // SDK 초기화 여부를 판단합니다.
             console.log(Kakao.isInitialized());
-            
         </script>
 
 
@@ -42,58 +41,57 @@
                     }
                 </script>
             </c:when>
+
         </c:choose>
     </head>
 
 <body>
-    <div class="wrap" name="frmLogin" method="post" action="${contextPath}/user/login.do">
+    <div class="wrap" name="frmLogin">
         <div class="form-wrap">
             <div class="button-wrap">
                 <div id="btn"></div>
-                <button type="button" class="togglebtn" onclick="login()">LOG IN</button>
+                <!-- <button type="button" class="togglebtn" onclick="login()">LOG IN</button> -->
 
             </div>
             <div class="social-icons">
-                <img src="../image/face.png" alt="대체">
-                <img src="../image/ins.png" alt="대체">
+                <!-- <img src="../image/face.png" alt="대체">
+                <img src="../image/ins.png" alt="대체"> -->
             </div>
-            <form id="login" action="" class="input-group">
-                <input type="text" class="input-field" placeholder="User name or Email" required>
-                <input type="password" class="input-field" placeholder="Enter Password" required>
+            <form id="login" method="post" action="${contextPath}/logincheck.do" class="input-group">
+                <input type="text" class="input-field" name="user_Id" placeholder="ID" required>
+                <input type="password" class="input-field" name="user_Pwd" placeholder="PASSWORD" required>
                 <input type="checkbox" class="checkbox"><span>Remember Password</span>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <div>
-                    <button class="submit" action="#">Login</button>
-
+                    <button class="submit">Login</button>
                 </div>
             </form>
 
 
+            <a id="custom-login-btn" href="javascript:loginWithKakao()"
+                style="position: absolute;bottom: 80px;left: 78px;">
+                <img src="//k.kakaocdn.net/14/dn/btroDszwNrM/I6efHub1SN5KCJqLm1Ovx1/o.jpg" width="222"
+                    alt="카카오 로그인 버튼" />
+            </a>
         </div>
     </div>
-
-    <a id="custom-login-btn" href="javascript:loginWithKakao()">
-        <img src="//k.kakaocdn.net/14/dn/btroDszwNrM/I6efHub1SN5KCJqLm1Ovx1/o.jpg" width="222" alt="카카오 로그인 버튼" />
-    </a>
+    <!-- 카카오 로그인 -->
     <script type="text/javascript">
         function loginWithKakao() {
-            
+
             Kakao.Auth.authorize({
-                redirectUri: 'http://localhost:8080/productmain.do',
                 redirectUri: 'http://localhost:8080/dealingmain.do',
-                prompts:'login',
-                
+                prompts: 'login',
+
             });
-            
-            Kakao.Auth.login({
+
+            Kakao.Auth.createLoginButton({
                 success: function (authObj) {
                     alert(JSON.stringify(authObj))
-                    console.log(zz);
                 },
                 fail: function (err) {
                     alert(JSON.stringify(err))
-                    console.log(nn);
                 },
             })
         }

@@ -23,7 +23,7 @@
 
     <!-- css -->
     <link rel="stylesheet" href="/css/dealingform.css">
-  
+
 </head>
 
 <body>
@@ -31,8 +31,8 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
     <div class="first">
-        <h1 style="margin:20px 0 0 10px; font: bold;">매물등록</h1>
-        <br><br><br><br>
+        <h1 style="margin:40px 0 0 10px; font: bold;">매물등록</h1>
+
         <form method="get" action="" enctype="multipart/form-data">
             <div class="middle">
 
@@ -100,7 +100,7 @@
 
                 <!--상품 설명div-->
                 <div class="dealingcon">
-                    <h3>건물이름</h3>
+                    <h3>매물이름</h3>
                     <input type="text" name="dl_title" placeholder="건물명을 입력해주세요." size="50">
                     <br><br>
                     <h3>도시명</h3>
@@ -112,65 +112,68 @@
                     <h3>가격</h3>
                     <input type="text" name="dl_Price" placeholder="희망하시는 가격을 입력해주세요." size="50">
                     <br><br>
-                    <h3>매물정보</h3>
+                    <h3>옵션정보</h3>
                     <input type="text" name="dl_Info" placeholder="매물의 추가정보를 입력해주세요." size="50">
-                    <br><br>
-                    <h3>상세설명</h3>
-                    <input type="text" name="dl_Content" placeholder="매물에 대한 상세설명을 입력해주세요." size="50">
+
+                    <!--카테고리-->
+                    <div class="cg">
+                        <h3>카테고리 선택</h3>
+                        <br><br>
+                        <h5>건물형태</h5>
+                        <select>
+                            <option name="cg_Type1" value="아파트">아파트</option>
+                            <option name="cg_Type1" value="투룸+">투룸+</option>
+                            <option name="cg_Type1" value="원룸">원룸</option>
+                            <option name="cg_Type1" value="오피스텔">오피스텔</option>
+                            <option name="cg_Type1" value="주택">주택</option>
+                        </select>
+                        <br><br>
+                        <h5>매물종류</h5>
+                        <select>
+                            <option name="cg_Type2" value="매매">매매</option>
+                            <option name="cg_Type2" value="월세">월세</option>
+                            <option name="cg_Type2" value="전세">전세</option>
+                        </select>
+                        <br><br>
+                        <h5>방개수</h5>
+                        <select>
+                            <option name="cg_Room_Count" value="1">1층</option>
+                            <option name="cg_Room_Count" value="2">2층</option>
+                            <option name="cg_Room_Count" value="3">3층</option>
+                            <option name="cg_Room_Count" value="4">4층</option>
+                            <option name="cg_Room_Count" value="5">5층</option>
+                            <option name="cg_Room_Count" value="6">6층</option>
+                            <option name="cg_Room_Count" value="7">7층</option>
+                            <option name="cg_Room_Count" value="8">8층</option>
+                            <option name="cg_Room_Count" value="9">9층</option>
+                            <option name="cg_Room_Count" value="10">10층</option>
+                        </select>
+                        <br><br>
+                        <h5>평수</h5>
+                        <input type="text" name="cg_Width" placeholder="평수를 입력해주세요.">
+                        <br><br>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="dealingformcontent">
+                <h3>상세설명</h3>
+                
+                <textarea name="" id="" cols="120" rows="10" placeholder="매물에 대한 상세설명을 입력해주세요."></textarea>
+                
+                <div class="bds02">
+                    <input type="submit" class="btn btn-secondary btn-lg" value="등록하기">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="reset" class="btn btn-secondary btn-lg" value="다시입력">
                 </div>
             </div>
 
-            <!--카테고리-->
-            <div class="cg">
-                <h3>카테고리 선택</h3>
-                <br><br>
-                <h5>건물형태</h5>
-                <select>
-                    <option name="cg_Type1" value="아파트">아파트</option>
-                    <option name="cg_Type1" value="투룸+">투룸+</option>
-                    <option name="cg_Type1" value="원룸">원룸</option>
-                    <option name="cg_Type1" value="오피스텔">오피스텔</option>
-                    <option name="cg_Type1" value="주택">주택</option>
-                </select>
-                <br><br>
-                <h5>매물종류</h5>
-                <select>
-                    <option name="cg_Type2" value="매매">매매</option>
-                    <option name="cg_Type2" value="월세">월세</option>
-                    <option name="cg_Type2" value="전세">전세</option>
-                </select>
-                <br><br>
-                <h5>방개수</h5>
-                <select>
-                    <option name="cg_Room_Count" value="1">1층</option>
-                    <option name="cg_Room_Count" value="2">2층</option>
-                    <option name="cg_Room_Count" value="3">3층</option>
-                    <option name="cg_Room_Count" value="4">4층</option>
-                    <option name="cg_Room_Count" value="5">5층</option>
-                    <option name="cg_Room_Count" value="6">6층</option>
-                    <option name="cg_Room_Count" value="7">7층</option>
-                    <option name="cg_Room_Count" value="8">8층</option>
-                    <option name="cg_Room_Count" value="9">9층</option>
-                    <option name="cg_Room_Count" value="10">10층</option>
-                </select>
-                <br><br>
-                <h5>평수</h5>
-                <input type="text" name="cg_Width" placeholder="평수를 입력해주세요.">
-                <br><br>
-                <h5>추가옵션</h5>
-                <input type="text" name="cg_Option" placeholder="추가옵션을 입력해주세요.">
-                <br><br>
-            </div>
 
-            <div class="bds02">
-                <input type="submit" class="btn btn-secondary btn-lg"
-                value="등록하기">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="reset"
-                class="btn btn-secondary btn-lg" value="다시입력">
-            </div>
         </form>
-        <div class="" style="background-color:white; height: 200px;">
 
-        </div>
     </div>
 </body>
 

@@ -17,6 +17,7 @@ public class MemberVO {
 	private String user_Address1;
 	private String user_Address2;
 	private String user_Address3;
+	private int user_Business;
 
 	public MemberVO() {
 
@@ -24,7 +25,7 @@ public class MemberVO {
 
 	public MemberVO(String user_Id, String user_Pwd, String user_Name, String user_Phone, String user_Email,
 			int user_Level, Date user_Sign, String user_Birth, String user_Address1, String user_Address2,
-			String user_Address3) {
+			String user_Address3, int user_Business) {
 
 		this.user_Id = user_Id;
 		this.user_Pwd = user_Pwd;
@@ -37,6 +38,7 @@ public class MemberVO {
 		this.user_Address1 = user_Address1;
 		this.user_Address2 = user_Address2;
 		this.user_Address3 = user_Address3;
+		this.user_Business = user_Business;
 	}
 
 	public String getUser_Id() {
@@ -125,6 +127,14 @@ public class MemberVO {
 
 	public void setUser_Address3(String user_Address3) {
 		this.user_Address3 = user_Address3;
+	}
+
+	public int getUser_Business() {
+		return user_Business;
+	}
+
+	public void setUser_Business(int user_Business) {
+		this.user_Business = user_Business;
 	}
 
 }

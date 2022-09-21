@@ -20,4 +20,10 @@ public class DealingServiceImpl implements DealingService {
 	public int addMember(MemberVO member) throws DataAccessException {
 		return dealingDAO.insertMember(member);
 	}
+
+//	로그인확인
+	@Override
+	public MemberVO login(MemberVO memberVO) throws Exception {
+		return dealingDAO.loginById(memberVO);
+	}
 }

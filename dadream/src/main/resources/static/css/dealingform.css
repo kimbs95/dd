@@ -1,8 +1,8 @@
-* {
+/** {
             margin: 0px;
             padding: 0px;
 
-        }
+        }*/
 
         .first>h1 {
             font-weight: bold;
@@ -13,8 +13,9 @@
 
         .dlImg {
             display: flex;
-            margin: 0 0 0 20px;
-            flex-wrap: wrap;
+            justify-content: space-around;
+            margin: 10px 30px 0 20px;
+            flex-direction: column;
         }
 
         .dlMain {
@@ -24,16 +25,17 @@
         /* 나중에 width길이 조정 필요할 수 있음 */
         .middle {
             display: flex;
-            justify-content: space-between;
+            /*justify-content: space-between;*/
             width: 1130px;
 
         }
 
         .dealingcon {
-            line-height: 2;
+            
         }
         .dealingcon >h3{
             font-weight: bold;
+            margin-bottom: 10px;
         }
 
         .dlThumbnail1 {
@@ -52,18 +54,15 @@
         }
 
         .cg {
-            margin: 50px 0 0 20px;
+            margin: 50px 0 0 0;
         }
 
-        .cg select,
-        input {
-            width: 300px;
-        }
+        
 
         .bds02 {
-            margin: 100px 0 0 20px;
+            margin: 50px 0 0 0px;
             text-align: center;
-            width: 200px;
+            width: 1000px;
             display: inline-block;
         }
         .cg >h3{
@@ -71,6 +70,14 @@
             font-size: 19px;
         }
         .cg > h5{
-            line-height: 2;
-            font-weight: bold;
+			margin-bottom: 10px;
+			font-weight: bold;
         }
+        .dealingformcontent{
+			width: 850px;
+			margin-left: 20px;
+		}
+		.dealingformcontent > h3{
+			margin-bottom: 10px;
+			font-weight: bold;
+		}

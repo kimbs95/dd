@@ -12,4 +12,6 @@ public interface DealingDAO {
 
 	public int insertMember(MemberVO memberVO) throws DataAccessException;
 
+	public MemberVO loginById(MemberVO memberVO) throws DataAccessException;
+
 }

@@ -65,9 +65,11 @@
                 <option>반려동물</option>
                 <option>신축</option>
             </select>
+            <label for="">
+                <input type="text" placeholder="가격" style="text-align: center;">원
+            </label>
 
-
-            <label for="range1" style="display: flex; width:200px;height:25px;">보증금
+            <!-- <label for="range1" style="display: flex; width:200px;height:25px;">보증금
                 <input id="range1" type="range" min="0" max="10" step="1" value="5" />
                 <div id="val_range1" style="width: 5px;height: 5px;">5</div>
             </label>
@@ -75,7 +77,7 @@
             <label for="range1" style="display: flex; width:200px;height:25px;">월세
                 <input id="range1" type="range" min="0" max="10" step="1" value="5" />
                 <div id="val_range1" style="width: 5px;height: 5px;">5</div>
-            </label>
+            </label> -->
             <script>
                 document.querySelector("#range1").addEventListener("input", function(e) {
                     document.querySelector("#val_range1").innerHTML = e.target.value;
@@ -87,7 +89,7 @@
     <div id="prs-position" style="display:flex; width: 700px;">
         <input type="button" value="현 위치" action="#"><!--코드 생성 해야함-->
         <address>&nbsp;대전광역시 서구 둔산동 오라클빌딩</address>
-        <button type="submit" value="매물검색" action="#" style="margin-left:40px;">매물검색</button><input type="text" size="30px" name="검색창" placeholder="내용을 입력해주세요.">
+        <input type="text" size="30px" name="검색창" placeholder="내용을 입력해주세요."><button type="submit" value="매물검색" action="#" style="margin-left:40px;">매물검색</button>
     </div>
 
     <div id="map" style=" display: flex; margin-top: 20px;">

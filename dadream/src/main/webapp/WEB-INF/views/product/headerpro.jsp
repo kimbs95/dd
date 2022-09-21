@@ -24,11 +24,11 @@
 
     <!-- maintab -->
     <ul class="maintab">
-        <a href="${contextPath}/dealingmain.do">
-            <li class="a">부동산</li>
+        <a href="${contextPath}/dealingmain.do" style="color: balck;">
+            <li class="a" style="color: balck;">부동산</li>
         </a>
-        <a href="${contextPath}/productmain.do">
-            <li class="b">가구</li>
+        <a href="${contextPath}/productmain.do" style="color: balck;">
+            <li class="b" style="color: balck;">가구</li>
         </a>
     </ul>
 
@@ -42,8 +42,8 @@
         </div>
         <div class="search">
             <form action="">
-                <input type="search" placeholder="검색어 입력">
-                <button type="submit">검색</button>
+                <input type="search" placeholder="검색어 입력" style="appearance:auto ;">
+                <button type="submit" style="border: 1px solid;">검색</button>
             </form>
         </div>
         <div class="headerul">
@@ -59,9 +59,24 @@
                         <option value="">계정관리</option>
                     </select>
                 </li>
-                <a href="{contextPath}/login.do">
-                    <li>로그인</li>
-                </a>
+                <c:choose>
+                    <c:when test="${isLogOn == true  && member!= null}">
+                        <li>
+                            <h6>${member.user_Name}님</h6>
+                        </li>
+                        <a href="${contextPath}/logout.do">
+                            <li>로그아웃</li>
+                        </a>
+                    </c:when>
+                    <c:otherwise>
+                        <a href="${contextPath}/login.do">
+                            <li>로그인</li>
+                        </a>
+                        <a href="${contextPath}/userjoin.do">
+                            <li>회원가입</li>
+                        </a>
+                    </c:otherwise>
+                </c:choose>
             </ul>
         </div>
 

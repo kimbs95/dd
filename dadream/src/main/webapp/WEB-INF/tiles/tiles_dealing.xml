@@ -22,6 +22,12 @@
       <put-attribute name="header" value="/WEB-INF/views/common/header.jsp" />
       <put-attribute name="body" value="/WEB-INF/views/common/userform.jsp" />
    </definition>
+	<!--회원가입완료창 -->
+  <definition name="/formcheck" extends="baseLayout2">
+      <put-attribute name="title" value="회원가입" />
+      <put-attribute name="header" value="/WEB-INF/views/common/header.jsp" />
+      <put-attribute name="body" value="/WEB-INF/views/common/uformcheck.jsp" />
+   </definition>
     <!-- 로그인 -->
    <definition name="/login" extends="baseLayout2">
       <put-attribute name="title" value="로그인" />
