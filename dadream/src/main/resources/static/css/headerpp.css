@@ -60,6 +60,7 @@
             display: flex;
             align-items: center;
             justify-content: space-around;
+            height:52.5px
         }
 
         header .Main_Logo {
@@ -70,13 +71,13 @@
         .headerleft {
             display: flex;
         }
+    
 
         .search form {
             display: flex;
             margin-top: 2.5%;
             width: 450px;
             /*margin-left: 130px;*/
-            margin-right: 50px;
         }
 
         .search form input {
@@ -88,7 +89,8 @@
             margin-top: 2%;
             font-size: 18px;
             margin-left: 100px;
-            width: 300px;
+            width: 400px;
+            height: 22.5px;
         }
 
         .headerul ul li {
@@ -108,6 +110,28 @@
             text-decoration: none;
             color: black;
             position: fixed;
-            bottom: 100px;
+            bottom: 150px;
             right: 40px;
         }
+        
+        .headerpp > a{
+			display:block;	
+		}
+	
+		.headerpp> * {
+			margin-top: 5px;
+		}
+       .hidee{
+			display:none;
+		}
+		.pan{
+			text-decoration: none;
+            color: black;
+            position: fixed;
+           bottom: 110px;
+            right: 33px;
+		}
+		
+		
+		
+       

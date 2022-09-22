@@ -91,7 +91,7 @@
             margin-top: 2%;
             font-size: 18px;
             margin-left: 100px;
-            /*width: 300px;*/
+            width: 400px;
         }
 
         header .headerul ul select {
@@ -115,6 +115,14 @@
             text-decoration: none;
             color: black;
             position: fixed;
-            bottom: 100px;
+            bottom: 150px;
             right: 40px;
         }
+        .pan{
+			text-decoration: none;
+            color: black;
+            position: fixed;
+           bottom: 110px;
+            right: 33px;
+		}
+		

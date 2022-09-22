@@ -36,7 +36,7 @@
 
     <!-- header -->
     <header class="header">
-        <div class="headerleft">
+        <div class="headerleft" style="margin-right: 39.8%">
             <a href="${contextPath}/dealingmain.do" style="width:200px;"><img class="Main_Logo" src="../image/메인로고.png"
                     alt="다드림 메인로고"></a>
         </div>
@@ -48,6 +48,9 @@
                 </a>
                 <c:choose>
                     <c:when test="${isLogOn == true  && member!= null}">
+                        <a href="/mypage.do">
+                            <li>마이페이지</li>
+                        </a>
                         <li>
                             <h6>${member.user_Name}님</h6>
                         </li>
@@ -85,6 +88,8 @@
     <!-- TOP 부분 -->
     <!-- <a class="top" href=".headerleft">TOP</a> -->
     <a class="top" href="#">TOP</a>
+     <!-- 게시판 부분 -->
+     <a class ="pan" href="#">게시판</a>
     <!-- Channel Plugin Scripts -->
     <script>
         (function () {

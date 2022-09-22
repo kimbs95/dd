@@ -4,6 +4,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
+<c:set var="result" value="${param.result }" />
+
 <%
   request.setCharacterEncoding("UTF-8");
 %> 
@@ -41,12 +43,27 @@
 
         <div class="headerul">
             <ul>
-                <a href="${contextPath}/login.do">
-                    <li>로그인</li>
-                </a>
-                <a href="${contextPath}/userjoin.do">
-                    <li>회원가입</li>
-                </a>
+                <c:choose>
+                    <c:when test="${isLogOn == true  && member!= null}">
+                        <a href="/mypage.do">
+                            <li>마이페이지</li>
+                        </a>
+                        <li>
+                            <h6>${member.user_Name}님</h6>
+                        </li>
+                        <a href="${contextPath}/logout.do">
+                            <li>로그아웃</li>
+                        </a>
+                    </c:when>
+                    <c:otherwise>
+                        <a href="${contextPath}/login.do">
+                            <li>로그인</li>
+                        </a>
+                        <a href="${contextPath}/userjoin.do">
+                            <li>회원가입</li>
+                        </a>
+                    </c:otherwise>
+                </c:choose>
             </ul>
         </div>
     </header>

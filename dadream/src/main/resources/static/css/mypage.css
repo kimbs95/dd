@@ -1,9 +1,5 @@
  .mypage {
-            width: 1460px;
-            margin: auto;
-            /* margin: 0px auto; */
-            /* height: 1920px; */
-            /* background-color: rgb(220, 219, 219);  */
+           margin-top: 40px;
 
         }
 
@@ -46,6 +42,9 @@
 
 
         }
+        .table tr {
+			height:22px
+}
 
         td:first-child,
         th:first-child {

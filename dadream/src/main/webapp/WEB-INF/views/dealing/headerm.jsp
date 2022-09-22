@@ -25,7 +25,7 @@
 
     <!-- maintab -->
     <ul class="maintab">
-        <a href="${contextPath}/dealingmain.do">
+        <a href="${contextPath}/dealingmainvip.do">
             <li class="a">부동산</li>
         </a>
         <a href="${contextPath}/productmain.do">
@@ -37,23 +37,17 @@
     <!-- header -->
     <header class="header">
         <div class="headerleft">
-            <a href="${contextPath}/dealingmain.do" style="width:200px;"><img class="Main_Logo" src="../image/메인로고.png" alt="다드림 메인로고"></a>
+            <a href="${contextPath}/dealingmainvip.do" style="width:200px;"><img class="Main_Logo" src="../image/메인로고.png" alt="다드림 메인로고"></a>
             <h1>중개사</h1>
         </div>
 
         <div class="headerul">
             <ul>
                 <li>
-                    <select name="" id="">
-                        <a href="#">
-                            <option value="" selected>중개관리</option>
-                        </a>
-                        <a href="#">
+                    <select name="" id="" onchange="window.open(value,'_self');">
+                            <option value="" >중개관리</option>
                             <option value="">매물관리</option>
-                        </a>
-                        <a href="#">
-                            <option value="">계정관리</option>
-                        </a>
+                            <option value="${contextPath}/mypage.do">마이페이지</option>
                     </select>
                 </li>
                 <c:choose>
@@ -91,7 +85,7 @@
     <!-- TOP 부분 -->
     <!-- <a class="top" href=".headerleft">TOP</a> -->
     <a class="top" href="#">TOP</a>
-
+    <a class ="pan" href="#">게시판</a>
     <!-- Channel Plugin Scripts -->
     <script>
         (function () {

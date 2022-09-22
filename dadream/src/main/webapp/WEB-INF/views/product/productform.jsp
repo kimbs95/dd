@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
     <!-- css -->
     <link rel="stylesheet" href="/css/productform.css">
-    
+
 
 </head>
 
@@ -33,7 +33,7 @@
     <div class="first">
         <h1 style="margin:20px 0 0 10px; font: bold;">상품등록</h1>
         <br><br><br><br>
-        <form class="product_form" method="get" action="" enctype="multipart/form-data">
+        <form class="product_form" method="post" action="/productcheck.do" enctype="multipart/form-data">
             <div class="middle">
 
                 <!--이미지 div-->
@@ -106,56 +106,67 @@
                     var cnt = 1;
 
                     function fn_addtext() {
-                        $("#d_text").append("<br>" + "<input type='text' name='text" + cnt + "' />");
+                        $("#d_text").append("<br>" +
+                            "<input type='text' name='product_Option1' size='32'  placeholder='상품 옵션을 입력하세요.' />");
                         cnt++;
                     }
                     var cnt = 1;
 
                     function fn_addtext2() {
-                        $("#d_text2").append("<br>" + "<input type='text' name='text" + cnt + "' />");
+                        $("#d_text2").append("<br>" +
+                            "<input type='text' name='product_Option2' size='32'  placeholder='상품 추가 옵션을 입력하세요.' />"
+                            );
                         cnt++;
                     }
                 </script>
                 <!--상품 설명div-->
-                <div class="productcon">
-                    <h3>상품제목</h3>
-                    <input type="text" class="width300" name="dl_title" placeholder="ex)뜨거운침대" size="50">
-                    <br><br>
-                    <h3>싱픔설명</h3>
-                    <input type="text" class="width300" name="dl_city" placeholder="ex) 뜨거운침대는 매우 큰 사이즈입니다." size="50">
-                    <br><br>
-                    <div class="flexnum">
-                        <div class="margin10">
-                            <h3>상품가격</h3>
-                            <input type="text" class="width145" name="dl_Map" placeholder="상품가격을 입력하세요." size="50">
-                            <br><br>
-                        </div>
-                        <div class="margin10">
-                            <h3>상품수량</h3>
-                            <input type="text" class="width145" name="dl_Price" placeholder="상품수량을 입력해주세요." size="50">
-                            <br><br>
-                        </div>
+                <div class="productcg">
+                    <div class="productcon">
+                        <h3>상품제목</h3>
+                        <input type="text" class="width300" name="product_Name" placeholder="ex)뜨거운침대" size="70">
+                        <br><br>
+                        <h3>상품설명</h3>
+                        <input type="text" class="width300" name="product_Content" placeholder="ex) 뜨거운침대는 매우 큰 사이즈입니다."
+                            size="70">
+                        <br><br>
                     </div>
-                    <div class="option_all">
-                        <div class="option">
-                            <div class="flex_option">
-                                <h3>옵션</h3>
-                                <input type="button" value="추가" onclick="fn_addtext()" class="text_button" />
+                    <div class="pfcontrol">
+                        <div class="flexnum">
+                            <div class="margin10">
+                                <h3>상품가격</h3>
+                                <input type="text" class="width145" name="product_Price" placeholder="상품가격을 입력하세요."
+                                    size="32">
+                                <br><br>
                             </div>
-                            <input type="text" class="option_text" name="dl_Info" placeholder="매물의 옵션을 입력해주세요."
-                                size="50">
-
-                            <div id="d_text"></div>
-                            <br><br>
+                            <div class="margin10">
+                                <h3>상품수량</h3>
+                                <input type="text" class="width145" name="product_TotalCount"
+                                    placeholder="상품수량을 입력해주세요." size="32">
+                                <br><br>
+                            </div>
                         </div>
-                        <div class="option">
-                            <div class="flex_option">
-                                <h3>추가옵션</h3>
-                                <input type="button" value="추가" onclick="fn_addtext2()" class="text_button2" />
+
+                        <div class="option_all">
+                            <div class="option">
+                                <div class="flex_option">
+                                    <h3>옵션 <input type="button" value="추가" onclick="fn_addtext()" class="text_button" />
+                                    </h3>
+
+                                </div>
+
+
+                                <div id="d_text"></div>
+                                <br><br>
                             </div>
-                            <input type="text" class="option_text" name="dl_Info2" placeholder="상품의 추가옵션을 입력해주세요."
-                                size="50">
-                            <div id="d_text2"></div>
+                            <div class="option1">
+                                <div class="flex_option">
+                                    <h3>추가옵션 <input type="button" value="추가" onclick="fn_addtext2()"
+                                            class="text_button2" /></h3>
+
+                                </div>
+
+                                <div id="d_text2"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -199,7 +210,7 @@
                     class="btn btn-secondary btn-lg" value="다시입력">
             </div>
         </form>
-    
+
     </div>
     </div>
 </body>
