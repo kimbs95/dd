@@ -33,7 +33,7 @@
     <div class="first">
         <h1 style="margin:40px 0 0 10px; font: bold;">매물등록</h1>
 
-        <form method="get" action="" enctype="multipart/form-data">
+        <form method="post" action="${contextPath}/addNewdealing.do" enctype="multipart/form-data"  name="dl_Image">
             <div class="middle">
 
                 <!--이미지 div-->
@@ -64,6 +64,7 @@
                                 dictRemoveFile: '삭제', // 삭제버튼 표시 텍스트
                                 acceptedFiles: '.jpeg,.jpg,.png,.gif,.JPEG,.JPG,.PNG,.GIF', // 이미지 파일 포맷만 허용
                             });
+                        
                         </script>
                     </div>
 
@@ -101,56 +102,56 @@
                 <!--상품 설명div-->
                 <div class="dealingcon">
                     <h3>매물이름</h3>
-                    <input type="text" name="dl_title" placeholder="건물명을 입력해주세요." size="50">
+                    <input type="text" name="dl_Title" placeholder="건물명을 입력해주세요." size="50">
                     <br><br>
                     <h3>도시명</h3>
-                    <input type="text" name="dl_city" placeholder="ex) 서울, 부산, 대전" size="50">
+                    <input type="text" name="dl_City" placeholder="ex) 서울, 부산, 대전" size="50">
                     <br><br>
                     <h3>주소입력</h3>
-                    <input type="text" name="dl_Map" placeholder="건물주소를 입력하세요." size="50">
+                    <input type="text" name="dl_Address" placeholder="건물주소를 입력하세요." size="50">
                     <br><br>
                     <h3>가격</h3>
                     <input type="text" name="dl_Price" placeholder="희망하시는 가격을 입력해주세요." size="50">
                     <br><br>
                     <h3>옵션정보</h3>
-                    <input type="text" name="dl_Info" placeholder="매물의 추가정보를 입력해주세요." size="50">
+                    <input type="text" name="dl_Option" placeholder="매물의 추가정보를 입력해주세요." size="50">
 
                     <!--카테고리-->
                     <div class="cg">
                         <h3>카테고리 선택</h3>
                         <br><br>
                         <h5>건물형태</h5>
-                        <select>
-                            <option name="cg_Type1" value="아파트">아파트</option>
-                            <option name="cg_Type1" value="투룸+">투룸+</option>
-                            <option name="cg_Type1" value="원룸">원룸</option>
-                            <option name="cg_Type1" value="오피스텔">오피스텔</option>
-                            <option name="cg_Type1" value="주택">주택</option>
+                        <select name="dl_Form">
+                            <option name="dl_Form" value="아파트">아파트</option>
+                            <option name="dl_Form" value="투룸+">투룸+</option>
+                            <option name="dl_Form" value="원룸">원룸</option>
+                            <option name="dl_Form" value="오피스텔">오피스텔</option>
+                            <option name="dl_Form" value="주택">주택</option>
                         </select>
                         <br><br>
                         <h5>매물종류</h5>
-                        <select>
-                            <option name="cg_Type2" value="매매">매매</option>
-                            <option name="cg_Type2" value="월세">월세</option>
-                            <option name="cg_Type2" value="전세">전세</option>
+                        <select name="dl_Form2">
+                            <option name="dl_Form2" value="매매">매매</option>
+                            <option name="dl_Form2" value="월세">월세</option>
+                            <option name="dl_Form2" value="전세">전세</option>
                         </select>
                         <br><br>
                         <h5>방개수</h5>
-                        <select>
-                            <option name="cg_Room_Count" value="1">1층</option>
-                            <option name="cg_Room_Count" value="2">2층</option>
-                            <option name="cg_Room_Count" value="3">3층</option>
-                            <option name="cg_Room_Count" value="4">4층</option>
-                            <option name="cg_Room_Count" value="5">5층</option>
-                            <option name="cg_Room_Count" value="6">6층</option>
-                            <option name="cg_Room_Count" value="7">7층</option>
-                            <option name="cg_Room_Count" value="8">8층</option>
-                            <option name="cg_Room_Count" value="9">9층</option>
-                            <option name="cg_Room_Count" value="10">10층</option>
+                        <select name="dl_Room">
+                            <option name="dl_Room" value="1">1층</option>
+                            <option name="dl_Room" value="2">2층</option>
+                            <option name="dl_Room" value="3">3층</option>
+                            <option name="dl_Room" value="4">4층</option>
+                            <option name="dl_Room" value="5">5층</option>
+                            <option name="dl_Room" value="6">6층</option>
+                            <option name="dl_Room" value="7">7층</option>
+                            <option name="dl_Room" value="8">8층</option>
+                            <option name="dl_Room" value="9">9층</option>
+                            <option name="dl_Room" value="10">10층</option>
                         </select>
                         <br><br>
                         <h5>평수</h5>
-                        <input type="text" name="cg_Width" placeholder="평수를 입력해주세요.">
+                        <input type="text" name="dl_Size" placeholder="평수를 입력해주세요.">
                         <br><br>
 
                     </div>
@@ -162,7 +163,7 @@
             <div class="dealingformcontent">
                 <h3>상세설명</h3>
                 
-                <textarea name="" id="" cols="120" rows="10" placeholder="매물에 대한 상세설명을 입력해주세요."></textarea>
+                <textarea name="dl_Content" id="dl_Content" cols="120" rows="10" placeholder="매물에 대한 상세설명을 입력해주세요."></textarea>
                 
                 <div class="bds02">
                     <input type="submit" class="btn btn-secondary btn-lg" value="등록하기">

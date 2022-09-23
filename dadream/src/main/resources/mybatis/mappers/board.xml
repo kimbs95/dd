@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+   
+   <mapper namespace="com.dd.dealing.dao.DealingDAO">
+   
+	<resultMap id="boardResult" type="boardVO">
+		<result property="inte_Num" column="inte_Num" />
+		<result property="inte_Title" column="inte_Title" />
+		<result property="inte_Text" column="inte_Text" />
+		<result property="inte_Image" column="inte_Image" />
+		<result property="inte_Date" column="inte_Date" />
+		<result property="user_Id" column="user_Id" />
+		
+	
+	</resultMap> 
+	
+		<!-- 게시글 등록 -->
+	  <insert id="insertboard"  parameterType="boardVO">
+		<![CDATA[
+		 insert into interior_t(inte_Num,inte_Title,inte_Text,inte_Image,inte_Date,user_Id)
+		 values(#{inte_Num},#{inte_Title},#{inte_Text},#{inte_Image},#{inte_Date},#{user_Id})
+		]]>
+	</insert>
+	
+	</mapper>

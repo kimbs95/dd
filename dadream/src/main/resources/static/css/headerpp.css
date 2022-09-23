@@ -71,7 +71,16 @@
         .headerleft {
             display: flex;
         }
-    
+        .ppcursor {
+	cursor: pointer;
+	
+}
+    	.ppcursor li h6 {
+	text-decoration: underline;
+	 text-underline-position : under;
+	  text-decoration-thickness: 2px;
+}
+		
 
         .search form {
             display: flex;
@@ -89,7 +98,7 @@
             margin-top: 2%;
             font-size: 18px;
             margin-left: 100px;
-            width: 400px;
+            width: 530px;
             height: 22.5px;
         }
 
@@ -100,7 +109,6 @@
         }
 
         .headerul ul a {
-            margin-top: 1.5%;
             text-decoration: none;
             color: black;
         }
@@ -120,7 +128,9 @@
 	
 		.headerpp> * {
 			margin-top: 5px;
+			
 		}
+		
        .hidee{
 			display:none;
 		}

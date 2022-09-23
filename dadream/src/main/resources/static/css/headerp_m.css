@@ -87,6 +87,13 @@
             text-decoration: none;
             color: black;
         }
+		/*.pmcursor > h6 {
+			
+			text-decoration: underline;
+	 text-underline-position : under;
+	  text-decoration-thickness: 2px;
+		}
+*/
 
         /* top버튼 */
         .top {

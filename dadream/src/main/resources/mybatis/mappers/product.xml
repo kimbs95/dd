@@ -14,7 +14,7 @@
         <result property="product_Content" column="product_Content" />
         <result property="product_Image" column="product_Image" />
         <result property="user_Id" column="user_Id" />
-        <result property="Product_Views" column="Product_Views" />
+        <result property="product_Views" column="product_Views" />
         <result property="product_Option1" column="product_Option1" />
         <result property="product_Option2" column="product_Option2" />
         <result property="product_ExImg" column="product_ExImg" />
@@ -24,10 +24,10 @@
 	
 	  <insert id="insertProduct"  parameterType="productVO">
 		<![CDATA[
-		 insert into product_t(product_Num ,product_Name, "product_Price", product_TotalCount,product_Date,product_Content,product_Image,user_Id,Product_Views,product_Option1,product_Option2,product_ExImg)
-		 values(#{product_Num}, #{product_Name}, #{"product_Price"}, #{product_TotalCount},
+		 insert into product_t(product_Num ,product_Name,product_Price, product_TotalCount,product_Date,product_Content,product_Image,user_Id,product_Views,product_Option1,product_Option2,product_ExImg)
+		 values(#{product_Num}, #{product_Name}, #{product_Price}, #{product_TotalCount},
 		 #{product_Date},#{product_Content},#{product_Image},#{user_Id},
-		 #{Product_Views},#{product_Option1},#{product_Option2},#{product_ExImg})
+		 #{product_Views},#{product_Option1},#{product_Option2},#{product_ExImg})
 		]]>      
 	</insert>
 	

@@ -31,63 +31,115 @@
     </ul>
 
 
-
-    <!-- header -->
-    <header class="header">
-        <div class="headerleft">
-            <a href="${contextPath}/productmain.do" style="width:200px;"><img class="Main_Logo" src="/image/메인로고.png"
-                    alt="다드림 메인로고"></a>
-        </div>
-        <div class="search" style="margin-left:7%;margin-top:4px;">
-            <form action="" >
-                <input type="search" placeholder="검색어 입력">
-                <button type="submit">검색</button>
-            </form>
-        </div>
-        <div class="headerul">
-            <ul style="display: flex;">
-                <c:choose>
-                    <c:when test="${isLogOn == true  && member!= null}">
-                        <a href="/mypage.do">
-                            <li>마이페이지</li>
-                        </a>
-                        <li class="headerppli" style="display: block;">
-                            <h6  style="padding-top: 4.8px;">${member.user_Name}님</h6>
-                            <div class="headerpp hidee">
-                                <a href="" style="margin-top:10px">
-                                    장바구니
-                                </a>
-                                <a href="" style="margin-top:10px">
-                                    인테리어
-                                </a>
-                            </div>
+    <c:choose>
+        <c:when test="${member.user_Level == 2}">
+            <!-- header -->
+            <header class="header">
+                <div class="headerleft">
+                    <a href="${contextPath}/productmainvip.do" style="width:200px;"><img class="Main_Logo"
+                            src="../image/메인로고.png" alt="다드림 메인로고"></a>
+                </div>
+                <div class="search">
+                    <form action="">
+                        <input type="search" placeholder="검색어 입력" style="appearance:auto ;">
+                        <button type="submit" style="border: 1px solid;">검색</button>
+                    </form>
+                </div>
+                <div class="headerul">
+                    <ul>
+                        <li>
+                            <select name="" id="" onchange="window.open(value,'_self');">
+                                <optgroup label="상품등록">
+                                    <option value="${contextPath}/productform.do">상품등록</option>
+                                    <option value="">상품관리</option>
+                                    <option value="${contextPath}/mypage.do">마이페이지</option>
+                                </optgroup>
+                            </select>
                         </li>
+                        <c:choose>
+                            <c:when test="${isLogOn == true  && member!= null}">
+                                <li>
+                                    <h6>${member.user_Name}님</h6>
+                                </li>
+                                <a href="${contextPath}/logout.do">
+                                    <li>로그아웃</li>
+                                </a>
+                            </c:when>
+                            <c:otherwise>
+                                <a href="${contextPath}/login.do">
+                                    <li>로그인</li>
+                                </a>
+                                <a href="${contextPath}/userjoin.do">
+                                    <li>회원가입</li>
+                                </a>
+                            </c:otherwise>
+                        </c:choose>
+                    </ul>
+                </div>
 
-                        <a href="${contextPath}/logout.do">
-                            <li>로그아웃</li>
-                        </a>
+            </header>
+        </c:when>
+        <c:otherwise>
 
-                    </c:when>
-                    <c:otherwise>
-                        <a href="${contextPath}/login.do">
-                            <li>로그인</li>
-                        </a>
-                        <a href="${contextPath}/userjoin.do">
-                            <li>회원가입</li>
-                        </a>
-                    </c:otherwise>
-                </c:choose>
-            </ul>
-        </div>
-        <script>
-            let headerppli = document.querySelector(".headerppli");
-            let hiderpp = document.querySelector(".headerpp");
-            headerppli.addEventListener("click", function () {
-                hiderpp.classList.toggle("hidee");
-            })
-        </script>
-    </header>
 
+            <!-- header -->
+            <header class="header">
+                <div class="headerleft">
+                    <a href="${contextPath}/productmain.do" style="width:200px;"><img class="Main_Logo"
+                            src="/image/메인로고.png" alt="다드림 메인로고"></a>
+                </div>
+                <div class="search" style="margin-left:7%;margin-top:4px;">
+                    <form action="">
+                        <input type="search" placeholder="검색어 입력">
+                        <button type="submit">검색</button>
+                    </form>
+                </div>
+                <div class="headerul">
+                    <ul style="display: flex;">
+                        <c:choose>
+                            <c:when test="${isLogOn == true  && member!= null}">
+                                <a href="/mypage.do">
+                                    <li>마이페이지</li>
+                                </a>
+                                <div class="ppcursor">
+                                    <li class="headerppli" style="display: block;">
+                                        <h6>${member.user_Name}님</h6>
+                                        <div class="headerpp hidee">
+                                            <a href="" style="margin-top:10px">
+                                                장바구니
+                                            </a>
+                                            <a href="" style="margin-top:10px">
+                                                인테리어
+                                            </a>
+                                        </div>
+                                    </li>
+                                </div>
+                                <a href="${contextPath}/logout.do">
+                                    <li>로그아웃</li>
+                                </a>
+
+                            </c:when>
+                            <c:otherwise>
+                                <a href="${contextPath}/login.do">
+                                    <li>로그인</li>
+                                </a>
+                                <a href="${contextPath}/userjoin.do">
+                                    <li>회원가입</li>
+                                </a>
+                            </c:otherwise>
+                        </c:choose>
+                    </ul>
+                </div>
+                <script>
+                    let headerppli = document.querySelector(".headerppli");
+                    let hiderpp = document.querySelector(".headerpp");
+                    headerppli.addEventListener("click", function () {
+                        hiderpp.classList.toggle("hidee");
+                    })
+                </script>
+            </header>
+        </c:otherwise>
+    </c:choose>
 
     <!-- 내용물 -->
     <div class="detaling">
@@ -102,7 +154,7 @@
     <!-- <a class="top" href=".headerleft">TOP</a> -->
     <a class="top" href="#">TOP</a>
     <!-- 게시판 부분 -->
-    <a class ="pan" href="#">게시판</a>
+    <a class="pan" href="#">게시판</a>
     <!-- Channel Plugin Scripts -->
     <script>
         (function () {

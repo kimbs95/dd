@@ -47,12 +47,8 @@
       <put-attribute name="header" value="/WEB-INF/views/dealing/headerp_m.jsp" />
       <put-attribute name="body" value="/WEB-INF/views/dealing/main.jsp" />
    </definition>
-   <!--중개사 매물 메인  -->
-   <definition name="/dealingmainvip" extends="baseLayout2">
-      <put-attribute name="title" value="중개사 매물 메인페이지" />
-      <put-attribute name="header" value="/WEB-INF/views/dealing/headerm.jsp" />
-      <put-attribute name="body" value="/WEB-INF/views/dealing/main.jsp" />
-   </definition>
+  
+   
    <!-- 매물등록 -->
    <definition name="/dealingform" extends="baseLayout2">
       <put-attribute name="title" value="매물 등록" />
@@ -76,5 +72,12 @@
       <put-attribute name="title" value="매물 상세보기" />
       <put-attribute name="header" value="/WEB-INF/views/dealing/headerp_m.jsp" />
       <put-attribute name="body" value="/WEB-INF/views/dealing/Map.jsp" />
+   </definition>
+   
+   
+   <definition name="/addinteboard" extends="baseLayout2">
+      <put-attribute name="title" value="매물 메인페이지" />
+      <put-attribute name="header" value="/WEB-INF/views/dealing/headerp_m.jsp" />
+      <put-attribute name="body" value="/WEB-INF/views/dealing/addboard.jsp" />
    </definition>
    </tiles-definitions>

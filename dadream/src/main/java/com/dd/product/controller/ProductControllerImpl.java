@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.dd.dealing.vo.MemberVO;
 import com.dd.product.service.ProductService;
 import com.dd.product.vo.ProductVO;
 
@@ -34,14 +34,6 @@ public class ProductControllerImpl implements ProductController {
 		return mav;
 	}
 
-	/* 판매자 가구 메인 */
-	@RequestMapping(value = { "/productmainvip.do" }, method = RequestMethod.GET)
-	private String productmainvip(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String viewName = (String) request.getAttribute("viewName");
-		System.out.println("interceptor에서 온 viewName:" + viewName);
-		return viewName;
-	}
-
 	/* 상품목록 */
 	@RequestMapping(value = { "/product.do" }, method = RequestMethod.GET)
 	private String product(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -50,16 +42,7 @@ public class ProductControllerImpl implements ProductController {
 		return viewName;
 	}
 
-	/* 판매자 상품 목록 */
-
-	@RequestMapping(value = { "/productvip.do" }, method = RequestMethod.GET)
-	private String productvip(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String viewName = (String) request.getAttribute("viewName");
-		System.out.println("interceptor에서 온 viewName:" + viewName);
-		return viewName;
-	}
-
-	/* 판매자 상품 등록 */
+	/* 판매자 상품 등록 창 */
 
 	@RequestMapping(value = { "/productform.do" }, method = RequestMethod.GET)
 	private String productform(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -68,19 +51,21 @@ public class ProductControllerImpl implements ProductController {
 		return viewName;
 	}
 
-	/* 상품등록 체크 */
-	@RequestMapping(value = "/productcheck.do", method = RequestMethod.POST)
-	private ModelAndView productcheck(@ModelAttribute("product") ProductVO product, RedirectAttributes rAttr,
+	/* 상품등록 */
+	@RequestMapping(value = "/productpost.do", method = RequestMethod.POST)
+	private ModelAndView productcheck(@ModelAttribute("product") ProductVO product,
 			MultipartHttpServletRequest multipartRequest, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		multipartRequest.setCharacterEncoding("utf-8");
+		String viewName = (String) request.getAttribute("viewName");
 		HttpSession session = request.getSession();
-		String user_Id = (String) session.getAttribute("user_Id");
+		MemberVO member = (MemberVO) session.getAttribute("member");
+		String user_Id = member.getUser_Id();
 		product.setUser_Id(user_Id);
 		int result = 0;
 		result = productService.addProduct(product);
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("dealingmain.do");
+		mav.setViewName("/productmain");
 		return mav;
 	}
 

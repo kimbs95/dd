@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+   
+   <mapper namespace="com.dd.dealing.dao.DealingDAO">
+   
+	<resultMap id="dealResult" type="dealingVO">
+		<result property="dl_Num" column="dl_Num" />
+		<result property="dl_Title" column="dl_Title" />
+		<result property="user_Id" column="user_Id" />
+		<result property="dl_City" column="dl_City" />
+		<result property="dl_Address" column="dl_Address" />
+		<result property="dl_Option" column="dl_Option" />
+		<result property="dl_Form" column="dl_Form" />
+		<result property="dl_Form2" column="dl_Form2" />
+		<result property="dl_Room" column="dl_Room" />
+		<result property="dl_Size" column="dl_Size" />
+		<result property="dl_Content" column="dl_Content" />
+		<result property="dl_Price" column="dl_Price" />
+		<result property="dl_Image" column="dl_Image" />
+		
+ 		
+	</resultMap> 
+	<resultMap  id="imgResult" type="dealingVO">
+		<result property="dl_Image" column="dl_Image" />
+		<result property="dl_Num" column="dl_Image" />
+		
+	</resultMap>
+	
+		<!-- 매물등록 -->
+	  <insert id="addNewdealing"  parameterType="dealingVO">
+		<![CDATA[
+		 insert into dealing_t(dl_Num,dl_Title,user_Id,dl_City,dl_Address,dl_Option,dl_Form,dl_Form2,dl_Room,dl_Size,dl_Content,dl_Price,dl_Image)
+		 values(#{dl_Num},#{dl_Title},#{user_Id},#{dl_City},#{dl_Address},#{dl_Option},#{dl_Form},#{dl_Form2},#{dl_Room},#{dl_Size},#{dl_Content},#{dl_Price},#{dl_Image})
+		]]>
+	</insert>
+	<insert id="insertNewImage" parameterType="java.util.Map">
+		INSERT INTO dealing_t(dl_Image,dl_Num)
+		VALUES
+		<foreach item="item" collection="list"  separator=", " >
+					(#{item.dl_Image}, 
+					)
+		</foreach>
+
+	</insert>
+	
+	
+	</mapper>

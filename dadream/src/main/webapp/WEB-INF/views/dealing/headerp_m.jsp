@@ -33,46 +33,106 @@
         </a>
     </ul>
 
+    <c:choose>
+        <c:when test="${member.user_Level == 3}">
+            <header class="header">
+                <div class="headerleft">
+                    <a href="${contextPath}/dealingmain.do" style="width:200px;"><img class="Main_Logo"
+                            src="../image/메인로고.png" alt="다드림 메인로고"></a>
+                </div>
 
-    <!-- header -->
-    <header class="header">
-        <div class="headerleft" style="margin-right: 39.8%">
-            <a href="${contextPath}/dealingmain.do" style="width:200px;"><img class="Main_Logo" src="../image/메인로고.png"
-                    alt="다드림 메인로고"></a>
-        </div>
-
-        <div class="headerul">
-            <ul>
-                <a href="${contextPath}/dealingform.do">
-                    <li>매물등록</li>
-                </a>
-                <c:choose>
-                    <c:when test="${isLogOn == true  && member!= null}">
-                        <a href="/mypage.do">
-                            <li>마이페이지</li>
-                        </a>
+                <div class="headerul">
+                    <ul>
                         <li>
-                            <h6>${member.user_Name}님</h6>
+                            <select name="" id="" onchange="window.open(value,'_self');">
+                                <option value="">중개관리</option>
+                                <option value="">매물관리</option>
+                                <option value="${contextPath}/mypage.do">마이페이지</option>
+                            </select>
                         </li>
-                        <a href="${contextPath}/logout.do">
-                            <li>로그아웃</li>
-                        </a>
+                        
+                        <c:choose>
+                            <c:when test="${isLogOn == true  && member!= null}">
+                                
+                              
+                                    <li>
+                                        <h6>${member.user_Name}님</h6>
+                                    </li>
+                                
+                                <a href="${contextPath}/logout.do">
+                                    <li>로그아웃</li>
+                                </a>
+                            </c:when>
+                            <c:otherwise>
+                                <a href="${contextPath}/login.do">
+                                    <li>로그인</li>
+                                </a>
+                                <a href="${contextPath}/userjoin.do">
+                                    <li>회원가입</li>
+                                </a>
+                            </c:otherwise>
+                        </c:choose>
+                    </ul>
+                </div>
+
+            </header>
+        </c:when>
+       
+        <c:otherwise>
+        <script>
+            function dont(){
+                <c:choose>
+                    <c:when test="${member.user_Id == null}">
+                        alert("로그인 후 작성 가능합니다.");
+                        event.preventDefault();
+
                     </c:when>
-                    <c:otherwise>
-                        <a href="${contextPath}/login.do">
-                            <li>로그인</li>
-                        </a>
-                        <a href="${contextPath}/userjoin.do">
-                            <li>회원가입</li>
-                        </a>
-                    </c:otherwise>
                 </c:choose>
-            </ul>
-        </div>
-    </header>
+            }
+        </script>
 
+            <!-- header -->
+            <header class="header">
+                <div class="headerleft" style="margin-right: 39.8%">
+                    <a href="${contextPath}/dealingmain.do" style="width:200px;"><img class="Main_Logo"
+                            src="../image/메인로고.png" alt="다드림 메인로고"></a>
+                </div>
 
+                <div class="headerul">
+                    <ul>
+                        <a onclick="dont();" href="${contextPath}/dealingform.do">
+                            <li>매물등록</li>
+                        </a>
 
+                        <c:choose>
+                            <c:when test="${isLogOn == true  && member!= null}">
+                                <a href="/mypage.do">
+                                    <li>마이페이지</li>
+                                </a>
+                                <li>
+                                    <div class="pmcurosr">
+                                    <h6>${member.user_Name}님</h6>
+                                    </div>
+                                </li>
+                                <a href="${contextPath}/logout.do">
+                                    <li>로그아웃</li>
+                                </a>
+                            </c:when>
+                            <c:otherwise>
+                                <a href="${contextPath}/login.do">
+                                    <li>로그인</li>
+                                </a>
+                                <a href="${contextPath}/userjoin.do">
+                                    <li>회원가입</li>
+                                </a>
+                            </c:otherwise>
+                        </c:choose>
+                    </ul>
+                </div>
+            </header>
+        </c:otherwise>
+
+    </c:choose>
 
 
 
@@ -88,8 +148,8 @@
     <!-- TOP 부분 -->
     <!-- <a class="top" href=".headerleft">TOP</a> -->
     <a class="top" href="#">TOP</a>
-     <!-- 게시판 부분 -->
-     <a class ="pan" href="#">게시판</a>
+    <!-- 게시판 부분 -->
+    <a class="pan" href="#">게시판</a>
     <!-- Channel Plugin Scripts -->
     <script>
         (function () {

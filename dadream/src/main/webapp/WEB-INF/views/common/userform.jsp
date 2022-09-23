@@ -73,12 +73,22 @@
                 </div>
 
                 <!--판매자 ,중개사 전용 태그-->
-                <c:if test="${member == '3' || member == '2'}">
-                    <h3>사업자 번호</h3>
-                    <div class="userformbtn">
-                        <input type="text" id="businessNum" name="user_Business" size="40" />
-                    </div>
-                </c:if>
+                <c:choose>
+                    <c:when test="${memberjoin == '2'}">
+                        <h3>사업자 번호</h3>
+                        <div class="userformbtn">
+                            <input type="text" id="businessNum" name="user_Business" size="40" />
+                            <input type="hidden" name="user_Level"  value =2>
+                        </div>
+                    </c:when>
+                    <c:when test="${memberjoin == '3'}">
+                        <h3>사업자 번호</h3>
+                        <div class="userformbtn">
+                            <input type="text" id="businessNum" name="user_Business" size="40" />
+                            <input type="hidden" name="user_Level"  value =3>
+                        </div>
+                    </c:when>
+                </c:choose>
                 <input type="submit" value="회원가입"
                     style="margin-left: 135px; margin-top: 20px; width: 100px; height: 40px;">
             </div>

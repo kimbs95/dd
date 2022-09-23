@@ -6,8 +6,15 @@
 	<!-- <typeAliases> <typeAlias type="com.dd.dealing.vo.MemberVO" alias="memberVO" 
 		/> <typeAlias type="com.myboot03.board.vo.ArticleVO" alias="articleVO" /> 
 		</typeAliases> -->
+		<!-- <settings>
+			<setting name="cacheEnabled" value="false" />
+			<setting name="jdbcTypeForNull" value="NULL" />
+		</settings> -->
 	<mappers>
 		<mapper resource="mybatis/mappers/member.xml" />
-		<!-- <mapper resource="mybatis/mappers/dealing.xml" /> -->
+		<mapper resource="mybatis/mappers/dealing.xml" /> 
+		<mapper resource ="mybatis/mappers/product.xml" />
+		<mapper resource ="mybatis/mappers/report.xml" />
+		<mapper resource="mybatis/mappers/board.xml"/>	
 	</mappers>
 </configuration>

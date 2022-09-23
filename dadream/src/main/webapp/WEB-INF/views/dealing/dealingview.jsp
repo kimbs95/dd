@@ -19,6 +19,10 @@
         function showPopup() {
             window.open("${contextPath}/call.do", "중개사번호", "width=400, height=500, top=200 left=600");
         }
+
+        function showPopup2() {
+            window.open("${contextPath}/rpPopUp.do", "신고하기", "width=500, height=600, top=200 left=600");
+        }
     </script>
     <!--부트스트랩-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
@@ -106,7 +110,8 @@
             </p>
         </div>
         <div id="reportbtn">
-            <a href="#" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">신고하기</a>
+            <!-- <a href="#" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">신고하기</a> -->
+            <button type="button" class="btn btn-secondary btn-lg" onclick="showPopup2();">신고하기</button>
         </div>
 
 </body>

@@ -31,21 +31,21 @@
                 <button type="submit">
                         <img src="../image/customer.png" />
                         <p>일반회원 가입</p>
-                        <input type="hidden" name="member" value="1" />
+                        <input type="hidden" name="memberjoin" value="1" />
                 </button>
             </form>
             <form id="member2" method="" action="${contextPath}/userform.do">
                 <button type="submit">
                         <img src="../image/seller.png" />
                         <p>판매자회원 가입</p>
-                        <input type="hidden" name="member" value="2" />
+                        <input type="hidden" name="memberjoin" value="2" />
                 </button>
             </form>
             <form id="member3" method="" action="${contextPath}/userform.do">
                 <button type="submit">
                         <img src="../image/broker.png" />
                         <p>중개사회원 가입</p>
-                        <input type="hidden" name="member" value="3" />
+                        <input type="hidden" name="memberjoin" value="3" />
                 </button>
             </form>
         </div>

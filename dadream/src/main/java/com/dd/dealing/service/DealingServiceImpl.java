@@ -1,5 +1,7 @@
 package com.dd.dealing.service;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
@@ -7,6 +9,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.dd.dealing.dao.DealingDAO;
+import com.dd.dealing.vo.BoardVO;
 import com.dd.dealing.vo.MemberVO;
 
 @Service("dealingService")
@@ -25,5 +28,23 @@ public class DealingServiceImpl implements DealingService {
 	@Override
 	public MemberVO login(MemberVO memberVO) throws Exception {
 		return dealingDAO.loginById(memberVO);
+	}
+
+	// 매물등록
+	@Override
+	public int addNewdealing(Map dealingMap) throws DataAccessException {
+		return dealingDAO.addNewdealing(dealingMap);
+	}
+
+	// 인테리어 게시글추가
+	@Override
+	public int addinteboard(BoardVO board) throws DataAccessException {
+		return dealingDAO.insertboard(board);
+	}
+
+//	신고하기
+	@Override
+	public int addReport(Map rpMap) throws DataAccessException {
+		return dealingDAO.insertReport(rpMap);
 	}
 }

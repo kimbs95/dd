@@ -33,7 +33,7 @@
     <div class="first">
         <h1 style="margin:20px 0 0 10px; font: bold;">상품등록</h1>
         <br><br><br><br>
-        <form class="product_form" method="post" action="/productcheck.do" enctype="multipart/form-data">
+        <form class="product_form" method="post" action="/productpost.do" enctype="multipart/form-data">
             <div class="middle">
 
                 <!--이미지 div-->
