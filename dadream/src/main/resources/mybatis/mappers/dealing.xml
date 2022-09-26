@@ -22,11 +22,7 @@
 		
  		
 	</resultMap> 
-	<resultMap  id="imgResult" type="dealingVO">
-		<result property="dl_Image" column="dl_Image" />
-		<result property="dl_Num" column="dl_Image" />
-		
-	</resultMap>
+
 	
 		<!-- 매물등록 -->
 	  <insert id="addNewdealing"  parameterType="dealingVO">

@@ -7,6 +7,7 @@
   request.setCharacterEncoding("UTF-8");
 %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
+<c:set var="result" value="{param.result}" />
 <!DOCTYPE html>
 <html lang="en">
 
@@ -33,20 +34,47 @@
                 </div>
                 <h3>아이디</h3>
                 <div class="userformbtn">
-                    <input type="text" id="userId" name="user_Id" size="40" /> <button>중복확인</button><br><br>
+                    <input type="text" id="userId" name="user_Id" size="40" /> <button
+                        id="idcheck">중복확인</button><br><br>
+                    <h3 class="idcheckresult"></h3>
+
+                    <script>
+                        const idcheck = document.querySelector("#idcheck");
+                        const userId = document.querySelector("#userId");
+                        const idcheckresult = document.querySelector(".idcheckresult");
+                        idcheck.addEventListener("click", function (e) {
+                            e.preventDefault();
+                            const req = {
+                                method:'POST',
+                                headers:{'content-type':'application/json'},
+                                data :JSON.stringify({
+                                    user_Id:userId.value
+                                })
+                            }
+                            fetch('/idcheck.do',req)
+                                .then(res =>{console.log(res);})
+                            
+                                
+                                
+
+                        })
+                    </script>
+
+
+
                 </div>
                 <h3>비밀번호</h3>
                 <div class="userformbtn">
-                    <input type="password" id="userPwd" name="user_Pwd" size="40" /><br><br>
+                    <input type="password" id="userPwd" name="user_Pwd" size="40" /><span id="pwd"></span><br><br>
                 </div>
                 <h3>비밀번호 확인</h3>
                 <div class="userformbtn">
-                    <input type="password" id="userPwd2" name="비밀번호확인" size="40" /><br><br>
+                    <input type="password" id="userPwd2" name="비밀번호확인" size="40" /><span id="pwd2"></span><br><br>
                 </div>
                 <h3>주소</h3>
                 <div class="userformbtn">
-                    <input type="text" id="sample4_postcode" placeholder="우편번호" name="user_Address1" size="40" /> <input type="button"
-                        onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br><br>
+                    <input type="text" id="sample4_postcode" placeholder="우편번호" name="user_Address1" size="40" /> <input
+                        type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br><br>
                 </div>
                 <h3>도로명주소</h3>
                 <div class="userformbtn">
@@ -78,14 +106,14 @@
                         <h3>사업자 번호</h3>
                         <div class="userformbtn">
                             <input type="text" id="businessNum" name="user_Business" size="40" />
-                            <input type="hidden" name="user_Level"  value =2>
+                            <input type="hidden" name="user_Level" value=2>
                         </div>
                     </c:when>
                     <c:when test="${memberjoin == '3'}">
                         <h3>사업자 번호</h3>
                         <div class="userformbtn">
                             <input type="text" id="businessNum" name="user_Business" size="40" />
-                            <input type="hidden" name="user_Level"  value =3>
+                            <input type="hidden" name="user_Level" value=3>
                         </div>
                     </c:when>
                 </c:choose>
@@ -158,6 +186,31 @@
         }
     </script>
 
+    <script>
+        (function check() {
+
+
+            const userpwd = document.querySelector("#userPwd");
+            const userpwd2 = document.querySelector("#userPwd2");
+            userpwd.addEventListener("keyup", function () {
+                if (userpwd.value.length <= 8) {
+                    const pwd = document.querySelector("#pwd");
+                    pwd.textContent = "비밀번호 8자리 이상 이어야합니다.";
+                } else {
+                    pwd.textContent = "";
+                }
+            })
+            userpwd2.addEventListener("keyup", function () {
+
+                const pwd = document.querySelector("#pwd2");
+                if (userpwd.value !== userpwd2.value) {
+                    pwd.textContent = "비밀번호가 일치하지 않습니다.";
+                } else {
+                    pwd.textContent = "비밀번호가 일치합니다.";
+                }
+            })
+        })();
+    </script>
 </body>
 
 </html>

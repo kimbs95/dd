@@ -138,16 +138,16 @@
                         <br><br>
                         <h5>방개수</h5>
                         <select name="dl_Room">
-                            <option name="dl_Room" value="1">1층</option>
-                            <option name="dl_Room" value="2">2층</option>
-                            <option name="dl_Room" value="3">3층</option>
-                            <option name="dl_Room" value="4">4층</option>
-                            <option name="dl_Room" value="5">5층</option>
-                            <option name="dl_Room" value="6">6층</option>
-                            <option name="dl_Room" value="7">7층</option>
-                            <option name="dl_Room" value="8">8층</option>
-                            <option name="dl_Room" value="9">9층</option>
-                            <option name="dl_Room" value="10">10층</option>
+                            <option name="dl_Room" value=1>1층</option>
+                            <option name="dl_Room" value=2>2층</option>
+                            <option name="dl_Room" value=3>3층</option>
+                            <option name="dl_Room" value=4>4층</option>
+                            <option name="dl_Room" value=5>5층</option>
+                            <option name="dl_Room" value=6>6층</option>
+                            <option name="dl_Room" value=7>7층</option>
+                            <option name="dl_Room" value=8>8층</option>
+                            <option name="dl_Room" value=9>9층</option>
+                            <option name="dl_Room" value=10>10층</option>
                         </select>
                         <br><br>
                         <h5>평수</h5>

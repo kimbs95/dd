@@ -1,5 +1,7 @@
 package com.dd.product.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
@@ -19,5 +21,13 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public int addProduct(ProductVO product) throws DataAccessException {
 		return productDAO.insertProduct(product);
+	}
+
+	// 상품목록
+	@Override
+	public List<ProductVO> listProducts() throws Exception {
+		List<ProductVO> productsList = null;
+		productsList = productDAO.selectAllProductsList();
+		return productsList;
 	}
 }

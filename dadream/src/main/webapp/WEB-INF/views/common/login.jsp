@@ -58,7 +58,7 @@
                 <img src="../image/ins.png" alt="대체"> -->
             </div>
             <form id="login" method="post" action="${contextPath}/logincheck.do" class="input-group">
-                <input type="text" class="input-field" name="user_Id" placeholder="ID" required>
+                <input type="text" class="input-field" name="user_Id" placeholder="ID" autofocus required>
                 <input type="password" class="input-field" name="user_Pwd" placeholder="PASSWORD" required>
                 <input type="checkbox" class="checkbox"><span>Remember Password</span>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

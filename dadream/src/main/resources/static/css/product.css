@@ -104,7 +104,22 @@
     .pro_category_menu p{
       margin: 10px 0;
     }
-    
+    .pro_category_content{
+	display:flex;
+	margin-bottom: 10px;
+}
+
+	.productcontent > *{
+		margin-bottom: 5px;
+	}
+	.productcontent > h1{
+		font-weight: bold;
+		font-size: 20px;
+	}
+    .productcontent > h3 {
+		font-weight: bold;
+		
+}
     
     .bx-wrapper {
 	width:600px;

@@ -1,5 +1,6 @@
 package com.dd.dealing.service;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,14 @@ public class DealingServiceImpl implements DealingService {
 		return dealingDAO.insertMember(member);
 	}
 
+//	회원가입 아이디 중복체크
+	@Override
+	public int idcheck(String user_Id) throws DataAccessException {
+
+		int result = dealingDAO.idcheck(user_Id);
+		return result;
+	}
+
 //	로그인확인
 	@Override
 	public MemberVO login(MemberVO memberVO) throws Exception {
@@ -40,6 +49,13 @@ public class DealingServiceImpl implements DealingService {
 	@Override
 	public int addinteboard(BoardVO board) throws DataAccessException {
 		return dealingDAO.insertboard(board);
+	}
+
+//	인테리어 목록보기
+	public List<BoardVO> listArticles() throws Exception {
+		List<BoardVO> articlesList = null;
+		articlesList = dealingDAO.selectAllArticlesList();
+		return articlesList;
 	}
 
 //	신고하기

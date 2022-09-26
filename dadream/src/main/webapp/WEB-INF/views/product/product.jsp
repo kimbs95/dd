@@ -21,7 +21,7 @@
 <body>
 
   <!-- 슬라이드 body  절대 절대 건드리지 마시오 이거 없으면 화면 뒤틀림 -->
-  <div id="stupit" style="display:none; "  >
+  <div id="stupit" style="display:none; ">
     <div class="slide_item">1</div>
     <div class="slide_item">2</div>
     <div class="slide_item">3</div>
@@ -33,58 +33,23 @@
   </div>
   <!-- 카테고리상품들 -->
   <!-- 함부로 inlinecss 건드리면 안돼요 깨져용 -->
-  <div class="pro_category_padding" style="width: 850px; margin-left: 200px;">
-    <div class="pro_category_menu">
-      <a href="${contextPath}/productview.do">
-        <img src="../메인 카테고리 사진/스텐드.png" alt="" width="200px" height="200px">
-      </a>
+  <c:forEach var="product" items="${productsList}">
+    <div class="pro_category_padding" style="width: 850px; margin-left: 200px;">
       <div class="pro_category_content">
-        <p>title</p>
-        <p>pay</p>
-        <p>content</p>
+        <div class="productimg">
+          <a href="${contextPath}/productview.do">
+            <img src="../메인 카테고리 사진/스텐드.png" alt="" width="200px" height="200px">
+          </a>
+        </div>
+        <div class="productcontent">
+
+          <h1>${product.product_Name}</h1>
+          <h3><span>가격 : </span>${product.product_Price}</h3>
+          <p>${product.product_Content}</p>
+        </div>
       </div>
     </div>
-    <div class="pro_category_menu">
-      <a href="${contextPath}/productview.do">
-        <img src="../메인 카테고리 사진/스텐드.png" alt="" width="200px" height="200px">
-      </a>
-      <div class="pro_category_content">
-        <p>title</p>
-        <p>pay</p>
-        <p>content</p>
-      </div>
-    </div>
-    <div class="pro_category_menu">
-      <a href="${contextPath}/productview.do">
-        <img src="../메인 카테고리 사진/스텐드.png" alt="" width="200px" height="200px">
-      </a>
-      <div class="pro_category_content">
-        <p>title</p>
-        <p>pay</p>
-        <p>content</p>
-      </div>
-    </div>
-    <div class="pro_category_menu">
-      <a href="${contextPath}/productview.do">
-        <img src="../메인 카테고리 사진/스텐드.png" alt="" width="200px" height="200px">
-      </a>
-      <div class="pro_category_content">
-        <p>title</p>
-        <p>pay</p>
-        <p>content</p>
-      </div>
-    </div>
-    <div class="pro_category_menu">
-      <a href="${contextPath}/productview.do">
-        <img src="../메인 카테고리 사진/스텐드.png" alt="" width="200px" height="200px">
-      </a>
-      <div class="pro_category_content">
-        <p>title</p>
-        <p>pay</p>
-        <p>content</p>
-      </div>
-    </div>
-  </div>
+  </c:forEach>
 
 </body>
 

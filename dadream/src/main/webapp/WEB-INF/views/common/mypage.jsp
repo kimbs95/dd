@@ -54,7 +54,7 @@
                     <form>
                         <h3 style="font-weight: 900; font-size: 2em;">회원정보 변경</h3><br>
                         <label style="font-weight: 700; ">ID</label><br>
-                        <input type="text" style="margin: 10px 0;" value="사용자아이디" disabled="disabled"><br>
+                        <input type="text" style="margin: 10px 0;" value="${member.user_Id}" disabled="disabled"><br>
                         <label style="font-weight: 700;margin-bottom: 10px;">Password</label><br>
                         <input type="password" name="userPwd" id="pwd1" placeholder="비밀번호를 입력하세요" required="required"
                             style="margin-top:7px ;"><br>

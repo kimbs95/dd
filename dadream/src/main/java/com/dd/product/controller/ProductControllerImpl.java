@@ -1,5 +1,7 @@
 package com.dd.product.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -36,10 +38,13 @@ public class ProductControllerImpl implements ProductController {
 
 	/* 상품목록 */
 	@RequestMapping(value = { "/product.do" }, method = RequestMethod.GET)
-	private String product(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	private ModelAndView product(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = (String) request.getAttribute("viewName");
-		System.out.println("interceptor에서 온 viewName:" + viewName);
-		return viewName;
+		List<ProductVO> productsList = productService.listProducts();
+		ModelAndView mav = new ModelAndView(viewName);
+		mav.setViewName(viewName);
+		mav.addObject("productsList", productsList);
+		return mav;
 	}
 
 	/* 판매자 상품 등록 창 */

@@ -1,5 +1,6 @@
 package com.dd.dealing.dao;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -23,4 +24,7 @@ public interface DealingDAO {
 
 	public int insertboard(BoardVO boardVO) throws DataAccessException;
 
+	public List selectAllArticlesList() throws DataAccessException;
+
+	public int idcheck(String user_Id) throws DataAccessException;
 }

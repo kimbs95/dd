@@ -29,6 +29,13 @@
 		 #{user_Address1},#{user_Address2},#{user_Address3},#{user_Business})
 		]]>      
 	</insert>
+	<select id="idcheck"  resultType="int"   parameterType="String" >
+	<![CDATA[
+		select * from user_t	
+		where user_Id = #{user_Id} 		
+	]]>
+  </select>
+	
 	
 	
 	

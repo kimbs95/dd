@@ -126,8 +126,9 @@
                         <input type="text" class="width300" name="product_Name" placeholder="ex)뜨거운침대" size="70">
                         <br><br>
                         <h3>상품설명</h3>
-                        <input type="text" class="width300" name="product_Content" placeholder="ex) 뜨거운침대는 매우 큰 사이즈입니다."
-                            size="70">
+                        <!-- <input type="text" class="width300" name="product_Content" placeholder="ex) 뜨거운침대는 매우 큰 사이즈입니다."
+                            size="70"> -->
+                            <textarea name="product_Content" id="" cols="70" rows="15" placeholder="상품 상세 설명"></textarea>
                         <br><br>
                     </div>
                     <div class="pfcontrol">

@@ -21,22 +21,17 @@
 </head>
 <body>
     <div id="main1">
-        <!--아래 form 부분 중앙정렬 검토필요-->
-        <form> 
+        <!--아래 form 부분 중앙정렬 검토필요--> 
             <ul class="search">
-                <li><button type="submit" value="all">전체</button> </li>
-                <li><button type="submit" value="apt">아파트</button> </li>
-                <li><button type="submit" value="two-room">투룸+</button> </li>
-                <li><button type="submit" value="room">원룸</button> </li>
-                <li><button type="submit" value="op">오피스텔</button> </li>
-                <li><button type="submit" value="villa">주택</button> </li>
+                <li><form method="get" action="${contextPath}/map.do"><button type="submit" name="검색" value="전체">전체</button></form></li>
+                <li><form method="get" action="${contextPath}/map.do"><button type="submit" name="검색" value="아파트">아파트</button></form></li>
+                <li><form method="get" action="${contextPath}/map.do"><button type="submit" name="검색" value="투룸">투룸+</button></form></li>
+                <li><form method="get" action="${contextPath}/map.do"><button type="submit" name="검색" value="원룸">원룸</button></form></li>
+                <li><form method="get" action="${contextPath}/map.do"><button type="submit" name="검색" value="오피스텔">오피스텔</button></form></li>
+                <li><form method="get" action="${contextPath}/map.do"><button type="submit" name="검색" value="주택">주택</button></form></li>
             </ul>
-        </form>
         <div id="search">
-            <!-- <ul>
-                <li><button type="submit"></button></li>
-            </ul> -->
-            <form   action="" style="display:inline-flex;  margin-top: 25px;">
+            <form method="get" action="${contextPath}/map.do" style="display:inline-flex;  margin-top: 25px;">
                 <input class="dealingsearch" type="search" name="검색" placeholder="검색어 입력" /><input type="submit" value="검색"></form>
             </form>
         </div>        

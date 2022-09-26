@@ -2,33 +2,41 @@
 <!DOCTYPE mapper
       PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-   
-   <mapper namespace="com.dd.product.dao.ProductDAO">
-   
-		<resultMap id="proResult" type="productVO">
+
+<mapper namespace="com.dd.product.dao.ProductDAO">
+
+	<resultMap id="proResult" type="productVO">
 		<result property="product_Num" column="product_Num" />
-        <result property="product_Name" column="product_Name" />
-        <result property="product_Price" column="product_Price" />
-        <result property="product_TotalCount" column="product_TotalCount" />
-        <result property="product_Date" column="product_Date" />
-        <result property="product_Content" column="product_Content" />
-        <result property="product_Image" column="product_Image" />
-        <result property="user_Id" column="user_Id" />
-        <result property="product_Views" column="product_Views" />
-        <result property="product_Option1" column="product_Option1" />
-        <result property="product_Option2" column="product_Option2" />
-        <result property="product_ExImg" column="product_ExImg" />
-	</resultMap> 
-	
-	
-	
-	  <insert id="insertProduct"  parameterType="productVO">
+		<result property="product_Name" column="product_Name" />
+		<result property="product_Price" column="product_Price" />
+		<result property="product_TotalCount"
+			column="product_TotalCount" />
+		<result property="product_Date" column="product_Date" />
+		<result property="product_Content" column="product_Content" />
+		<result property="product_Image" column="product_Image" />
+		<result property="user_Id" column="user_Id" />
+		<result property="product_Views" column="product_Views" />
+		<result property="product_Option1" column="product_Option1" />
+		<result property="product_Option2" column="product_Option2" />
+		<result property="product_ExImg" column="product_ExImg" />
+	</resultMap>
+
+
+	<select id="selectAllProductsList" resultType="productVO"
+		parameterType="productVO">
+	<![CDATA[
+		select * from product_t order by product_Date desc
+	]]>
+	</select>
+
+
+	<insert id="insertProduct" parameterType="productVO">
 		<![CDATA[
 		 insert into product_t(product_Num ,product_Name,product_Price, product_TotalCount,product_Date,product_Content,product_Image,user_Id,product_Views,product_Option1,product_Option2,product_ExImg)
 		 values(#{product_Num}, #{product_Name}, #{product_Price}, #{product_TotalCount},
 		 #{product_Date},#{product_Content},#{product_Image},#{user_Id},
 		 #{product_Views},#{product_Option1},#{product_Option2},#{product_ExImg})
-		]]>      
+		]]>
 	</insert>
-	
-	</mapper>
+
+</mapper>
