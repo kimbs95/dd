@@ -1,6 +1,7 @@
 package com.dd.dealing.controller;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -18,6 +20,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -65,23 +68,15 @@ public class DealingControllerImpl {
 //	아이디 중복체크
 	@ResponseBody
 	@RequestMapping(value = "/idcheck.do", method = { RequestMethod.POST })
-	private int idcheck(String user_Id) throws Exception {
-		System.out.println("userId" + user_Id);
-
+	private Map<String, Object> idcheck(@RequestBody Map<String, Object> body) throws Exception {
 		int result = 0;
-		result = dealingService.idcheck(user_Id);
-		try {
-			if (result == 1) {
-				return 1;
-			} else {
-				return 0;
-			}
-		} catch (Exception e) {
-			System.out.println("뭐냐 넌 ? ");
-		}
+		result = dealingService.idcheck((String) body.get("user_Id"));
+		System.out.println((String) body.get("user_Id"));
+		Map<String, Object> map = new HashMap<>();
+		System.out.println(result);
+		map.put("resultCode", result);
 
-		System.out.println("result :" + result);
-		return result;
+		return map;
 	}
 
 //	회원가입 전송 
@@ -143,7 +138,7 @@ public class DealingControllerImpl {
 	}
 
 	/* 마이페이지 */
-	@RequestMapping(value = "/mypage.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/mypage.do", method = RequestMethod.POST)
 	private String mypage(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = (String) request.getAttribute("viewName");
 		System.out.println("interceptor에서 온 viewName:" + viewName);
@@ -195,11 +190,11 @@ public class DealingControllerImpl {
 		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
 		try {
 			int dl_Num = dealingService.addNewdealing(dealingMap);
-//			if (dl_Image != null && dl_Image.length() != 0) {
-//				File srcFile = new File(DEALING_IMAGE_REPO + "\\" + "temp" + "\\" + dl_Image);
-//				File destDir = new File(DEALING_IMAGE_REPO + "\\" + dl_Num);
-//				FileUtils.moveFileToDirectory(srcFile, destDir, true);
-//			}
+			if (dl_Image != null && dl_Image.length() != 0) {
+				File srcFile = new File(DEALING_IMAGE_REPO + "\\" + "temp" + "\\" + dl_Image);
+				File destDir = new File(DEALING_IMAGE_REPO + "\\" + dl_Num);
+				FileUtils.moveFileToDirectory(srcFile, destDir, true);
+			}
 
 			message = "<script>";
 			message += "alert('새글을 추가했습니다.');";
@@ -273,12 +268,34 @@ public class DealingControllerImpl {
 	}
 
 	/* 지도창 */
-
 	@RequestMapping(value = "/map.do", method = RequestMethod.GET)
-	private String map(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	private ModelAndView map(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = (String) request.getAttribute("viewName");
+		String search = (String) request.getParameter("search");
+		System.out.println("search : " + search);
 		System.out.println("interceptor에서 온 viewName:" + viewName);
-		return viewName;
+//		매물 전부 리스트 검색
+		List<DealingVO> allListdealing = dealingService.allListdealing();
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("search", search);
+		mav.addObject("allListdealing", allListdealing);
+		mav.setViewName(viewName);
+		return mav;
+	}
+
+	/* 지도 첫 검색 */
+	@RequestMapping(value = "/showMap.do", method = RequestMethod.GET)
+	@ResponseBody
+	public ResponseEntity showMap(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		String dl_Lat = request.getParameter("dl_Lat");
+		String dl_Lng = request.getParameter("dl_Lng");
+		System.out.println("dl_Lat : " + dl_Lat);
+		System.out.println("dl_Lng : " + dl_Lng);
+		List<DealingVO> dlMap = new ArrayList<DealingVO>();
+		dlMap = dealingService.selectMap();
+
+		return new ResponseEntity(dlMap, HttpStatus.OK);
 	}
 
 	// 인테리어 게시판 글쓰기

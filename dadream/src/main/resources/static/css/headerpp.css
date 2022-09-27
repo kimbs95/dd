@@ -80,6 +80,9 @@
 	 text-underline-position : under;
 	  text-decoration-thickness: 2px;
 }
+.ppcursor li h6:hover{
+	color:gray;
+}
 		
 
         .search form {

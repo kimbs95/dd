@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.dao.DataAccessException;
 
 import com.dd.dealing.vo.BoardVO;
+import com.dd.dealing.vo.DealingVO;
 import com.dd.dealing.vo.MemberVO;
 
 public interface DealingService {
@@ -18,6 +19,12 @@ public interface DealingService {
 
 //	로그인체크
 	public MemberVO login(MemberVO memberVO) throws Exception;
+
+//	지도검색
+	public List<DealingVO> selectMap() throws DataAccessException;
+
+//	매물 전부검색
+	public List<DealingVO> allListdealing() throws DataAccessException;
 
 	// 매물등록
 	public int addNewdealing(Map dealingMap) throws DataAccessException;

@@ -8,6 +8,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
 import com.dd.dealing.vo.BoardVO;
+import com.dd.dealing.vo.DealingVO;
 import com.dd.dealing.vo.MemberVO;
 
 @Mapper
@@ -27,4 +28,8 @@ public interface DealingDAO {
 	public List selectAllArticlesList() throws DataAccessException;
 
 	public int idcheck(String user_Id) throws DataAccessException;
+
+	public List<DealingVO> selectMap() throws DataAccessException;
+
+	public List<DealingVO> allListdealing() throws DataAccessException;
 }

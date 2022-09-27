@@ -9,17 +9,17 @@ public class DealingVO {
 	private int dl_Num;
 	private String dl_Title;
 	private String dl_Image;
-	private int dl_Price;
+	private String dl_Price;
 	private String dl_Address;
 	private String dl_Content;
-	private int dl_Views;
+	private String dl_Views;
 	private Date dl_Date;
 	private String user_Id;
 	private String dl_City;
 	private String dl_Form;
 	private String dl_Form2;
-	private int dl_Room;
-	private int dl_Size;
+	private String dl_Room;
+	private String dl_Size;
 	private String dl_Option;
 	private String dl_Lat;
 	private String dl_Lng;
@@ -28,10 +28,10 @@ public class DealingVO {
 
 	}
 
-	public DealingVO(int dl_Num, String dl_Title, String dl_Image, int dl_Price, String dl_Address, String dl_Content,
-			int dl_Views, Date dl_Date, String user_Id, String dl_City, String dl_Form, String dl_Form2, int dl_Room,
-			int dl_Size, String dl_Option, String dl_Lat, String dl_Lng) {
-
+	public DealingVO(int dl_Num, String dl_Title, String dl_Image, String dl_Price, String dl_Address,
+			String dl_Content, String dl_Views, Date dl_Date, String user_Id, String dl_City, String dl_Form,
+			String dl_Form2, String dl_Room, String dl_Size, String dl_Option, String dl_Lat, String dl_Lng) {
+		super();
 		this.dl_Num = dl_Num;
 		this.dl_Title = dl_Title;
 		this.dl_Image = dl_Image;
@@ -75,11 +75,11 @@ public class DealingVO {
 		this.dl_Image = dl_Image;
 	}
 
-	public int getDl_Price() {
+	public String getDl_Price() {
 		return dl_Price;
 	}
 
-	public void setDl_Price(int dl_Price) {
+	public void setDl_Price(String dl_Price) {
 		this.dl_Price = dl_Price;
 	}
 
@@ -99,11 +99,11 @@ public class DealingVO {
 		this.dl_Content = dl_Content;
 	}
 
-	public int getDl_Views() {
+	public String getDl_Views() {
 		return dl_Views;
 	}
 
-	public void setDl_Views(int dl_Views) {
+	public void setDl_Views(String dl_Views) {
 		this.dl_Views = dl_Views;
 	}
 
@@ -147,19 +147,19 @@ public class DealingVO {
 		this.dl_Form2 = dl_Form2;
 	}
 
-	public int getDl_Room() {
+	public String getDl_Room() {
 		return dl_Room;
 	}
 
-	public void setDl_Room(int dl_Room) {
+	public void setDl_Room(String dl_Room) {
 		this.dl_Room = dl_Room;
 	}
 
-	public int getDl_Size() {
+	public String getDl_Size() {
 		return dl_Size;
 	}
 
-	public void setDl_Size(int dl_Size) {
+	public void setDl_Size(String dl_Size) {
 		this.dl_Size = dl_Size;
 	}
 

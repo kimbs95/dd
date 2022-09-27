@@ -36,11 +36,11 @@
             <!-- header -->
             <header class="header">
                 <div class="headerleft">
-                    <a href="${contextPath}/productmainvip.do" style="width:200px;"><img class="Main_Logo"
+                    <a href="${contextPath}/productmain.do" style="width:200px;"><img class="Main_Logo" style="margin-left:150px"
                             src="../image/메인로고.png" alt="다드림 메인로고"></a>
                 </div>
-                <div class="search">
-                    <form action="">
+                <div class="search" style="margin-left:350px">
+                    <form action="" method="get">
                         <input type="search" placeholder="검색어 입력" style="appearance:auto ;">
                         <button type="submit" style="border: 1px solid;">검색</button>
                     </form>
@@ -48,13 +48,29 @@
                 <div class="headerul">
                     <ul>
                         <li>
-                            <select name="" id="" onchange="window.open(value,'_self');">
-                                <optgroup label="상품등록">
-                                    <option value="${contextPath}/productform.do">상품등록</option>
+                            <form  method="POST" id ="result">
+                                <select name="path" id="path" onchange="search()" style="height: 30px;" >
                                     <option value="">상품관리</option>
+                                    <option value="${contextPath}/productform.do">상품등록</option>
                                     <option value="${contextPath}/mypage.do">마이페이지</option>
-                                </optgroup>
-                            </select>
+                                </select>
+                            </form>
+                            <!-- select 를 이용해 action -->
+                            <script>
+                                function search(){
+
+                                    let path = document.querySelector("#path");
+                                    let pathresult =path.options[path.selectedIndex].value;
+                                    // console.log(pathresult);
+                                    const result = document.querySelector("#result");
+                                    result.setAttribute('action',pathresult);
+                                    result.submit();
+                                    
+                                };
+                                    
+                                
+                            </script>
+
                         </li>
                         <c:choose>
                             <c:when test="${isLogOn == true  && member!= null}">
@@ -85,10 +101,10 @@
             <!-- header -->
             <header class="header">
                 <div class="headerleft">
-                    <a href="${contextPath}/productmain.do" style="width:200px;"><img class="Main_Logo"
+                    <a href="${contextPath}/productmain.do" style="width:200px;"><img class="Main_Logo" style="margin-left:150px"
                             src="/image/메인로고.png" alt="다드림 메인로고"></a>
                 </div>
-                <div class="search" style="margin-left:7%;margin-top:4px;">
+                <div class="search"style="margin-left:350px">
                     <form action="">
                         <input type="search" placeholder="검색어 입력">
                         <button type="submit">검색</button>
@@ -98,9 +114,14 @@
                     <ul style="display: flex;">
                         <c:choose>
                             <c:when test="${isLogOn == true  && member!= null}">
-                                <a href="/mypage.do">
-                                    <li>마이페이지</li>
-                                </a>
+                                <li>
+                                    <form method="POST" action="/mypage.do">
+                                        <button style="background-color: white; cursor:pointer;border: none; font-weight: bold;font-size: 18px;padding: 0;">
+                                            마이페이지
+                                        </button>
+                                    </form>
+    
+                                </li>
                                 <div class="ppcursor">
                                     <li class="headerppli" style="display: block;">
                                         <h6>${member.user_Name}님</h6>

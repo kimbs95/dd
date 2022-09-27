@@ -38,7 +38,7 @@
       <div class="pro_category_content">
         <div class="productimg">
           <a href="${contextPath}/productview.do">
-            <img src="../메인 카테고리 사진/스텐드.png" alt="" width="200px" height="200px">
+            <img src="../메인 카테고리 사진/스텐드.png" alt="" width="200px" height="170px">
           </a>
         </div>
         <div class="productcontent">

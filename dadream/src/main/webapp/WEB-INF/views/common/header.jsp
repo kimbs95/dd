@@ -1,14 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     isELIgnored="false" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
+<c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <c:set var="result" value="${param.result }" />
 
 <%
   request.setCharacterEncoding("UTF-8");
-%> 
+%>
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -38,16 +38,24 @@
     <!-- header -->
     <header class="header">
         <div class="headerleft">
-            <a href="${contextPath}/dealingmain.do" style="width:200px;"><img class="Main_Logo" src="../image/메인로고.png" alt="다드림 메인로고"></a>
+            <a href="${contextPath}/dealingmain.do" style="width:200px;"><img class="Main_Logo" src="../image/메인로고.png"
+                    alt="다드림 메인로고"></a>
         </div>
 
         <div class="headerul">
             <ul>
                 <c:choose>
                     <c:when test="${isLogOn == true  && member!= null}">
-                        <a href="/mypage.do">
-                            <li>마이페이지</li>
-                        </a>
+
+                        <li>
+                            <form method="POST" action="/mypage.do">
+                                <button style="background-color: white; cursor:pointer;border: none; font-weight: bold;font-size: 18px;padding: 0;">
+                                    마이페이지
+                                </button>
+                            </form>
+
+                        </li>
+
                         <li>
                             <h6>${member.user_Name}님</h6>
                         </li>

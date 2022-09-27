@@ -22,6 +22,23 @@
     <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
     <!-- css -->
     <link rel="stylesheet" href="/css/productform.css">
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript">
+// 이미지 파일 미리보기 함수 
+ 	 function readURL(input) {
+	 	if (input.files && input.files[0]) {
+	 	var reader = new FileReader();
+	 	reader.onload = function (e) {
+		 $('#preview').attr('src', e.target.result);
+		 }
+		 reader.readAsDataURL(input.files[0]);
+		 }
+	 } 
+	 function backToList(obj){
+	 	 obj.action="${contextPath}/board/listArticles.do";
+		 obj.submit();
+	 } 
+	</script>
 
 
 </head>
@@ -29,7 +46,7 @@
 <body>
     <!--부트스트랩-->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    
     <div class="first">
         <h1 style="margin:20px 0 0 10px; font: bold;">상품등록</h1>
         <br><br><br><br>
@@ -39,64 +56,11 @@
                 <!--이미지 div-->
                 <div class="dlImg">
                     <div class="dlMain">
-                        <!-- 드롭존을 적용할 클래스이름을 dropzone 해야 css테마가 적용된다 -->
-                        <div class="dropzone dz1" style="width:500px; height: 400px;">
-
-                        </div>
-
-                        <script>
-                            Dropzone.autoDiscover = false; // deprecated 된 옵션. false로 해놓는걸 공식문서에서 명시
-
-                            const dropzone = new Dropzone("div.dropzone.dz1", {
-                                url: "https://httpbin.org/post",
-                                dictDefaultMessage: "대표 이미지를 등록해주세요.",
-                                autoProcessQueue: false, //자동으로 보내기
-                                clickable: true, // 클릭 가능 여부
-                                autoQueue: false, // 드래그 드랍 후 바로 서버로 전송
-                                createImageThumbnails: true, //파일 업로드 썸네일 생성
-                                thumbnailHeight: 150, // Upload icon size
-                                thumbnailWidth: 150, // Upload icon size
-                                maxFiles: 1, // 업로드 파일수
-                                maxFilesize: 1000, // 최대업로드용량 : 1000MB
-                                paramName: 'dl_Image', // 서버에서 사용할 formdata 이름 설정 (default는 file)
-                                uploadMultiple: false, // 다중업로드 기능
-                                timeout: 300000, //커넥션 타임아웃 설정 -> 데이터가 클 경우 꼭 넉넉히 설정해주자
-                                addRemoveLinks: true, // 업로드 후 파일 삭제버튼 표시 여부
-                                dictRemoveFile: '삭제', // 삭제버튼 표시 텍스트
-                                acceptedFiles: '.jpeg,.jpg,.png,.gif,.JPEG,.JPG,.PNG,.GIF', // 이미지 파일 포맷만 허용
-                            });
-                        </script>
+                        <input type="file" name="product_Image" onchange="readURL(this);">
+                        <img id="preview" src="#" width=200 height=200/>
                     </div>
 
-                    <div class="dlThumbnail1">
-                        <!-- 드롭존을 적용할 클래스이름을 dropzone 해야 css테마가 적용된다 -->
-                        <div class="dropzone dz2" style="width:500px; height: 200px;">
-                        </div>
-
-                        <script>
-                            Dropzone.autoDiscover = false; // deprecated 된 옵션. false로 해놓는걸 공식문서에서 명시
-
-                            const dropzone2 = new Dropzone("div.dropzone.dz2", {
-                                url: "https://httpbin.org/post",
-                                dictDefaultMessage: "추가 할 이미지를 등록해주세요.",
-                                autoProcessQueue: false, //자동으로 보내기
-                                clickable: true, // 클릭 가능 여부
-                                autoQueue: false, // 드래그 드랍 후 바로 서버로 전송
-                                // createImageThumbnails: true, //파일 업로드 썸네일 생성
-                                // thumbnailHeight: 150, // Upload icon size
-                                // thumbnailWidth: 150, // Upload icon size
-                                maxFiles: 10, // 업로드 파일수
-                                maxFilesize: 1000, // 최대업로드용량 : 1000MB
-                                paramName: 'dl_Image', // 서버에서 사용할 formdata 이름 설정 (default는 file)
-                                uploadMultiple: false, // 다중업로드 기능
-                                timeout: 300000, //커넥션 타임아웃 설정 -> 데이터가 클 경우 꼭 넉넉히 설정해주자
-                                addRemoveLinks: true, // 업로드 후 파일 삭제버튼 표시 여부
-                                dictRemoveFile: '삭제', // 삭제버튼 표시 텍스트
-                                acceptedFiles: '.jpeg,.jpg,.png,.gif,.JPEG,.JPG,.PNG,.GIF', // 이미지 파일 포맷만 허용
-                            });
-                        </script>
-
-                    </div>
+                    
                 </div>
 
 
@@ -115,7 +79,7 @@
                     function fn_addtext2() {
                         $("#d_text2").append("<br>" +
                             "<input type='text' name='product_Option2' size='32'  placeholder='상품 추가 옵션을 입력하세요.' />"
-                            );
+                        );
                         cnt++;
                     }
                 </script>
@@ -128,7 +92,7 @@
                         <h3>상품설명</h3>
                         <!-- <input type="text" class="width300" name="product_Content" placeholder="ex) 뜨거운침대는 매우 큰 사이즈입니다."
                             size="70"> -->
-                            <textarea name="product_Content" id="" cols="70" rows="15" placeholder="상품 상세 설명"></textarea>
+                        <textarea name="product_Content" id="" cols="70" rows="15" placeholder="상품 상세 설명"></textarea>
                         <br><br>
                     </div>
                     <div class="pfcontrol">
@@ -174,33 +138,7 @@
             </div>
 
             <div class="dlThumbnail2">
-                <h2 style="width:150px; font-weight: bold; margin: 15px 0; ">상품설명이미지 등록</h2>
-                <!-- 드롭존을 적용할 클래스이름을 dropzone 해야 css테마가 적용된다 -->
-                <div class="dropzone dz3" style="width:1130px; height: 200px;">
-                </div>
-
-                <script>
-                    Dropzone.autoDiscover = false; // deprecated 된 옵션. false로 해놓는걸 공식문서에서 명시
-
-                    const dropzone3 = new Dropzone("div.dropzone.dz3", {
-                        url: "https://httpbin.org/post",
-                        dictDefaultMessage: "추가 할 이미지를 등록해주세요.",
-                        autoProcessQueue: false, //자동으로 보내기
-                        clickable: true, // 클릭 가능 여부
-                        autoQueue: false, // 드래그 드랍 후 바로 서버로 전송
-                        // createImageThumbnails: true, //파일 업로드 썸네일 생성
-                        // thumbnailHeight: 150, // Upload icon size
-                        // thumbnailWidth: 150, // Upload icon size
-                        maxFiles: 10, // 업로드 파일수
-                        maxFilesize: 1000, // 최대업로드용량 : 1000MB
-                        paramName: 'dl_Image', // 서버에서 사용할 formdata 이름 설정 (default는 file)
-                        uploadMultiple: false, // 다중업로드 기능
-                        timeout: 300000, //커넥션 타임아웃 설정 -> 데이터가 클 경우 꼭 넉넉히 설정해주자
-                        addRemoveLinks: true, // 업로드 후 파일 삭제버튼 표시 여부
-                        dictRemoveFile: '삭제', // 삭제버튼 표시 텍스트
-                        acceptedFiles: '.jpeg,.jpg,.png,.gif,.JPEG,.JPG,.PNG,.GIF', // 이미지 파일 포맷만 허용
-                    });
-                </script>
+                
 
             </div>
 

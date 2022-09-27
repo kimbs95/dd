@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.dd.dealing.dao.DealingDAO;
 import com.dd.dealing.vo.BoardVO;
+import com.dd.dealing.vo.DealingVO;
 import com.dd.dealing.vo.MemberVO;
 
 @Service("dealingService")
@@ -43,6 +44,19 @@ public class DealingServiceImpl implements DealingService {
 	@Override
 	public int addNewdealing(Map dealingMap) throws DataAccessException {
 		return dealingDAO.addNewdealing(dealingMap);
+	}
+
+//	매물 전부 리스트 검색
+	public List<DealingVO> allListdealing() throws DataAccessException {
+		List<DealingVO> allListdealing = dealingDAO.allListdealing();
+		return allListdealing;
+	}
+
+	// 지도 검색
+	@Override
+	public List<DealingVO> selectMap() throws DataAccessException {
+		List<DealingVO> dlMap = dealingDAO.selectMap();
+		return dlMap;
 	}
 
 	// 인테리어 게시글추가

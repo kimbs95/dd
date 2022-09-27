@@ -122,32 +122,32 @@
                         <br><br>
                         <h5>건물형태</h5>
                         <select name="dl_Form">
-                            <option name="dl_Form" value="아파트">아파트</option>
-                            <option name="dl_Form" value="투룸+">투룸+</option>
-                            <option name="dl_Form" value="원룸">원룸</option>
-                            <option name="dl_Form" value="오피스텔">오피스텔</option>
-                            <option name="dl_Form" value="주택">주택</option>
+                            <option  value="아파트">아파트</option>
+                            <option  value="투룸+">투룸+</option>
+                            <option  value="원룸">원룸</option>
+                            <option  value="오피스텔">오피스텔</option>
+                            <option  value="주택">주택</option>
                         </select>
                         <br><br>
                         <h5>매물종류</h5>
                         <select name="dl_Form2">
-                            <option name="dl_Form2" value="매매">매매</option>
-                            <option name="dl_Form2" value="월세">월세</option>
-                            <option name="dl_Form2" value="전세">전세</option>
+                            <option value="매매">매매</option>
+                            <option  value="월세">월세</option>
+                            <option  value="전세">전세</option>
                         </select>
                         <br><br>
                         <h5>방개수</h5>
                         <select name="dl_Room">
-                            <option name="dl_Room" value=1>1층</option>
-                            <option name="dl_Room" value=2>2층</option>
-                            <option name="dl_Room" value=3>3층</option>
-                            <option name="dl_Room" value=4>4층</option>
-                            <option name="dl_Room" value=5>5층</option>
-                            <option name="dl_Room" value=6>6층</option>
-                            <option name="dl_Room" value=7>7층</option>
-                            <option name="dl_Room" value=8>8층</option>
-                            <option name="dl_Room" value=9>9층</option>
-                            <option name="dl_Room" value=10>10층</option>
+                            <option  value=1>1층</option>
+                            <option  value=2>2층</option>
+                            <option  value=3>3층</option>
+                            <option  value=4>4층</option>
+                            <option  value=5>5층</option>
+                            <option  value=6>6층</option>
+                            <option  value=7>7층</option>
+                            <option  value=8>8층</option>
+                            <option  value=9>9층</option>
+                            <option  value=10>10층</option>
                         </select>
                         <br><br>
                         <h5>평수</h5>

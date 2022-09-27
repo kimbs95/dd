@@ -37,19 +37,37 @@
         <c:when test="${member.user_Level == 3}">
             <header class="header">
                 <div class="headerleft">
-                    <a href="${contextPath}/dealingmain.do" style="width:200px;"><img class="Main_Logo"
+                    <a href="${contextPath}/dealingmain.do" style="width:200px;"><img class="Main_Logo" style=""
                             src="../image/메인로고.png" alt="다드림 메인로고"></a>
                 </div>
 
                 <div class="headerul">
                     <ul>
                         <li>
-                            <select name="" id="" onchange="window.open(value,'_self');">
-                                <option value="">중개관리</option>
-                                <option value="">매물관리</option>
-                                <option value="${contextPath}/mypage.do">마이페이지</option>
-                            </select>
+                            <form method="post" id="result">
+                                <select name="" id="path" onchange="search()" style="height: 30px;">
+                                    <option value="">중개관리</option>
+                                    <option value="">매물관리</option>
+                                    <option value="${contextPath}/mypage.do">마이페이지</option>
+                                </select>
+                            </form>
                         </li>
+                          <!-- select 를 이용해 action -->
+                          <script>
+                            function search(){
+
+                                let path = document.querySelector("#path");
+                                let pathresult =path.options[path.selectedIndex].value;
+                                // console.log(pathresult);
+                                const result = document.querySelector("#result");
+                                result.setAttribute('action',pathresult);
+                                result.submit();
+                                
+                            };
+                                
+                            
+                        </script>
+
                         
                         <c:choose>
                             <c:when test="${isLogOn == true  && member!= null}">
@@ -94,21 +112,26 @@
             <!-- header -->
             <header class="header">
                 <div class="headerleft" style="margin-right: 39.8%">
-                    <a href="${contextPath}/dealingmain.do" style="width:200px;"><img class="Main_Logo"
+                    <a href="${contextPath}/dealingmain.do" style="width:200px;"><img class="Main_Logo" 
                             src="../image/메인로고.png" alt="다드림 메인로고"></a>
                 </div>
 
                 <div class="headerul">
-                    <ul>
+                    <ul style="width: 550px;">
                         <a onclick="dont();" href="${contextPath}/dealingform.do">
                             <li>매물등록</li>
                         </a>
 
                         <c:choose>
                             <c:when test="${isLogOn == true  && member!= null}">
-                                <a href="/mypage.do">
-                                    <li>마이페이지</li>
-                                </a>
+                                <li>
+                                    <form method="POST" action="/mypage.do">
+                                        <button style="background-color: white; cursor:pointer;border: none; font-weight: bold;font-size: 18px;padding: 0;">
+                                            마이페이지
+                                        </button>
+                                    </form>
+                                </li>
+    
                                 <li>
                                     <div class="pmcurosr">
                                     <h6>${member.user_Name}님</h6>

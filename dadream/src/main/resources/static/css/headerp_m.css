@@ -56,14 +56,14 @@
         .header {
             margin: 20px 0 0 30px;
             display: flex;
-            justify-content: space-around;
+            justify-content: space-between;
             align-items: center;
         }
 
         .header .Main_Logo {
             width: 220px;
             height: 50px;
-            margin-right: 300px;
+            margin-left: 190px;
         }
 
         .headerleft {
@@ -74,6 +74,7 @@
             margin-top: 2%;
             font-size: 18px;
             width: 530px;
+            margin-right: 150px;
         }
 
         .headerul ul li {

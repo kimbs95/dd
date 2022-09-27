@@ -37,27 +37,41 @@
                     <input type="text" id="userId" name="user_Id" size="40" /> <button
                         id="idcheck">중복확인</button><br><br>
                     <h3 class="idcheckresult"></h3>
-
+                    <!-- 아이디 중복체크 -->
                     <script>
-                        const idcheck = document.querySelector("#idcheck");
-                        const userId = document.querySelector("#userId");
-                        const idcheckresult = document.querySelector(".idcheckresult");
-                        idcheck.addEventListener("click", function (e) {
-                            e.preventDefault();
-                            const req = {
-                                method:'POST',
-                                headers:{'content-type':'application/json'},
-                                data :JSON.stringify({
-                                    user_Id:userId.value
-                                })
-                            }
-                            fetch('/idcheck.do',req)
-                                .then(res =>{console.log(res);})
-                            
-                                
-                                
+                        document.addEventListener("DOMContentLoaded", () => {
 
-                        })
+                            const idcheck = document.querySelector("#idcheck");
+                            idcheck.addEventListener("click", async (e) => {
+                                const idcheckresult = document.querySelector(".idcheckresult");
+                                const userId = document.querySelector("#userId").value;
+                                console.log(userId);
+                                e.preventDefault();
+                                const res = await fetch('/idcheck.do', {
+                                    method: 'POST',
+                                    headers: {
+                                        'content-type': 'application/json'
+                                    },
+                                    body: JSON.stringify({
+                                        user_Id: userId,
+                                        
+                                    })
+
+                                });
+                                if (res.status === 200) {
+                                    let jsondata = await res.json();
+                                    if (jsondata.resultCode !== 0) {
+                                        alert("중복된 아이디가 있습니다");
+                                    } else if (jsondata.resultCode === 0) {
+                                        alert("중복확인성공");
+                                    }
+                                } else {
+                                    alert('예상치 못한 오류가 발생하였습니다.');
+                                }
+
+
+                            });
+                        });
                     </script>
 
 
@@ -185,7 +199,7 @@
             }).open();
         }
     </script>
-
+    <!-- 비밀번호 체크  -->
     <script>
         (function check() {
 
@@ -193,9 +207,9 @@
             const userpwd = document.querySelector("#userPwd");
             const userpwd2 = document.querySelector("#userPwd2");
             userpwd.addEventListener("keyup", function () {
-                if (userpwd.value.length <= 8) {
+                if (userpwd.value.trim().length <= 8) {
                     const pwd = document.querySelector("#pwd");
-                    pwd.textContent = "비밀번호 8자리 이상 이어야합니다.";
+                    pwd.textContent = "비밀번호 8자리 이상 입력하시오.";
                 } else {
                     pwd.textContent = "";
                 }
