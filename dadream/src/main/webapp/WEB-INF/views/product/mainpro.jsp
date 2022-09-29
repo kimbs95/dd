@@ -19,29 +19,41 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
     <!-- css -->
     <link rel="stylesheet" href="/css/mainpro.css">
-    
+
 </head>
+
 <body>
     <!-- 메인 카테고리 -->
     <div class="pro_category">
         <ul>
             <div class="pro_category_image">
-                <a href="${contextPath}/product.do">
-                    <li>
+
+                <form action="/product.do" class="submit">
+                    <li onclick="">
+                        <input type="hidden" name="product_Name" value="의자">
                         <img src="../메인 카테고리 사진/책상.png">
                     </li>
-                </a>
+                </form>
+
             </div>
         </ul>
         <ul>
             <div class="pro_category_image">
-                <a href="${contextPath}/product.do">
+                <form action="/product.do" class="submit">
                     <li>
+                        <input type="hidden" name="product_Name" value="">
                         <img src="../메인 카테고리 사진/침대.png">
                     </li>
-                </a>
+                </form>
             </div>
         </ul>
+        <script>
+            document.querySelector(".pro_category_image").addEventListener("click",(e)=>{
+                
+                document.querySelector(".submit").submit();
+                // location.href="/product.do?productName="+ che;
+            })
+        </script>
         <ul>
             <div class="pro_category_image">
                 <a href="${contextPath}/product.do">

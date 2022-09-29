@@ -7,7 +7,7 @@ import org.springframework.dao.DataAccessException;
 import com.dd.product.vo.ProductVO;
 
 public interface ProductService {
-	public int addProduct(ProductVO product) throws DataAccessException;
+	public void addProduct(ProductVO productMap) throws DataAccessException;
 
-	public List<ProductVO> listProducts() throws Exception;
+	public List<ProductVO> listProducts(String product_Name) throws Exception;
 }

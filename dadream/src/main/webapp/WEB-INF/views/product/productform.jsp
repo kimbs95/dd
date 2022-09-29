@@ -18,35 +18,20 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 
     <!-- 파일업로드 드래그앤드롭 -->
-    <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
-    <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
+    <!-- <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script> -->
+    <!-- <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" /> -->
     <!-- css -->
     <link rel="stylesheet" href="/css/productform.css">
-    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script type="text/javascript">
-// 이미지 파일 미리보기 함수 
- 	 function readURL(input) {
-	 	if (input.files && input.files[0]) {
-	 	var reader = new FileReader();
-	 	reader.onload = function (e) {
-		 $('#preview').attr('src', e.target.result);
-		 }
-		 reader.readAsDataURL(input.files[0]);
-		 }
-	 } 
-	 function backToList(obj){
-	 	 obj.action="${contextPath}/board/listArticles.do";
-		 obj.submit();
-	 } 
-	</script>
+    <!-- <script src="http://code.jquery.com/jquery-latest.min.js"></script> -->
+
 
 
 </head>
 
 <body>
     <!--부트스트랩-->
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
-    
+    <!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script> -->
+
     <div class="first">
         <h1 style="margin:20px 0 0 10px; font: bold;">상품등록</h1>
         <br><br><br><br>
@@ -56,13 +41,66 @@
                 <!--이미지 div-->
                 <div class="dlImg">
                     <div class="dlMain">
-                        <input type="file" name="product_Image" onchange="readURL(this);">
-                        <img id="preview" src="#" width=200 height=200/>
+                        <label for="product_Image">이미지 를 골라주세요</label><br>
+                        <input type="file" id="product_Image" accept="image/*" multiple>
+                        <img id="preview" src="" width=200 height=200 />
+                        <h1 class="imgh1"></h1>
                     </div>
-
-                    
                 </div>
+                <script>
+                    // 썸네일 코드 
+                    document.addEventListener('DOMContentLoaded', () => {
+                        document.querySelector("#product_Image").addEventListener("change", e => {
+                            const preview = document.querySelector("#preview");
+                            document.querySelector(".imgh1").innerHTML = "감사합니다";
+                            let reader = new FileReader();
+                            reader.onloadend = finished => {
+                                preview.setAttribute('src', finished.target.result);
+                            }
+                            reader.readAsDataURL(e.target.files.item(0));
+                        })
+                        
+                        // 등록 버튼 누를시 
+                        document.querySelector("#productsubmit").addEventListener("click", async (e) => {
+                            let data = document.querySelector("#product_Image").files;
+                            // if ([...data].length === 0) {
+                            //     alert('파일을 선택해 주세요');
+                            //     location.reload();
+                            //     return;
+                            // }
+                            let fd = new FormData();
+                            // 유사배열에서 실제배열로
+                            for (let f of [...data]) {
+                                fd.append("file", f);
+                            }
+                            let response = await fetch('/productpost.do', {
+                                method: "POST",
+                                body: fd
+                            });
 
+
+                            // if (response.status !== 200) {
+                            //     alert('예상치 못한 무언가 오류가 발생했습니다.');
+                            //     // e.preventDefault();
+                            //     // location.reload();
+                            //     return;
+                            // }
+
+                            // if (response.headers.get('state') === 'success') {
+                            //     alert('파일 업로드 되었습니다.');
+                            //     location.reload();
+                            //     return;
+                            // } else {
+                            //     alert('오류가 발생 했습니다.');
+                            //     location.reload();
+                            //     return;
+                                
+                            // }
+
+
+                        })
+                    });
+                </script>
 
                 <!-- 텍스트추가 -->
                 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
@@ -138,13 +176,13 @@
             </div>
 
             <div class="dlThumbnail2">
-                
+
 
             </div>
 
 
             <div class="bds02">
-                <input type="submit" class="btn btn-secondary btn-lg"
+                <input type="submit" id="productsubmit" class="btn btn-secondary btn-lg"
                     value="등록하기">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="reset"
                     class="btn btn-secondary btn-lg" value="다시입력">
             </div>

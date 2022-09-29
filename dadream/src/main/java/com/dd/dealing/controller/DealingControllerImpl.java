@@ -272,8 +272,6 @@ public class DealingControllerImpl {
 	private ModelAndView map(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = (String) request.getAttribute("viewName");
 		String search = (String) request.getParameter("search");
-		System.out.println("search : " + search);
-		System.out.println("interceptor에서 온 viewName:" + viewName);
 //		매물 전부 리스트 검색
 		List<DealingVO> allListdealing = dealingService.allListdealing();
 		ModelAndView mav = new ModelAndView();
@@ -290,12 +288,34 @@ public class DealingControllerImpl {
 		request.setCharacterEncoding("utf-8");
 		String dl_Lat = request.getParameter("dl_Lat");
 		String dl_Lng = request.getParameter("dl_Lng");
+		String dl_Address = request.getParameter("dl_Address");
 		System.out.println("dl_Lat : " + dl_Lat);
 		System.out.println("dl_Lng : " + dl_Lng);
+		System.out.println("dl_Address: " + dl_Address);
 		List<DealingVO> dlMap = new ArrayList<DealingVO>();
 		dlMap = dealingService.selectMap();
 
 		return new ResponseEntity(dlMap, HttpStatus.OK);
+	}
+
+	/* 지도창에서 검색 */
+	@RequestMapping(value = "/showMap2.do", method = RequestMethod.GET)
+	@ResponseBody
+	public ResponseEntity showMap2(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+		Map<String, Object> dlMap = new HashMap<String, Object>();
+		Enumeration enu = request.getParameterNames();
+		while (enu.hasMoreElements()) {
+			String name = (String) enu.nextElement();
+			String value = request.getParameter(name);
+			dlMap.put(name, value);
+		}
+		List<DealingVO> dlReq = new ArrayList<DealingVO>();
+		dlReq = dealingService.selectMap2(dlMap);
+
+		System.out.println("dlReq : " + dlReq);
+		return new ResponseEntity(dlReq, HttpStatus.OK);
+
 	}
 
 	// 인테리어 게시판 글쓰기

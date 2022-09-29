@@ -1,9 +1,8 @@
 package com.dd.product.controller;
 
 import java.io.File;
-import java.util.Enumeration;
+import java.security.MessageDigest;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -11,13 +10,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -31,7 +28,7 @@ import com.dd.product.vo.ProductVO;
 
 @Controller("productController")
 public class ProductControllerImpl implements ProductController {
-	private static final String PRODUCT_IMAGE_REPO = "C:\\product\\product_image";
+	private static final String PRODUCT_IMAGE_REPO = "C:\\spring\\KBS\\dadream\\src\\main\\resources\\static\\product";
 
 	@Autowired
 	private ProductService productService;
@@ -50,9 +47,13 @@ public class ProductControllerImpl implements ProductController {
 
 	/* 상품목록 */
 	@RequestMapping(value = { "/product.do" }, method = RequestMethod.GET)
-	private ModelAndView product(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	private ModelAndView product(@ModelAttribute ProductVO product, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
 		String viewName = (String) request.getAttribute("viewName");
-		List<ProductVO> productsList = productService.listProducts();
+		String product_Name = (String) product.getProduct_Name();
+		System.out.println("product_Name :" + product_Name);
+
+		List<ProductVO> productsList = productService.listProducts(product_Name);
 		ModelAndView mav = new ModelAndView(viewName);
 		mav.setViewName(viewName);
 		mav.addObject("productsList", productsList);
@@ -69,76 +70,49 @@ public class ProductControllerImpl implements ProductController {
 	}
 
 	/* 상품등록 */
-	@ResponseBody
 	@RequestMapping(value = "/productpost.do", method = RequestMethod.POST)
-	public ResponseEntity addNewArticle(ProductVO product, MultipartHttpServletRequest multipartRequest,
-			HttpServletResponse response) throws Exception {
-		multipartRequest.setCharacterEncoding("utf-8");
+	@ResponseBody
+	private Map<String, Object> productpost(ProductVO product, MultipartHttpServletRequest request,
+			HttpServletResponse response) {
+		List<MultipartFile> fileList = request.getFiles("file");
 		Map<String, Object> productMap = new HashMap<String, Object>();
-		Enumeration enu = multipartRequest.getParameterNames();
-		while (enu.hasMoreElements()) {
-			String name = (String) enu.nextElement();
-			String value = multipartRequest.getParameter(name);
-			productMap.put(name, value);
-		}
 
-		String imageFileName = upload(multipartRequest);
-		HttpSession session = multipartRequest.getSession();
-		MemberVO memberVO = (MemberVO) session.getAttribute("member");
-		String user_Id = memberVO.getUser_Id();
-
-		productMap.put("user_Id", user_Id);
-		productMap.put("imageFileName", imageFileName);
-		String message;
-		ResponseEntity resEnt = null;
-		HttpHeaders responseHeaders = new HttpHeaders();
-		responseHeaders.add("content-Type", "text/html;charset=utf-8");
+		StringBuffer saveName = new StringBuffer();
+		String fileName = null;
+		int length = 0;
 
 		try {
-			productService.addProduct(product);
-			if (imageFileName != null && imageFileName.length() != 0) {
-				File srcFile = new File(PRODUCT_IMAGE_REPO + "\\" + "temp" + "\\" + imageFileName);
-				File desDir = new File(PRODUCT_IMAGE_REPO + "\\" + user_Id);
-				FileUtils.moveFileToDirectory(srcFile, desDir, true);
-			}
-			message = "<script>";
-			message += "alert('새글을 추가했습니다.');";
-			message += "location.href='" + multipartRequest.getContextPath() + "/product.do';";
-			message += "</script>";
-			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
-		} catch (Exception e) {
-			File srcFile = new File(PRODUCT_IMAGE_REPO + "\\" + "temp" + "\\" + "imageFileName");
-			srcFile.delete();
+			MessageDigest md = MessageDigest.getInstance("MD5");
+			int count = 0;
 
-			message = "<script>";
-			message += "alert('오류다 오류. 다시 시도해');";
-			message += "location.href='" + multipartRequest.getContextPath() + "/productform.do';";
-			message += "</script>";
-			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+			for (MultipartFile file : fileList) {
+				length += file.getSize();
+				md.update((Long.toString(System.currentTimeMillis()) + Double.toString(Math.random())).getBytes());
+				for (byte a : md.digest()) {
+					saveName.append(Integer.toString((a & 0xff) + 0x100, 16).substring(1));
+				}
+				fileName = saveName.toString().substring(16) + "."
+						+ FilenameUtils.getExtension(file.getOriginalFilename());
+				File saveFile = new File(PRODUCT_IMAGE_REPO, fileName);
+				file.transferTo(saveFile);
+				saveName.delete(0, saveName.length());
+			}
+
+			product.setProduct_Image(fileName);
+			HttpSession session = request.getSession();
+			MemberVO member = (MemberVO) session.getAttribute("member");
+			String user_Id = member.getUser_Id();
+			product.setUser_Id(user_Id);
+			System.out.println(product);
+			productService.addProduct(product);
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return resEnt;
-
-	}
-
-//	한개 이미 업로드 하기 
-	private String upload(MultipartHttpServletRequest multipartRequest) throws Exception {
-		String imageFileName = null;
-		Iterator<String> fileNames = multipartRequest.getFileNames();
-
-		while (fileNames.hasNext()) {
-			String fileName = fileNames.next();
-			MultipartFile mFile = multipartRequest.getFile(fileName);
-			imageFileName = mFile.getOriginalFilename();
-			File file = new File(PRODUCT_IMAGE_REPO + "\\" + "temp" + "\\" + fileName);
-			if (mFile.getSize() != 0) {
-				if (!file.exists()) {
-					file.getParentFile().mkdirs();
-					mFile.transferTo(new File(PRODUCT_IMAGE_REPO + "\\" + "temp" + "\\" + imageFileName));
-				}
-			}
-		}
-		return imageFileName;
+		;
+		response.setHeader("state", "success");
+		response.setContentLength(length);
+		response.setContentType("application/json");
+		return productMap;
 	}
 
 	/* 판매자 상품 상세 */

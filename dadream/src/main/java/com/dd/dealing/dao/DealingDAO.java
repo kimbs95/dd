@@ -31,5 +31,8 @@ public interface DealingDAO {
 
 	public List<DealingVO> selectMap() throws DataAccessException;
 
+	public List<DealingVO> selectMap2(Map<String, Object> dlMap) throws DataAccessException;
+
 	public List<DealingVO> allListdealing() throws DataAccessException;
+
 }

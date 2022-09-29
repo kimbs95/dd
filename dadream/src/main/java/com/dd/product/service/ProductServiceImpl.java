@@ -19,15 +19,16 @@ public class ProductServiceImpl implements ProductService {
 
 //상품등록
 	@Override
-	public int addProduct(ProductVO product) throws DataAccessException {
-		return productDAO.insertProduct(product);
+	public void addProduct(ProductVO productMap) throws DataAccessException {
+		productDAO.insertProduct(productMap);
+		return;
 	}
 
 	// 상품목록
 	@Override
-	public List<ProductVO> listProducts() throws Exception {
+	public List<ProductVO> listProducts(String product_Name) throws Exception {
 		List<ProductVO> productsList = null;
-		productsList = productDAO.selectAllProductsList();
+		productsList = productDAO.selectAllProductsList(product_Name);
 		return productsList;
 	}
 }

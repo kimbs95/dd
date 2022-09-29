@@ -33,7 +33,7 @@
     <div class="first">
         <h1 style="margin:40px 0 0 10px; font: bold;">매물등록</h1>
 
-        <form method="post" action="${contextPath}/addNewdealing.do" enctype="multipart/form-data"  name="dl_Image">
+        <form method="post" action="${contextPath}/addNewdealing.do" enctype="multipart/form-data" name="dl_Image">
             <div class="middle">
 
                 <!--이미지 div-->
@@ -64,7 +64,6 @@
                                 dictRemoveFile: '삭제', // 삭제버튼 표시 텍스트
                                 acceptedFiles: '.jpeg,.jpg,.png,.gif,.JPEG,.JPG,.PNG,.GIF', // 이미지 파일 포맷만 허용
                             });
-                        
                         </script>
                     </div>
 
@@ -108,8 +107,98 @@
                     <input type="text" name="dl_City" placeholder="ex) 서울, 부산, 대전" size="50">
                     <br><br>
                     <h3>주소입력</h3>
-                    <input type="text" name="dl_Address" placeholder="건물주소를 입력하세요." size="50">
-                    <br><br>
+                    <input type="text" id="sample5_address" name="dl_Address" placeholder="주소" size="38">
+                    <input type="button" onclick="sample5_execDaumPostcode()" value="주소 검색"><br><br>
+                    <div id="map" style="width:300px;height:300px;margin-top:10px;display:none"></div><br>
+                    <!-- 우편api -->
+                    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+                    <!-- 지도api -->
+                    <script
+                        src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d1a9a1b185a416c4c43f9c88915f8650&libraries=services">
+                    </script>
+                    <!-- 지도생성 -->
+                    <script>
+                        var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+                            mapOption = {
+                                center: new daum.maps.LatLng(37.537187, 127.005476), // 지도의 중심좌표
+                                level: 5 // 지도의 확대 레벨
+                            };
+
+                        //지도를 미리 생성
+                        var map = new daum.maps.Map(mapContainer, mapOption);
+                        //주소-좌표 변환 객체를 생성
+                        var geocoder = new daum.maps.services.Geocoder();
+                        // //마커를 미리 생성
+                        // var marker = new daum.maps.Marker({
+                        //     position: new daum.maps.LatLng(37.537187, 127.005476),
+                        //     map: map
+                        // });
+                        // 지도를 클릭한 위치에 표출할 마커입니다
+                        var marker = new kakao.maps.Marker({
+                            // 지도 중심좌표에 마커를 생성합니다 
+                            position: map.getCenter()
+                        });
+                        // 지도에 마커를 표시합니다
+                        marker.setMap(map);
+
+                        // 지도에 클릭 이벤트를 등록합니다
+                        // 지도를 클릭하면 마지막 파라미터로 넘어온 함수를 호출합니다
+                        kakao.maps.event.addListener(map, 'click', function (mouseEvent) {
+
+                            // 클릭한 위도, 경도 정보를 가져옵니다 
+                            var latlng = mouseEvent.latLng;
+
+                            // 마커 위치를 클릭한 위치로 옮깁니다
+                            marker.setPosition(latlng);
+
+                            var dl_Lat = latlng.getLat();
+                            var dl_Lng = latlng.getLng();
+                            console.log(dl_Lat);
+                            console.log(dl_Lng);
+                            // var message = '클릭한 위치의 위도는 ' + latlng.getLat() + ' 이고, ';
+                            // message += '경도는 ' + latlng.getLng() + ' 입니다';
+
+                            // var resultDiv = document.getElementById('clickLatlng');
+                            // resultDiv.innerHTML = message;
+
+                            //인풋에 value 값 넣기
+                            document.querySelector("#dl_Lat").setAttribute('value', dl_Lat);
+                            document.querySelector("#dl_Lng").setAttribute('value', dl_Lng);
+                            
+
+                        });
+
+                        function sample5_execDaumPostcode() {
+                            new daum.Postcode({
+                                oncomplete: function (data) {
+                                    var addr = data.address; // 최종 주소 변수
+
+                                    // 주소 정보를 해당 필드에 넣는다.
+                                    document.getElementById("sample5_address").value = addr;
+                                    // 주소로 상세 정보를 검색
+                                    geocoder.addressSearch(data.address, function (results, status) {
+                                        // 정상적으로 검색이 완료됐으면
+                                        if (status === daum.maps.services.Status.OK) {
+
+                                            var result = results[0]; //첫번째 결과의 값을 활용
+
+                                            // 해당 주소에 대한 좌표를 받아서
+                                            var coords = new daum.maps.LatLng(result.y, result.x);
+                                            // 지도를 보여준다.
+                                            mapContainer.style.display = "block";
+                                            map.relayout();
+                                            // 지도 중심을 변경한다.
+                                            map.setCenter(coords);
+                                            // 마커를 결과값으로 받은 위치로 옮긴다.
+                                            marker.setPosition(coords)
+                                        }
+                                    });
+                                }
+                            }).open();
+                        }
+                    </script>
+                    <input type="hidden" name="dl_Lat" id ="dl_Lat"  />
+                    <input type="hidden" name="dl_Lng" id ="dl_Lng"  />
                     <h3>가격</h3>
                     <input type="text" name="dl_Price" placeholder="희망하시는 가격을 입력해주세요." size="50">
                     <br><br>
@@ -122,32 +211,32 @@
                         <br><br>
                         <h5>건물형태</h5>
                         <select name="dl_Form">
-                            <option  value="아파트">아파트</option>
-                            <option  value="투룸+">투룸+</option>
-                            <option  value="원룸">원룸</option>
-                            <option  value="오피스텔">오피스텔</option>
-                            <option  value="주택">주택</option>
+                            <option name="dl_Form" value="아파트">아파트</option>
+                            <option name="dl_Form" value="투룸+">투룸+</option>
+                            <option name="dl_Form" value="원룸">원룸</option>
+                            <option name="dl_Form" value="오피스텔">오피스텔</option>
+                            <option name="dl_Form" value="주택">주택</option>
                         </select>
                         <br><br>
                         <h5>매물종류</h5>
                         <select name="dl_Form2">
-                            <option value="매매">매매</option>
-                            <option  value="월세">월세</option>
-                            <option  value="전세">전세</option>
+                            <option name="dl_Form2" value="매매">매매</option>
+                            <option name="dl_Form2" value="월세">월세</option>
+                            <option name="dl_Form2" value="전세">전세</option>
                         </select>
                         <br><br>
                         <h5>방개수</h5>
                         <select name="dl_Room">
-                            <option  value=1>1층</option>
-                            <option  value=2>2층</option>
-                            <option  value=3>3층</option>
-                            <option  value=4>4층</option>
-                            <option  value=5>5층</option>
-                            <option  value=6>6층</option>
-                            <option  value=7>7층</option>
-                            <option  value=8>8층</option>
-                            <option  value=9>9층</option>
-                            <option  value=10>10층</option>
+                            <option name="dl_Room" value="1">1층</option>
+                            <option name="dl_Room" value="2">2층</option>
+                            <option name="dl_Room" value="3">3층</option>
+                            <option name="dl_Room" value="4">4층</option>
+                            <option name="dl_Room" value="5">5층</option>
+                            <option name="dl_Room" value="6">6층</option>
+                            <option name="dl_Room" value="7">7층</option>
+                            <option name="dl_Room" value="8">8층</option>
+                            <option name="dl_Room" value="9">9층</option>
+                            <option name="dl_Room" value="10">10층</option>
                         </select>
                         <br><br>
                         <h5>평수</h5>
@@ -162,20 +251,17 @@
 
             <div class="dealingformcontent">
                 <h3>상세설명</h3>
-                
-                <textarea name="dl_Content" id="dl_Content" cols="120" rows="10" placeholder="매물에 대한 상세설명을 입력해주세요."></textarea>
-                
+
+                <textarea name="dl_Content" id="dl_Content" cols="120" rows="10"
+                    placeholder="매물에 대한 상세설명을 입력해주세요."></textarea>
+
                 <div class="bds02">
                     <input type="submit" class="btn btn-secondary btn-lg" value="등록하기">
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <input type="reset" class="btn btn-secondary btn-lg" value="다시입력">
                 </div>
             </div>
-
-
         </form>
-
     </div>
 </body>
-
 </html>

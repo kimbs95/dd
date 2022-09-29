@@ -31,8 +31,8 @@
                 <li><form method="get" action="${contextPath}/map.do"><button type="submit" name="검색" value="주택">주택</button></form></li>
             </ul>
         <div id="search">
-            <form method="get" action="${contextPath}/map.do" style="display:inline-flex;  margin-top: 25px;">
-                <input class="dealingsearch" type="search" name="검색" placeholder="검색어 입력" /><input type="submit" value="검색"></form>
+            <form method="get" action="${contextPath}/MainsearchMap.do" style="display:inline-flex;   margin-top: 25px;">
+                <input class="dealingsearch" style="outline: none;" type="search" name="dl_Address" placeholder="검색어 입력" /><input type="submit" value="검색"></form>
             </form>
         </div>        
     </div>

@@ -23,9 +23,9 @@
 
 
 	<select id="selectAllProductsList" resultType="productVO"
-		parameterType="productVO">
+		parameterType="String">
 	<![CDATA[
-		select * from product_t order by product_Date desc
+		select * from product_t where product_Name = #{product_Name} order by product_Date desc
 	]]>
 	</select>
 

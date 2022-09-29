@@ -12,7 +12,7 @@ public class ViewNameInterceptor extends HandlerInterceptorAdapter {
 		try {
 			String viewName = getViewName(request);
 			request.setAttribute("viewName", viewName);
-			System.out.println("interceptor viewName:"+viewName);
+			System.out.println("interceptor viewName:" + viewName);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -53,11 +53,11 @@ public class ViewNameInterceptor extends HandlerInterceptorAdapter {
 		String fileName = uri.substring(begin, end);
 		if (fileName.indexOf(".") != -1) {
 			fileName = fileName.substring(0, fileName.lastIndexOf("."));
-			System.out.println(". fileName :"+fileName);
+//			System.out.println(". fileName :"+fileName);
 		}
 		if (fileName.lastIndexOf("/") != -1) {
-			fileName = fileName.substring(fileName.lastIndexOf("/",1), fileName.length());
-			System.out.println("/ fileName:"+fileName);
+			fileName = fileName.substring(fileName.lastIndexOf("/", 1), fileName.length());
+//			System.out.println("/ fileName:"+fileName);
 		}
 		return fileName;
 	}

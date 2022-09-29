@@ -23,6 +23,9 @@ public interface DealingService {
 //	지도검색
 	public List<DealingVO> selectMap() throws DataAccessException;
 
+	// 지도창에서 검색
+	public List<DealingVO> selectMap2(Map<String, Object> dlMap) throws DataAccessException;
+
 //	매물 전부검색
 	public List<DealingVO> allListdealing() throws DataAccessException;
 

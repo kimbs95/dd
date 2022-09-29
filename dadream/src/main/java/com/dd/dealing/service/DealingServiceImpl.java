@@ -59,6 +59,13 @@ public class DealingServiceImpl implements DealingService {
 		return dlMap;
 	}
 
+	// 지도창에서 검색
+	@Override
+	public List<DealingVO> selectMap2(Map<String, Object> dlMap) throws DataAccessException {
+		List<DealingVO> dlReqp = dealingDAO.selectMap2(dlMap);
+		return dlReqp;
+	}
+
 	// 인테리어 게시글추가
 	@Override
 	public int addinteboard(BoardVO board) throws DataAccessException {

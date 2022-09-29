@@ -19,16 +19,20 @@
 		<result property="dl_Content" column="dl_Content" />
 		<result property="dl_Price" column="dl_Price" />
 		<result property="dl_Image" column="dl_Image" />
-		
+		<result property="dl_Lat" column="dl_Lat" />
+		<result property="dl_Lng" column="dl_Lng" />
  		
 	</resultMap> 
-
+	<resultMap  id="imgResult" type="dealingVO">
+		<result property="dl_Image" column="dl_Image" />
+		<result property="dl_Num" column="dl_Image" />
+	</resultMap>
 	
-		<!-- 매물등록 -->
-	  <insert id="addNewdealing"  parameterType="dealingVO">
+	<!-- 매물등록 --> 
+	  <insert id="addNewdealing"  parameterType="java.util.Map">
 		<![CDATA[
-		 insert into dealing_t(dl_Num,dl_Title,user_Id,dl_City,dl_Address,dl_Option,dl_Form,dl_Form2,dl_Room,dl_Size,dl_Content,dl_Price,dl_Image)
-		 values(#{dl_Num},#{dl_Title},#{user_Id},#{dl_City},#{dl_Address},#{dl_Option},#{dl_Form},#{dl_Form2},#{dl_Room},#{dl_Size},#{dl_Content},#{dl_Price},#{dl_Image})
+		 insert into dealing_t(dl_Num,dl_Title,user_Id,dl_City,dl_Address,dl_Option,dl_Form,dl_Form2,dl_Room,dl_Size,dl_Content,dl_Price,dl_Image, dl_Lat, dl_Lng)
+		 values(#{dl_Num},#{dl_Title},#{user_Id},#{dl_City},#{dl_Address},#{dl_Option},#{dl_Form},#{dl_Form2},#{dl_Room},#{dl_Size},#{dl_Content},#{dl_Price},#{dl_Image}, #{dl_Lat}, #{dl_Lng})
 		]]>
 	</insert>
 	
@@ -39,17 +43,8 @@
 					(#{item.dl_Image}, 
 					)
 		</foreach>
-
 	</insert>
 	
-	<!--매물 전체검색 -->
-	<select id = "allListdealing" resultType="dealingVO"  parameterType="dealingVO">
-	<![CDATA[
-			SELECT *
-			FROM dealing_t
-		]]>
-	</select>
-	<!--지도 첫 시작  -->
 	<select id="selectMap" resultMap="dealResult">
 		<![CDATA[
 			SELECT *
@@ -57,5 +52,39 @@
 		]]>
 	</select>
 	
+	<select id="selectMap2" resultMap="dealResult" parameterType="java.util.Map">
+			SELECT *
+			FROM dealing_t
+			WHERE
+			1=1 
+			<if test="dl_Form != null and dl_Form !=''">
+			AND dl_Form LIKE CONCAT('%', #{dl_Form}, '%') 
+			</if>
+			<if test="dl_Form2 != null and dl_Form2 !=''">
+			AND dl_Form2 = #{dl_Form2}   
+			</if>
+			<if test="dl_Room != null and dl_Room !=''">
+			AND dl_Room LIKE CONCAT('%', #{dl_Room}, '%') 
+			</if>
+			<if test="dl_Option != null and dl_Option !=''"> 
+			AND dl_Option LIKE CONCAT('%', #{dl_Option}, '%') 
+			</if>
+			<if test="dl_Price != null and dl_Price !=''">
+			AND #{dl_Price} >= dl_Price 
+			</if>
+			<if test="dl_Address != null and dl_Address !=''">
+			AND dl_Address LIKE CONCAT('%', #{dl_Address}, '%')
+			</if>
+	</select>
 	
+
+	<!--매물 전체검색 -->
+	<select id = "allListdealing" resultType="dealingVO"  parameterType="dealingVO">
+	<![CDATA[
+			SELECT *
+			FROM dealing_t
+		]]>
+	</select>	
+
+
 	</mapper>

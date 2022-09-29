@@ -40,8 +40,8 @@
                             src="../image/메인로고.png" alt="다드림 메인로고"></a>
                 </div>
                 <div class="search" style="margin-left:350px">
-                    <form action="" method="get">
-                        <input type="search" placeholder="검색어 입력" style="appearance:auto ;">
+                    <form action="/product.do" method="get">
+                        <input type="search" name="product_Name" placeholder="검색어 입력" style="appearance:auto ;">
                         <button type="submit" style="border: 1px solid;">검색</button>
                     </form>
                 </div>
@@ -105,8 +105,8 @@
                             src="/image/메인로고.png" alt="다드림 메인로고"></a>
                 </div>
                 <div class="search"style="margin-left:350px">
-                    <form action="">
-                        <input type="search" placeholder="검색어 입력">
+                    <form action="/product.do">
+                        <input type="search" name ="product_Name" placeholder="검색어 입력">
                         <button type="submit">검색</button>
                     </form>
                 </div>
