@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -24,6 +25,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.dd.dealing.vo.MemberVO;
 import com.dd.product.service.ProductService;
+import com.dd.product.vo.CartVO;
 import com.dd.product.vo.ProductVO;
 
 @Controller("productController")
@@ -55,7 +57,7 @@ public class ProductControllerImpl implements ProductController {
 
 		List<ProductVO> productsList = productService.listProducts(product_Name);
 		ModelAndView mav = new ModelAndView(viewName);
-		mav.setViewName(viewName);
+//		mav.setViewName(viewName);
 		mav.addObject("productsList", productsList);
 		return mav;
 	}
@@ -118,9 +120,13 @@ public class ProductControllerImpl implements ProductController {
 	/* 판매자 상품 상세 */
 
 	@RequestMapping(value = { "/productview.do" }, method = RequestMethod.GET)
-	private String productmod(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	private String productmod(Model model, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = (String) request.getAttribute("viewName");
 		System.out.println("interceptor에서 온 viewName:" + viewName);
+		String product_Num = (String) request.getParameter("product_Num");
+		System.out.println("product_Num :" + product_Num);
+		model.addAttribute("product_Num", product_Num);
+
 		return viewName;
 	}
 
@@ -128,6 +134,44 @@ public class ProductControllerImpl implements ProductController {
 	@RequestMapping("/order.do")
 	public String order(Model model) {
 		return "/common/order";
+	}
+
+	/* 장바구니 등록 */
+	@ResponseBody
+	@RequestMapping(value = "/cart.do", method = RequestMethod.POST)
+	public Map<String, Object> cartpost(@RequestBody Map<String, Object> body, CartVO cartVO,
+			HttpServletRequest request) {
+
+		System.out.println("cart들어왔다");
+
+		int result = 0;
+
+		HttpSession session = request.getSession();
+		MemberVO member = (MemberVO) session.getAttribute("member");
+		String user_Id = member.getUser_Id();
+
+		body.put("user_Id", user_Id);
+		System.out.println(body);
+		result = productService.cart(body);
+		Map<String, Object> cart = new HashMap<String, Object>();
+		cart.put("result", result);
+
+		return cart;
+	}
+
+	/* 장바구니 창 */
+	@RequestMapping("/cartweb.do")
+	public ModelAndView cart(Model model, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		MemberVO member = (MemberVO) session.getAttribute("member");
+		String user_Id = member.getUser_Id();
+		List<CartVO> info = productService.cartlist(user_Id);
+//		info = productService.cartlist(user_Id);
+
+		System.out.println("info :" + info);
+		ModelAndView mav = new ModelAndView("/product/cart");
+		mav.addObject("info", info);
+		return mav;
 	}
 
 }

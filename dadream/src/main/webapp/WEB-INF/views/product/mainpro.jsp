@@ -30,91 +30,99 @@
 
                 <form action="/product.do" class="submit">
                     <li onclick="">
-                        <input type="hidden" name="product_Name" value="의자">
-                        <img src="../메인 카테고리 사진/책상.png">
+                        <button style="background: none; border: none;" type="submit" name="product_Name" value="책상">
+                            <img src="../메인 카테고리 사진/책상.png">
+                        </button>
                     </li>
                 </form>
-
             </div>
         </ul>
         <ul>
             <div class="pro_category_image">
                 <form action="/product.do" class="submit">
                     <li>
-                        <input type="hidden" name="product_Name" value="">
-                        <img src="../메인 카테고리 사진/침대.png">
+                        <button style="background: none; border: none;" type="submit" name="product_Name" value="침대">
+                            <img src="../메인 카테고리 사진/침대.png">
+                        </button>
                     </li>
                 </form>
             </div>
         </ul>
-        <script>
-            document.querySelector(".pro_category_image").addEventListener("click",(e)=>{
-                
-                document.querySelector(".submit").submit();
-                // location.href="/product.do?productName="+ che;
-            })
-        </script>
         <ul>
             <div class="pro_category_image">
-                <a href="${contextPath}/product.do">
+                <form action="/product.do" class="submit">
                     <li>
-                        <img src="../메인 카테고리 사진/의자.png">
+                        <button style="background: none; border: none;" type="submit" name="product_Name" value="의자">
+                            <img src="../메인 카테고리 사진/의자.png">
+                        </button>
                     </li>
-                </a>
+                </form>
             </div>
         </ul>
         <ul>
             <div class="pro_category_image">
-                <a href="${contextPath}/product.do">
+                <form action="/product.do" class="submit">
                     <li>
-                        <img src="../메인 카테고리 사진/스텐드.png">
+                        <button style="background: none; border: none;" type="submit" name="product_Name" value="스탠드">
+                            <img src="../메인 카테고리 사진/스텐드.png">
+                        </button>
                     </li>
-                </a>
+                </form>
             </div>
         </ul>
         <ul>
             <div class="pro_category_image">
-                <a href="${contextPath}/product.do">
+                <form action="/product.do" class="submit">
                     <li>
-                        <img src="../메인 카테고리 사진/거울.png">
+                        <button style="background: none; border: none;" type="submit" name="product_Name" value="거울">
+                            <img src="../메인 카테고리 사진/거울.png">
+                        </button>
                     </li>
-                </a>
+                </form>
             </div>
         </ul>
         <ul>
             <div class="pro_category_image">
-                <a href="${contextPath}/product.do">
+                <form action="/product.do" class="submit">
                     <li>
-                        <img src="../메인 카테고리 사진/서랍장.png">
+                        <button style="background: none; border: none;" type="submit" name="product_Name" value="서랍장">
+                            <img src="../메인 카테고리 사진/서랍장.png">
+                        </button>
                     </li>
-                </a>
+                </form>
             </div>
         </ul>
         <ul>
             <div class="pro_category_image">
-                <a href="${contextPath}/product.do">
+                <form action="/product.do" class="submit">
                     <li>
-                        <img src="../메인 카테고리 사진/소파.png">
+                        <button style="background: none; border: none;" type="submit" name="product_Name" value="소파">
+                            <img src="../메인 카테고리 사진/소파.png">
+                        </button>
                     </li>
-                </a>
+                </form>
             </div>
         </ul>
         <ul>
             <div class="pro_category_image">
-                <a href="${contextPath}/product.do">
+                <form action="/product.do" class="submit">
                     <li>
-                        <img src="../메인 카테고리 사진/식탁.png">
+                        <button style="background: none; border: none;" type="submit" name="product_Name" value="식탁">
+                            <img src="../메인 카테고리 사진/식탁.png">
+                        </button>
                     </li>
-                </a>
+                </form>
             </div>
         </ul>
         <ul>
             <div class="pro_category_image">
-                <a href="${contextPath}/product.do">
+                <form action="/product.do" class="submit">
                     <li>
-                        <img src="../메인 카테고리 사진/옷장.png">
+                        <button style="background: none; border: none;" type="submit" name="product_Name" value="옷장">
+                            <img src="../메인 카테고리 사진/옷장.png">
+                        </button>
                     </li>
-                </a>
+                </form>
             </div>
         </ul>
     </div>

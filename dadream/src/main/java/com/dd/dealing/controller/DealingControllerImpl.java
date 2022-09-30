@@ -34,6 +34,7 @@ import com.dd.dealing.service.DealingService;
 import com.dd.dealing.vo.BoardVO;
 import com.dd.dealing.vo.DealingVO;
 import com.dd.dealing.vo.MemberVO;
+import com.dd.dealing.vo.NoticeVO;
 
 @Controller("dealingController")
 public class DealingControllerImpl {
@@ -318,14 +319,14 @@ public class DealingControllerImpl {
 
 	}
 
-	// 인테리어 게시판 글쓰기
+	// 인테리어게시판 글쓰기
 	@RequestMapping(value = "/inteboardform.do", method = { RequestMethod.GET })
 	private String addboard(BoardVO board, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = (String) request.getAttribute("viewName");
 		return "/dealing/addboard";
 	}
 
-	// 인테리어 게시글 전송
+	// 인테리어게시글 전송
 	@RequestMapping(value = "/addinteboard.do", method = { RequestMethod.GET, RequestMethod.POST })
 	private ModelAndView addinteboard(@ModelAttribute("board") BoardVO board, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
@@ -336,17 +337,170 @@ public class DealingControllerImpl {
 		return mav;
 	}
 
-	// 인테리어 게시판리스트
-	@RequestMapping(value = "/inteboardlist.do", method = RequestMethod.GET)
-	private ModelAndView inteboardform(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	// 인테리어게시판리스트
+	@RequestMapping(value = "/inteboardlist.do", method = { RequestMethod.GET, RequestMethod.POST })
+	private ModelAndView inteboardlist(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = (String) request.getAttribute("viewName");
+
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("/dealing/inteboardlist");
 		List<BoardVO> inteboardlist = dealingService.listArticles();
-
 		mav.addObject("inteboardlist", inteboardlist);
 		System.out.println("interceptor에서 온 viewName:" + viewName);
 		return mav;
+	}
+
+	// 인테리어 게시글 상세보기
+	@RequestMapping(value = "/board/read", method = { RequestMethod.GET, RequestMethod.POST })
+	public String read(BoardVO boardVO, @RequestParam("inte_Num") int inte_Num, Model model) throws Exception {
+
+		dealingService.updateView(inte_Num);// 조회수 증가
+		BoardVO boardContents = dealingService.getBoardContents(inte_Num);
+		model.addAttribute("boardContents", boardContents);
+		return "/dealing/read";
+	}
+
+	// 인테리어 글 수정화면
+	@RequestMapping(value = "/board/update", method = RequestMethod.GET)
+	public String update(@ModelAttribute("boardVO") BoardVO boardVO, @RequestParam("inte_Num") int inte_Num,
+			Model model) throws Exception {
+
+		BoardVO boardContents = dealingService.getBoardContents(inte_Num);
+		model.addAttribute("boardContents", boardContents);
+		return "/dealing/update";
+	}
+
+	// 인테리어 글 수정 동작화면
+	@RequestMapping(value = "/board/update_action", method = RequestMethod.POST)
+	public String update_action(@ModelAttribute("boardVO") BoardVO boardVO, HttpServletRequest request,
+			RedirectAttributes redirect, Model model) {
+		try {
+			dealingService.updateBoard(boardVO);
+			redirect.addFlashAttribute("redirect", boardVO.getInte_Num());
+			redirect.addFlashAttribute("msg", "수정이 완료되었습니다.");
+		} catch (Exception e) {
+			redirect.addFlashAttribute("msg", "오류가 발생되었습니다.");
+		}
+		return "redirect:/board/read?inte_Num=" + boardVO.getInte_Num();
+	}
+
+	// 인테리어 글 수정
+	@RequestMapping(value = "/board/modArticle.do", method = RequestMethod.POST)
+	@ResponseBody
+	public ResponseEntity modArticle(MultipartHttpServletRequest multipartRequest, HttpServletResponse response)
+			throws Exception {
+		multipartRequest.setCharacterEncoding("UTF-8");
+		Map<String, Object> dealingMap = new HashMap<String, Object>();
+		Enumeration enu = multipartRequest.getParameterNames();
+		while (enu.hasMoreElements()) {
+			String name = (String) enu.nextElement();
+			String value = multipartRequest.getParameter(name);
+			dealingMap.put(name, value);
+		}
+		String inte_Image = upload(multipartRequest);
+
+		HttpSession session = multipartRequest.getSession();
+		session.setAttribute("user_Id", "testId");
+
+		MemberVO memberVO = (MemberVO) session.getAttribute("member");
+		String id = memberVO.getUser_Id();
+		System.out.println("user_Id:" + id);
+		dealingMap.put("user_Id", id);
+		dealingMap.put("inte_Image", inte_Image);
+		String inte_Num = (String) dealingMap.get("inte_Num");
+		System.out.println("inte_Num :" + inte_Num);
+		String message;
+		ResponseEntity resEnt = null;
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.add("Content-Type", "text/html;charset=utf-8");
+
+		try {
+			dealingService.modArticle(dealingMap);
+			if (inte_Image != null && inte_Image.length() != 0) {
+				File srcFile = new File(DEALING_IMAGE_REPO + "\\" + "temp" + "\\" + inte_Image);
+				File destDir = new File(DEALING_IMAGE_REPO + "\\" + inte_Num);
+				FileUtils.moveFileToDirectory(srcFile, destDir, true);
+
+				String originalFileName = (String) dealingMap.get("originalFileName");
+				File oldFile = new File(DEALING_IMAGE_REPO + "\\" + inte_Num + "\\" + originalFileName);
+				oldFile.delete();
+			}
+			message = "<script>";
+			message += "alert('수정이 완료되었습니다.');";
+			message += "location.href='" + multipartRequest.getContextPath() + "/board/read?inte_Num=" + inte_Num
+					+ "';";
+			message += "</script>";
+			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+		} catch (Exception e) {
+			File srcFile = new File(DEALING_IMAGE_REPO + "\\" + "temp" + "\\" + inte_Image);
+			srcFile.delete();
+			message = "<script>";
+			message += "alert('오류 입니다.');";
+			message += "location.href='" + multipartRequest.getContextPath() + "/board/read?inte_Num=" + inte_Num
+					+ "';";
+			message += "</script>";
+			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+		}
+		return resEnt;
+	}
+
+	// 인테리어 글 삭제 동작화면
+	@RequestMapping(value = "/board/removeArticle.do", method = RequestMethod.POST)
+	@ResponseBody
+	public ResponseEntity removeArticle(@RequestParam("inte_Num") int inte_Num, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		response.setContentType("text/html;charset=UTF-8");
+		String message;
+		ResponseEntity resEnt = null;
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.add("Content-Type", "text/html;charset=utf-8");
+		try {
+			dealingService.removeArticle(inte_Num);
+			File destDir = new File(DEALING_IMAGE_REPO + "\\" + inte_Num);
+			FileUtils.deleteDirectory(destDir);
+
+			message = "<script>";
+			message += "alert('삭제되었습니다.');";
+			message += "location.href='" + request.getContextPath() + "/inteboardlist.do';";
+			message += "</script>";
+			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+		} catch (Exception e) {
+			message = "<script>";
+			message += "alert('오류입니다.');";
+			message += "location.href='" + request.getContextPath() + "/inteboardlist.do';";
+			message += "</script>";
+			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+			e.printStackTrace();
+		}
+		return resEnt;
+	}
+
+	// 공지사항 리스트조회
+	@RequestMapping(value = "/noticelist.do", method = { RequestMethod.GET, RequestMethod.POST })
+	private ModelAndView noticelist(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String viewName = (String) request.getAttribute("viewName");
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("/dealing/list");
+		List<NoticeVO> noticlesList = dealingService.listNoticles();
+		mav.addObject("noticlesList", noticlesList);
+		System.out.println("interceptor에서 온 viewName:" + viewName);
+		return mav;
+	}
+
+	// 공지사항 글 화면 추가
+	@RequestMapping(value = "/board/create", method = RequestMethod.GET)
+	public String create(@ModelAttribute("searchVO") NoticeVO searchVO, Model model) throws Exception {
+		return "/dealing/create";
+	}
+
+	// 공지사항 글 추가
+	@RequestMapping(value = "/board/create_action", method = RequestMethod.POST)
+	public String create_action(@ModelAttribute("searchVO") NoticeVO searchVO, RedirectAttributes redirect)
+			throws Exception {
+
+		dealingService.insertnotice(searchVO);
+		redirect.addFlashAttribute("redirect", searchVO.getNotice_Num());
+		return "/dealing/list";
 	}
 
 	/* 신고하기 */
@@ -388,6 +542,7 @@ public class DealingControllerImpl {
 			message += "alert('신고가 완료되었습니다.');";
 			// message += "location.href='" + request.getContextPath() +
 			// "/board/listArticles.do';";
+			message += "window.close()";
 			message += "</script>";
 			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
 		} catch (Exception e) {

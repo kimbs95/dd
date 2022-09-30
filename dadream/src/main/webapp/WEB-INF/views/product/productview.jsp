@@ -107,8 +107,35 @@
                 </div>
                 <div id="dlComments4">
                     <div>
-                        <button type="button" class="btn btn-secondary btn-lg" onclick="showPopup();">
-                            장바구니</button>
+                        <!-- <form action="/cart.do?product_Num=${product_Num}" method="post"> -->
+                        <button type="button" id="cart" class="btn btn-secondary btn-lg">장바구니</button>
+                        <!-- </form> -->
+                        <script>
+                            let product_Nums ="${product_Num}"
+                            
+                            document.addEventListener("DOMContentLoaded", () => {
+                                document.querySelector("#cart").addEventListener("click", async e => {
+                                    let cart = await fetch('/cart.do', {
+                                        method: "POST",
+                                        headers: {
+                                            'content-type': 'application/json'
+                                        },
+                                        body: JSON.stringify({
+                                            product_Num : product_Nums,
+                                        }) 
+                                    });
+                                    if(cart.status===200){
+                                        let jsondata = await cart.json();
+                                        if(jsondata.result === 1){
+                                            alert("장바구니에 성공적으로 담겼습니다");
+                                        }
+                                            
+                                    }else{
+                                        alert("예상치 못한 오류입니다.");
+                                    }
+                                });
+                            })
+                        </script>
                         <button type="button" class="btn btn-secondary btn-lg" onclick="showPopup();">
                             구매하기</button>
                     </div>

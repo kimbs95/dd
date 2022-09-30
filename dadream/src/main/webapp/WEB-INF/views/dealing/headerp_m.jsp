@@ -117,7 +117,14 @@
                 </div>
 
                 <div class="headerul">
+
                     <ul style="width: 550px;">
+                        <a href="${contextPath}/noticelist.do">
+                            <li>공지사항</li>
+                        </a>
+                        <a href="${contextPath}/inteboardlist.do">
+                            <li>게시판등록</li>
+                        </a>
                         <a onclick="dont();" href="${contextPath}/dealingform.do">
                             <li>매물등록</li>
                         </a>

@@ -126,7 +126,7 @@
                                     <li class="headerppli" style="display: block;">
                                         <h6>${member.user_Name}님</h6>
                                         <div class="headerpp hidee">
-                                            <a href="" style="margin-top:10px">
+                                            <a href="/cartweb.do" style="margin-top:10px">
                                                 장바구니
                                             </a>
                                             <a href="" style="margin-top:10px">

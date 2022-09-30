@@ -34,21 +34,20 @@
   <!-- 카테고리상품들 -->
   <!-- 함부로 inlinecss 건드리면 안돼요 깨져용 -->
   <c:forEach var="product" items="${productsList}">
-    <div class="pro_category_padding" style="width: 850px; margin-left: 200px;">
-      <div class="pro_category_content">
-        <div class="productimg">
-          <a href="${contextPath}/productview.do">
-            <img src="../메인 카테고리 사진/스텐드.png" alt="" width="200px" height="170px">
-          </a>
+        <div class="pro_category_padding" style="width: 850px; margin-left: 200px;">
+          <div class="pro_category_content">
+            <div class="productimg">
+              <a href="${contextPath}/productview.do?product_Num=${product.product_Num}">
+                <img src="../메인 카테고리 사진/스텐드.png" alt="" width="200px" height="170px">
+              </a>
+            </div>
+            <div class="productcontent">
+              <h1>${product.product_Name}</h1>
+              <h3><span>가격 : </span>${product.product_Price}</h3>
+              <p>${product.product_Content}</p>
+            </div>
+          </div>
         </div>
-        <div class="productcontent">
-
-          <h1>${product.product_Name}</h1>
-          <h3><span>가격 : </span>${product.product_Price}</h3>
-          <p>${product.product_Content}</p>
-        </div>
-      </div>
-    </div>
   </c:forEach>
 
 </body>

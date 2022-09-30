@@ -75,9 +75,38 @@
    </definition>
    
    
-   <definition name="/addinteboard" extends="baseLayout2">
-      <put-attribute name="title" value="매물 메인페이지" />
+   <!-- 부동산 인테리어 게시판 -->
+   <definition name="/dealing/inteboardlist" extends="baseLayout2">
+      <put-attribute name="title" value="게시판 리스트페이지" />
+      <put-attribute name="header" value="/WEB-INF/views/dealing/headerp_m.jsp" />
+      <put-attribute name="body" value="/WEB-INF/views/dealing/inteboardlist.jsp" />
+   </definition>
+   
+   <!-- 부동산 게시판 글 등록 -->
+   <definition name="/dealing/addboard" extends="baseLayout2">
+      <put-attribute name="title" value="게시판 리스트페이지" />
       <put-attribute name="header" value="/WEB-INF/views/dealing/headerp_m.jsp" />
       <put-attribute name="body" value="/WEB-INF/views/dealing/addboard.jsp" />
+   </definition>
+   
+   <!-- 부동산 게시판 글 상세보기 -->
+   <definition name="/dealing/read" extends="baseLayout2">
+      <put-attribute name="title" value="게시글 등록 페이지" />
+      <put-attribute name="header" value="/WEB-INF/views/dealing/headerp_m.jsp" />
+      <put-attribute name="body" value="/WEB-INF/views/dealing/read.jsp" />
+   </definition>
+   
+   <!-- 부동산 게시글 수정,삭제 -->
+   <definition name="/dealing/update" extends="baseLayout2">
+      <put-attribute name="title" value="게시글 수정 페이지" />
+      <put-attribute name="header" value="/WEB-INF/views/dealing/headerp_m.jsp" />
+      <put-attribute name="body" value="/WEB-INF/views/dealing/update.jsp" />
+   </definition>
+   
+   <!-- 공지사항 리스트 -->
+    <definition name="/dealing/list" extends="baseLayout2">
+      <put-attribute name="title" value="게시글 수정 페이지" />
+      <put-attribute name="header" value="/WEB-INF/views/dealing/headerp_m.jsp" />
+      <put-attribute name="body" value="/WEB-INF/views/dealing/list.jsp" />
    </definition>
    </tiles-definitions>

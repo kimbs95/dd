@@ -2,6 +2,11 @@ package com.dd.dealing.vo;
 
 import java.sql.Date;
 
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+
+@Transactional
+@Component("boardVO")
 public class BoardVO {
 	private int inte_Num;
 	private String inte_Title;
@@ -9,13 +14,16 @@ public class BoardVO {
 	private String inte_Image;
 	private String user_Id;
 	private Date inte_Date;
+	private int viewCounts;
+
+	private String searchKeyword;
 
 	public BoardVO() {
 
 	}
 
-	public BoardVO(int inte_Num, String inte_Title, String inte_Text, String inte_Image, String user_Id,
-			Date inte_Date) {
+	public BoardVO(int inte_Num, String inte_Title, String inte_Text, String inte_Image, String user_Id, Date inte_Date,
+			String searchKeyword, int viewCounts) {
 		super();
 		this.inte_Num = inte_Num;
 		this.inte_Title = inte_Title;
@@ -23,6 +31,9 @@ public class BoardVO {
 		this.inte_Image = inte_Image;
 		this.user_Id = user_Id;
 		this.inte_Date = inte_Date;
+		this.searchKeyword = searchKeyword;
+		this.viewCounts = viewCounts;
+
 	}
 
 	public int getInte_Num() {
@@ -73,9 +84,20 @@ public class BoardVO {
 		this.inte_Date = inte_Date;
 	}
 
-	@Override
-	public String toString() {
-		return "BoardVO [inte_Num=" + inte_Num + ", inte_Title=" + inte_Title + ", inte_Text=" + inte_Text
-				+ ", user_Id=" + user_Id + ", inte_Date=" + inte_Date + ", inte_Image=" + inte_Image + "]";
+	public String getSearchKeyword() {
+		return searchKeyword;
 	}
+
+	public void setSearchKeyword(String searchKeyword) {
+		this.searchKeyword = searchKeyword;
+	}
+
+	public int getViewCounts() {
+		return viewCounts;
+	}
+
+	public void setViewCounts(int viewCounts) {
+		this.viewCounts = viewCounts;
+	}
+
 }

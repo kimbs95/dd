@@ -12,6 +12,7 @@
 		<result property="inte_Image" column="inte_Image" />
 		<result property="inte_Date" column="inte_Date" />
 		<result property="user_Id" column="user_Id" />
+		<result property="viewCounts" column="viewCounts" />
 		
 	
 	</resultMap> 
@@ -19,15 +20,16 @@
 		<!--인테리어 게시글 등록 -->
 	  <insert id="insertboard"  parameterType="boardVO">
 		<![CDATA[
-		 insert into interior_t(inte_Num,inte_Title,inte_Text,inte_Image,inte_Date,user_Id)
-		 values(#{inte_Num},#{inte_Title},#{inte_Text},#{inte_Image},#{inte_Date},#{user_Id})
+		 insert into interior_t(inte_Num,inte_Title,inte_Text,inte_Image,inte_Date,user_Id,viewCounts)
+		 values(#{inte_Num},#{inte_Title},#{inte_Text},#{inte_Image},#{inte_Date},#{user_Id},#{viewCounts})
 		]]>
+		  
 	</insert>
 	<!-- 인테리어 게시글 리스트 조회 -->
 	<select id="selectAllArticlesList" parameterType="boardVO" resultMap="boardResult">
 	
 	<![CDATA[
-		SELECT inte_Num,inte_Title,inte_Text,inte_Image,inte_Date,user_Id
+		SELECT inte_Num,inte_Title,inte_Text,inte_Image,inte_Date,user_Id,viewCounts
 		FROM INTERIOR_T
 		]]>
 		WHERE 1=1
@@ -35,6 +37,38 @@
 		AND INTE_NUM = #{inte_Num}
 		</if>
 	</select>
+	
+	<select id="getBoardContents" parameterType="boardVO" resultType="boardVO">
+		select * from interior_t
+		where inte_Num = #{inte_Num}
+	</select>
+	
+	<update id="updateBoard" parameterType="boardVO">
+		UPDATE interior_t SET
+		inte_Title = #{inte_Title},
+		inte_Text = #{inte_Text},
+		user_Id = #{user_Id}
+		WHERE inte_Num = #{inte_Num}
+	</update>
+	
+	<delete id="deleteArticle"  parameterType="boardVO" >
+		<![CDATA[
+			delete
+			from
+			interior_t
+			WHERE
+			inte_Num = #{inte_Num}
+			]]>
+	</delete>
+	
+	<!-- 조회수 증가 -->
+	<update id="updateView" parameterType="int">
+		UPDATE interior_t 
+		SET
+		viewCounts = viewCounts + 1
+		WHERE 
+		inte_Num = #{inte_Num}
+	</update>
 	
 	
 	</mapper>

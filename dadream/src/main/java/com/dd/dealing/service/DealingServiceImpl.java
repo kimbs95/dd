@@ -13,6 +13,7 @@ import com.dd.dealing.dao.DealingDAO;
 import com.dd.dealing.vo.BoardVO;
 import com.dd.dealing.vo.DealingVO;
 import com.dd.dealing.vo.MemberVO;
+import com.dd.dealing.vo.NoticeVO;
 
 @Service("dealingService")
 @Transactional(propagation = Propagation.REQUIRED)
@@ -66,17 +67,62 @@ public class DealingServiceImpl implements DealingService {
 		return dlReqp;
 	}
 
-	// 인테리어 게시글추가
+	// 게시글추가
 	@Override
 	public int addinteboard(BoardVO board) throws DataAccessException {
 		return dealingDAO.insertboard(board);
 	}
 
-//	인테리어 목록보기
+	// 게시글 목록 조회
+	@Override
 	public List<BoardVO> listArticles() throws Exception {
 		List<BoardVO> articlesList = null;
 		articlesList = dealingDAO.selectAllArticlesList();
 		return articlesList;
+	}
+
+	// 상세보기
+	@Override
+	public BoardVO getBoardContents(int inte_Num) throws Exception {
+		return dealingDAO.getBoardContents(inte_Num);
+	}
+
+	// 인테리어 글 수정
+	@Override
+	public void updateBoard(BoardVO boardVO) throws Exception {
+		dealingDAO.updateBoard(boardVO);
+	}
+
+	// 인테리어 글 삭제
+	@Override
+	public void removeArticle(int inte_Num) throws Exception {
+		dealingDAO.deleteArticle(inte_Num);
+	}
+
+	// 인테리어 수정
+	@Override
+	public void modArticle(Map dealingMap) throws Exception {
+		dealingDAO.updateArticle(dealingMap);
+	}
+
+	// 공지사항 게시판 목록 조회
+	@Override
+	public List<NoticeVO> listNoticles() throws Exception {
+		List<NoticeVO> noticlesList = null;
+		noticlesList = dealingDAO.selectAllNoticlesList();
+		return noticlesList;
+	}
+
+	// 공지사항 글 등록
+	@Override
+	public void insertnotice(NoticeVO searchVO) throws Exception {
+		dealingDAO.insertnotice(searchVO);
+	}
+
+	// 조회수 증가
+	@Override
+	public void updateView(int viewCounts) throws Exception {
+		dealingDAO.updateView(viewCounts);
 	}
 
 //	신고하기
@@ -84,4 +130,5 @@ public class DealingServiceImpl implements DealingService {
 	public int addReport(Map rpMap) throws DataAccessException {
 		return dealingDAO.insertReport(rpMap);
 	}
+
 }

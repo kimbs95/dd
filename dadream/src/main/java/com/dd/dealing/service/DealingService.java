@@ -8,6 +8,7 @@ import org.springframework.dao.DataAccessException;
 import com.dd.dealing.vo.BoardVO;
 import com.dd.dealing.vo.DealingVO;
 import com.dd.dealing.vo.MemberVO;
+import com.dd.dealing.vo.NoticeVO;
 
 public interface DealingService {
 
@@ -32,12 +33,34 @@ public interface DealingService {
 	// 매물등록
 	public int addNewdealing(Map dealingMap) throws DataAccessException;
 
-	// 인테리어 게시글추가
+	// 인테리어게시판 등록
 	public int addinteboard(BoardVO board) throws DataAccessException;
 
-//	인테리어 목록보기
+	// 인테리어게시판 글 목록
 	public List<BoardVO> listArticles() throws Exception;
+
+	// 인테리어 게시글 수정완료
+	public void modArticle(Map dealingMap) throws Exception;
+
+	// 인테리어 게시글 목록 가져오기
+	public BoardVO getBoardContents(int inte_Num) throws Exception;
+
+	// 인테리어 게시글 수정
+	public void updateBoard(BoardVO boardVO) throws Exception;
+
+	// 인테리어 게시글 삭제
+	public void removeArticle(int inte_Num) throws Exception;
+
+	// 공지사항 글 목록
+	public List<NoticeVO> listNoticles() throws Exception;
+
+	// 공지사항 글 등록
+	public void insertnotice(NoticeVO searchVO) throws Exception;
+
+	// 게시판 조회수 증가
+	public void updateView(int viewCounts) throws Exception;
 
 //	신고하기
 	public int addReport(Map rpMap) throws DataAccessException;
+
 }

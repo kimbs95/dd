@@ -25,7 +25,7 @@
 	<select id="selectAllProductsList" resultType="productVO"
 		parameterType="String">
 	<![CDATA[
-		select * from product_t where product_Name = #{product_Name} order by product_Date desc
+		select * from product_t where product_Name  like concat('%', #{product_Name},'%' )order by product_Date desc
 	]]>
 	</select>
 
@@ -38,5 +38,8 @@
 		 #{product_Views},#{product_Option1},#{product_Option2},#{product_ExImg})
 		]]>
 	</insert>
-
+	
+	<select id="productnum" resultType="int" parameterType="String">
+		select * from product_t where product_Num =#{productNum}
+	</select>
 </mapper>
