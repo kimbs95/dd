@@ -2,6 +2,7 @@ package com.dd.product.controller;
 
 import java.io.File;
 import java.security.MessageDigest;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -166,12 +167,37 @@ public class ProductControllerImpl implements ProductController {
 		MemberVO member = (MemberVO) session.getAttribute("member");
 		String user_Id = member.getUser_Id();
 		List<CartVO> info = productService.cartlist(user_Id);
-//		info = productService.cartlist(user_Id);
+//		Map<String, Object> pronum = new HashMap<>();
+		List<CartVO> pronum = new ArrayList<>();
+		int count = 0;
+		for (CartVO i : info) {
+			System.out.println(i.getProduct_Num());
+//			pronum.put("product_Num" + ++count, i.getProduct_Num());
+			pronum.add(i);
+		}
 
+		System.out.println("index" + pronum);
+
+//		List<ProductVO> pro = productService.profind();
+
+		info = productService.cartlist(user_Id);
 		System.out.println("info :" + info);
 		ModelAndView mav = new ModelAndView("/product/cart");
 		mav.addObject("info", info);
 		return mav;
+	}
+
+//	장바구니 삭제
+	@ResponseBody
+	@RequestMapping(value = "/cartdelete.do", method = RequestMethod.POST)
+	public Map<String, Object> cartdelete(@RequestBody int body, HttpServletRequest request) {
+
+		int result = 0;
+		result = productService.cartdelete(body);
+		System.out.println("cartbody :" + body);
+		Map<String, Object> map = new HashMap<>();
+		map.put("result", result);
+		return map;
 	}
 
 }

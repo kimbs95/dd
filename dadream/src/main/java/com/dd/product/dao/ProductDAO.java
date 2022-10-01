@@ -28,4 +28,7 @@ public interface ProductDAO {
 
 //	장바구니 리스트
 	public List<CartVO> cartlist(String user_Id) throws DataAccessException;
+
+//	장바구니 삭제 
+	public int cartdelete(int body) throws DataAccessException;
 }

@@ -24,6 +24,12 @@
 		<select id="cartlist" resultMap="cartResult"  parameterType="String">
 			select * from cart_t where user_Id = #{user_Id}
 		</select>
+		
+		<delete id ="cartdelete"  parameterType="int">
+			<![CDATA[
+				delete from cart_t where cart_Num = #{body}
+			]]>
+		</delete>
 	
      </mapper>
      

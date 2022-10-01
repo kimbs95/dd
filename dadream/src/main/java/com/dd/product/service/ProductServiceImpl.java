@@ -51,4 +51,9 @@ public class ProductServiceImpl implements ProductService {
 	public List<CartVO> cartlist(String user_Id) throws DataAccessException {
 		return productDAO.cartlist(user_Id);
 	}
+
+//	장바구니 삭제 
+	public int cartdelete(int body) throws DataAccessException {
+		return productDAO.cartdelete(body);
+	}
 }

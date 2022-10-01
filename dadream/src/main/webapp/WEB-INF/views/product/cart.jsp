@@ -17,61 +17,50 @@ request.setCharacterEncoding("UTF-8");
     <!-- reset css -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
     <style>
-        * {
-            box-sizing: border-box;
-            user-select: none;
-        }
-
         .cart {
-            margin-top: 40px;
+            /* margin-left: 100px; */
         }
 
-        .cartcontent {
-            display: flex;
-            margin-left: 200px;
-            width: 1500px;
-        }
-
-        .cartcontent h3 {
-            font-weight: bold;
-            font-size: 30px;
-            margin-right: 705px;
-        }
-
-        .cartcontent p {
+        .cart>* {
             margin-top: 30px;
-            margin-right: 160px;
         }
 
-        .cart .cartmiddle {
-            width: 1130px;
-            margin-left: 150px;
+        .cart>h3 {
+            font-weight: bold;
+            font-size: 40px;
+        }
+        #carttable{
+            width: 1100px;
         }
 
-        .cart .cartmiddle .cartradio {
-            width: 1300px;
-            display: flex;
-            justify-content: space-between;
-            margin: 20px 20px;
+        #carttable td {
+            width: 250px;
+            height: 80px;
+            padding: 20px;
+
         }
 
-        .cart .cartmiddle .cartradio .cartcount span {
-            margin-left: 100px;
+        #carttable tr>th {
+            font-weight: bold;
+            font-size: 20px;
+            width: 30px;
+            /* height: 50px; */
+            padding: 20px;
         }
 
-        .cartfoot {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-top: 40px;
+        #carttable tr {
+            margin-left: 20px;
+
         }
 
-        .inputnum {
-            width: 50px;
-        }
-
+        .cartfoot,
         .cartbuy {
-            width: 200px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .cartbuy button {
+            width: 150px;
             height: 40px;
         }
     </style>
@@ -79,38 +68,82 @@ request.setCharacterEncoding("UTF-8");
 
 <body>
     <div class="cart">
-        <div class="cartcontent">
-            <h3>장바구니</h3>
-            <p>수량</p>
-            <p>가격</p>
-        </div>
-        <div class="cartmiddle">
-            <ul>
-                <li>
-                    <c:forEach var="cart" items="${info}">
-                    <div class="cartradio">
-                            <input name="cartcheck" type="checkbox">
-                            <h6>${cart.cart_Num}
-                                <p>청춘의 끓는 피다 청춘의 피가 뜨거운지라 인간의 동산에는 사랑의</p>
-                            </h6>
-                            <div class="cartcount">
-                                <input type="button" value="-">
-                                <input class="inputnum" type="number" value="1" min="1" step="1">
-                                <input type="button" value="+">
-                                <span>13000원</span>
-                            </div>
-                            <button>삭제</button>
-                        </div>
-                    </c:forEach>
-                </li>
-            </ul>
-        </div>
+
+        <h3>장바구니</h3>
+        <table id=carttable>
+            <tr style="background: gray;">
+                <th>No</th>
+                <th>상품명</th>
+                <th>수량</th>
+                <th>가격</th>
+                <th>삭제</th>
+            </tr>
+            <c:forEach var="cart" items="${info}">
+                <tr align="center">
+                    <!-- <div class="cartradio"> -->
+                    <td>
+                        <h6>${cart.cart_Num}</h6>
+                    </td>
+
+                    <td>
+
+                        <p>청춘의 끓는 피다 청춘의 피가 뜨거운지라 인간의 동산에는 사랑의</p>
+                    </td>
+                    <!-- <div class="cartcount"> -->
+                    <td>
+                        <input class="inputnum" type="number" value="1" min="1" step="1" style="width: 30px ;">
+                    </td>
+                    <td>
+                        <span>13000원</span>
+                    </td>
+                    <!-- </div> -->
+                    <td>
+                        <button class="cartdelete" id ="num" value="${cart.cart_Num}">삭제</button>
+                    </td>
+                    <!-- </div> -->
+                </tr>
+            </c:forEach>
+                <script>
+                    
+                    document.addEventListener("DOMContentLoaded",()=>{
+                        document.querySelector(".cartdelete").addEventListener("click", async e => {
+                            let num = e.target.value;
+                            // console.log(num);
+                        console.log(e.target);
+                        let cartdelete = await fetch("/cartdelete.do",{
+                            method:"POST",
+                            headers:{"content-type":"application/json"},
+                            body: JSON.stringify(num)
+                        })
+                        if(cartdelete.status=200){
+                            let data = await cartdelete.json();
+                            console.log(data);
+                            if(data.result===0){
+                                alert("다시 시도해주세요");
+                                location.reload();
+                                return;
+                            }else{
+                                alert("삭제가 완료되었습니다");
+                                location.reload();
+                                return;
+                            }
+            
+                        }else{
+                            alert("서버 문제");
+                        }
+                    })
+                })
+                </script>
+        </table>
         <hr>
         <div class="cartfoot">
-            <span> 0개 선택&nbsp;&nbsp; 상품가 + 배송비&nbsp;&nbsp; = &nbsp;&nbsp;총금액</span> <br><br>
-            <button class="cartbuy">구매하기</button>
+            <span> 0개 선택&nbsp;&nbsp; 상품가 + 배송비&nbsp;&nbsp; = &nbsp;&nbsp;총금액</span>
+        </div>
+        <div class="cartbuy">
+            <button type="button">구매하기</button>
         </div>
     </div>
+  
 </body>
 
 </html>
