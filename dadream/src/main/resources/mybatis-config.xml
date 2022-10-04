@@ -14,7 +14,7 @@
 		<mapper resource ="mybatis/mappers/report.xml" />
 		<mapper resource="mybatis/mappers/board.xml"/>	
 		<mapper resource="mybatis/mappers/notice.xml"/>	
-		<mapper resource="mybatis/mappers/cart.xml"/>	
+		<!-- <mapper resource="mybatis/mappers/cart.xml"/>	 -->
 		
 	</mappers>
 </configuration>

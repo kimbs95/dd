@@ -48,6 +48,12 @@ public class DealingControllerImpl {
 	@Autowired
 	private DealingVO dealingVO;
 
+	/* 메인페이지 */
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+	private String MAIN(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		return "/dealingmain";
+	}
+
 	/* 회원가입 선택 */
 	@RequestMapping(value = "/userjoin.do", method = RequestMethod.GET)
 	private String userjoin(HttpServletRequest request, HttpServletResponse response) throws Exception {

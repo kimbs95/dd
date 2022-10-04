@@ -15,7 +15,7 @@ import com.dd.product.vo.ProductVO;
 public interface ProductDAO {
 
 //	상품등록
-	public void insertProduct(ProductVO productMap) throws DataAccessException;
+	public int insertProduct(Map<String, Object> productMap) throws DataAccessException;
 
 	// 상품목록
 	public List<ProductVO> selectAllProductsList(String product_Name) throws DataAccessException;

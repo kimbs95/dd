@@ -105,6 +105,42 @@
             }
         });
         </script>
+        <h1>구매하기</h1>
+        <img src="/images/toss-tee.png" style="max-width: 100%" />
+        <h3>토스 티셔츠</h3>
+        <span>19,000 원</span>
+        <p>----------------------</p>
+        <div><label><input type="radio" name="method" value="카드" checked/>신용카드</label></div>
+        <div><label><input type="radio" name="method" value="가상계좌"/>가상계좌</label></div>
+        <p>----------------------</p>
+        <button id="payment-button">결제하기</button>
+    </section>
+    <script src="https://js.tosspayments.com/v1"></script>
+    <script>
+        var tossPayments = TossPayments("test_ck_jkYG57Eba3G7LGlBJkj3pWDOxmA1");
+        var button = document.getElementById("payment-button");
+    
+        var orderId = new Date().getTime();
+    
+        button.addEventListener("click", function () {
+            var method = document.querySelector('input[name=method]:checked').value; // "카드" 혹은 "가상계좌"
+    
+            var paymentData = {
+                amount: 19000,
+                orderId: orderId,
+                orderName: "토스 티셔츠",
+                customerName: "이토페",
+                successUrl: window.location.origin + "/success.do",
+                failUrl: window.location.origin + "/fail.do",
+            };
+    
+            if (method === '가상계좌') {
+                paymentData.virtualAccountCallbackUrl = window.location.origin + '/virtual-account/callback.do'
+            }
+    
+            tossPayments.requestPayment(method, paymentData);
+        });
+    </script>
 </body>
 
 </html>

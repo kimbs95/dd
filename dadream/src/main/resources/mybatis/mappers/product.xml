@@ -20,6 +20,16 @@
 		<result property="product_Option2" column="product_Option2" />
 		<result property="product_ExImg" column="product_ExImg" />
 	</resultMap>
+	
+	 <resultMap id="cartResult" type="cartVO">
+			<result property="cart_Num" column="cart_Num" />
+			<result property="cart_BuytCount" column="cart_BuytCount" />
+			<result property="product_Num" column="product_Num" />
+			<result property="user_Id" column="user_Id" />
+			<!-- 상품과 연결 해서 씁니다 . cartvo 도 설정해줘야합니다 -->
+			<collection property ="product" resultMap="proResult">
+			</collection>
+		</resultMap> 
 
 
 	<select id="selectAllProductsList" resultType="productVO"
@@ -30,7 +40,7 @@
 	</select>
 
 
-	<insert id="insertProduct" parameterType="productVO">
+	<insert id="insertProduct" parameterType="java.util.Map">
 		<![CDATA[
 		 insert into product_t(product_Num ,product_Name,product_Price, product_TotalCount,product_Date,product_Content,product_Image,user_Id,product_Views,product_Option1,product_Option2,product_ExImg)
 		 values(#{product_Num}, #{product_Name}, #{product_Price}, #{product_TotalCount},
@@ -42,4 +52,25 @@
 	<select id="productnum" resultType="int" parameterType="String">
 		select * from product_t where product_Num =#{productNum}
 	</select>
+	
+
+		
+		<insert id="cart"  parameterType="java.util.Map">
+			<![CDATA[
+		 	insert into cart_t(cart_Num,cart_BuytCount,product_Num,user_Id)
+		 	values(#{cart_Num},#{cart_BuytCount},#{product_Num},#{user_Id})
+			]]>
+		</insert>
+		
+		
+		<select id="cartlist" resultMap="cartResult"  parameterType="String">
+			select a.cart_Num ,  a.cart_buytCount,   b.product_Name, b.product_Price from cart_t a join product_t b on a.product_Num = b.product_Num where a.user_Id =#{user_Id}
+		</select>
+		
+		<delete id ="cartdelete"  parameterType="int">
+			<![CDATA[
+				delete from cart_t where cart_Num = #{body}
+			]]>
+		</delete>
+	
 </mapper>

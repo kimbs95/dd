@@ -12,6 +12,10 @@ public class ViewNameInterceptor extends HandlerInterceptorAdapter {
 		try {
 			String viewName = getViewName(request);
 			request.setAttribute("viewName", viewName);
+//			if (request.getSession().getAttribute("member") == null) {
+//			response.sendRedirect("/login.do");
+//			return true;
+//		}
 			System.out.println("interceptor viewName:" + viewName);
 		} catch (Exception e) {
 			e.printStackTrace();

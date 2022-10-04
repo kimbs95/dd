@@ -42,65 +42,11 @@
                 <div class="dlImg">
                     <div class="dlMain">
                         <label for="product_Image">이미지 를 골라주세요</label><br>
-                        <input type="file" id="product_Image" accept="image/*" multiple>
+                        <input type="file" id="product_Image" name="product_Image" accept="image/*" multiple>
                         <img id="preview" src="" width=200 height=200 />
                         <h1 class="imgh1"></h1>
                     </div>
                 </div>
-                <script>
-                    // 썸네일 코드 
-                    document.addEventListener('DOMContentLoaded', () => {
-                        document.querySelector("#product_Image").addEventListener("change", e => {
-                            const preview = document.querySelector("#preview");
-                            document.querySelector(".imgh1").innerHTML = "감사합니다";
-                            let reader = new FileReader();
-                            reader.onloadend = finished => {
-                                preview.setAttribute('src', finished.target.result);
-                            }
-                            reader.readAsDataURL(e.target.files.item(0));
-                        })
-                        
-                        // 등록 버튼 누를시 
-                        document.querySelector("#productsubmit").addEventListener("click", async (e) => {
-                            let data = document.querySelector("#product_Image").files;
-                            // if ([...data].length === 0) {
-                            //     alert('파일을 선택해 주세요');
-                            //     location.reload();
-                            //     return;
-                            // }
-                            let fd = new FormData();
-                            // 유사배열에서 실제배열로
-                            for (let f of [...data]) {
-                                fd.append("file", f);
-                            }
-                            let response = await fetch('/productpost.do', {
-                                method: "POST",
-                                body: fd
-                            });
-
-
-                            // if (response.status !== 200) {
-                            //     alert('예상치 못한 무언가 오류가 발생했습니다.');
-                            //     // e.preventDefault();
-                            //     // location.reload();
-                            //     return;
-                            // }
-
-                            // if (response.headers.get('state') === 'success') {
-                            //     alert('파일 업로드 되었습니다.');
-                            //     location.reload();
-                            //     return;
-                            // } else {
-                            //     alert('오류가 발생 했습니다.');
-                            //     location.reload();
-                            //     return;
-                                
-                            // }
-
-
-                        })
-                    });
-                </script>
 
                 <!-- 텍스트추가 -->
                 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
@@ -109,14 +55,15 @@
 
                     function fn_addtext() {
                         $("#d_text").append("<br>" +
-                            "<input type='text' name='product_Option1' size='32'  placeholder='상품 옵션을 입력하세요.' />");
+                            "<input type='text' id='product_Option1' name='product_Option1' size='32'  placeholder='상품 옵션을 입력하세요.' />"
+                        );
                         cnt++;
                     }
                     var cnt = 1;
 
                     function fn_addtext2() {
                         $("#d_text2").append("<br>" +
-                            "<input type='text' name='product_Option2' size='32'  placeholder='상품 추가 옵션을 입력하세요.' />"
+                            "<input type='text' id='product_Option2' name='product_Option2' size='32'  placeholder='상품 추가 옵션을 입력하세요.' />"
                         );
                         cnt++;
                     }
@@ -125,25 +72,27 @@
                 <div class="productcg">
                     <div class="productcon">
                         <h3>상품제목</h3>
-                        <input type="text" class="width300" name="product_Name" placeholder="ex)뜨거운침대" size="70">
+                        <input type="text" class="width300" id="product_Name" name="product_Name" placeholder="ex)뜨거운침대"
+                            size="70">
                         <br><br>
                         <h3>상품설명</h3>
                         <!-- <input type="text" class="width300" name="product_Content" placeholder="ex) 뜨거운침대는 매우 큰 사이즈입니다."
                             size="70"> -->
-                        <textarea name="product_Content" id="" cols="70" rows="15" placeholder="상품 상세 설명"></textarea>
+                        <textarea id="product_Content" name="product_Content" id="" cols="70" rows="15"
+                            placeholder="상품 상세 설명"></textarea>
                         <br><br>
                     </div>
                     <div class="pfcontrol">
                         <div class="flexnum">
                             <div class="margin10">
                                 <h3>상품가격</h3>
-                                <input type="text" class="width145" name="product_Price" placeholder="상품가격을 입력하세요."
-                                    size="32">
+                                <input type="text" class="width145" id="product_Price" name="product_Price"
+                                    placeholder="상품가격을 입력하세요." size="32">
                                 <br><br>
                             </div>
                             <div class="margin10">
                                 <h3>상품수량</h3>
-                                <input type="text" class="width145" name="product_TotalCount"
+                                <input type="text" class="width145" id="product_TotalCount" name="product_TotalCount"
                                     placeholder="상품수량을 입력해주세요." size="32">
                                 <br><br>
                             </div>
@@ -165,9 +114,7 @@
                                 <div class="flex_option">
                                     <h3>추가옵션 <input type="button" value="추가" onclick="fn_addtext2()"
                                             class="text_button2" /></h3>
-
                                 </div>
-
                                 <div id="d_text2"></div>
                             </div>
                         </div>
@@ -183,13 +130,36 @@
 
             <div class="bds02">
                 <input type="submit" id="productsubmit" class="btn btn-secondary btn-lg"
-                    value="등록하기">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="reset"
-                    class="btn btn-secondary btn-lg" value="다시입력">
+                    value="등록하기">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="reset" class="btn btn-secondary btn-lg" value="다시입력">
             </div>
         </form>
 
     </div>
     </div>
+    <script>
+        // 썸네일 코드 
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelector("#product_Image").addEventListener("change", async e => {
+                const preview = document.querySelector("#preview");
+                document.querySelector(".imgh1").innerHTML = "감사합니다";
+                let reader = new FileReader();
+                reader.onloadend = finished => {
+                    preview.setAttribute('src', finished.target.result);
+                    console.log(finished.target.result);
+                }
+                reader.readAsDataURL(e.target.files.item(0));
+            })
+
+            // // 등록 버튼 누를시 
+            // document.querySelector("#productsubmit").addEventListener("click", async () => {
+
+
+
+            // })
+        });
+    </script>
+
 </body>
 
 </html>

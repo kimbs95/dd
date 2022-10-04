@@ -21,9 +21,9 @@ public class ProductServiceImpl implements ProductService {
 
 //상품등록
 	@Override
-	public void addProduct(ProductVO productMap) throws DataAccessException {
-		productDAO.insertProduct(productMap);
-		return;
+	public int addProduct(Map<String, Object> productMap) throws DataAccessException {
+		return productDAO.insertProduct(productMap);
+
 	}
 
 	// 상품목록

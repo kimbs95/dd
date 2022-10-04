@@ -9,7 +9,7 @@ import com.dd.product.vo.CartVO;
 import com.dd.product.vo.ProductVO;
 
 public interface ProductService {
-	public void addProduct(ProductVO productMap) throws DataAccessException;
+	public int addProduct(Map<String, Object> productMap) throws DataAccessException;
 
 	public List<ProductVO> listProducts(String product_Name) throws Exception;
 

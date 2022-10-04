@@ -29,7 +29,8 @@ request.setCharacterEncoding("UTF-8");
             font-weight: bold;
             font-size: 40px;
         }
-        #carttable{
+
+        #carttable {
             width: 1100px;
         }
 
@@ -78,62 +79,71 @@ request.setCharacterEncoding("UTF-8");
                 <th>가격</th>
                 <th>삭제</th>
             </tr>
-            <c:forEach var="cart" items="${info}">
-                <tr align="center">
-                    <!-- <div class="cartradio"> -->
-                    <td>
-                        <h6>${cart.cart_Num}</h6>
-                    </td>
+            <c:forEach var="cart" items="${info}" varStatus="status">
+                <c:forEach var="pro" items="${cart.product}">
+                    <tr align="center">
+                        <!-- <div class="cartradio"> -->
+                        <td>
+                            <h6>${status.count}</h6>
+                        </td>
 
-                    <td>
-
-                        <p>청춘의 끓는 피다 청춘의 피가 뜨거운지라 인간의 동산에는 사랑의</p>
-                    </td>
-                    <!-- <div class="cartcount"> -->
-                    <td>
-                        <input class="inputnum" type="number" value="1" min="1" step="1" style="width: 30px ;">
-                    </td>
-                    <td>
-                        <span>13000원</span>
-                    </td>
-                    <!-- </div> -->
-                    <td>
-                        <button class="cartdelete" id ="num" value="${cart.cart_Num}">삭제</button>
-                    </td>
-                    <!-- </div> -->
-                </tr>
+                        <td>
+                            <p>${pro.product_Name}</p>
+                        </td>
+                        <!-- <div class="cartcount"> -->
+                        <td>
+                            <input class="inputnum" type="number" value="1" min="1" step="1" style="width: 30px ;">
+                        </td>
+                        <td>
+                            <span>${pro.product_Price}</span>
+                        </td>
+                        <!-- </div> -->
+                        <td>
+                            <button class="cartdelete" id="num" value="${cart.cart_Num}">삭제</button>
+                        </td>
+                        <!-- </div> -->
+                    </tr>
+                </c:forEach>
             </c:forEach>
-                <script>
-                    
-                    document.addEventListener("DOMContentLoaded",()=>{
-                        document.querySelector(".cartdelete").addEventListener("click", async e => {
-                            let num = e.target.value;
-                            // console.log(num);
+            <script>
+                document.addEventListener("DOMContentLoaded", () => {
+                    document.querySelector("#carttable").addEventListener("click", async e => {
+                        if (e.target.tagName.toLowerCase() !== "button") {
+                            // e.target instanceof HTMLButtonElement
+                            return;
+                        }
+                        if (!confirm("정말로 삭제하시겠습니까?")) {
+                            return;
+                        }
+                        let num = e.target.value;
+                        // console.log(num);
                         console.log(e.target);
-                        let cartdelete = await fetch("/cartdelete.do",{
-                            method:"POST",
-                            headers:{"content-type":"application/json"},
+                        let cartdelete = await fetch("/cartdelete.do", {
+                            method: "POST",
+                            headers: {
+                                "content-type": "application/json"
+                            },
                             body: JSON.stringify(num)
                         })
-                        if(cartdelete.status=200){
+                        if (cartdelete.status = 200) {
                             let data = await cartdelete.json();
                             console.log(data);
-                            if(data.result===0){
+                            if (data.result === 0) {
                                 alert("다시 시도해주세요");
                                 location.reload();
                                 return;
-                            }else{
+                            } else {
                                 alert("삭제가 완료되었습니다");
                                 location.reload();
                                 return;
                             }
-            
-                        }else{
+
+                        } else {
                             alert("서버 문제");
                         }
                     })
                 })
-                </script>
+            </script>
         </table>
         <hr>
         <div class="cartfoot">
@@ -143,7 +153,7 @@ request.setCharacterEncoding("UTF-8");
             <button type="button">구매하기</button>
         </div>
     </div>
-  
+
 </body>
 
 </html>

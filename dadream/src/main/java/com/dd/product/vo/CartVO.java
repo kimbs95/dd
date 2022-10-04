@@ -1,5 +1,7 @@
 package com.dd.product.vo;
 
+import java.util.List;
+
 import org.springframework.stereotype.Component;
 
 @Component("cartVO")
@@ -9,6 +11,9 @@ public class CartVO {
 	private int cart_BuytCount;
 	private int product_Num;
 	private String user_Id;
+
+//	productVO 1:n 관계
+	private List<ProductVO> product;
 
 	public CartVO() {
 
@@ -52,6 +57,14 @@ public class CartVO {
 
 	public void setUser_Id(String user_Id) {
 		this.user_Id = user_Id;
+	}
+
+	public List<ProductVO> getProduct() {
+		return product;
+	}
+
+	public void setProduct(List<ProductVO> productVO) {
+		this.product = productVO;
 	}
 
 }
