@@ -200,6 +200,7 @@ public class ProductControllerImpl implements ProductController {
 		String user_Id = member.getUser_Id();
 
 		body.put("user_Id", user_Id);
+		body.put("cart_BuytCount", 1);
 		System.out.println(body);
 		result = productService.cart(body);
 		Map<String, Object> cart = new HashMap<String, Object>();

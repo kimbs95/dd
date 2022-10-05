@@ -6,6 +6,7 @@ isELIgnored="false" %>
 <%
 request.setCharacterEncoding("UTF-8");
 %>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -72,41 +73,67 @@ request.setCharacterEncoding("UTF-8");
 
         <h3>장바구니</h3>
         <table id=carttable>
-            <tr style="background: gray;">
-                <th>No</th>
-                <th>상품명</th>
-                <th>수량</th>
-                <th>가격</th>
-                <th>삭제</th>
-            </tr>
-            <c:forEach var="cart" items="${info}" varStatus="status">
-                <c:forEach var="pro" items="${cart.product}">
+            <thead>
+                <tr style="background: gray;">
+                    <th>No</th>
+                    <th>상품명</th>
+                    <th>수량</th>
+                    <th>가격</th>
+                    <th>삭제</th>
+                </tr>
+            </thead>
+            
+                <tbody>
+                    <c:forEach var="cart" items="${info}" varStatus="status">
+                    <c:forEach var="pro" items="${cart.product}">
                     <tr align="center">
-                        <!-- <div class="cartradio"> -->
-                        <td>
-                            <h6>${status.count}</h6>
-                        </td>
+                        <td>${status.count}</td>
+                        <td>${pro.product_Name}</td>
+                        <td><input id="productCount" type="number" min="0" onchange="price()"
+                            value=${cart.cart_BuytCount} style="width: 50px ;">
+                            </td>
+                            <td id="productprice">${pro.product_Price}</td>
+                            <td><button class="cartdelete" id="num" value="${cart.cart_Num}">삭제</button></td>
+                            </tr>
+                            </c:forEach>
+                            </c:forEach>
+                            </tbody>
+                            
+            
+                            <script>
+                                // 1000단위로 . 찍기
+                                const number = num => 
+                                num.toString().replace(/\B(?=(\d{3})+(?!\d))/g,".");
+                                
+                                
+                                
+                                // 계산하는 함수 총 개수 총 금액
+                                const price = () => {
+                                    
+                                    let tr = [...document.querySelectorAll("#carttable > tbody > tr")];
+                                    let total = tr.reduce((acc, curr) => {
+                                        let currcount = +curr.querySelector("#productCount").value;
+                                        let currprice = +curr.querySelector("#productprice").innerText;
+                                        acc.count += currcount;
+                                        acc.price += (currprice * currcount);
+                                        return acc;
+                                    }, {
+                                        count: 0,
+                                        price: 0
+                                    });
+                                    document.querySelector("#productnum").innerHTML = number(total.count);
+                                    document.querySelector("#totalprice").innerHTML = number(total.price);
+                                    document.querySelector("#totalpriceplus").innerHTML = number(total.price + 2500);
+                
+                                }
+                                document.addEventListener("DOMContentLoaded", () => {
+                                    price();
+                                })
+                            </script>
 
-                        <td>
-                            <p>${pro.product_Name}</p>
-                        </td>
-                        <!-- <div class="cartcount"> -->
-                        <td>
-                            <input class="inputnum" type="number" value="1" min="1" step="1" style="width: 30px ;">
-                        </td>
-                        <td>
-                            <span>${pro.product_Price}</span>
-                        </td>
-                        <!-- </div> -->
-                        <td>
-                            <button class="cartdelete" id="num" value="${cart.cart_Num}">삭제</button>
-                        </td>
-                        <!-- </div> -->
-                    </tr>
-                </c:forEach>
-            </c:forEach>
             <script>
                 document.addEventListener("DOMContentLoaded", () => {
+                    // 삭제 버튼 
                     document.querySelector("#carttable").addEventListener("click", async e => {
                         if (e.target.tagName.toLowerCase() !== "button") {
                             // e.target instanceof HTMLButtonElement
@@ -147,12 +174,18 @@ request.setCharacterEncoding("UTF-8");
         </table>
         <hr>
         <div class="cartfoot">
-            <span> 0개 선택&nbsp;&nbsp; 상품가 + 배송비&nbsp;&nbsp; = &nbsp;&nbsp;총금액</span>
+            <h5>
+                <span id="productnum"></span>개 상품 : <span id="totalprice"></span>원 + 배송비 : 2.500원 총 금액 : 
+                <span id="totalpriceplus" style="font-weight: bold"></span>원
+            </h5>
         </div>
         <div class="cartbuy">
             <button type="button">구매하기</button>
         </div>
     </div>
+
+
+
 
 </body>
 
