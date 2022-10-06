@@ -3,6 +3,7 @@
     isELIgnored="false" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <%
   request.setCharacterEncoding("UTF-8");
 %>
@@ -14,18 +15,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>가구 상품등록</title>
-    <!--부트스트랩-->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-
-    <!-- 파일업로드 드래그앤드롭 -->
-    <!-- <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script> -->
-    <!-- <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" /> -->
+    
     <!-- css -->
     <link rel="stylesheet" href="/css/productform.css">
-    <!-- <script src="http://code.jquery.com/jquery-latest.min.js"></script> -->
-
-
-
+    
 </head>
 
 <body>
@@ -41,10 +34,10 @@
                 <!--이미지 div-->
                 <div class="dlImg">
                     <div class="dlMain">
-                        <label for="product_Image">이미지 를 골라주세요</label><br>
+                        <label for="product_Image" ><p style="width: 300px;border: 1px solid;height: 40px;text-align: center;line-height: 40px;">클릭 후 이미지 를 골라주세요</p></label><br>
                         <input type="file" id="product_Image" name="product_Image" accept="image/*" multiple>
                         <img id="preview" src="" width=200 height=200 />
-                        <h1 class="imgh1"></h1>
+                        <h1 class="imgh1" style="font-weight: bold;margin-top: 20px;"></h1>
                     </div>
                 </div>
 
@@ -101,7 +94,7 @@
                         <div class="option_all">
                             <div class="option">
                                 <div class="flex_option">
-                                    <h3>옵션 <input type="button" value="추가" onclick="fn_addtext()" class="text_button" />
+                                    <h3>옵션 <input style="height: 30px;" type="button" value="추가" onclick="fn_addtext()" class="text_button" />
                                     </h3>
 
                                 </div>
@@ -112,7 +105,7 @@
                             </div>
                             <div class="option1">
                                 <div class="flex_option">
-                                    <h3>추가옵션 <input type="button" value="추가" onclick="fn_addtext2()"
+                                    <h3>추가옵션 <input style="height: 30px;" type="button" value="추가" onclick="fn_addtext2()"
                                             class="text_button2" /></h3>
                                 </div>
                                 <div id="d_text2"></div>
@@ -142,7 +135,7 @@
         document.addEventListener('DOMContentLoaded', () => {
             document.querySelector("#product_Image").addEventListener("change", async e => {
                 const preview = document.querySelector("#preview");
-                document.querySelector(".imgh1").innerHTML = "감사합니다";
+                document.querySelector(".imgh1").innerHTML = "사진이 등록 되었습니다.";
                 let reader = new FileReader();
                 reader.onloadend = finished => {
                     preview.setAttribute('src', finished.target.result);
@@ -152,11 +145,14 @@
             })
 
             // // 등록 버튼 누를시 
-            // document.querySelector("#productsubmit").addEventListener("click", async () => {
+            document.querySelector("#productsubmit").addEventListener("click", async (e) => {
+                if(!confirm("상품등록을 하시겠습니까?")){
+                    e.preventDefault();
+                    return;
+                }
 
 
-
-            // })
+             })
         });
     </script>
 

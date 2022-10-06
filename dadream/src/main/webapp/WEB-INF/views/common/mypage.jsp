@@ -3,6 +3,7 @@
     isELIgnored="false" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%
   request.setCharacterEncoding("UTF-8");
 %>
@@ -71,24 +72,31 @@
                         <p style="margin-bottom: 5px; font-weight: bold;">상세주소</p>
                         <input type="text" size="20" placeholder="상세주소를 입력해주세요." style="margin-top: 3px;">
                         <br><br>
-                        <input type="submit" name="mod" value="변경" style="font-weight:700; margin-top:10px;width: 100px; height:30px;"><br><br>
+                        <input type="submit" name="mod" value="변경"
+                            style="font-weight:700; margin-top:10px;width: 100px; height:30px;"><br><br>
                     </form>
                 </div>
                 <br>
                 <h2 style="font-weight: 900; font-size: 2em;">내가 등록한 방</h2>
                 <div id="myroom">
+                <c:forEach var="myDealing" items="${myDealing}">
                     <div style="display: flex;">
                         <div style="width: 200px; height: 200px;"><img src="images/네이버.PNG"
                                 style="width:200px; height: 200px;">
                         </div>
-                        <div style="border: 1px solid black; width: 300px; height: 200px;">OO동<br>
-                            원룸<br>
-                            주소:</div>
+                        <div style="border: 1px solid black; width: 300px; height: 200px;">
+                            <p>${myDealing.dl_Title}</p>
+                            <P>${myDealing.dl_Form}</P>
+                            <P>${myDealing.dl_Form2}</P>
+                            <p>${myDealing.dl_Room}</p>
+                            <p>${myDealing.dl_Price}</p>
+                        </div>
                         <div style="width: 200px; height: 200px; border: 1px solid black;">조회수:
                             <br>
                             연락온 고객:
                         </div>
                     </div>
+                </c:forEach>
                 </div>
                 <br>
                 <h2 style="font-weight: 900; font-size: 2em;">관심목록</h2>
@@ -123,20 +131,14 @@
                             <th>신고사유</th>
                             <th>신고일</th>
                         </tr>
-
-                        <tr>
-                            <td>1</td>
-                            <td>오라클 빌딩</td>
-                            <td>건물 구조 상이</td>
-                            <td>2022.08.31</td>
-                        </tr>
-
-                        <tr>
-                            <td>2</td>
-                            <td>오라클 빌딩</td>
-                            <td>건물 구조 상이</td>
-                            <td>2022.08.31</td>
-                        </tr>
+                        <c:forEach var="myReport" items="${myReport}">
+                            <tr>
+                                <td>${myReport.dl_ReportNum}</td>
+                                <td>${myReport.dl_Title}</td>
+                                <td>${myReport.rp_Title}</td>
+                                <td>${myReport.rp_Date}</td>
+                            </tr>
+                        </c:forEach>
                     </table>
                 </div>
                 <br><br><br>

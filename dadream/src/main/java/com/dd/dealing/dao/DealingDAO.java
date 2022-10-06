@@ -11,6 +11,7 @@ import com.dd.dealing.vo.BoardVO;
 import com.dd.dealing.vo.DealingVO;
 import com.dd.dealing.vo.MemberVO;
 import com.dd.dealing.vo.NoticeVO;
+import com.dd.dealing.vo.ReportVO;
 
 @Mapper
 @Repository("dealingDAO")
@@ -23,7 +24,7 @@ public interface DealingDAO {
 	public int insertReport(Map rpMap) throws DataAccessException;
 
 	// 매물 DB전송
-	public int addNewdealing(Map dealingMap) throws DataAccessException;
+	public int addNewdealing(Map<String, Object> dealingMap) throws DataAccessException;
 
 	// 게시글 DB전송
 	public int insertboard(BoardVO boardVO) throws DataAccessException;
@@ -63,5 +64,16 @@ public interface DealingDAO {
 
 	// 게시판 조회수
 	public void updateView(int viewCounts) throws Exception;
+
+	public DealingVO getDealingContents(int dl_Num) throws Exception;
+
+	// 마이페이지 신고리스트
+	public List<ReportVO> myReport(String user_Id) throws DataAccessException;
+
+	// 마이페이지 매물리스트
+	public List<DealingVO> myDealing(String user_Id) throws DataAccessException;
+
+	// 현재위치
+	public List<DealingVO> hereMe(Map<String, Object> hereMap) throws DataAccessException;
 
 }

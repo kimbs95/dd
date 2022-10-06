@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dd.product.dao.ProductDAO">
+
+	<resultMap id="reviewResult" type="reviewVO">
+		<result property="review_Num" column="review_Num" />
+		<result property="review_Text" column="review_Text" />
+		<result property="review_Title" column="review_Title" />
+		<result property="review_Date" column="review_Date" />
+		<result property="review_Image" column="review_Image" />
+		<result property="product_Num" column="product_Num" />
+		<result property="user_Id" column="user_Id" />
+		<!-- <collection property ="product" resultMap ="proResult"> </collection> -->
+	</resultMap>
+	
+	<!-- 리뷰 -->
+	<insert id="reviewpost"  parameterType="java.util.Map">
+	<![CDATA[
+		insert into review_t(review_Num,review_Text,review_Title,review_Date,review_Image,product_Num,user_Id)
+		values(#{review_Num},#{review_Text},#{review_Title},#{review_Date},#{review_Image},#{product_Num},#{user_Id})
+		]]>
+	</insert>
+	
+	
+	
+	
+</mapper>

@@ -45,12 +45,26 @@
 		</foreach>
 	</insert>
 	
-	<select id="selectMap" resultMap="dealResult">
-		<![CDATA[
+	<!-- 매물 상세보기 -->
+	<select id="getDealingContents" parameterType="java.lang.Integer" resultType="dealingVO">
+		SELECT * FROM dealing_t
+			WHERE dl_Num = #{dl_Num}
+	</select>
+
+
+
+
+	
+	
+	<select id="selectMap" resultMap="dealResult" parameterType="java.util.Map">
 			SELECT *
 			FROM dealing_t
-		]]>
+			<if test="dl_Form != null and dl_Form != '' and dl_Form != 'all'">
+			WHERE
+			dl_Form = #{dl_Form}
+			</if>
 	</select>
+	
 	
 	<select id="selectMap2" resultMap="dealResult" parameterType="java.util.Map">
 			SELECT *
@@ -77,14 +91,70 @@
 			</if>
 	</select>
 	
+	<select id="selectMap3" resultMap="dealResult" parameterType="java.util.Map">
+			SELECT *
+			FROM dealing_t
+			<if test="dl_Address != null and dl_Address != ''">
+			WHERE
+			dl_Address LIKE CONCAT('%', #{dl_Address}, '%')
+			</if>
+	</select>
+	
 
 	<!--매물 전체검색 -->
-	<select id = "allListdealing" resultType="dealingVO"  parameterType="dealingVO">
+	<select id = "allListdealing" resultType="dealingVO"  parameterType="String">
 	<![CDATA[
 			SELECT *
 			FROM dealing_t
+			WHERE
+			dl_Form LIKE CONCAT('%', #{dl_Form}, '%')
 		]]>
-	</select>	
+	</select>
+	
+	<select id="myDealing" resultMap="dealResult" parameterType="String">
+	<![CDATA[
+		SELECT *
+		FROM dealing_t
+		WHERE user_Id = #{user_Id}
+	]]>
+	</select>
+	
+	<select id="hereMe" resultMap="dealResult" parameterType="java.util.Map">
+	<![CDATA[
+		SELECT *
+		FROM dealing_t
+		WHERE dl_Lat BETWEEN (#{lat}-0.01) AND (#{lat}+0.01) 
+		AND dl_Lng BETWEEN (#{lng}-0.01) AND (#{lng}+0.01)
+		ORDER BY dl_Views DESC
+		LIMIT 3
+	]]>
+	</select>
+	
+	<!-- 로컬스토리지 보류 -->
+	<!-- <select id="dlMainMap" resultMap="dealResult" parameterType="java.util.Map">
+			SELECT *
+			FROM dealing_t
+			WHERE
+			1=1 
+			<if test="dl_Form != null and dl_Form !=''">
+			AND dl_Form LIKE CONCAT('%', #{dl_Form}, '%') 
+			</if>
+			<if test="dl_Form2 != null and dl_Form2 !=''">
+			AND dl_Form2 = #{dl_Form2}   
+			</if>
+			<if test="dl_Room != null and dl_Room !=''">
+			AND dl_Room LIKE CONCAT('%', #{dl_Room}, '%') 
+			</if>
+			<if test="dl_Option != null and dl_Option !=''"> 
+			AND dl_Option LIKE CONCAT('%', #{dl_Option}, '%') 
+			</if>
+			<if test="dl_Price != null and dl_Price !=''">
+			AND #{dl_Price} >= dl_Price 
+			</if>
+			<if test="dl_Address != null and dl_Address !=''">
+			AND dl_Address LIKE CONCAT('%', #{dl_Address}, '%')
+			</if>
+	</select> -->
 
 
 	</mapper>

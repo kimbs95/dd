@@ -14,7 +14,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>부동산 매물등록</title>
-    <!--부트스트랩-->
+
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+
+    <!-- 부트스트랩 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 
     <!-- 파일업로드 드래그앤드롭 -->
@@ -24,77 +27,36 @@
     <!-- css -->
     <link rel="stylesheet" href="/css/dealingform.css">
 
+    <!-- 섬머노트 -->
+    <script src="/js/summernote/summernote-lite.js"></script>
+    <script src="/js/summernote/lang/summernote-ko-KR.js"></script>
+    <link rel="stylesheet" href="/css/summernote/summernote-lite.css">
+
+    <style>
+        .dropdown-toggle::after {
+            display: none;
+        }
+    </style>
+
 </head>
 
 <body>
     <!--부트스트랩-->
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
     <div class="first">
         <h1 style="margin:40px 0 0 10px; font: bold;">매물등록</h1>
 
-        <form method="post" action="${contextPath}/addNewdealing.do" enctype="multipart/form-data" name="dl_Image">
+        <form method="post" action="${contextPath}/addNewdealing.do" enctype="multipart/form-data">
             <div class="middle">
 
                 <!--이미지 div-->
                 <div class="dlImg">
                     <div class="dlMain">
-                        <!-- 드롭존을 적용할 클래스이름을 dropzone 해야 css테마가 적용된다 -->
-                        <div class="dropzone dz1" style="width:500px; height: 400px;">
-                        </div>
-
-                        <script>
-                            Dropzone.autoDiscover = false; // deprecated 된 옵션. false로 해놓는걸 공식문서에서 명시
-
-                            const dropzone = new Dropzone("div.dropzone.dz1", {
-                                url: "https://httpbin.org/post",
-                                dictDefaultMessage: "대표 이미지를 등록해주세요.",
-                                autoProcessQueue: false, //자동으로 보내기
-                                clickable: true, // 클릭 가능 여부
-                                autoQueue: false, // 드래그 드랍 후 바로 서버로 전송
-                                createImageThumbnails: true, //파일 업로드 썸네일 생성
-                                thumbnailHeight: 500, // Upload icon size
-                                thumbnailWidth: 500, // Upload icon size
-                                maxFiles: 1, // 업로드 파일수
-                                maxFilesize: 1000, // 최대업로드용량 : 1000MB
-                                paramName: 'dl_Image', // 서버에서 사용할 formdata 이름 설정 (default는 file)
-                                uploadMultiple: false, // 다중업로드 기능
-                                timeout: 300000, //커넥션 타임아웃 설정 -> 데이터가 클 경우 꼭 넉넉히 설정해주자
-                                addRemoveLinks: true, // 업로드 후 파일 삭제버튼 표시 여부
-                                dictRemoveFile: '삭제', // 삭제버튼 표시 텍스트
-                                acceptedFiles: '.jpeg,.jpg,.png,.gif,.JPEG,.JPG,.PNG,.GIF', // 이미지 파일 포맷만 허용
-                            });
-                        </script>
-                    </div>
-
-                    <div class="dlThumbnail1">
-                        <!-- 드롭존을 적용할 클래스이름을 dropzone 해야 css테마가 적용된다 -->
-                        <div class="dropzone dz2" style="width:500px; height: 200px;">
-                        </div>
-
-                        <script>
-                            Dropzone.autoDiscover = false; // deprecated 된 옵션. false로 해놓는걸 공식문서에서 명시
-
-                            const dropzone2 = new Dropzone("div.dropzone.dz2", {
-                                url: "https://httpbin.org/post",
-                                dictDefaultMessage: "추가 할 이미지를 등록해주세요.",
-                                autoProcessQueue: false, //자동으로 보내기
-                                clickable: true, // 클릭 가능 여부
-                                autoQueue: false, // 드래그 드랍 후 바로 서버로 전송
-                                // createImageThumbnails: true, //파일 업로드 썸네일 생성
-                                // thumbnailHeight: 150, // Upload icon size
-                                // thumbnailWidth: 150, // Upload icon size
-                                maxFiles: 10, // 업로드 파일수
-                                maxFilesize: 1000, // 최대업로드용량 : 1000MB
-                                paramName: 'dl_Image', // 서버에서 사용할 formdata 이름 설정 (default는 file)
-                                uploadMultiple: false, // 다중업로드 기능
-                                timeout: 300000, //커넥션 타임아웃 설정 -> 데이터가 클 경우 꼭 넉넉히 설정해주자
-                                addRemoveLinks: true, // 업로드 후 파일 삭제버튼 표시 여부
-                                dictRemoveFile: '삭제', // 삭제버튼 표시 텍스트
-                                acceptedFiles: '.jpeg,.jpg,.png,.gif,.JPEG,.JPG,.PNG,.GIF', // 이미지 파일 포맷만 허용
-                            });
-                        </script>
-
+                        <label for="dealing_Image">이미지 를 골라주세요</label><br>
+                        <input type="file" id="dealing_Image" name="dl_Image" accept="image/*" multiple>
+                        <img id="preview" src="" width=200 height=200 />
+                        <h1 class="imgh1"></h1>
                     </div>
                 </div>
 
@@ -164,7 +126,7 @@
                             //인풋에 value 값 넣기
                             document.querySelector("#dl_Lat").setAttribute('value', dl_Lat);
                             document.querySelector("#dl_Lng").setAttribute('value', dl_Lng);
-                            
+
 
                         });
 
@@ -197,8 +159,8 @@
                             }).open();
                         }
                     </script>
-                    <input type="hidden" name="dl_Lat" id ="dl_Lat"  />
-                    <input type="hidden" name="dl_Lng" id ="dl_Lng"  />
+                    <input type="hidden" name="dl_Lat" id="dl_Lat" />
+                    <input type="hidden" name="dl_Lng" id="dl_Lng" />
                     <h3>가격</h3>
                     <input type="text" name="dl_Price" placeholder="희망하시는 가격을 입력해주세요." size="50">
                     <br><br>
@@ -248,20 +210,83 @@
                 </div>
 
             </div>
-
             <div class="dealingformcontent">
                 <h3>상세설명</h3>
 
-                <textarea name="dl_Content" id="dl_Content" cols="120" rows="10"
-                    placeholder="매물에 대한 상세설명을 입력해주세요."></textarea>
+                <textarea id="summernote" name="dl_Content"></textarea>
 
                 <div class="bds02">
-                    <input type="submit" class="btn btn-secondary btn-lg" value="등록하기">
+                    <input type="submit" id="submit" class="btn btn-secondary btn-lg" value="등록하기">
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <input type="reset" class="btn btn-secondary btn-lg" value="다시입력">
                 </div>
             </div>
         </form>
     </div>
+    <script>
+        // 썸네일 코드 
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelector("#dealing_Image").addEventListener("change", async e => {
+                const preview = document.querySelector("#preview");
+                document.querySelector(".imgh1").innerHTML = "감사합니다";
+                let reader = new FileReader();
+                reader.onloadend = finished => {
+                    preview.setAttribute('src', finished.target.result);
+                    console.log(finished.target.result);
+                }
+                reader.readAsDataURL(e.target.files.item(0));
+            })
+
+            // // 등록 버튼 누를시 
+            // document.querySelector("#productsubmit").addEventListener("click", async () => {
+
+
+
+            // })
+        });
+    </script>
+
+
+    <script>
+       
+         (function(){
+
+             
+             $("#summernote").summernote({
+                    height: 300, // 에디터 높이
+                    minHeight: 300, // 최소 높이
+                    maxHeight: null, // 최대 높이(null 제한없음)
+                    focus: false, // 에디터 로딩후 포커스를 맞출지 여부
+                    lang: "ko-KR", // 한글 설정
+                    toolbar: [
+                        ['fontname', ['fontname']], // 글꼴 설정
+                        ['fontsize', ['fontsize']], // 글자 크기 설정
+                        ['style', ['bold', 'italic', 'underline', 'strikethrough',
+                        'clear'
+                    ]], // 굵기, 기울임꼴, 밑줄,취소 선, 서식지우기
+                    ['color', ['forecolor', 'color']], // 글자색
+                    ['table', ['table']], // 표만들기
+                    ['para', ['ul', 'ol', 'paragraph']], // 글머리 기호, 번호매기기, 문단정렬
+                    ['height', ['height']], // 줄간격
+                    ['insert', ['picture', 'link', 'video']], // 그림첨부, 링크만들기, 동영상첨부
+                    ['view', ['fullscreen', 'codeview', 'help']] // 코드보기, 확대해서보기, 도움말
+                    ],
+                    // 추가한 글꼴
+                    fontNames: ['Arial', 'Arial Black', '맑은 고딕', '궁서',
+                    '굴림체', '굴림', '돋음체', '바탕체'
+                ],
+                    // 추가한 폰트사이즈
+                    fontSizes: ['8', '9', '10', '11', '12', '14', '16', '18', '20', '22', '24',
+                    '28', '30',
+                    '36', '50', '72'
+                ]
+                });
+                
+                
+            })();
+          
+  
+    </script>
 </body>
+
 </html>

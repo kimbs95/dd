@@ -24,4 +24,7 @@ public interface ProductService {
 
 //	장바구니 삭제 
 	public int cartdelete(int body) throws DataAccessException;
+
+//	리뷰작성
+	public int reviewpost(Map<String, Object> body) throws DataAccessException;
 }

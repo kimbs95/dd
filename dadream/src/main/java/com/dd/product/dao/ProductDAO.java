@@ -31,4 +31,7 @@ public interface ProductDAO {
 
 //	장바구니 삭제 
 	public int cartdelete(int body) throws DataAccessException;
+
+//	리뷰등록
+	public int reviewpost(Map<String, Object> body) throws DataAccessException;
 }

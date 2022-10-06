@@ -40,6 +40,7 @@ import com.dd.dealing.vo.MemberVO;
 import com.dd.product.service.ProductService;
 import com.dd.product.vo.CartVO;
 import com.dd.product.vo.ProductVO;
+import com.dd.product.vo.ReviewVO;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -235,6 +236,28 @@ public class ProductControllerImpl implements ProductController {
 		Map<String, Object> map = new HashMap<>();
 		map.put("result", result);
 		return map;
+	}
+
+//	리뷰
+	@RequestMapping(value = "/reviewform.do", method = { RequestMethod.GET, RequestMethod.POST })
+	private String reviewform(HttpServletRequest req) {
+//		String viewName = (String) req.getAttribute("viewName");
+		return "/product/reviewform";
+	}
+
+//	리뷰등록
+	@RequestMapping(value = "/reviewpost.do", method = { RequestMethod.POST })
+	private Map<String, Object> review(@RequestBody Map<String, Object> body, ReviewVO review, HttpServletRequest req) {
+		int result = 0;
+		HttpSession session = req.getSession();
+		MemberVO member = (MemberVO) session.getAttribute("member");
+		String user_Id = (String) member.getUser_Id();
+		body.put("user_Id", user_Id);
+		body.put("product_Num", 6);
+		result = productService.reviewpost(body);
+		Map<String, Object> response = new HashMap<>();
+		response.put("result", result);
+		return response;
 	}
 
 //	토스페이

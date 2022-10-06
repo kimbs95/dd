@@ -92,19 +92,21 @@
 		
 		
     });
-	var table = $('#table_id').DataTable();
-	if(! table.data().count()){
-		alert('글이 없습니다. 새로운 글을 작성해주세요.');
-	}else{
-		return false;
-	}
-} );
+	// var table = $('#table_id').DataTable();
+	// if(! table.data().count()){
+	// 	alert('글이 없습니다. 새로운 글을 작성해주세요.');
+	// }else{
+	// 	return false;
+	// }
+} )
+
+;
 </script>
 <body>
 	<form action="${contextPath}/noticelist.do" method="get" id="listForm2">
 	<table align="center" border="0" width="960px">
 		<tr height="20" align="center" bgcolor="pink" >
-			<th style="border: 1px solid gray;">카테고리</th>
+			<!-- <th style="border: 1px solid gray;">카테고리</th> -->
 			<th style="border: 1px solid gray;">글번호</th>
 			<th style="border: 1px solid gray;">작성자</th>
 			<th style="border: 1px solid gray;">내용</th>
@@ -113,19 +115,17 @@
 		</tr>
 			
 		<tbody>
-		<c:forEach var="notice" items="${noticlesList}" varStatus="">
-			
-			<tr>
-				<td>${notice.Notice_Category}</td>
-				<td>${notice.Notice_Num}</td>
-				<td>${notice.user_Id}</td>
-				<td>${notice.Notice_Text}</td>
-				<td><fmt:formatDate value="${notice.Notice_Date}" /></td>
-				<td></td>
-			</tr>
-		
-		</c:forEach>
-	</tbody>
+			<c:forEach var="notice" items="${noticlesList}">
+				<tr>
+					<!-- <td>${noticeTemp}</td> -->
+					<!-- <td>${notice.notice_Category}</td> -->
+					<td>${notice.notice_Num}</td>
+					<td>${notice.user_Id}</td>
+					<td>${notice.notice_Text}</td>
+					<td><fmt:formatDate value="${noticeTemp.notice_Date}" /></td>
+				</tr>
+			</c:forEach>
+		</tbody>
 	</table>
 	
 	

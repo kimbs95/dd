@@ -37,11 +37,12 @@
         <c:when test="${member.user_Level == 3}">
             <header class="header">
                 <div class="headerleft">
-                    <a href="${contextPath}/dealingmain.do" style="width:200px;"><img class="Main_Logo" style=""
+                    <a href="${contextPath}/dealingmain.do" style="width:200px;"><img class="Main_Logo" 
                             src="../image/메인로고.png" alt="다드림 메인로고"></a>
                 </div>
 
                 <div class="headerul">
+                   
                     <ul>
                         <li>
                             <form method="post" id="result">

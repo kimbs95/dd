@@ -12,6 +12,8 @@ public class ReportVO {
 	private Date rp_Date;
 	private String user_Id;
 	private int dl_Num;
+	private String dl_Title;
+	// private List<DealingVO> dealing;
 
 	public ReportVO() {
 	}
@@ -73,4 +75,19 @@ public class ReportVO {
 		this.dl_Num = dl_Num;
 	}
 
+	public String getDl_Title() {
+		return dl_Title;
+	}
+
+	public void setDl_Title(String dl_Title) {
+		this.dl_Title = dl_Title;
+	}
 }
+
+//	public List<DealingVO> getDealing() {
+//		return dealing;
+//	}
+//
+//	public void setDealing(List<DealingVO> dealing) {
+//		this.dealing = dealing;
+//	}

@@ -1,6 +1,7 @@
 package com.dd.dealing.controller;
 
 import java.io.File;
+import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -35,11 +36,12 @@ import com.dd.dealing.vo.BoardVO;
 import com.dd.dealing.vo.DealingVO;
 import com.dd.dealing.vo.MemberVO;
 import com.dd.dealing.vo.NoticeVO;
+import com.dd.dealing.vo.ReportVO;
 
 @Controller("dealingController")
 public class DealingControllerImpl {
 
-	private static final String DEALING_IMAGE_REPO = "C:\\dealing\\dealing_image";
+	private static final String DEALING_IMAGE_REPO = "C:\\spring\\KBS\\dadream\\src\\main\\resources\\static\\dealing";
 
 	@Autowired
 	private DealingService dealingService;
@@ -146,10 +148,22 @@ public class DealingControllerImpl {
 
 	/* 마이페이지 */
 	@RequestMapping(value = "/mypage.do", method = RequestMethod.POST)
-	private String mypage(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	private ModelAndView mypage(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		HttpSession session = request.getSession();
+		ModelAndView mav = new ModelAndView();
 		String viewName = (String) request.getAttribute("viewName");
+		MemberVO member = (MemberVO) session.getAttribute("member");
+		String user_Id = member.getUser_Id();
+		System.out.println("유저아이디 : " + user_Id);
+		List<ReportVO> myReport = new ArrayList<ReportVO>();
+		List<DealingVO> myDealing = new ArrayList<DealingVO>();
+		myReport = dealingService.myReport(user_Id);
+		myDealing = dealingService.myDealing(user_Id);
+		mav.addObject("myReport", myReport);
+		mav.addObject("myDealing", myDealing);
+		mav.setViewName(viewName);
 		System.out.println("interceptor에서 온 viewName:" + viewName);
-		return viewName;
+		return mav;
 	}
 
 	/* 사용자 매물메인 */
@@ -170,87 +184,94 @@ public class DealingControllerImpl {
 	}
 
 	/* 매물등록 DB전송 */
-
 	@RequestMapping(value = "/addNewdealing.do", method = RequestMethod.POST)
 	@ResponseBody
-	public ResponseEntity addNewdealing(MultipartHttpServletRequest multipartRequest, HttpServletResponse response)
+	public ResponseEntity dealingpost(MultipartHttpServletRequest multipartRequest, HttpServletResponse response)
 			throws Exception {
 		multipartRequest.setCharacterEncoding("utf-8");
 		Map<String, Object> dealingMap = new HashMap<String, Object>();
 		Enumeration enu = multipartRequest.getParameterNames();
 		while (enu.hasMoreElements()) {
 			String name = (String) enu.nextElement();
+//			System.out.println(name);
 			String value = multipartRequest.getParameter(name);
+//			System.out.println(value);
 			dealingMap.put(name, value);
 		}
-		String dl_Image = upload(multipartRequest);
-		HttpSession session = multipartRequest.getSession();
-		MemberVO member = (MemberVO) session.getAttribute("member");
-		String user_Id = member.getUser_Id();
-		dealingMap.put("dl_Num", 0);
-		dealingMap.put("user_Id", user_Id);
-		dealingMap.put("dl_Image", dl_Image);
 
+		String imageFileName = up(multipartRequest);
+		HttpSession session = multipartRequest.getSession();
+		MemberVO memberVO = (MemberVO) session.getAttribute("member");
+		String user_Id = memberVO.getUser_Id();
+		System.out.println("이미지 파일 이름 : " + imageFileName);
+		dealingMap.put("user_Id", user_Id);
+		dealingMap.put("dl_Image", imageFileName);
 		String message;
 		ResponseEntity resEnt = null;
 		HttpHeaders responseHeaders = new HttpHeaders();
-		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
-		try {
-			int dl_Num = dealingService.addNewdealing(dealingMap);
-			if (dl_Image != null && dl_Image.length() != 0) {
-				File srcFile = new File(DEALING_IMAGE_REPO + "\\" + "temp" + "\\" + dl_Image);
-				File destDir = new File(DEALING_IMAGE_REPO + "\\" + dl_Num);
-				FileUtils.moveFileToDirectory(srcFile, destDir, true);
-			}
+		responseHeaders.add("content-Type", "text/html;charset=utf-8");
 
+		try {
+			int result = dealingService.addNewdealing(dealingMap);
+//			if (imageFileName != null && imageFileName.length() != 0) {
+//				File srcFile = new File(PRODUCT_IMAGE_REPO + "\\" + imageFileName);
+//				File desDir = new File(PRODUCT_IMAGE_REPO);
+//			중간에 폴더 없으면 만들어주는 함수 moveFileToDirectory
+//				FileUtils.moveFileToDirectory(srcFile, desDir, true);
+//			}
 			message = "<script>";
-			message += "alert('새글을 추가했습니다.');";
-			message += "location.href='" + multipartRequest.getContextPath() + "/dealingmain.do';";
+			message += "alert('상품등록이 완료되었습니다.');";
+			message += "location.href='" + multipartRequest.getContextPath() + "/dealingmain.do'";
 			message += "</script>";
 			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
-
 		} catch (Exception e) {
-//			File srcFile = new File(DEALING_IMAGE_REPO + "\\" + "temp" + "\\" + imageFileName);
-//			srcFile.delete();
+			File srcFile = new File(DEALING_IMAGE_REPO + "\\" + "imageFileName");
+			srcFile.delete();
 
 			message = "<script>";
-			message += "alert('오류가 발생했습니다. 다시 시도해 주세요.');";
-			message += "location.href='" + multipartRequest.getContextPath() + "/board/articleForm.do';";
+			message += "alert('다시 시도 하세요');";
+//			message += "location.href='" + multipartRequest.getContextPath() + "location.reload();'";
+			message += "";
 			message += "</script>";
 			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
 			e.printStackTrace();
 		}
 		return resEnt;
+
 	}
 
-	// 한개 이미지 업로드 하기
-	private String upload(MultipartHttpServletRequest multipartRequest) throws Exception {
-		String dl_Image = null;
+//	이미지 업로드
+	private String up(MultipartHttpServletRequest multipartRequest) throws Exception {
+		String imageFileName = null;
 		Iterator<String> fileNames = multipartRequest.getFileNames();
-
-		while (fileNames.hasNext()) {
-			String fileName = fileNames.next();
-			MultipartFile mFile = multipartRequest.getFile(fileName);
-			dl_Image = mFile.getOriginalFilename();
-			File file = new File(DEALING_IMAGE_REPO + "\\" + "temp" + "\\" + fileName);
-			if (mFile.getSize() != 0) {
-				if (!file.exists()) {
-					file.getParentFile().mkdirs();
-					mFile.transferTo(new File(DEALING_IMAGE_REPO + "\\" + "temp" + "\\" + dl_Image));
-				}
+		HttpSession session = multipartRequest.getSession();
+		MemberVO memberVO = (MemberVO) session.getAttribute("member");
+		String user_Id = memberVO.getUser_Id();
+		int count = 0;
+//		while (fileNames.hasNext()) {
+		String fileName = fileNames.next();
+		MultipartFile mFile = multipartRequest.getFile(fileName);
+		imageFileName = mFile.getOriginalFilename();
+		System.out.println("imaage :" + imageFileName);
+		File file = new File(DEALING_IMAGE_REPO + "\\" + user_Id + "\\" + imageFileName);
+		if (mFile.getSize() != 0) {
+			if (!file.exists()) {
+				file.getParentFile().mkdirs();
+				mFile.transferTo(new File(DEALING_IMAGE_REPO + "\\" + user_Id + "\\" + imageFileName));
 			}
 		}
-		return dl_Image;
-
+//		}
+		return imageFileName;
 	}
 
-	/* 매물상세보기 */
-
+	/* 매물 상세보기 */
 	@RequestMapping(value = "/dealingview.do", method = RequestMethod.GET)
-	private String dealingview(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String viewName = (String) request.getAttribute("viewName");
-		System.out.println("interceptor에서 온 viewName:" + viewName);
-		return viewName;
+	public String read(@ModelAttribute("searchVO") DealingVO searchVO,
+			@RequestParam(value = "dl_Num", defaultValue = "1") int dl_Num, Model model) throws Exception {
+		DealingVO DealingContents = dealingService.getDealingContents(dl_Num);
+		model.addAttribute("DealingContents", DealingContents);
+
+		return "/dealing/dealingview";
 	}
 
 	/* 중개사 팝업창 */
@@ -280,11 +301,19 @@ public class DealingControllerImpl {
 		String viewName = (String) request.getAttribute("viewName");
 		String search = (String) request.getParameter("search");
 //		매물 전부 리스트 검색
-		List<DealingVO> allListdealing = dealingService.allListdealing();
+		// List<DealingVO> allListdealing = dealingService.allListdealing();
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("search", search);
-		mav.addObject("allListdealing", allListdealing);
+		// mav.addObject("allListdealing", allListdealing);
 		mav.setViewName(viewName);
+		InetAddress local = null;
+		local = InetAddress.getLocalHost();
+
+		String ip = "";
+		if (local == null) {
+		} else {
+			ip = local.getHostAddress();
+		}
 		return mav;
 	}
 
@@ -324,6 +353,44 @@ public class DealingControllerImpl {
 		return new ResponseEntity(dlReq, HttpStatus.OK);
 
 	}
+
+	/* 현재위치기반 매물검색 */
+	@ResponseBody
+	@RequestMapping(value = "/hereMe.do", method = RequestMethod.GET)
+	public ResponseEntity hereMe(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		String strLat = request.getParameter("lat");
+		String strLng = request.getParameter("lng");
+		double lat = Double.parseDouble(strLat);
+		double lng = Double.parseDouble(strLng);
+		System.out.println("lat : " + lat);
+		System.out.println("lng : " + lng);
+		Map<String, Object> hereMap = new HashMap<String, Object>();
+		List<DealingVO> hereList = new ArrayList<DealingVO>();
+		hereMap.put("lat", lat);
+		hereMap.put("lng", lng);
+		hereList = dealingService.hereMe(hereMap);
+		System.out.println("쿼리테스트 : " + hereList);
+		return new ResponseEntity(hereList, HttpStatus.OK);
+
+	}
+	/* 로컬스토리지 보류 */
+	/* 부동산메인페이지 검색조건 가져오기 */
+//	@ResponseBody
+//	@RequestMapping(value = "/dlLocalStorage.do", method = RequestMethod.GET)
+//	public ResponseEntity dlMain2(HttpServletRequest request, HttpServletResponse response) throws Exception {
+//		Map<String, Object> mainMap = new HashMap<String, Object>();
+//		Enumeration enu = request.getParameterNames();
+//		while (enu.hasMoreElements()) {
+//			String name = (String) enu.nextElement();
+//			String value = request.getParameter(name);
+//			mainMap.put(name, value);
+//		}
+//		List<DealingVO> dlMain = new ArrayList<DealingVO>();
+//		dlMain = dealingService.dlMainMap(mainMap);
+//
+//		return new ResponseEntity(dlMain, HttpStatus.OK);
+//	}
 
 	// 인테리어게시판 글쓰기
 	@RequestMapping(value = "/inteboardform.do", method = { RequestMethod.GET })
@@ -403,7 +470,7 @@ public class DealingControllerImpl {
 			String value = multipartRequest.getParameter(name);
 			dealingMap.put(name, value);
 		}
-		String inte_Image = upload(multipartRequest);
+		String inte_Image = up(multipartRequest);
 
 		HttpSession session = multipartRequest.getSession();
 		session.setAttribute("user_Id", "testId");

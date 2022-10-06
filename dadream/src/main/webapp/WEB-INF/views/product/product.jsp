@@ -3,10 +3,10 @@
     isELIgnored="false" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
 <%
-  request.setCharacterEncoding("UTF-8");
+request.setCharacterEncoding("UTF-8");
 %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
@@ -38,7 +38,7 @@
           <div class="pro_category_content">
             <div class="productimg">
               <a href="${contextPath}/productview.do?product_Num=${product.product_Num}">
-                <img src="../메인 카테고리 사진/스텐드.png" alt="" width="200px" height="170px">
+                <img src="../${contextPath}/product/${product.user_Id}/${product.product_Image}" alt="상품사진" width="200px" height="170px" style="margin-right: 10px;">
               </a>
             </div>
             <div class="productcontent">

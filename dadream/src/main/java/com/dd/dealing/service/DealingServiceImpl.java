@@ -14,6 +14,7 @@ import com.dd.dealing.vo.BoardVO;
 import com.dd.dealing.vo.DealingVO;
 import com.dd.dealing.vo.MemberVO;
 import com.dd.dealing.vo.NoticeVO;
+import com.dd.dealing.vo.ReportVO;
 
 @Service("dealingService")
 @Transactional(propagation = Propagation.REQUIRED)
@@ -43,7 +44,7 @@ public class DealingServiceImpl implements DealingService {
 
 	// 매물등록
 	@Override
-	public int addNewdealing(Map dealingMap) throws DataAccessException {
+	public int addNewdealing(Map<String, Object> dealingMap) throws DataAccessException {
 		return dealingDAO.addNewdealing(dealingMap);
 	}
 
@@ -66,6 +67,21 @@ public class DealingServiceImpl implements DealingService {
 		List<DealingVO> dlReqp = dealingDAO.selectMap2(dlMap);
 		return dlReqp;
 	}
+
+	/* 현재위치 검색 */
+	@Override
+	public List<DealingVO> hereMe(Map<String, Object> hereMap) throws DataAccessException {
+		List<DealingVO> hereList = dealingDAO.hereMe(hereMap);
+		return hereList;
+	}
+
+	/* 로컬스토리지 보류 */
+	/* 메인페이지 검색조건 리스트 */
+//	@Override
+//	public List<DealingVO> dlMainMap(Map<String, Object> mainMap) throws DataAccessException {
+//		List<DealingVO> dlMain = dealingDAO.dlMainMap(mainMap);
+//		return dlMain;
+//	}
 
 	// 게시글추가
 	@Override
@@ -131,4 +147,20 @@ public class DealingServiceImpl implements DealingService {
 		return dealingDAO.insertReport(rpMap);
 	}
 
+	@Override
+	public DealingVO getDealingContents(int dl_Num) throws Exception {
+		return dealingDAO.getDealingContents(dl_Num);
+	}
+
+	/* 마이페이지 신고리스트 */
+	@Override
+	public List<ReportVO> myReport(String user_Id) throws DataAccessException {
+		return dealingDAO.myReport(user_Id);
+	}
+
+	/* 마이페이지 신고리스트 */
+	@Override
+	public List<DealingVO> myDealing(String user_Id) throws DataAccessException {
+		return dealingDAO.myDealing(user_Id);
+	}
 }

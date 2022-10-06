@@ -56,4 +56,9 @@ public class ProductServiceImpl implements ProductService {
 	public int cartdelete(int body) throws DataAccessException {
 		return productDAO.cartdelete(body);
 	}
+
+//	리뷰 작성
+	public int reviewpost(Map<String, Object> body) throws DataAccessException {
+		return productDAO.reviewpost(body);
+	}
 }

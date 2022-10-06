@@ -9,6 +9,7 @@ import com.dd.dealing.vo.BoardVO;
 import com.dd.dealing.vo.DealingVO;
 import com.dd.dealing.vo.MemberVO;
 import com.dd.dealing.vo.NoticeVO;
+import com.dd.dealing.vo.ReportVO;
 
 public interface DealingService {
 
@@ -31,7 +32,7 @@ public interface DealingService {
 	public List<DealingVO> allListdealing() throws DataAccessException;
 
 	// 매물등록
-	public int addNewdealing(Map dealingMap) throws DataAccessException;
+	public int addNewdealing(Map<String, Object> dealingMap) throws DataAccessException;
 
 	// 인테리어게시판 등록
 	public int addinteboard(BoardVO board) throws DataAccessException;
@@ -63,4 +64,17 @@ public interface DealingService {
 //	신고하기
 	public int addReport(Map rpMap) throws DataAccessException;
 
+	public DealingVO getDealingContents(int dl_Num) throws Exception;
+
+	// 마이페이지 신고리스트
+	public List<ReportVO> myReport(String user_Id) throws DataAccessException;
+
+	// 마이페이지 매물리스트
+	public List<DealingVO> myDealing(String user_Id) throws DataAccessException;
+
+	// 현재위치
+	public List<DealingVO> hereMe(Map<String, Object> hereMap) throws DataAccessException;
+
+	// 로컬스토리지 보류
+//		public List<DealingVO> dlMainMap(Map<String, Object> mainMap) throws DataAccessException;
 }
