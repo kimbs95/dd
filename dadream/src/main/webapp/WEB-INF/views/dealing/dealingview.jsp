@@ -43,7 +43,7 @@
             <!--이미지 div-->
             <div class="dlImg">
                 <div class="dlMain">
-                    <img src="/image/sample01.jpg" class="img-fluid" alt="" width="650px">
+                    <img src="/dealing/${DealingContents.user_Id}/${DealingContents.dl_Image}">
                 </div>
 
                 <div class="dlThumbnail1">
@@ -112,6 +112,7 @@
 
                 <!-------------------------------가격,매물종류------------------------------->
                 <div id="dlComments3">
+                    <div id="dlC_1" style="display:flex">
                     <div style="display: block;">
                         <tr>
                             <td>가격</td>
@@ -124,7 +125,7 @@
                             <td><input type="text" value="${DealingContents.dl_Form2}" name="dl_Form2" disabled style="text-align: center;"></td>
                         </tr>
                     </div>
-                
+                </div>
                     <!-------------------------------판매자 전화번호------------------------------->
                     <div id="dlComments4">
                         <div>
@@ -136,11 +137,11 @@
         </div>
     
         <div id="dlcontents">
-            <h3>매물정보</h3>
+            <h3>매물 상세정보</h3>
             <br><br>
-            <p>이 집은 2022년 신축이지만 주택의뢰자가 갑작스러운 일정으로 인해 해외로 이민을 가게되어서
-                급하게 싸게 내놓은 매물입니다.
-            </p>
+            <td>
+                <textarea rows="20" cols="60" value="${DealingContents.dl_Content}" name="dl_Content" disabled>${DealingContents.dl_Content } </textarea>
+            </td>
         
         </div>
     

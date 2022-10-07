@@ -37,7 +37,17 @@
             border: 2px solid black;
             /* display: flex; */
             text-align: center;
+		height:420.25px;
         }
+        .dlComments div{
+		
+}
+        
+        .dlComments h3{
+		font-size: 22px;
+		font-weight:bold;
+		margin: 10px 0;
+}
 
         .dlComments1 {
             width: 400px;
@@ -51,16 +61,30 @@
         .dlComments1 p {
             border: 1px solid black;
             width: 350px;
+            height:25px;
+            line-height:25px ;
+            
         }
 
         #dlComments2 {
             display: flex;
             justify-content: space-around;
         }
+        
+        #dlComments2 h3{
+	text-align: center;
+}
+        
+        
+         #dlComments2 h3{
+	text-align: center;
+}
 
         #dlComments2 p {
             border: 1px solid black;
             width: 170px;
+            height:25px;
+            line-height:25px ;
         }
 
         #dlComments3 {
@@ -76,7 +100,8 @@
 
         #dlComments4 {
             display: flex;
-            margin: 20px 80px;
+            margin-top:50px;
+            margin-left: 80px;
         }
 
 
@@ -178,7 +203,12 @@
             width: 170px;
             height: 26.23px;
         }
+   
 
         .ot_1 option {
             width: 170px;
+          
         }
+        #ot_1 ,#ot_2 {
+	  text-align: center;
+}

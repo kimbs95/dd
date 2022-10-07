@@ -15,6 +15,23 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>마이페이지</title>
+        <style>
+            #myroom {
+                overflow-x: auto;
+                height: 200px;
+            }
+            #mydl {
+                border: 1px solid #ccc; 
+                width: 300px; 
+                height: 200px;
+                padding: 10px;
+            }
+
+            #likeroom {
+                overflow-x: scroll;
+                
+            }
+        </style>
         <!-- reset css -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
         <!-- css -->
@@ -48,7 +65,7 @@
 
 
             <div class="mypage">
-                <h1 style="font-size:2.5em; font-weight: bold; margin: 30px 0;">My Page</h1>
+                <h1 style="font-size:2.5em; font-weight: bold; margin: 30px 0 150px 0;">My Page</h1>
                 <div>
 
 
@@ -77,45 +94,43 @@
                     </form>
                 </div>
                 <br>
-                <h2 style="font-weight: 900; font-size: 2em;">내가 등록한 방</h2>
+                <h2 style="font-weight: 900; font-size: 2em; margin-top: 80px; margin-bottom: 40px;">내가 등록한 방</h2>
                 <div id="myroom">
                 <c:forEach var="myDealing" items="${myDealing}">
-                    <div style="display: flex;">
-                        <div style="width: 200px; height: 200px;"><img src="images/네이버.PNG"
-                                style="width:200px; height: 200px;">
+                    <div style="display: flex; margin-right: 20px;">
+                        <div style="width: 200px; height: 200px;">
+                            <img src="/dealing/${myDealing.user_Id}/${myDealing.dl_Image}" alt="매물사진"
+                            style="width:200px; height: 200px;">
                         </div>
-                        <div style="border: 1px solid black; width: 300px; height: 200px;">
-                            <p>${myDealing.dl_Title}</p>
-                            <P>${myDealing.dl_Form}</P>
-                            <P>${myDealing.dl_Form2}</P>
-                            <p>${myDealing.dl_Room}</p>
-                            <p>${myDealing.dl_Price}</p>
-                        </div>
-                        <div style="width: 200px; height: 200px; border: 1px solid black;">조회수:
-                            <br>
-                            연락온 고객:
+                        <div id="mydl">
+                            <p>매물이름 : ${myDealing.dl_Title}</p><br>
+                            <P>건물형태 : ${myDealing.dl_Form}</P><br>
+                            <P>매매종류 : ${myDealing.dl_Form2}</P><br>
+                            <p>방 개수 : ${myDealing.dl_Room}</p><br>
+                            <p>매매가격 : ${myDealing.dl_Price}</p><br>
+                            <p>조회수  : ${myDealing.dl_Views}</p><br>
                         </div>
                     </div>
                 </c:forEach>
                 </div>
                 <br>
-                <h2 style="font-weight: 900; font-size: 2em;">관심목록</h2>
+                <h2 style="font-weight: 900; font-size: 2em; margin-top: 80px; margin-bottom: 40px;">관심목록</h2>
                 <div id="likeroom" style="display:flex;">
-                    <div style="display:flex;"><img src="images/네이버.PNG"
-                            style="width:150px; height: 150px; margin-top: 25px;"><br>
-                        <div style="border: 1px solid black; width: 200px; height: 200px;">OO동<br>
+                    <div style="display:flex; margin-right: 20px;"><img src="images/네이버.PNG"
+                            style="width:200px; height: 200px;"><br>
+                        <div style="border: 1px solid #ccc; width: 200px; height: 200px;">OO동<br>
                             원룸<br>
                             주소:</div>
                     </div>
-                    <div style="display:flex;"><img src="images/네이버.PNG"
-                            style="width:150px; height: 150px; margin-top: 25px;"><br>
-                        <div style="border: 1px solid black; width: 200px; height: 200px;">OO동<br>
+                    <div style="display:flex; margin-right: 20px;"><img src="images/네이버.PNG"
+                            style="width:200px; height: 200px;"><br>
+                        <div style="border: 1px solid #ccc; width: 200px; height: 200px;">OO동<br>
                             원룸<br>
                             주소:</div>
                     </div>
-                    <div style="display:flex;"><img src="images/네이버.PNG"
-                            style="width:150px; height: 150px; margin-top: 25px;"><br>
-                        <div style="border: 1px solid black; width: 200px; height: 200px;">OO동<br>
+                    <div style="display:flex; margin-right: 20px;"><img src="images/네이버.PNG"
+                            style="width:200px; height: 200px;"><br>
+                        <div style="border: 1px solid #ccc; width: 200px; height: 200px;">OO동<br>
                             원룸<br>
                             주소:</div>
                     </div>
@@ -123,16 +138,16 @@
                 <hr>
                 <br><br>
                 <div class="report" style="width: 1000px;">
-                    <h2 style="font-weight: 900; font-size: 2em;">허위매물 신고목록</h2><br>
+                    <h2 style="font-weight: 900; font-size: 2em; margin-top: 80px; margin-bottom: 40px;">허위매물 신고목록</h2><br>
                     <table class="table">
-                        <tr>
+                        <tr style="height: 30px; line-height: 30px;">
                             <th>No</th>
                             <th>매물명</th>
                             <th>신고사유</th>
                             <th>신고일</th>
                         </tr>
                         <c:forEach var="myReport" items="${myReport}">
-                            <tr>
+                            <tr style="border-bottom: 1px solid #ccc; height: 40px; line-height: 40px;">
                                 <td>${myReport.dl_ReportNum}</td>
                                 <td>${myReport.dl_Title}</td>
                                 <td>${myReport.rp_Title}</td>

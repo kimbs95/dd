@@ -13,6 +13,9 @@ public interface ProductService {
 
 	public List<ProductVO> listProducts(String product_Name) throws Exception;
 
+//	상품번호로 상품찾기
+	public ProductVO productinfo(int product_Nums) throws Exception;
+
 //	 상품번호 
 	public int productNum(String product_Num) throws DataAccessException;
 

@@ -104,6 +104,7 @@
                     <c:when test="${member.user_Id == null}">
                         alert("로그인 후 작성 가능합니다.");
                         event.preventDefault();
+                        location.href="/login.do";
 
                     </c:when>
                 </c:choose>
@@ -113,13 +114,13 @@
             <!-- header -->
             <header class="header">
                 <div class="headerleft" style="margin-right: 39.8%">
-                    <a href="${contextPath}/dealingmain.do" style="width:200px;"><img class="Main_Logo" 
+                    <a href="${contextPath}/dealingmain.do"><img class="Main_Logo" 
                             src="../image/메인로고.png" alt="다드림 메인로고"></a>
                 </div>
 
                 <div class="headerul">
 
-                    <ul style="width: 550px;">
+                    <ul>
                         <a href="${contextPath}/noticelist.do">
                             <li>공지사항</li>
                         </a>
@@ -180,7 +181,7 @@
     <!-- <a class="top" href=".headerleft">TOP</a> -->
     <a class="top" href="#">TOP</a>
     <!-- 게시판 부분 -->
-    <a class="pan" href="#">게시판</a>
+    <!-- <a class="pan" href="#">게시판</a> -->
     <!-- Channel Plugin Scripts -->
     <script>
         (function () {

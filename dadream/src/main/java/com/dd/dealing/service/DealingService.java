@@ -23,7 +23,9 @@ public interface DealingService {
 	public MemberVO login(MemberVO memberVO) throws Exception;
 
 //	지도검색
-	public List<DealingVO> selectMap() throws DataAccessException;
+	public List<DealingVO> selectMap(Map<String, Object> dlSearch) throws DataAccessException;
+
+	public List<DealingVO> selectMap3(Map<String, Object> dlSearch) throws DataAccessException;
 
 	// 지도창에서 검색
 	public List<DealingVO> selectMap2(Map<String, Object> dlMap) throws DataAccessException;
@@ -64,6 +66,7 @@ public interface DealingService {
 //	신고하기
 	public int addReport(Map rpMap) throws DataAccessException;
 
+	// 매물상세보기
 	public DealingVO getDealingContents(int dl_Num) throws Exception;
 
 	// 마이페이지 신고리스트

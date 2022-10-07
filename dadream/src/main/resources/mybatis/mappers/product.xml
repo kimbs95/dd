@@ -40,6 +40,15 @@
 		select * from product_t where product_Name  like concat('%', #{product_Name},'%' )order by product_Date desc
 	]]>
 	</select>
+	
+	
+	<select id="productinfo" resultType="productVO"
+		parameterType="int">
+	<![CDATA[
+		select * from product_t where product_Num = #{product_Nums}
+	]]>
+	</select>
+	
 
 
 	<insert id="insertProduct" parameterType="java.util.Map">

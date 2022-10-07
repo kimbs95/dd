@@ -34,7 +34,11 @@ public interface DealingDAO {
 
 	public int idcheck(String user_Id) throws DataAccessException;
 
-	public List<DealingVO> selectMap() throws DataAccessException;
+	// 검색버튼
+	public List<DealingVO> selectMap(Map<String, Object> dlSearch) throws DataAccessException;
+
+	// 검색창
+	public List<DealingVO> selectMap3(Map<String, Object> dlSearch) throws DataAccessException;
 
 	public List<DealingVO> selectMap2(Map<String, Object> dlMap) throws DataAccessException;
 
@@ -65,6 +69,7 @@ public interface DealingDAO {
 	// 게시판 조회수
 	public void updateView(int viewCounts) throws Exception;
 
+	// 매물 상세보기
 	public DealingVO getDealingContents(int dl_Num) throws Exception;
 
 	// 마이페이지 신고리스트

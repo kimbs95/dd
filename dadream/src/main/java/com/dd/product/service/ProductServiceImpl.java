@@ -34,6 +34,14 @@ public class ProductServiceImpl implements ProductService {
 		return productsList;
 	}
 
+//	상품번호로 상품찾기
+	@Override
+	public ProductVO productinfo(int product_Nums) throws Exception {
+
+		return productDAO.productinfo(product_Nums);
+
+	}
+
 //	 상품번호 
 	@Override
 	public int productNum(String product_Num) throws DataAccessException {

@@ -174,8 +174,12 @@ public class ProductControllerImpl implements ProductController {
 		String viewName = (String) request.getAttribute("viewName");
 		System.out.println("interceptor에서 온 viewName:" + viewName);
 		String product_Num = (String) request.getParameter("product_Num");
+		int product_Nums = Integer.parseInt(product_Num);
 		System.out.println("product_Num :" + product_Num);
+
+		ProductVO result = productService.productinfo(product_Nums);
 		model.addAttribute("product_Num", product_Num);
+		model.addAttribute("result", result);
 
 		return viewName;
 	}

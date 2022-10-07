@@ -54,10 +54,17 @@ public class DealingServiceImpl implements DealingService {
 		return allListdealing;
 	}
 
-	// 지도 검색
+	// 지도 검색(건물형태 버튼)
 	@Override
-	public List<DealingVO> selectMap() throws DataAccessException {
-		List<DealingVO> dlMap = dealingDAO.selectMap();
+	public List<DealingVO> selectMap(Map<String, Object> dlSearch) throws DataAccessException {
+		List<DealingVO> dlMap = dealingDAO.selectMap(dlSearch);
+		return dlMap;
+	}
+
+	// 지도 검색(건물형태 버튼)
+	@Override
+	public List<DealingVO> selectMap3(Map<String, Object> dlSearch) throws DataAccessException {
+		List<DealingVO> dlMap = dealingDAO.selectMap3(dlSearch);
 		return dlMap;
 	}
 
@@ -147,6 +154,7 @@ public class DealingServiceImpl implements DealingService {
 		return dealingDAO.insertReport(rpMap);
 	}
 
+	// 매물상세보기
 	@Override
 	public DealingVO getDealingContents(int dl_Num) throws Exception {
 		return dealingDAO.getDealingContents(dl_Num);

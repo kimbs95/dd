@@ -37,7 +37,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 
     <div class="first">
-        <h1 style="margin:20px 0 0 10px; font: bold;">(상품이름)</h1>
+        <h1 style="margin:20px 0 0 10px;font-size: 35px; font: bold;"></h1>
         <br><br><br><br>
         <div class="middle">
 
@@ -45,7 +45,7 @@
             <div class="dlImg">
 
                 <div class="dlMain">
-                    <img src="../image/메인로고.png" class="img-fluid" alt="" width="650px">
+                    <img src="/product/${result.user_Id}/${result.product_Image}" class="img-fluid" alt="" width="650px">
                 </div>
 
                 <div class="dlThumbnail1">
@@ -69,37 +69,37 @@
                 <div class="dlComments1">
                     <div>
                         <h3 style="text-align: left;">상품제목</h3>
-                        <h5 style="text-align: left;">상품평☆☆☆☆☆</h5>
-                        <p>뜨거운침대(퀸사이즈)</p>
+                        <!-- <h5 style="text-align: left;">상품평</h5> -->
+                        <p>${result.product_Name}</p>
                     </div>
                     <div>
                         <h3 style="text-align: left;">상품설명</h3>
-                        <p>뜨거운 침대는 매우 큰 사이즈 입니다</p>
+                        <p>${result.product_Content}</p>
                     </div>
                 </div>
                 <div id="dlComments2">
                     <div>
-                        <h3 style="text-align: left;">상품가격</h3>
-                        <p>0원</p>
+                        <h3>상품가격</h3>
+                        <p>${result.product_Price}</p>
                     </div>
                     <div>
-                        <h3 style="text-align: left;">상품수량</h3>
-                        <p>3층</p>
+                        <h3 >수량</h3>
+                        <p>${result.product_TotalCount}</p>
                     </div>
                 </div>
                 <div id="dlComments3">
                     <div>
-                        <h3 style="text-align: left;">옵션</h3>
+                        <h3 >옵션</h3>
                         <select name="ot_1" class="select" id="ot_1">
-                            <option>크기1</option>
+                            <option>-</option>
                             <option>크기2</option>
                             <option>크기3</option>
                         </select>
                     </div>
                     <div>
-                        <h3 style="text-align: left;">추가옵션</h3>
+                        <h3 >추가옵션</h3>
                         <select name="ot_2" class="select" id="ot_2">
-                            <option>크기1</option>
+                            <option>-</option>
                             <option>크기2</option>
                             <option>크기3</option>
                         </select>

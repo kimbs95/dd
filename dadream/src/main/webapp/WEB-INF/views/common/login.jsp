@@ -55,8 +55,11 @@
                 <input type="checkbox" class="checkbox"><span>Remember Password</span>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <div>
+                <div id="loginbtn">
                     <button class="submit">Login</button>
+                    <a id="kakao-login-btn" href="javascript:loginWithKakao()">
+                        <img src="https://k.kakaocdn.net/14/dn/btroDszwNrM/I6efHub1SN5KCJqLm1Ovx1/o.jpg" width="222"
+                            alt="카카오 로그인 버튼" style="border-radius: 60px; margin-top: 5px;" />
                 </div>
             </form>
 
@@ -69,16 +72,14 @@
                 console.log(Kakao.isInitialized());
             </script>
 
-            <a id="kakao-login-btn" href="javascript:loginWithKakao()">
-                <img src="https://k.kakaocdn.net/14/dn/btroDszwNrM/I6efHub1SN5KCJqLm1Ovx1/o.jpg" width="222"
-                    alt="카카오 로그인 버튼" />
+            
             </a>
             <p id="token-result"></p>
 
             <script>
                 function loginWithKakao() {
                     Kakao.Auth.authorize({
-                        redirectUri: 'http://localhost:8080/dealingmain.do',
+                        redirectUri: 'http://localhost:8080/kakaologin.do',
                         prompts: 'login',
                     });
                   

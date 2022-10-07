@@ -1,4 +1,4 @@
- * {
+* {
             box-sizing: border-box;
             user-select: none;
             
@@ -12,6 +12,7 @@
             display: flex;
             align-items: center;
             justify-content: space-around;
+            width:1960px
             
             
 
@@ -30,5 +31,10 @@
         }
         .footerinfo {
             /* margin: 20px 30px; */
+            width:550px;
             font-weight: bold;
+            
         }
+        .footerinfo span{
+			width:550px
+}

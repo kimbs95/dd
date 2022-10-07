@@ -38,6 +38,7 @@
 </head>
 
 <body>
+    <!-- <div style="display:none;"><%= application.getRealPath("/image") %></div> -->
     <div id="main1">
         <!--아래 form 부분 중앙정렬 검토필요-->
         <ul class="search">
@@ -67,9 +68,9 @@
             </li>
         </ul>
         <div id="search">
-            <form method="get" action="${contextPath}/map.do" style="display:inline-flex;  margin-top: 25px;">
-                <input class="dealingsearch" type="search" name="dl_Address" placeholder="검색어 입력" /><input type="submit"
-                    value="검색"></form>
+            <form method="get" action="${contextPath}/map.do" id="mapForm">
+                <input class="dealingsearch" type="search" name="dl_Address" placeholder="검색어를 입력하세요." />
+                <input type="submit" value="검색" style="font-weight:bold;"></form>
             </form>
         </div>
     </div>
@@ -80,7 +81,7 @@
             <h1 style="font-weight:bold; font-size:x-large; margin-bottom: 40px;">현재위치 추천 매물</h1>
             <div id="mainList"></div>
         </form>
-        <!-- 추천매물 리스트 -->
+        <!-- 추천매물 리스트
         <div id="main2_1" style="display: flex;">
             <a class="img-button" href="${contextPath}/dealingview.do">
             </a>
@@ -92,28 +93,28 @@
             </a>
             <a class="img-button" href="${contextPath}/dealingview.do">
             </a>
-        </div>
+        </div> -->
     </div>
 
-    <div id="main3">
-        <div id="avg-dong-price">
+    <!-- <div id="main3">
+        <div id="avg-dong-price"> -->
             <!-- OO동 평균월세 API 연동필요 -->
-        </div>
-        <div id="avg-dong-price1">
+        <!-- </div>
+        <div id="avg-dong-price1"> -->
             <!-- OO동의 주변동 평균월세 API 연동필요 -->
-        </div>
-    </div>
+        <!-- </div>
+    </div> -->
 
-    <h1 style="font-size: larger; margin: revert; text-align: initial;">부동산 가이드</h1>
+    <h1 style="font-size: larger; font-weight: bolder; margin: revert; margin-left: 45%;">부동산 가이드</h1>
     <div id="main4">
         <div id="guide1" style="background: red;">
             <a href="https://post.naver.com/viewer/postView.nhn?volumeNo=27011368&memberNo=2120568"
                 style="margin: auto;">
-                <p>허위매물방지</p>
+                <p>허위매물방지 5계명</p>
             </a>
         </div>
-        <div id="guide2" style="background: black;">
-            <a href="#" style="margin: auto;">
+        <div id="guide2" style="background: white;">
+            <a href="https://post.naver.com/viewer/postView.nhn?volumeNo=25802095&memberNo=2120568" style="margin: auto;">
                 <p>나에게 꼭 맞는<br> 방 찾는 방법!!</p>
             </a>
         </div>
@@ -123,12 +124,12 @@
             </a>
         </div>
         <div id="guide4" style="background: yellowgreen;">
-            <a href="#" style="margin: auto;">
+            <a href="https://post.naver.com/viewer/postView.nhn?volumeNo=26067452&memberNo=2120568" style="margin: auto;">
                 <p>알아두면 좋은<br> 부동산 용어!!</p>
             </a>
         </div>
-        <div id="guide5" style="background: blue;">
-            <a href="#" style="margin: auto;">
+        <div id="guide5" style="background: grey;">
+            <a href="https://post.naver.com/viewer/postView.nhn?volumeNo=26596142&memberNo=2120568" style="margin: auto;">
                 <p>임대차 계약서 <br>작성 시 <br>꼭 알아두세요!!</p>
             </a>
         </div>
@@ -162,11 +163,11 @@
 
                             $.each(hereList, function (index, item) {
                                 mainList +=
-                                    '<div style="display: inline-block; border: 1px solid #ccc; margin-bottom: 20px; margin-left: 30px; width:300px; height:400px;">';
-                                mainList += '<div>' +
-                                    '<img src="../메인 카테고리 사진/스텐드.png" alt="" width="300px" height="250px" style="margin-bottom: 20px;">' +
+                                    '<div style="display: inline-block; border: 1px solid #ccc; margin-bottom: 20px; margin-left: 30px; width:350px; height:470px;">';
+                                mainList += '<div style="text-align:center;">' +
+                                    '<img src="/dealing/'+item.user_Id+'/'+item.dl_Image+'" alt="" width="300px" height="250px" style="margin-bottom: 20px;">' +
                                     '</div>';
-                                mainList += '<div>'+ '<h1 style="margin-left:10px; font-size:large;">' + item.dl_Title + '<br><br>' + item
+                                mainList += '<div style="text-align:center;">'+ '<h1 style="margin-left:10px; font-size:large; text-align:center;">' + item.dl_Title + '<br><br>' + item
                                     .dl_Form +
                                     '<br><br></h1>' + item.dl_Form2 + '<br>' +
                                     item.dl_Price + '</div>' + '</div>';

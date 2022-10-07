@@ -39,7 +39,7 @@
         <form id="dlReq2">
             <div id="category-menubar">
                 <div id="selectbox" style="display: flex; width: 940px; height: 30px;margin-top: 30px;">
-                    <select id="asd" name="dl_Form" style="width: 100px; height: 25px; text-align: center;">
+                    <select id="asd" name="dl_Form" style="width: 100px; height: 25px; text-align: center; margin-right: 8px;">
                         <option value="">건물종류</option>
                         <option value="아파트">아파트</option>
                         <option value="원룸">원룸</option>
@@ -48,18 +48,21 @@
                         <option value="주택">주택</option>
                     </select>
 
-                    <select name="dl_Form2" style="width: 100px; height: 25px; text-align: center;">
-                        <option value="">매매종류</option>
+                    <select name="dl_Form2" style="width: 100px; height: 25px; text-align: center; margin-right: 8px;">
+                        <option value="">거래유형</option>
                         <option value="월세">월세</option>
                         <option value="전세">전세</option>
                         <option value="매매">매매</option>
                         <option value="단기임대">단기임대</option>
                     </select>
 
-                    <select name="dl_Room" style="width: 100px; height: 25px; text-align: center;">
+                    <select name="dl_Room" style="width: 100px; height: 25px; text-align: center; margin-right: 8px;">
                         <option value="">방 개수</option>
-                        <option value=1>원룸</option>
-                        <option value=2>투룸+</option>
+                        <option value=1>1개</option>
+                        <option value=2>2개</option>
+                        <option value=2>3개</option>
+                        <option value=2>4개</option>
+                        <option value=2>5개</option>
                     </select>
 
                     <!-- db에 층수에 관한 컬럼이 없음 -->
@@ -73,7 +76,7 @@
                 </optgroup>
             </select> -->
 
-                    <select name="dl_Option" style="width: 100px; height: 25px; text-align: center;">
+                    <select name="dl_Option" style="width: 100px; height: 25px; text-align: center;margin-right: 8px;">
                         <option value="">옵션선택</option>
                         <option value="풀옵션">풀옵션</option>
                         <option value="엘레베이터">엘레베이터</option>
@@ -82,7 +85,7 @@
                         <option value="신축">신축</option>
                     </select>
                     <div>
-                        <input name="dl_Price" type="text" placeholder="최대가격을 적어주세요." style="text-align: center;">원
+                        <input name="dl_Price" type="text" placeholder="최대가격을 적어주세요." style="text-align: center;margin-right: 3px; margin-top: 2px;">원
                     </div>
 
                 </div>
@@ -90,9 +93,9 @@
             <div id="prs-position" style="display:flex; width: 700px;">
                 <input type="button" value="현 위치" action="#">
                 <!--코드 생성 해야함-->
-                <address>&nbsp;대전광역시 서구 둔산동 오라클빌딩</address>
-                <input type="text" size="30px" name="dl_Address" placeholder="지역을 적어주세요."><button type="button"
-                    value="매물검색" onclick="dlBtn()" style="margin-left:40px;">매물검색</button>
+                <address style="margin: auto;">&nbsp;대전광역시 서구 둔산동 오라클빌딩</address>
+                <input type="text" size="30px" name="dl_Address" placeholder="둔산동 오라클빌딩"><button type="button"
+                    value="매물검색" onclick="dlBtn()">매물검색</button>
             </div>
         </form>
         <!--지도-->
@@ -194,12 +197,12 @@
                         $.each(dlMap, function (index, item) {
 
                             resultList += '<form action="${contextPath}/dealingview.do" method="get">'
-                                resultList += '<input type="hidden" value="${item.dl_Num}" >'
+                                resultList += '<input type="hidden" name ="dl_Num" value="' + item.dl_Num + '">'
                                 resultList += '<button type="submit" style="width:450px; height:300px; background-color:white; border:outset;">'
                                     
                                 resultList += '<div style="display: flex; border-bottom: 1px solid #ccc; margin-bottom: 20px; margin-left: 30px;">';
                                 resultList += '<div>' +
-                                    '<img src="../image/sample01.jpg" alt="" width="200px" height="190px">' +
+                                    '<img src="/dealing/'+item.user_Id+'/'+item.dl_Image+'" alt="" width="200px" height="190px">' +
                                     '</div>';
                                 resultList += '<div style="flex-grow:1; margin:auto; line-height:14px; font-weight:bold; color:darkorange">'+'매물번호'+'<br>'+ item.dl_Num +'<br><br>'+'매물이름'+'<br>' + item.dl_Title + '<br><br>' + item.dl_Form +
                                     '<br><br>'+'거래유형'+'<br>' + item.dl_Form2 + '<br><br>' +'가격'+'<br>'+

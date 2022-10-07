@@ -20,6 +20,9 @@ public interface ProductDAO {
 	// 상품목록
 	public List<ProductVO> selectAllProductsList(String product_Name) throws DataAccessException;
 
+//	상품번호로 상품찾기
+	public ProductVO productinfo(int product_Nums) throws Exception;
+
 //	  상품번호 
 	public int productnum(String product_Num) throws DataAccessException;
 

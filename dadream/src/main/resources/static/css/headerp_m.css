@@ -1,19 +1,19 @@
- * {
+* {
             box-sizing: border-box;
             user-select: none;
-            margin: 0 auto;
-
+            
         }
 
         /* maintab */
         .maintab {
-            display: flex;
-            margin-top:10px ;
+            margin-top: 10px;
             margin-bottom: 20px;
+            display: flex;
             background: rgb(238, 232, 232);
+            
         }
 
-         .maintab a{
+          .maintab a{
             width: 100%;
             text-decoration: none;
             color: black;
@@ -29,7 +29,9 @@
         }
 		.maintab a:first-child{
 			border-right: solid 0.5px;
+			
 		}
+
 
         .maintab .a:hover {
             background-color: rgb(146, 142, 142);
@@ -54,57 +56,91 @@
 
         /* header */
         .header {
-            margin: 20px 0 0 30px;
+            margin: 20px 0 0 150px;
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            justify-content: space-around;
+            height:52.5px
         }
 
-        .header .Main_Logo {
+        header .Main_Logo {
             width: 220px;
             height: 50px;
-            margin-left: 190px;
+            margin-left: 280px;
         }
 
         .headerleft {
             display: flex;
         }
+        .ppcursor {
+		cursor: pointer;
+	
+		}
+		    	.ppcursor li h6 {
+			text-decoration: underline;
+			 text-underline-position : under;
+			  text-decoration-thickness: 2px;
+		}
+		.ppcursor li h6:hover{
+			color:gray;
+		}
+		
+
+        /*.search form {
+            display: flex;
+            margin-top: 2.5%;
+            width: 450px;
+            margin-left: 130px;
+        }
+
+        .search form input {
+            width: 400px;
+            height: 40px;
+        }*/
 
         .headerul ul {
-            margin-top: 2%;
+            /*margin-top: 2%;*/
             font-size: 18px;
-            width: 530px;
-            margin-right: 150px;
+            /*margin-left: 100px;*/
+           	width: 860px;
+            height: 22.5px;
+            margin-right: 113px;
+            line-height: normal;
         }
 
         .headerul ul li {
-            display: inline-block;
+            display: inline-flex;
             font-weight: bold;
             margin-right: 50px;
         }
 
-        .headerul ul>a {
-            margin-top: 1.5%;
+        .headerul ul a {
             text-decoration: none;
             color: black;
         }
-		/*.pmcursor > h6 {
-			
-			text-decoration: underline;
-	 text-underline-position : under;
-	  text-decoration-thickness: 2px;
-		}
-*/
 
         /* top버튼 */
         .top {
             text-decoration: none;
             color: black;
             position: fixed;
-            bottom: 150px;
+            bottom: 100px;
             right: 40px;
         }
-        .pan{
+        
+        .headerpp > a{
+			display:block;	
+		}
+	
+		.headerpp> * {
+			margin-top: 5px;
+			
+		}
+		
+       .hidee{
+			display:none;
+		}
+		.pan{
 			text-decoration: none;
             color: black;
             position: fixed;
@@ -112,3 +148,6 @@
             right: 33px;
 		}
 		
+		
+		
+       

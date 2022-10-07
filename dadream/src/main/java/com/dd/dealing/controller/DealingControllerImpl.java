@@ -1,7 +1,7 @@
 package com.dd.dealing.controller;
 
 import java.io.File;
-import java.net.InetAddress;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -14,7 +14,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FileUtils;
+import org.jsoup.Connection.Method;
+import org.jsoup.Connection.Response;
+import org.jsoup.Jsoup;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.expression.ParseException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -37,6 +41,8 @@ import com.dd.dealing.vo.DealingVO;
 import com.dd.dealing.vo.MemberVO;
 import com.dd.dealing.vo.NoticeVO;
 import com.dd.dealing.vo.ReportVO;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 
 @Controller("dealingController")
 public class DealingControllerImpl {
@@ -113,6 +119,78 @@ public class DealingControllerImpl {
 		String viewName = (String) request.getAttribute("viewName");
 		System.out.println("interceptor에서 온 viewName:" + viewName);
 		return viewName;
+	}
+
+//카카오로그인
+	@RequestMapping(value = "/kakaologin.do", method = RequestMethod.GET)
+	private String kakaologin(@RequestParam("code") String token, HttpServletRequest request)
+			throws IOException, ParseException {
+		System.out.println("토큰: " + token);
+
+		Map<String, String> kakaoreq = new HashMap<>();
+		kakaoreq.put("grant_type", "authorization_code");
+		kakaoreq.put("client_id", "35aa1216a2a526e324dd20cbbf64bc06");
+		kakaoreq.put("redirect_uri", "http://localhost:8080/kakaologin.do");
+		kakaoreq.put("code", token);
+//
+		/*
+		 * 1번째 방법 url 방식으로 받는법 String kakaoURL = "https://kauth.kakao.com/oauth/token";
+		 * URL url = new URL(kakaoURL);
+		 * 
+		 * HttpURLConnection con = (HttpURLConnection) url.openConnection();
+		 * 
+		 * con.setRequestMethod("POST"); // post 요청을위해 true/ 데이터를 넘겨주겠다는 뜻
+		 * con.setDoOutput(true);
+		 * 
+		 * BufferedWriter bw = new BufferedWriter(new
+		 * OutputStreamWriter(con.getOutputStream()));
+		 * 
+		 * StringBuilder sb = new StringBuilder();
+		 * sb.append("grant_type=authorization_code"); // 스크립트 키
+		 * sb.append("&client_id=35aa1216a2a526e324dd20cbbf64bc06");
+		 * sb.append("&redirect_uri=http://localhost:8080/kakaologin.do");
+		 * sb.append("&code=" + token);
+		 * 
+		 * bw.write(sb.toString()); bw.flush(); int responsecode =
+		 * con.getResponseCode(); System.out.println("responsecode :" + responsecode);
+		 * 
+		 * // 요청 통해 응답으로온 JSON 타입 메세지 BufferedReader br = new BufferedReader(new
+		 * InputStreamReader(con.getInputStream())); String line = ""; String result =
+		 * "";
+		 * 
+		 * while ((line = br.readLine()) != null) {
+		 * 
+		 * result += line; } System.out.println("responseBody : " + result);
+		 * 
+		 * // 파싱 하는곳 Gson 주입 JsonParser parser = new JsonParser(); JsonElement element =
+		 * parser.parse(result); System.out.println("파싱 뽑은거 : " + element);
+		 * 
+		 * String access_token =
+		 * element.getAsJsonObject().get("access_token").getAsString();
+		 * System.out.println(access_token);
+		 * 
+		 * br.close(); bw.close();
+		 * 
+		 */
+
+//		/* 2번째 Jsoup url 주소 HTMl 을 파싱해옴 */
+		// Jsoup url 주소 HTMl 을 파싱해옴
+		Response response = Jsoup.connect("https://kauth.kakao.com/oauth/token").method(Method.POST)
+				.header("Content-type", "application/x-www-form-urlencoded;charset=utf-8").data(kakaoreq)
+				.ignoreHttpErrors(true).ignoreContentType(true).execute();
+		System.out.println(response.body());
+//		파싱 하는곳  Gson, json-simple 주입
+		JsonParser parser = new JsonParser();
+		JsonElement element = parser.parse(response.body());
+		System.out.println("파싱 뽑은거 : " + element);
+
+		String access_token = element.getAsJsonObject().get("access_token").getAsString();
+		String refresh_token = element.getAsJsonObject().get("refresh_token").getAsString();
+		System.out.println("accsess 토큰" + access_token);
+		System.out.println("refresh 토큰" + refresh_token);
+
+		return "/dealingmain";
+
 	}
 
 //	로그인 확인
@@ -265,13 +343,18 @@ public class DealingControllerImpl {
 	}
 
 	/* 매물 상세보기 */
+	@ResponseBody
 	@RequestMapping(value = "/dealingview.do", method = RequestMethod.GET)
-	public String read(@ModelAttribute("searchVO") DealingVO searchVO,
-			@RequestParam(value = "dl_Num", defaultValue = "1") int dl_Num, Model model) throws Exception {
+	public ModelAndView read(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String dl_Num1 = request.getParameter("dl_Num");
+		int dl_Num = Integer.parseInt(dl_Num1);
+		String viewName = (String) request.getAttribute("viewName");
+		System.out.println("dl_Num : " + dl_Num);
+		ModelAndView mav = new ModelAndView();
 		DealingVO DealingContents = dealingService.getDealingContents(dl_Num);
-		model.addAttribute("DealingContents", DealingContents);
-
-		return "/dealing/dealingview";
+		mav.addObject("DealingContents", DealingContents);
+		mav.setViewName(viewName);
+		return mav;
 	}
 
 	/* 중개사 팝업창 */
@@ -299,21 +382,16 @@ public class DealingControllerImpl {
 	@RequestMapping(value = "/map.do", method = RequestMethod.GET)
 	private ModelAndView map(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = (String) request.getAttribute("viewName");
-		String search = (String) request.getParameter("search");
-//		매물 전부 리스트 검색
-		// List<DealingVO> allListdealing = dealingService.allListdealing();
+		String dl_Form = (String) request.getParameter("dl_Form");
+		String dl_Address = (String) request.getParameter("dl_Address");
+		// 매물 전부 리스트 검색
+		System.out.println("dl_Address : " + dl_Address);
+		// List<DealingVO> allListdealing = dealingService.allListdealing(dl_Form);
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("search", search);
+		mav.addObject("dl_Address", dl_Address);
+		mav.addObject("dl_Form", dl_Form);
 		// mav.addObject("allListdealing", allListdealing);
 		mav.setViewName(viewName);
-		InetAddress local = null;
-		local = InetAddress.getLocalHost();
-
-		String ip = "";
-		if (local == null) {
-		} else {
-			ip = local.getHostAddress();
-		}
 		return mav;
 	}
 
@@ -322,14 +400,27 @@ public class DealingControllerImpl {
 	@ResponseBody
 	public ResponseEntity showMap(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
-		String dl_Lat = request.getParameter("dl_Lat");
-		String dl_Lng = request.getParameter("dl_Lng");
+		// String dl_Lat = request.getParameter("dl_Lat");
+		// String dl_Lng = request.getParameter("dl_Lng");
+		String dl_Form = request.getParameter("dl_Form");
 		String dl_Address = request.getParameter("dl_Address");
-		System.out.println("dl_Lat : " + dl_Lat);
-		System.out.println("dl_Lng : " + dl_Lng);
-		System.out.println("dl_Address: " + dl_Address);
+
+		// System.out.println("dl_Lat : " + dl_Lat);
+		// System.out.println("dl_Lng : " + dl_Lng);
+		System.out.println("dl_Form : " + dl_Form);
+		System.out.println("dl_Address : " + dl_Address);
+		Map<String, Object> dlSearch = new HashMap<String, Object>();
 		List<DealingVO> dlMap = new ArrayList<DealingVO>();
-		dlMap = dealingService.selectMap();
+		if (dl_Form != null && dl_Form != "") {
+			// 버튼으로 검색
+			dlSearch.put("dl_Form", dl_Form);
+			dlMap = dealingService.selectMap(dlSearch);
+		} else if (dl_Address != null && dl_Address != "") {
+			// 검색창으로 검색
+			dlSearch.put("dl_Address", dl_Address);
+			dlMap = dealingService.selectMap3(dlSearch);
+		}
+		System.out.println("dlMap : " + dlMap);
 
 		return new ResponseEntity(dlMap, HttpStatus.OK);
 	}

@@ -45,7 +45,7 @@
     <!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
     <div class="first">
-        <h1 style="margin:40px 0 0 10px; font: bold;">매물등록</h1>
+        <h1 >매물등록</h1>
 
         <form method="post" action="${contextPath}/addNewdealing.do" enctype="multipart/form-data">
             <div class="middle">
@@ -53,9 +53,10 @@
                 <!--이미지 div-->
                 <div class="dlImg">
                     <div class="dlMain">
-                        <label for="dealing_Image">이미지 를 골라주세요</label><br>
+                        <label for="dealing_Image" style="margin-bottom: 5px;">
+                            <p style="font-weight: bold;">대표이미지를 선택해주세요.</p></label><br>
+                        <img id="preview" src="" width=500 height=500 />
                         <input type="file" id="dealing_Image" name="dl_Image" accept="image/*" multiple>
-                        <img id="preview" src="" width=200 height=200 />
                         <h1 class="imgh1"></h1>
                     </div>
                 </div>
@@ -70,7 +71,7 @@
                     <br><br>
                     <h3>주소입력</h3>
                     <input type="text" id="sample5_address" name="dl_Address" placeholder="주소" size="38">
-                    <input type="button" onclick="sample5_execDaumPostcode()" value="주소 검색"><br><br>
+                    <input type="button" onclick="sample5_execDaumPostcode()" value="주소 검색" style="height: 27px;"><br><br>
                     <div id="map" style="width:300px;height:300px;margin-top:10px;display:none"></div><br>
                     <!-- 우편api -->
                     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -180,7 +181,7 @@
                             <option name="dl_Form" value="주택">주택</option>
                         </select>
                         <br><br>
-                        <h5>매물종류</h5>
+                        <h5>거래유형</h5>
                         <select name="dl_Form2">
                             <option name="dl_Form2" value="매매">매매</option>
                             <option name="dl_Form2" value="월세">월세</option>
@@ -189,16 +190,16 @@
                         <br><br>
                         <h5>방개수</h5>
                         <select name="dl_Room">
-                            <option name="dl_Room" value="1">1층</option>
-                            <option name="dl_Room" value="2">2층</option>
-                            <option name="dl_Room" value="3">3층</option>
-                            <option name="dl_Room" value="4">4층</option>
-                            <option name="dl_Room" value="5">5층</option>
-                            <option name="dl_Room" value="6">6층</option>
+                            <option name="dl_Room" value="1">1개</option>
+                            <option name="dl_Room" value="2">2개</option>
+                            <option name="dl_Room" value="3">3개</option>
+                            <option name="dl_Room" value="4">4개</option>
+                            <option name="dl_Room" value="5">5개</option>
+                            <!-- <option name="dl_Room" value="6">6층</option>
                             <option name="dl_Room" value="7">7층</option>
                             <option name="dl_Room" value="8">8층</option>
                             <option name="dl_Room" value="9">9층</option>
-                            <option name="dl_Room" value="10">10층</option>
+                            <option name="dl_Room" value="10">10층</option> -->
                         </select>
                         <br><br>
                         <h5>평수</h5>

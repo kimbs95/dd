@@ -2,9 +2,9 @@
             
         
         #main1{
-            background-image:url("../image/메인로고.png");
-            width: 1130px;
-            height: 250px;
+            background-image:url("../image/livingRoom.jpg");
+            width: 1550px;
+            height: 350px;
             display: inline-block;
             /* margin: 15px ; */
             
@@ -21,6 +21,7 @@
         .dealingsearch{
 			width: 400px;
             height: 40px;
+           border:0.5px solid skyblue;
            
 		}
 
@@ -33,6 +34,10 @@
         }
         li button{
             width: 100px;
+           border-top-right-radius: 5px;
+           border-top-left-radius: 5px;
+           border:0.5px solid skyblue;
+           color:rgb(128, 0, 255);
             
             
         }
@@ -40,7 +45,12 @@
             text-align: center;
             justify-content: center;
             margin-left: 40px;
+            
         }
+        #mapForm{
+		display:inline-flex;
+            margin-top: 25px;
+}
         .img-button{
             background: url(../images/pro.JPG);
             width: 150px;
@@ -57,8 +67,14 @@
             justify-content: center; /* 중앙 정렬*/
         }
         #main2_1 > input {
-	cursor:pointer;
-}
+		cursor:pointer;
+		}
+		#main2 h1{
+			font-weight: bold;
+			font-size: x-large;
+			margin-bottom: 40px;
+			margin-left: 30px;
+		}
         
         #main3{
             border: 1px solid red;
@@ -94,19 +110,30 @@
             /* margin: 15px; */
             display: flex;
             justify-content: center;
+            
         }
         #main4 > div{
             display: flex;
-            width: 150px;
+            width: 250px;
             height: 150px;
             border: 1px solid black;
             /* margin: 15px; */
             justify-content: center;
             
+            
         }
+          a{
+			text-decoration: none;
+		}
+		h1{
+			font-size: larger;
+			font-weight: bolder;
+			margin:revert;
+			margin-left: 45%;
+		}
        h2{
         margin-left: 50px;
-       }
+       	}
        
        
        
