@@ -94,8 +94,17 @@
                 <input type="button" value="현 위치" action="#">
                 <!--코드 생성 해야함-->
                 <address style="margin: auto;">&nbsp;대전광역시 서구 둔산동 오라클빌딩</address>
-                <input type="text" size="30px" name="dl_Address" placeholder="둔산동 오라클빌딩"><button type="button"
+                <input type="text" id="dealingsearch" size="30px" name="dl_Address" placeholder="둔산동 오라클빌딩"><button type="button"
                     value="매물검색" onclick="dlBtn()">매물검색</button>
+                    <script>
+                            document.querySelector("#dealingsearch").addEventListener("keydown",(e)=>{
+                                console.log(e);
+                                if(e.code ==="Enter"){
+                                    
+                                    document.querySelector("#dlReq2").submit();
+                                }
+                            })
+                    </script>
             </div>
         </form>
         <!--지도-->

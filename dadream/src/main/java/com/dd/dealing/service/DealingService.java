@@ -7,6 +7,7 @@ import org.springframework.dao.DataAccessException;
 
 import com.dd.dealing.vo.BoardVO;
 import com.dd.dealing.vo.DealingVO;
+import com.dd.dealing.vo.KakaoLoginVO;
 import com.dd.dealing.vo.MemberVO;
 import com.dd.dealing.vo.NoticeVO;
 import com.dd.dealing.vo.ReportVO;
@@ -21,6 +22,12 @@ public interface DealingService {
 
 //	로그인체크
 	public MemberVO login(MemberVO memberVO) throws Exception;
+
+//	카카오 로그인 
+	public int kakaologin(Map<String, Object> user) throws Exception;
+
+//	카카오 아이디 이름 반환
+	public KakaoLoginVO kakaoresult(Map<String, Object> user) throws Exception;
 
 //	지도검색
 	public List<DealingVO> selectMap(Map<String, Object> dlSearch) throws DataAccessException;

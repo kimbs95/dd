@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.dd.dealing.vo.BoardVO;
 import com.dd.dealing.vo.DealingVO;
+import com.dd.dealing.vo.KakaoLoginVO;
 import com.dd.dealing.vo.MemberVO;
 import com.dd.dealing.vo.NoticeVO;
 import com.dd.dealing.vo.ReportVO;
@@ -22,6 +23,12 @@ public interface DealingDAO {
 	public MemberVO loginById(MemberVO memberVO) throws DataAccessException;
 
 	public int insertReport(Map rpMap) throws DataAccessException;
+
+//	카카오 로그인 
+	public int kakaologin(Map<String, Object> user) throws Exception;
+
+//	카카오 아이디 이름 반환
+	public KakaoLoginVO kakaoresult(Map<String, Object> user) throws Exception;
 
 	// 매물 DB전송
 	public int addNewdealing(Map<String, Object> dealingMap) throws DataAccessException;

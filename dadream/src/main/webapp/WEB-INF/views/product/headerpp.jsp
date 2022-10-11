@@ -95,6 +95,62 @@
 
             </header>
         </c:when>
+        <c:when test="${member.user_Level ==4}">
+         <!-- header -->
+         <header class="header">
+            <div class="headerleft">
+                <a href="${contextPath}/productmain.do" style="width:200px;"><img class="Main_Logo" style="margin-left:150px"
+                        src="/image/메인로고.png" alt="다드림 메인로고"></a>
+            </div>
+            <div class="search"style="margin-left:350px">
+                <form action="/product.do">
+                    <input type="search" name ="product_Name" placeholder="검색어 입력">
+                    <button type="submit">검색</button>
+                </form>
+            </div>
+            <div class="headerul">
+                <ul style="display: flex;">
+                    <c:choose>
+                        <c:when test="${isLogOn == true  && member!= null}">
+                          
+                            <div class="ppcursor">
+                                <li class="headerppli" style="display: block;">
+                                    <h6>${member.user_Name}님</h6>
+                                    <div class="headerpp hidee">
+                                        <a href="/cartweb.do" style="margin-top:10px">
+                                            장바구니
+                                        </a>
+                                        <a href="" style="margin-top:10px">
+                                            인테리어
+                                        </a>
+                                    </div>
+                                </li>
+                            </div>
+                            <a href="${contextPath}/logout.do">
+                                <li>로그아웃</li>
+                            </a>
+
+                        </c:when>
+                        <c:otherwise>
+                            <a href="${contextPath}/login.do">
+                                <li>로그인</li>
+                            </a>
+                            <a href="${contextPath}/userjoin.do">
+                                <li>회원가입</li>
+                            </a>
+                        </c:otherwise>
+                    </c:choose>
+                </ul>
+            </div>
+            <script>
+                let headerppli2 = document.querySelector(".headerppli");
+                let hiderpp2 = document.querySelector(".headerpp");
+                headerppli2.addEventListener("click", function () {
+                    hiderpp2.classList.toggle("hidee");
+                })
+            </script>
+        </header>
+        </c:when>
         <c:otherwise>
 
 

@@ -138,6 +138,7 @@
                         </script>
                         <button type="button" class="btn btn-secondary btn-lg" onclick="showPopup();">
                             구매하기</button>
+                            
                     </div>
                 </div>
 

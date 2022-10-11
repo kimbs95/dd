@@ -69,7 +69,7 @@
         </ul>
         <div id="search">
             <form method="get" action="${contextPath}/map.do" id="mapForm">
-                <input class="dealingsearch" type="search" name="dl_Address" placeholder="검색어를 입력하세요." />
+                <input class="dealingsearch" type="search" style="outline: none;" name="dl_Address" placeholder="검색어를 입력하세요." />
                 <input type="submit" value="검색" style="font-weight:bold;"></form>
             </form>
         </div>

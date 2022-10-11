@@ -96,7 +96,65 @@
 
             </header>
         </c:when>
-       
+       <c:when test ="${member.user_Level == 4}">
+        <script>
+            function dont(){
+                <c:choose>
+                    <c:when test="${member.user_Id == null}">
+                        alert("로그인 후 작성 가능합니다.");
+                        event.preventDefault();
+                        location.href="/login.do";
+
+                    </c:when>
+                </c:choose>
+            }
+        </script>
+
+            <!-- header -->
+            <header class="header">
+                <div class="headerleft" style="margin-right: 39.8%">
+                    <a href="${contextPath}/dealingmain.do"><img class="Main_Logo" 
+                            src="../image/메인로고.png" alt="다드림 메인로고"></a>
+                </div>
+
+                <div class="headerul">
+
+                    <ul>
+                        <a href="${contextPath}/noticelist.do">
+                            <li>공지사항</li>
+                        </a>
+                        <a href="${contextPath}/inteboardlist.do">
+                            <li>게시판등록</li>
+                        </a>
+                        <a onclick="dont();" href="${contextPath}/dealingform.do">
+                            <li>매물등록</li>
+                        </a>
+
+                        <c:choose>
+                            <c:when test="${isLogOn == true  && member!= null}">
+    
+                                <li>
+                                    <div class="pmcurosr">
+                                    <h6>${member.user_Name}님</h6>
+                                    </div>
+                                </li>
+                                <a href="${contextPath}/logout.do">
+                                    <li>로그아웃</li>
+                                </a>
+                            </c:when>
+                            <c:otherwise>
+                                <a href="${contextPath}/login.do">
+                                    <li>로그인</li>
+                                </a>
+                                <a href="${contextPath}/userjoin.do">
+                                    <li>회원가입</li>
+                                </a>
+                            </c:otherwise>
+                        </c:choose>
+                    </ul>
+                </div>
+            </header>
+       </c:when>
         <c:otherwise>
         <script>
             function dont(){

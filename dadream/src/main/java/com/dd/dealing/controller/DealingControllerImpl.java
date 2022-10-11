@@ -1,7 +1,13 @@
 package com.dd.dealing.controller;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -38,10 +44,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.dd.dealing.service.DealingService;
 import com.dd.dealing.vo.BoardVO;
 import com.dd.dealing.vo.DealingVO;
+import com.dd.dealing.vo.KakaoLoginVO;
 import com.dd.dealing.vo.MemberVO;
 import com.dd.dealing.vo.NoticeVO;
 import com.dd.dealing.vo.ReportVO;
 import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 @Controller("dealingController")
@@ -53,6 +61,8 @@ public class DealingControllerImpl {
 	private DealingService dealingService;
 	@Autowired
 	private MemberVO memberVO;
+	@Autowired
+	private KakaoLoginVO kakaoLoginVO;
 	@Autowired
 	private DealingVO dealingVO;
 
@@ -121,10 +131,10 @@ public class DealingControllerImpl {
 		return viewName;
 	}
 
-//카카오로그인
+	// 카카오로그인
 	@RequestMapping(value = "/kakaologin.do", method = RequestMethod.GET)
-	private String kakaologin(@RequestParam("code") String token, HttpServletRequest request)
-			throws IOException, ParseException {
+	private String kakaologin(@RequestParam("code") String token, RedirectAttributes rAttr, Model model,
+			HttpServletRequest request) throws IOException, ParseException, Exception {
 		System.out.println("토큰: " + token);
 
 		Map<String, String> kakaoreq = new HashMap<>();
@@ -132,67 +142,101 @@ public class DealingControllerImpl {
 		kakaoreq.put("client_id", "35aa1216a2a526e324dd20cbbf64bc06");
 		kakaoreq.put("redirect_uri", "http://localhost:8080/kakaologin.do");
 		kakaoreq.put("code", token);
-//
-		/*
-		 * 1번째 방법 url 방식으로 받는법 String kakaoURL = "https://kauth.kakao.com/oauth/token";
-		 * URL url = new URL(kakaoURL);
-		 * 
-		 * HttpURLConnection con = (HttpURLConnection) url.openConnection();
-		 * 
-		 * con.setRequestMethod("POST"); // post 요청을위해 true/ 데이터를 넘겨주겠다는 뜻
-		 * con.setDoOutput(true);
-		 * 
-		 * BufferedWriter bw = new BufferedWriter(new
-		 * OutputStreamWriter(con.getOutputStream()));
-		 * 
-		 * StringBuilder sb = new StringBuilder();
-		 * sb.append("grant_type=authorization_code"); // 스크립트 키
-		 * sb.append("&client_id=35aa1216a2a526e324dd20cbbf64bc06");
-		 * sb.append("&redirect_uri=http://localhost:8080/kakaologin.do");
-		 * sb.append("&code=" + token);
-		 * 
-		 * bw.write(sb.toString()); bw.flush(); int responsecode =
-		 * con.getResponseCode(); System.out.println("responsecode :" + responsecode);
-		 * 
-		 * // 요청 통해 응답으로온 JSON 타입 메세지 BufferedReader br = new BufferedReader(new
-		 * InputStreamReader(con.getInputStream())); String line = ""; String result =
-		 * "";
-		 * 
-		 * while ((line = br.readLine()) != null) {
-		 * 
-		 * result += line; } System.out.println("responseBody : " + result);
-		 * 
-		 * // 파싱 하는곳 Gson 주입 JsonParser parser = new JsonParser(); JsonElement element =
-		 * parser.parse(result); System.out.println("파싱 뽑은거 : " + element);
-		 * 
-		 * String access_token =
-		 * element.getAsJsonObject().get("access_token").getAsString();
-		 * System.out.println(access_token);
-		 * 
-		 * br.close(); bw.close();
-		 * 
-		 */
+//			==================================
+//				1번째 방법 http통신 방식으로 받는법
 
-//		/* 2번째 Jsoup url 주소 HTMl 을 파싱해옴 */
-		// Jsoup url 주소 HTMl 을 파싱해옴
-		Response response = Jsoup.connect("https://kauth.kakao.com/oauth/token").method(Method.POST)
-				.header("Content-type", "application/x-www-form-urlencoded;charset=utf-8").data(kakaoreq)
-				.ignoreHttpErrors(true).ignoreContentType(true).execute();
-		System.out.println(response.body());
-//		파싱 하는곳  Gson, json-simple 주입
+		String kakaoURL = "https://kauth.kakao.com/oauth/token";
+		URL url = new URL(kakaoURL);
+
+		HttpURLConnection con = (HttpURLConnection) url.openConnection();
+
+		con.setRequestMethod("POST"); // post 요청을위해 true/ 데이터를 넘겨주겠다는 뜻
+		con.setDoOutput(true);
+
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(con.getOutputStream()));
+
+		StringBuilder sb = new StringBuilder();
+		sb.append("grant_type=authorization_code"); // 스크립트 키
+		sb.append("&client_id=35aa1216a2a526e324dd20cbbf64bc06");
+		sb.append("&redirect_uri=http://localhost:8080/kakaologin.do");
+		sb.append("&code=" + token);
+
+		bw.write(sb.toString());// 출력
+		bw.flush();// 버퍼 비움
+		int responsecode = con.getResponseCode();
+		System.out.println("responsecode :" + responsecode);
+
+		// 요청 통해 응답으로온 JSON 타입 메세지
+		BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream()));
+		String line = "";
+		String result = "";
+
+		while ((line = br.readLine()) != null) {
+
+			result += line;
+		}
+		System.out.println("responseBody : " + result);
+
+		// 파싱 하는곳 Gson 주입
 		JsonParser parser = new JsonParser();
-		JsonElement element = parser.parse(response.body());
+		JsonElement element = parser.parse(result);
 		System.out.println("파싱 뽑은거 : " + element);
 
 		String access_token = element.getAsJsonObject().get("access_token").getAsString();
 		String refresh_token = element.getAsJsonObject().get("refresh_token").getAsString();
-		System.out.println("accsess 토큰" + access_token);
-		System.out.println("refresh 토큰" + refresh_token);
+		System.out.println("엑세스토큰 : " + access_token);
+		System.out.println("리프레시토큰 : " + refresh_token);
 
-		return "/dealingmain";
+		br.close();
+		bw.close();
+
+//			==========유저 정보 =================
+		String userInfo = "https://kapi.kakao.com/v2/user/me";
+		Map<String, Object> user = new HashMap<>();
+//			=========================================
+//			/* 2번째방법 Jsoup "url" 주소 HTMl 을 파싱해옴 */
+//			==========================================
+		Response response = Jsoup.connect(userInfo).method(Method.GET)
+				.header("Authorization", " Bearer " + access_token).ignoreHttpErrors(true).ignoreContentType(true)
+				.execute();
+		System.out.println(response.body());
+//			==========================================
+//			파싱 하는곳  Gson, json-simple 주입
+		JsonParser parser1 = new JsonParser();
+		JsonElement element1 = parser.parse(response.body());
+		System.out.println("유저 파싱 뽑은거 : " + element1);
+		JsonObject properties = element1.getAsJsonObject().get("properties").getAsJsonObject();
+		JsonObject kakao_account = element1.getAsJsonObject().get("kakao_account").getAsJsonObject();
+		String id = element1.getAsJsonObject().get("id").getAsString();
+		System.out.println("유저 ID : " + id);
+		System.out.println("유저 properties :" + properties);
+		System.out.println("유저 kakao_account :" + kakao_account);
+
+		String nickname = properties.getAsJsonObject().get("nickname").getAsString();
+//		String email = kakao_account.getAsJsonObject().get("email").getAsString();
+		String Id = element1.getAsJsonObject().get("id").getAsString();
+		System.out.println("ID :" + Id);
+		System.out.println("nickname : " + nickname);
+//		System.out.println("email : " + Id);
+		user.put("user_Id", Id);
+		user.put("user_Level", 4);
+		user.put("user_Name", nickname);
+//			카카오 테이블에 정보 추가 
+		int info = 0;
+		info = dealingService.kakaologin(user);
+
+		kakaoLoginVO = dealingService.kakaoresult(user);
+//		String user_Name = email;
+		if (kakaoLoginVO != null) {
+			HttpSession session = request.getSession();
+			session.setAttribute("member", kakaoLoginVO);
+			session.setAttribute("isLogOn", true);
+			return ("redirect:/dealingmain.do");
+		}
+		rAttr.addAttribute("result", "loginFailed");
+		return ("redirect:/login.do");
 
 	}
-
 //	로그인 확인
 
 	@RequestMapping(value = "/logincheck.do", method = RequestMethod.POST)
