@@ -48,6 +48,11 @@ public class ProductServiceImpl implements ProductService {
 		return productDAO.productnum(product_Num);
 	}
 
+//	상품 조회수 올리기
+	public void viewCount(int product_Nums) throws Exception {
+		productDAO.viewCount(product_Nums);
+	}
+
 //	장바구니
 	@Override
 	public int cart(Map<String, Object> body) throws DataAccessException {

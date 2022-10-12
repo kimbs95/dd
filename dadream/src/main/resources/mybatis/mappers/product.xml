@@ -42,12 +42,18 @@
 	</select>
 	
 	
-	<select id="productinfo" resultType="productVO"
-		parameterType="int">
+	<select id="productinfo" resultType="productVO" parameterType="int">
 	<![CDATA[
 		select * from product_t where product_Num = #{product_Nums}
 	]]>
 	</select>
+	
+	<update id="viewCount" parameterType="int">
+		update product_t
+		set
+		product_Views = product_Views+1
+		where product_Num = #{product_Nums}
+	</update>
 	
 
 

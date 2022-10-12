@@ -12,9 +12,6 @@
             display: flex;
             align-items: center;
             justify-content: space-around;
-            width:1960px
-            
-            
 
         }
         .footer > div {
@@ -29,12 +26,18 @@
             font-weight: bold;
             margin-top: 20px;
         }
+        .footer_content span{
+	display:inline-block;
+	width:219px;
+}
         .footerinfo {
             /* margin: 20px 30px; */
             width:550px;
             font-weight: bold;
+            margin-left: 300px;
             
         }
-        .footerinfo span{
-			width:550px
+        .footerinfo > span{
+	display:inline-block;
+			width:600px;
 }

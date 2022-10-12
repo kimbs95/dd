@@ -63,50 +63,102 @@
 		}
 	}
 </script>
+
+<style>
+	#container{
+		margin-top: 30px;
+	}
+	#viewboardform {
+		display: table-caption;
+	}
+	#viewboardform > div {
+		margin-bottom: 8px;
+	}
+
+	#content{
+		display: grid;
+	}
+	#inputNumber{
+		width:40px; 
+		text-align: center; 
+		border: 0.5px;
+	}
+	#Number{
+		display: grid;
+	}
+	#writerName{
+		display: inline-grid;
+	}
+	#readbtn{
+		display: grid;
+	}
+	.mod_btn{
+		text-decoration: none;
+		color: black;	
+	}
+	#delete{
+		cursor: pointer;
+	}
+	#backList{
+		cursor: pointer;
+	}
+	#updatebtn{
+		cursor: pointer;
+	}
+	#viewCount{
+		width: 35px;
+		text-align: center;
+		margin-bottom: 8px;
+	}
+</style>
 </head>
 <body>
 	<section id="container">
-	<form  name="readForm" method="post" action="${contextPath}/viewArticle.do" enctype="multipart/form-data">
+	<form  id="readForm" method="post" action="${contextPath}/viewArticle.do" enctype="multipart/form-data">
 		<input type="hidden" name="inte_Num" value="${boardContents.inte_Num }" />
-		<table border=0 align="center" id="readForm">
-			<tr>
-				<td width=150 align="center" bgcolor="pink">글번호</td>
-				<td> 
-					<input type="text" value="${boardContents.inte_Num }" disabled />
-					
-				</td>
-			</tr>
-			<tr>
-				<td width="150" align="center" bgcolor="pink">
-				작성자
-				</td>
+			<div id="viewboardform">
+
+				<div id="Number">
+				<td align="right" bgcolor="pink">글번호&nbsp;&nbsp;</td>
+					<input type="text" id="inputNumber" value="${boardContents.inte_Num }" disabled />	
+				
+			</div>
+
+			<div id="writerName">
+				<td align="center" bgcolor="pink">작성자</td>
 				<td>
 					<input type="text" value="${boardContents.user_Id }" name="user_Id" disabled />
 				</td>
-			</tr>
-			<tr>
-				<td width="150" align="center" bgcolor="pink">
-					제목
-				</td>
+			</div>
+
+			<div >
+				<td align="right" bgcolor="pink">제목&nbsp;&nbsp; </td>
+				<td colspan="2">
+					<input type="text" size="63" maxlength="100" value="${boardContents.inte_Title }" name="inte_Title" disabled /></td>
+			</div>
+
+			<div >
+					<div>
+						<td align="rigth" valign="top">내용&nbsp;&nbsp; </td>
+					<td><textarea rows="20" cols="65" value="${boardContents.inte_Text}" name="inte_Text" disabled>${boardContents.inte_Text } </textarea>
+					</td>
+					</div>
+			</div>
+			
+			<div>
+				<td>조회수</td>
 				<td>
-					<input type="text" value="${boardContents.inte_Title }" name="inte_Title" disabled /></td>
-			</tr>
-			<tr>
-				<td width="150" align="center" bgcolor="pink">
-					내용
+					<input id="viewCount" type="text" value="${boardContents.viewCounts }" name="viewCounts" disabled />
 				</td>
-				<td>
-					<textarea rows="20" cols="60" value="${boardContents.inte_Text}" name="inte_Text" disabled>${boardContents.inte_Text } </textarea>
-				</td>
-			</tr>
-			<tr>
-				<td width="150" align="center" bgcolor="pink">
-					조회수
-				</td>
-				<td>
-					<input type="text" value="${boardContents.viewCounts }" name="viewCounts" disabled /></td>
-			</tr>
-			<!-- <c:if test="${not empty imageFileList && imageFileList != 'null' }">
+			</div>
+			<div class="inteImg">
+			<div class="inteMain">
+                    <img src="/board/${boardContents.user_Id}/${boardContents.inte_Image}">
+			</div>
+		</div>
+			<!---------------------------------------------------------------------------------------------------------------->
+			<!-- <div id="insertImage">
+			<c:if test="${not empty imageFileList && imageFileList != 'null' }">
 				<c:forEach var="item" items="${imageFileList }" varStatus="status">
 					<tr>
 						<td width="150" align="center" bgcolor="pink" rowspan="2">
@@ -159,31 +211,28 @@
 						</td>
 					</tr>
 				</c:otherwise>
-			</c:choose>  -->
-			
-			<tr>
+			</c:choose> 
+		</div> -->
+			<div id="regDate">
 				<td width="150" align="center" bgcolor="pink">
 					등록일자
 				</td>
+			</div>
 				<td>
 					<input type="text" value="<fmt:formatDate value='${boardContents.inte_Date}'/>" disabled />
 				</td>
-			</tr>
-		</table>
-			<div>
-				<!-- <button type="submit" class="update_btn">수정</button> -->
-				
-				
-				<a href="/board/update?inte_Num=${boardContents.inte_Num}" class="mod_btn" style="text-decoration: none;">수정</a>
+
+			<div id="readbtn">				
+				<button id="updatebtn"><a href="/board/update?inte_Num=${boardContents.inte_Num}" class="mod_btn">수정</a></button>
 				<!-- <button type="submit" class="delete_btn">삭제</button> -->
 				<!-- <a href="javascript:void(0);" class="btn btn-danger" onclick="deleteConfirm();">삭제</a> -->
-				<input type="button" value="삭제하기" onClick="fn_remove_article('${contextPath}/board/removeArticle.do','${boardContents.inte_Num}')">
+				<input id="delete"type="button" value="삭제하기" onClick="fn_remove_article('${contextPath}/board/removeArticle.do','${boardContents.inte_Num}')">
 				<!-- <button type="submit" class="list_btn">목록</button> -->
 				
-				<input type="button"  value="목록으로 이동"onClick="backToList(this.form)">
+				<input id="backList" type="button"  value="목록으로 이동"onClick="backToList(this.form)">
 			</div>
 		</section>
-		
+	</div>
 	</form>
 	
 </body>

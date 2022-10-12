@@ -15,7 +15,8 @@
 	font-weight: bold;
 }
 .userformbtn{
-	display: flex;
+	display: table-caption;
+	width:570px;
 }
 .userformbtn >input{
 	margin-right: 10px;

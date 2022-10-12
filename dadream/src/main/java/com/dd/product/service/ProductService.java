@@ -16,6 +16,9 @@ public interface ProductService {
 //	상품번호로 상품찾기
 	public ProductVO productinfo(int product_Nums) throws Exception;
 
+//	상품 조회수 올리기
+	public void viewCount(int product_Nums) throws Exception;
+
 //	 상품번호 
 	public int productNum(String product_Num) throws DataAccessException;
 

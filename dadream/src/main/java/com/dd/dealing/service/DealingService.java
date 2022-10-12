@@ -23,6 +23,9 @@ public interface DealingService {
 //	로그인체크
 	public MemberVO login(MemberVO memberVO) throws Exception;
 
+//회원탈퇴
+	public void removeMem(String user_Id) throws Exception;
+
 //	카카오 로그인 
 	public int kakaologin(Map<String, Object> user) throws Exception;
 
@@ -39,6 +42,9 @@ public interface DealingService {
 
 //	매물 전부검색
 	public List<DealingVO> allListdealing() throws DataAccessException;
+
+//	매물 조회수
+	public void viewCount(int dl_Num) throws DataAccessException;
 
 	// 매물등록
 	public int addNewdealing(Map<String, Object> dealingMap) throws DataAccessException;

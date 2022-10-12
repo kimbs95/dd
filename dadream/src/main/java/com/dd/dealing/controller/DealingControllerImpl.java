@@ -123,6 +123,22 @@ public class DealingControllerImpl {
 		return viewName;
 	}
 
+	/* 회원탈퇴 */
+	@RequestMapping(value = "/removeMember.do", method = RequestMethod.POST)
+	private ModelAndView removeMem(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		HttpSession session = request.getSession();
+		MemberVO member = (MemberVO) session.getAttribute("member");
+		String user_Id = member.getUser_Id();
+		System.out.println("삭제할 유저아이디 : " + user_Id);
+		ModelAndView mav = new ModelAndView();
+		dealingService.removeMem(user_Id);
+		session.removeAttribute("member");
+		session.removeAttribute("isLogOn");
+		mav.setViewName("redirect:/dealingmain.do");
+
+		return mav;
+	}
+
 	/* 로그인 */
 	@RequestMapping(value = "/login.do", method = RequestMethod.GET)
 	private String login(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -328,6 +344,7 @@ public class DealingControllerImpl {
 		System.out.println("이미지 파일 이름 : " + imageFileName);
 		dealingMap.put("user_Id", user_Id);
 		dealingMap.put("dl_Image", imageFileName);
+		dealingMap.put("dl_Views", 1);
 		String message;
 		ResponseEntity resEnt = null;
 		HttpHeaders responseHeaders = new HttpHeaders();
@@ -394,6 +411,7 @@ public class DealingControllerImpl {
 		int dl_Num = Integer.parseInt(dl_Num1);
 		String viewName = (String) request.getAttribute("viewName");
 		System.out.println("dl_Num : " + dl_Num);
+		dealingService.viewCount(dl_Num);
 		ModelAndView mav = new ModelAndView();
 		DealingVO DealingContents = dealingService.getDealingContents(dl_Num);
 		mav.addObject("DealingContents", DealingContents);

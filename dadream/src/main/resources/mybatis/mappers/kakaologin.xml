@@ -9,6 +9,7 @@
 		<result property="user_Id" column="user_Id" />
 		<result property="user_Name" column="user_Name" />
 		<result property="kakao_Count" column="kakao_Count" />
+		<result property="user_Sign" column="user_Sign" />
 		<result property ="user_Level" column="user_Level" />
 	</resultMap>
 
@@ -21,8 +22,8 @@
 
 	<insert id="kakaologin" parameterType="kakaoLoginVO">
 		<![CDATA[
-		 insert into kakao_t(user_Id , user_Name, kakao_Count ,user_Level)
-		 select #{user_Id},#{user_Name},#{kakao_Count},#{user_Level} from dual 
+		 insert into kakao_t(user_Id , user_Name, kakao_Count ,user_Sign,user_Level)
+		 select #{user_Id},#{user_Name},#{kakao_Count},#{user_Sign},#{user_Level} from dual 
 		 where not exists (select user_Id from kakao_t where user_Id = #{user_Id} and user_Name =#{user_Name})
 		]]>
 	</insert>

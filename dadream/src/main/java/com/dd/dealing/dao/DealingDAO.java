@@ -24,6 +24,9 @@ public interface DealingDAO {
 
 	public int insertReport(Map rpMap) throws DataAccessException;
 
+	/* 회원탈퇴 */
+	public void removeMem(String user_Id) throws Exception;
+
 //	카카오 로그인 
 	public int kakaologin(Map<String, Object> user) throws Exception;
 
@@ -62,6 +65,9 @@ public interface DealingDAO {
 
 	// 상세보기
 	public BoardVO getBoardContents(int inte_Num) throws Exception;
+
+//	매물 조회수
+	public void viewCount(int dl_Num) throws DataAccessException;
 
 	public void updateBoard(BoardVO boardVO) throws Exception;
 

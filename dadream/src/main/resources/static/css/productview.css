@@ -203,7 +203,9 @@
             width: 170px;
             height: 26.23px;
         }
-   
+   		.img-fluid{
+	height:400px;
+}
 
         .ot_1 option {
             width: 170px;

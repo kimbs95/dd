@@ -28,19 +28,19 @@
         ul{display: inline-block;
             list-style-type: none;
             justify-content: center;
-            
-            
-            
         }
         li button{
             width: 100px;
-           border-top-right-radius: 5px;
-           border-top-left-radius: 5px;
-           border:0.5px solid skyblue;
-           color:rgb(128, 0, 255);
-            
-            
+           background-color: rgb(0, 0, 0);
+           color:white;
+           margin-right: 1px;
+           height:28px;
+           border-radius: 3px;
         }
+        
+        li button:hover{
+		cursor:pointer;
+}
         #search{
             text-align: center;
             justify-content: center;
@@ -58,6 +58,9 @@
             margin: 15px;
             
         }
+        #mainList{
+	width:1550px;
+}
         #main2{
             width: 1130px;
             /* margin: 15px; */
@@ -105,26 +108,50 @@
             border-collapse: collapse;
             display: table-cell;
         }
-        #main4{
+        #main4 ul{
             width: 1130;
             /* margin: 15px; */
             display: flex;
-            justify-content: center;
-            
         }
+        #main4 ul li{
+			/*border: 1px solid black;*/
+			width: 300px;
+			height:180px;
+			text-align: center;
+			line-height: 180px;
+			margin-right: 1px;
+		}
+		.a1{
+			background-color: rgb(210, 162, 233);
+		}
+		.a2{
+			background-color: rgb(149, 178, 240);
+		}
+		.a3{
+			background-color: rgb(178, 240, 149);
+		}
+		.a4{
+			background-color:rgb(236, 81, 75);
+		}
         #main4 > div{
             display: flex;
             width: 250px;
             height: 150px;
             border: 1px solid black;
             /* margin: 15px; */
-            justify-content: center;
-            
+		            
             
         }
-          a{
+        #main4 a{
+			margin: auto;
 			text-decoration: none;
+			color:black;
+			display:block;
+			font-weight: bold;
+			font-size: 18px;
+			
 		}
+         
 		h1{
 			font-size: larger;
 			font-weight: bolder;

@@ -3,6 +3,10 @@
             padding: 0px;
 
         }*/
+        .first{
+			font-weight:lighter;
+			font-family: 'Jua', sans-serif;
+		}
        
         .first>h1 {
             font-weight: bold;
@@ -89,6 +93,4 @@
 			font-weight: bold;
 			color:blue;
 		}
-		#id{
-			
-		}
+		

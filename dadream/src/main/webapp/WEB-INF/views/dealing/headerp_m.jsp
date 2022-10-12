@@ -19,6 +19,9 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
     <!-- css -->
     <link rel="stylesheet" href="/css/headerp_m.css">
+    <!--구글폰트-->
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -135,7 +138,7 @@
     
                                 <li>
                                     <div class="pmcurosr">
-                                    <h6>${member.user_Name}님</h6>
+                                    <h6>${member.user_Name} 님</h6>
                                     </div>
                                 </li>
                                 <a href="${contextPath}/logout.do">
@@ -193,15 +196,13 @@
                             <c:when test="${isLogOn == true  && member!= null}">
                                 <li>
                                     <form method="POST" action="/mypage.do">
-                                        <button style="background-color: white; cursor:pointer;border: none; font-weight: bold;font-size: 18px;padding: 0;">
-                                            마이페이지
-                                        </button>
+                                        <input id="mypage" type="submit" value="마이페이지" style="background: white; color: black;border: none; font-size: 18px; width: 120px; font-weight: bold;cursor: pointer;font-size: 20px;">
                                     </form>
                                 </li>
     
                                 <li>
                                     <div class="pmcurosr">
-                                    <h6>${member.user_Name}님</h6>
+                                    <h6>${member.user_Name} 님</h6>
                                     </div>
                                 </li>
                                 <a href="${contextPath}/logout.do">

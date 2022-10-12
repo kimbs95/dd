@@ -22,11 +22,10 @@
     <link rel="stylesheet" type="text/css" href="/css/main.css">
 
     <style>
-
         #main1 {
             background-image: url("../image/livingRoom.jpg");
             background-repeat: no-repeat;
-            background-size : cover;
+            background-size: cover;
             margin-bottom: 50px;
         }
 
@@ -69,7 +68,8 @@
         </ul>
         <div id="search">
             <form method="get" action="${contextPath}/map.do" id="mapForm">
-                <input class="dealingsearch" type="search" style="outline: none;" name="dl_Address" placeholder="검색어를 입력하세요." />
+                <input class="dealingsearch" type="search" style="outline: none;" name="dl_Address"
+                    placeholder="검색어를 입력하세요." />
                 <input type="submit" value="검색" style="font-weight:bold;"></form>
             </form>
         </div>
@@ -78,7 +78,7 @@
     <div id="main2">
         <form>
             <!-- 위치기반 API 추천매물 -->
-            <h1 style="font-weight:bold; font-size:x-large; margin-bottom: 40px;">현재위치 추천 매물</h1>
+            <h1 style="font-weight:bold; font-size:x-large; margin-bottom: 40px;">현위치 추천 매물</h1>
             <div id="mainList"></div>
         </form>
         <!-- 추천매물 리스트
@@ -98,41 +98,37 @@
 
     <!-- <div id="main3">
         <div id="avg-dong-price"> -->
-            <!-- OO동 평균월세 API 연동필요 -->
-        <!-- </div>
+    <!-- OO동 평균월세 API 연동필요 -->
+    <!-- </div>
         <div id="avg-dong-price1"> -->
-            <!-- OO동의 주변동 평균월세 API 연동필요 -->
-        <!-- </div>
+    <!-- OO동의 주변동 평균월세 API 연동필요 -->
+    <!-- </div>
     </div> -->
 
-    <h1 style="font-size: larger; font-weight: bolder; margin: revert; margin-left: 45%;">부동산 가이드</h1>
+    <h1 style="font-size: 30px; font-weight: bolder;margin: 30px 0 40px 45%; ">부동산 가이드</h1>
     <div id="main4">
-        <div id="guide1" style="background: red;">
-            <a href="https://post.naver.com/viewer/postView.nhn?volumeNo=27011368&memberNo=2120568"
-                style="margin: auto;">
-                <p>허위매물방지 5계명</p>
-            </a>
-        </div>
-        <div id="guide2" style="background: white;">
-            <a href="https://post.naver.com/viewer/postView.nhn?volumeNo=25802095&memberNo=2120568" style="margin: auto;">
-                <p>나에게 꼭 맞는<br> 방 찾는 방법!!</p>
-            </a>
-        </div>
-        <div id="guide3" style="background: pink;">
-            <a href="#" style="margin: auto;">
-                <p>잘나가는 방<br> 올리는 방법!!</p>
-            </a>
-        </div>
-        <div id="guide4" style="background: yellowgreen;">
-            <a href="https://post.naver.com/viewer/postView.nhn?volumeNo=26067452&memberNo=2120568" style="margin: auto;">
-                <p>알아두면 좋은<br> 부동산 용어!!</p>
-            </a>
-        </div>
-        <div id="guide5" style="background: grey;">
-            <a href="https://post.naver.com/viewer/postView.nhn?volumeNo=26596142&memberNo=2120568" style="margin: auto;">
-                <p>임대차 계약서 <br>작성 시 <br>꼭 알아두세요!!</p>
-            </a>
-        </div>
+        <ul>
+            <li class="a1">
+                <a href="https://post.naver.com/viewer/postView.nhn?volumeNo=27011368&memberNo=2120568">
+                    <p>허위매물방지 5계명</p>
+                </a>
+            </li>
+            <li class="a2">
+                <a href="https://post.naver.com/viewer/postView.nhn?volumeNo=25802095&memberNo=2120568">
+                    <p>나에게 꼭 맞는 방 찾는 방법!!</p>
+                </a>
+            </li>
+            <li class="a3">
+                <a href="https://post.naver.com/viewer/postView.nhn?volumeNo=26067452&memberNo=2120568">
+                    <p>알아두면 좋은 부동산 용어!!</p>
+                </a>
+            </li>
+            <li class="a4">
+                <a href="https://post.naver.com/viewer/postView.nhn?volumeNo=26596142&memberNo=2120568">
+                    <p>임대차 계약서 작성 시!!</p>
+                </a>
+            </li>
+        </ul>
     </div>
     <script>
         $(document).ready(function () {
@@ -163,15 +159,20 @@
 
                             $.each(hereList, function (index, item) {
                                 mainList +=
+                                
                                     '<div style="display: inline-block; border: 1px solid #ccc; margin-bottom: 20px; margin-left: 30px; width:350px; height:470px;">';
                                 mainList += '<div style="text-align:center;">' +
-                                    '<img src="/dealing/'+item.user_Id+'/'+item.dl_Image+'" alt="" width="300px" height="250px" style="margin-bottom: 20px;">' +
+                                    '<img src="/dealing/' + item.user_Id + '/' +
+                                    item.dl_Image +
+                                    '" alt="" width="300px" height="250px" style="margin: 20px 0 30px 0;border:0.5px solid #ccc">' +
                                     '</div>';
-                                mainList += '<div style="text-align:center;">'+ '<h1 style="margin-left:10px; font-size:large; text-align:center;">' + item.dl_Title + '<br><br>' + item
-                                    .dl_Form +
-                                    '<br><br></h1>' + item.dl_Form2 + '<br>' +
-                                    item.dl_Price + '</div>' + '</div>';
+                                mainList += '<div style="text-align:center;">' +
+                                    '<h1 style="margin-left:10px; font-size:18px; text-align:center;">' +
+                                    item.dl_Title  +'<br ><br>'+ item.dl_Form +' '+
+                                      item.dl_Form2  +'<br><br>'+ item.dl_Price + ' <span > 원</span></h1></div>' + '</div>';
+
                             });
+
 
 
 

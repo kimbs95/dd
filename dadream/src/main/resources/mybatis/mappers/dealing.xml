@@ -8,6 +8,7 @@
 	<resultMap id="dealResult" type="dealingVO">
 		<result property="dl_Num" column="dl_Num" />
 		<result property="dl_Title" column="dl_Title" />
+		<result property="dl_Views" column="dl_Views" />
 		<result property="user_Id" column="user_Id" />
 		<result property="dl_City" column="dl_City" />
 		<result property="dl_Address" column="dl_Address" />
@@ -31,8 +32,8 @@
 	<!-- 매물등록 --> 
 	  <insert id="addNewdealing"  parameterType="java.util.Map">
 		<![CDATA[
-		 insert into dealing_t(dl_Num,dl_Title,user_Id,dl_City,dl_Address,dl_Option,dl_Form,dl_Form2,dl_Room,dl_Size,dl_Content,dl_Price,dl_Image, dl_Lat, dl_Lng)
-		 values(#{dl_Num},#{dl_Title},#{user_Id},#{dl_City},#{dl_Address},#{dl_Option},#{dl_Form},#{dl_Form2},#{dl_Room},#{dl_Size},#{dl_Content},#{dl_Price},#{dl_Image}, #{dl_Lat}, #{dl_Lng})
+		 insert into dealing_t(dl_Num,dl_Title,dl_Views,user_Id,dl_City,dl_Address,dl_Option,dl_Form,dl_Form2,dl_Room,dl_Size,dl_Content,dl_Price,dl_Image, dl_Lat, dl_Lng)
+		 values(#{dl_Num},#{dl_Title},#{dl_Views},#{user_Id},#{dl_City},#{dl_Address},#{dl_Option},#{dl_Form},#{dl_Form2},#{dl_Room},#{dl_Size},#{dl_Content},#{dl_Price},#{dl_Image}, #{dl_Lat}, #{dl_Lng})
 		]]>
 	</insert>
 	
@@ -51,7 +52,11 @@
 			WHERE dl_Num = #{dl_Num}
 	</select>
 
-
+	<update id ="viewCount" parameterType="int">
+		update dealing_t
+		set dl_Views =dl_Views +1
+		where dl_Num =#{dl_Num}
+	</update>
 
 
 	

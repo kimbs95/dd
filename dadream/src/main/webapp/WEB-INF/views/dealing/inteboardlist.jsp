@@ -21,14 +21,17 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!--구글폰트-->
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
   <style>
 	*{
 		
 		margin: 0 auto;
-		
+		font-weight:lighter;
+		font-family: 'Jua', sans-serif;
+
 	}
 	
 	th{
@@ -38,7 +41,7 @@
      	border-bottom: solid 1px #d2d2d2;
      	text-align: center;
       	line-height: 18px;
-		  font-family: 'Jua', sans-serif;
+		
 
 	}
 	td {
@@ -63,6 +66,9 @@
 		width: 960px;
 		height: auto;
 	}
+	#table_id_wrapper{
+		font-family: 'Jua', sans-serif;
+	}
   </style>
 </head>
 <script
@@ -86,6 +92,7 @@
 			alert("로그인 후 글쓰기가 가능합니다.")
 			location.href=login + '?action=/login.do';
 		}
+		
 	}
 	$(document).ready(function(){
 		var msg = "${msg}";
@@ -114,12 +121,12 @@
 		
 		
     });
-	var table = $('#table_id').DataTable();
-	if(! table.data().count()){
-		alert('글이 없습니다. 새로운 글을 작성해주세요.');
-	}else{
-		return false;
-	}
+	// let table = $('#table_id').DataTable();
+	// if(! table.data().count()){
+	// 	alert('글이 없습니다. 새로운 글을 작성해주세요.');
+	// }else{
+	// 	return false;
+	// }
 } );
  
 
@@ -128,6 +135,7 @@
 <body>
 	
 	<form action="${contextPath}/inteboardlist.do" method="get" id="listForm">
+		
 	<table id="table_id" style="text-align: center;" border="0" width="960px" cellspacing="0">
 		<thead>
 		<tr height="20" bgcolor="pink" style="text-align:center;" >
@@ -194,6 +202,7 @@
 	
 
 	<br><br>
+	
 	<button type="button" class="write_btn"><a class="write-btn" href="javascript:fn_addboard('${isLogOn }','${contextPath }/inteboardform.do', '${contextPath }/login.do')"  style="text-decoration: none;">글 작성</a></button>
 	
 	<!-- <div class="card-header py-3">

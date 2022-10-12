@@ -16,7 +16,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>게시판 글쓰기</title>
 	<link rel="stylesheet" href="/css/addboard.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="http://code.jquery.com/jquery-latest.js"></script>
+
+	<!--구글폰트-->
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+
+    <!-- 부트스트랩 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+	
 	<script type="text/javascript">
 	
  	 function readURL(input) {
@@ -64,40 +72,85 @@ return false;
 }
  
 	</script>
+	<style>
+		#addboardform > div {
+			margin-bottom: 8px;
+			font-weight:lighter;
+			font-family: 'Jua', sans-serif;
+			display:table-caption;
+		}
+	</style>
 	
 </head>
 <body>
     <form action="${contextPath}/addinteboard.do" method="post" enctype="multipart/form-data"  onsubmit="return _onSubmit();">
-		<table border="0" align="center">
-			<tr>
-				<td align="right">작성자: </td>
-				<td colspan="2" align="left"><input type="text" size="20" maxlength="100" value="${member.user_Id }" name="user_Id" readonly /></td>
-			</tr>
-			<tr>
-				<td align="right">제목: </td>
-				<td colspan="2"><input type="text" size="67" maxlength="500" name="inte_Title" id="inte_Title" /></td>
-			</tr>
-			<tr>
-				<td align="right" valign="top"><br>내용: </td>
-				<td colspan="2"><textarea rows="10" cols="65" maxlength="4000" name="inte_Text" id="inte_Text"></textarea>
+		<div id="addboardform">
+			<div style="display: inherit;">
+				<td align="right">작성자:&nbsp;&nbsp; </td>
+				<input type="text" size="20" maxlength="100" value="${member.user_Id }" name="user_Id" readonly disabled />
+			</div>
+				
+			
+			
+			<div>
+				<td align="right">제목:&nbsp;&nbsp; </td>
+				<td colspan="2"><input type="text" size="63" maxlength="100" name="inte_Title" id="inte_Title" /></td>
+			
+			</div>
+				
+			
+			<div>
+				<td align="right" valign="top">내용:&nbsp;&nbsp; </td>
+				<td colspan="2"><textarea rows="10" cols="65" maxlength="5000" name="inte_Text" id="inte_Text"></textarea>
 				</td>
-			</tr>
-			<tr>
-				<td align="right">파일첨부: </td>
-				<td colspan="2"><input type="button" value="파일 추가" onClick="fn_addFile()"  name="inte_Image"/> </td>
-				<td><div id="d_file"></div></td>
-				<td><img id="preview" scr="#" width=200 height=200 aria-placeholder="미리보기"/></td>
-			</tr>
-			<tr>
-                <tr>
+			</div>	
+				
+			
+			<div style="display: inline-grid;">
+				<td>
+					<div class="inteImg">
+						<div class="inteMain">
+							<label for="inteboard_Image" style="margin-bottom: 5px;">
+								<p style="font-weight: bold;">대표이미지를 선택해주세요.</p></label><br>
+							<img id="preview" src="" width=250 height=250 />
+							<input type="file" id="inteboard_Image" name="inte_Image" accept="image/*" multiple>
+							<h1 class="imgh2"></h1>
+						</div>
+					</div>
+				</td>
+				
+			
+                
                     <td align="right"></td>
                     <td colspan="2">
                         <input type="submit" value="등록하기" />
 						<input type="button" value="목록보기" onClick="backToList(this.form)"/>
                         </td>
-                    </tr>
-                </tr>
-            </table>
+                	</div>	
+				</div>	
+			
         </form>
+		<script>
+			// 썸네일 코드 
+			document.addEventListener('DOMContentLoaded', () => {
+				document.querySelector("#inteboard_Image").addEventListener("change", async e => {
+					const preview = document.querySelector("#preview");
+					document.querySelector(".imgh2").innerHTML = "!!";
+					let reader = new FileReader();
+					reader.onloadend = finished => {
+						preview.setAttribute('src', finished.target.result);
+						console.log(finished.target.result);
+					}
+					reader.readAsDataURL(e.target.files.item(0));
+				})
+	
+				// // 등록 버튼 누를시 
+				// document.querySelector("#productsubmit").addEventListener("click", async () => {
+	
+	
+	
+				// })
+			});
+		</script>
 </body>
 </html>

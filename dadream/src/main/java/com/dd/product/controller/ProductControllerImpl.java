@@ -109,6 +109,7 @@ public class ProductControllerImpl implements ProductController {
 		String user_Id = memberVO.getUser_Id();
 		System.out.println("이미지 파일 이름 : " + imageFileName);
 		productMap.put("user_Id", user_Id);
+		productMap.put("product_Views", 1);
 		productMap.put("product_Image", imageFileName);
 		String message;
 		ResponseEntity resEnt = null;
@@ -175,8 +176,8 @@ public class ProductControllerImpl implements ProductController {
 		System.out.println("interceptor에서 온 viewName:" + viewName);
 		String product_Num = (String) request.getParameter("product_Num");
 		int product_Nums = Integer.parseInt(product_Num);
-		System.out.println("product_Num :" + product_Num);
-
+		System.out.println("product_Nums :" + product_Nums);
+		productService.viewCount(product_Nums);// 조회수
 		ProductVO result = productService.productinfo(product_Nums);
 		model.addAttribute("product_Num", product_Num);
 		model.addAttribute("result", result);

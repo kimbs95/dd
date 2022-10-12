@@ -10,8 +10,15 @@
             margin-bottom: 20px;
             display: flex;
             background: rgb(238, 232, 232);
+            font-weight:lighter;
+			font-family: 'Jua', sans-serif;
+			font-size: larger;
             
         }
+        #mypage{
+	font-family: 'Jua', sans-serif;
+			padding:0;
+}
 
           .maintab a{
             width: 100%;
@@ -22,7 +29,7 @@
         .maintab a li {
             padding: 20px 20px;
             cursor: pointer;
-            font-size: 20px;
+            font-size: 40px;
             font-weight: bold;
             width: 100%;
             text-align: center;
@@ -60,13 +67,14 @@
             display: flex;
             align-items: center;
             justify-content: space-around;
-            height:52.5px
+            height:52.5px;
+            margin-bottom: 25px;
+            font-family: 'Jua', sans-serif;
         }
 
         header .Main_Logo {
             width: 220px;
             height: 50px;
-            margin-left: 280px;
         }
 
         .headerleft {
@@ -97,21 +105,23 @@
             width: 400px;
             height: 40px;
         }*/
+        
+
 
         .headerul ul {
             /*margin-top: 2%;*/
             font-size: 18px;
             /*margin-left: 100px;*/
-           	width: 860px;
             height: 22.5px;
-            margin-right: 113px;
+            width:770px;
             line-height: normal;
         }
 
         .headerul ul li {
             display: inline-flex;
             font-weight: bold;
-            margin-right: 50px;
+            margin-left: 20px;
+            font-size: 20px;
         }
 
         .headerul ul a {

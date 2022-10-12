@@ -37,6 +37,12 @@ public class DealingServiceImpl implements DealingService {
 		return result;
 	}
 
+	/* 회원탈퇴 */
+	@Override
+	public void removeMem(String user_Id) throws Exception {
+		dealingDAO.removeMem(user_Id);
+	}
+
 //	로그인확인
 	@Override
 	public MemberVO login(MemberVO memberVO) throws Exception {
@@ -57,6 +63,11 @@ public class DealingServiceImpl implements DealingService {
 	@Override
 	public int addNewdealing(Map<String, Object> dealingMap) throws DataAccessException {
 		return dealingDAO.addNewdealing(dealingMap);
+	}
+
+//	매물 조회수
+	public void viewCount(int dl_Num) throws DataAccessException {
+		dealingDAO.viewCount(dl_Num);
 	}
 
 //	매물 전부 리스트 검색

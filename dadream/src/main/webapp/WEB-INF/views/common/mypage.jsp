@@ -157,8 +157,9 @@
                     </table>
                 </div>
                 <br><br><br>
-                <input type="submit" value="회원탈퇴" style="width: 150px; height: 30px; font-weight: bolder; color: red;"
-                    onclick="">
+                <form method="post" action="${contextPath}/removeMember.do">
+                    <input type="submit" value="회원탈퇴" style="width: 150px; height: 30px; font-weight: bolder; color: red;">
+                    </form>
             </div>
 
         </div>

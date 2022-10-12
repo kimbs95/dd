@@ -31,13 +31,20 @@
     <script src="/js/summernote/summernote-lite.js"></script>
     <script src="/js/summernote/lang/summernote-ko-KR.js"></script>
     <link rel="stylesheet" href="/css/summernote/summernote-lite.css">
+    <!--구글 폰트-->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
 
     <style>
         .dropdown-toggle::after {
             display: none;
         }
-    </style>
 
+        .first {
+            font-weight: 50;
+            font-family: 'Jua', sans-serif;
+        }
+    </style>
 </head>
 
 <body>
@@ -45,7 +52,7 @@
     <!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
     <div class="first">
-        <h1 >매물등록</h1>
+        <h1>매물등록</h1>
 
         <form method="post" action="${contextPath}/addNewdealing.do" enctype="multipart/form-data">
             <div class="middle">
@@ -54,7 +61,8 @@
                 <div class="dlImg">
                     <div class="dlMain">
                         <label for="dealing_Image" style="margin-bottom: 5px;">
-                            <p style="font-weight: bold;">대표이미지를 선택해주세요.</p></label><br>
+                            <p style="font-weight: bold;">대표이미지를 선택해주세요.</p>
+                        </label><br>
                         <img id="preview" src="" width=500 height=500 />
                         <input type="file" id="dealing_Image" name="dl_Image" accept="image/*" multiple>
                         <h1 class="imgh1"></h1>
@@ -71,7 +79,8 @@
                     <br><br>
                     <h3>주소입력</h3>
                     <input type="text" id="sample5_address" name="dl_Address" placeholder="주소" size="38">
-                    <input type="button" onclick="sample5_execDaumPostcode()" value="주소 검색" style="height: 27px;"><br><br>
+                    <input type="button" onclick="sample5_execDaumPostcode()" value="주소 검색"
+                        style="height: 27px;"><br><br>
                     <div id="map" style="width:300px;height:300px;margin-top:10px;display:none"></div><br>
                     <!-- 우편api -->
                     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -103,33 +112,57 @@
                         });
                         // 지도에 마커를 표시합니다
                         marker.setMap(map);
-
                         // 지도에 클릭 이벤트를 등록합니다
                         // 지도를 클릭하면 마지막 파라미터로 넘어온 함수를 호출합니다
+                        //(function(){
                         kakao.maps.event.addListener(map, 'click', function (mouseEvent) {
+                            document.querySelector("#sample5_address").value = "";
+                            searchDetailAddrFromCoords(mouseEvent.latLng, function (result, status) {
+                                if (status === kakao.maps.services.Status.OK) {
+                                    // 클릭한 위도, 경도 정보를 가져옵니다 
+                                    var latlng = mouseEvent.latLng;
 
-                            // 클릭한 위도, 경도 정보를 가져옵니다 
-                            var latlng = mouseEvent.latLng;
+                                    // 마커 위치를 클릭한 위치로 옮깁니다
+                                    marker.setPosition(latlng);
 
-                            // 마커 위치를 클릭한 위치로 옮깁니다
-                            marker.setPosition(latlng);
+                                    var dl_Lat = latlng.getLat();
+                                    var dl_Lng = latlng.getLng();
+                                    //console.log(dl_Lat);
+                                    //console.log(dl_Lng);
 
-                            var dl_Lat = latlng.getLat();
-                            var dl_Lng = latlng.getLng();
-                            console.log(dl_Lat);
-                            console.log(dl_Lng);
-                            // var message = '클릭한 위치의 위도는 ' + latlng.getLat() + ' 이고, ';
-                            // message += '경도는 ' + latlng.getLng() + ' 입니다';
+                                    console.log(result[0]);
+                                    /* if문 안먹음 */
+                                    if (!result[0].road_address) {
+                                        alert("정확한 위치를 찍어주세요 ");
+                                        return;
+                                    }
 
-                            // var resultDiv = document.getElementById('clickLatlng');
-                            // resultDiv.innerHTML = message;
+                                    var jibun_address = result[0].address.address_name; // 지번 주소
+                                    var road_address = result[0].road_address.address_name; //도로명 주소
 
-                            //인풋에 value 값 넣기
-                            document.querySelector("#dl_Lat").setAttribute('value', dl_Lat);
-                            document.querySelector("#dl_Lng").setAttribute('value', dl_Lng);
+                                    //마커찍으면 주소 변환
+                                    document.querySelector("#sample5_address").value = road_address;
 
+                                    console.log(road_address);
+                                    console.log(jibun_address);
+                                    // var message = '클릭한 위치의 위도는 ' + latlng.getLat() + ' 이고, ';
+                                    // message += '경도는 ' + latlng.getLng() + ' 입니다';
 
+                                    // var resultDiv = document.getElementById('clickLatlng');
+                                    // resultDiv.innerHTML = message;
+
+                                    //인풋에 value 값 넣기
+                                    document.querySelector("#dl_Lat").setAttribute('value', dl_Lat);
+                                    document.querySelector("#dl_Lng").setAttribute('value', dl_Lng);
+                                }
+                            });
                         });
+                        //})();
+                        function searchDetailAddrFromCoords(coords, callback) {
+                            // 좌표로 법정동 상세 주소 정보를 요청합니다
+                            geocoder.coord2Address(coords.getLng(), coords.getLat(), callback);
+                        }
+
 
                         function sample5_execDaumPostcode() {
                             new daum.Postcode({
@@ -249,20 +282,19 @@
 
 
     <script>
-       
-         (function(){
+        (function () {
 
-             
-             $("#summernote").summernote({
-                    height: 300, // 에디터 높이
-                    minHeight: 300, // 최소 높이
-                    maxHeight: null, // 최대 높이(null 제한없음)
-                    focus: false, // 에디터 로딩후 포커스를 맞출지 여부
-                    lang: "ko-KR", // 한글 설정
-                    toolbar: [
-                        ['fontname', ['fontname']], // 글꼴 설정
-                        ['fontsize', ['fontsize']], // 글자 크기 설정
-                        ['style', ['bold', 'italic', 'underline', 'strikethrough',
+
+            $("#summernote").summernote({
+                height: 300, // 에디터 높이
+                minHeight: 300, // 최소 높이
+                maxHeight: null, // 최대 높이(null 제한없음)
+                focus: false, // 에디터 로딩후 포커스를 맞출지 여부
+                lang: "ko-KR", // 한글 설정
+                toolbar: [
+                    ['fontname', ['fontname']], // 글꼴 설정
+                    ['fontsize', ['fontsize']], // 글자 크기 설정
+                    ['style', ['bold', 'italic', 'underline', 'strikethrough',
                         'clear'
                     ]], // 굵기, 기울임꼴, 밑줄,취소 선, 서식지우기
                     ['color', ['forecolor', 'color']], // 글자색
@@ -271,22 +303,20 @@
                     ['height', ['height']], // 줄간격
                     ['insert', ['picture', 'link', 'video']], // 그림첨부, 링크만들기, 동영상첨부
                     ['view', ['fullscreen', 'codeview', 'help']] // 코드보기, 확대해서보기, 도움말
-                    ],
-                    // 추가한 글꼴
-                    fontNames: ['Arial', 'Arial Black', '맑은 고딕', '궁서',
+                ],
+                // 추가한 글꼴
+                fontNames: ['Arial', 'Arial Black', '맑은 고딕', '궁서',
                     '굴림체', '굴림', '돋음체', '바탕체'
                 ],
-                    // 추가한 폰트사이즈
-                    fontSizes: ['8', '9', '10', '11', '12', '14', '16', '18', '20', '22', '24',
+                // 추가한 폰트사이즈
+                fontSizes: ['8', '9', '10', '11', '12', '14', '16', '18', '20', '22', '24',
                     '28', '30',
                     '36', '50', '72'
                 ]
-                });
-                
-                
-            })();
-          
-  
+            });
+
+
+        })();
     </script>
 </body>
 
