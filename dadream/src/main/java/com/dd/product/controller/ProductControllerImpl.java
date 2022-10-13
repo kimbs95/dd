@@ -59,7 +59,9 @@ public class ProductControllerImpl implements ProductController {
 		String viewName = (String) request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName(viewName);
+		List<ProductVO> product = productService.productView();
 		System.out.println("interceptor에서 온 viewName:" + viewName);
+		mav.addObject("product", product);
 		return mav;
 	}
 

@@ -151,28 +151,12 @@
     <!-- 메인 베스트상품 -->
     <div class="pro_best_item">
         <ul>
-            <li>
-                <img class="image" src="../image/메인로고.png">
-                <span>제목 / 가격</span>
-            </li>
-        </ul>
-        <ul>
-            <li>
-                <img class="image" src="../image/메인로고.png">
-                <span>제목 / 가격</span>
-            </li>
-        </ul>
-        <ul>
-            <li>
-                <img class="image" src="../image/메인로고.png">
-                <span>제목 / 가격</span>
-            </li>
-        </ul>
-        <ul>
-            <li>
-                <img class="image" src="../image/메인로고.png">
-                <span>제목 / 가격</span>
-            </li>
+            <c:forEach var="i" items="${product}">
+                <li>
+                    <img class="image" src="/product/${i.user_Id}/${i.product_Image}">
+                    <span>제목 / 가격</span>                    
+                </li>
+            </c:forEach>
         </ul>
     </div>
 

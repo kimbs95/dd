@@ -31,7 +31,13 @@
 		</collection>
 	</resultMap>
 
-
+	<select id="productView" resultMap="proResult">
+		<![CDATA[
+			select * from product_t  
+			order by product_Views  DESC
+			limit 4
+		]]>
+	</select>
 
 
 	<select id="selectAllProductsList" resultType="productVO"

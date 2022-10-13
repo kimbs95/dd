@@ -19,6 +19,12 @@ public class ProductServiceImpl implements ProductService {
 	@Autowired
 	private ProductDAO productDAO;
 
+//	메뉴 정보 보기
+	@Override
+	public List<ProductVO> productView() throws Exception {
+		return productDAO.productView();
+	}
+
 //상품등록
 	@Override
 	public int addProduct(Map<String, Object> productMap) throws DataAccessException {

@@ -128,6 +128,8 @@
                     <p>임대차 계약서 작성 시!!</p>
                 </a>
             </li>
+            
+            <!-- ' <form action="/dealingView.do?dl_Num='+item.dl_Num+'method="get" >' -->
         </ul>
     </div>
     <script>
@@ -159,17 +161,17 @@
 
                             $.each(hereList, function (index, item) {
                                 mainList +=
-                                
-                                    '<div style="display: inline-block; border: 1px solid #ccc; margin-bottom: 20px; margin-left: 30px; width:350px; height:470px;">';
+                                '<a href="/dealingview.do?dl_Num='+item.dl_Num+'" style="color:black">'+
+                                    '<div style="display: inline-block; border: 1px solid #ccc; margin-bottom: 20px; margin-left: 30px; width:350px; height:485px;">';
                                 mainList += '<div style="text-align:center;">' +
                                     '<img src="/dealing/' + item.user_Id + '/' +
                                     item.dl_Image +
-                                    '" alt="" width="300px" height="250px" style="margin: 20px 0 30px 0;border:0.5px solid #ccc">' +
+                                    '" alt="매물사진" width="300px" height="250px" style="margin: 20px 0 20px 0;border:0.5px solid #ccc">' +
                                     '</div>';
-                                mainList += '<div style="text-align:center;">' +
-                                    '<h1 style="margin-left:10px; font-size:18px; text-align:center;">' +
-                                    item.dl_Title  +'<br ><br>'+ item.dl_Form +' '+
-                                      item.dl_Form2  +'<br><br>'+ item.dl_Price + ' <span > 원</span></h1></div>' + '</div>';
+                                mainList += '<div style="margin-left:15px;">' +
+                                    '<span style="font-size:20px;font-weight:bold;margin-left:10px;">'+item.dl_Title+'</span>'+
+                                    '<h1>'+ item.dl_Form + '<br>'+item.dl_Address+'<br>'+
+                                      item.dl_Form2  +'<br>￦ '+ item.dl_Price + '<br>옵션 : '+item.dl_Option+'</h1></div>' + '</div></a>';
 
                             });
 

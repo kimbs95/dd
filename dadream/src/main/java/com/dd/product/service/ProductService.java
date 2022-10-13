@@ -9,6 +9,9 @@ import com.dd.product.vo.CartVO;
 import com.dd.product.vo.ProductVO;
 
 public interface ProductService {
+//	메뉴 정보 보기
+	public List<ProductVO> productView() throws Exception;
+
 	public int addProduct(Map<String, Object> productMap) throws DataAccessException;
 
 	public List<ProductVO> listProducts(String product_Name) throws Exception;

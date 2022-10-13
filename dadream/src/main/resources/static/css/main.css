@@ -73,10 +73,11 @@
 		cursor:pointer;
 		}
 		#main2 h1{
-			font-weight: bold;
-			font-size: x-large;
-			margin-bottom: 40px;
-			margin-left: 30px;
+			margin-top:15px;
+			font-weight: 600;
+			line-height: 25px;
+			margin-left: 10px;
+			font-size: 14px;
 		}
         
         #main3{

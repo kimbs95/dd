@@ -13,6 +13,8 @@ import com.dd.product.vo.ProductVO;
 @Mapper
 @Repository("productDAO")
 public interface ProductDAO {
+//	메뉴 정보 보기
+	public List<ProductVO> productView() throws Exception;
 
 //	상품등록
 	public int insertProduct(Map<String, Object> productMap) throws DataAccessException;

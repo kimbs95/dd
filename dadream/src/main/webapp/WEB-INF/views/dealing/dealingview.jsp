@@ -15,13 +15,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>부동산 매물보기</title>
-   
+
 
     <!--팝업창-->
     <script>
         function showPopup() {
             window.open("${contextPath}/call.do", "중개사번호", "width=400, height=500, top=200 left=600");
         }
+
         function showPopup2() {
             window.open("${contextPath}/rpPopUp.do", "신고하기", "width=500, height=600, top=200 left=600");
         }
@@ -31,15 +32,16 @@
     <!-- css -->
     <link rel="stylesheet" href="/css/dealingview.css">
 </head>
+
 <body>
     <!--부트스트랩-->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
     <div class="first">
-        <h1>매물정보</h1>
-        <br><br><br><br>
+        <h1 class="title">매물정보</h1>
+
         <div class="middle">
-            
+
             <!--이미지 div-->
             <div class="dlImg">
                 <div class="dlMain">
@@ -63,90 +65,58 @@
             </div>
 
             <!--상품 설명-->
-            
+
             <div class="dlComments">
 
                 <!-------------------------------건물명,주소------------------------------->
-                <div class="dlComments1" >
-                    <div style="display: contents;">
-                        <tr>
-                            <td>매물번호</td>
-                            <td>
-                                <input type="text" value="${DealingContents.dl_Num}" name="dl_Num" disabled style="text-align: center;">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>매물이름</td>
-                            <td>
-                                <input type="text" value="${DealingContents.dl_Title}" name="dl_Title" disabled style="text-align: center;">
-                            </td>
-                        </tr>
-                    </div>
-                    <br>
-                    <div style="display: contents;">
-                        <tr>
-                            <td>주소</td>
-                            <td>
-                                <input type="text" value="${DealingContents.dl_Address}" name="dl_Address" maxlength="50" style="width: 300px; height: 50px; text-align: center;" disabled>
-                            </td>
-                        </tr>
-                    </div>
+                <div class="dlComments1">
+                    <p>매물명</p>
+                    <input type="text" value="${DealingContents.dl_Title}" name="dl_Title" disabled
+                        style="text-align: center;">
+                    <p>상세 주소</p>
+                    <input type="text" value="${DealingContents.dl_Address}" name="dl_Address" maxlength="50"
+                        style="width: 300px; height: 50px; text-align: center;" disabled>
                 </div>
                 <br><br>
-
                 <!-------------------------------방종류, 층수------------------------------->
-                <div id="dlComments2" >
-                    <div>
-                        <tr>
-                            <td>방 종류</td>
-                            <td><input type="text" value="${DealingContents.dl_Form}" name="dl_Form" size="10" disabled style="text-align: center;"></td>
-                        </tr>
+                <div id="dlComments2">
+                    <div class="">
+                        <p>건물 유형</p>
+                        <input type="text" value="${DealingContents.dl_Form}" name="dl_Form" size="10" disabled
+                            style="text-align: center;">
                     </div>
-                    <div>
-                        <tr>
-                            <td>층수</td>
-                            <td><input type="text" value="${DealingContents.dl_Room}" name="dl_Room" size="10" disabled style="text-align: center;"></td>
-                        </tr>
+                    <div class="">
+                        <p>매물 유형</p>
+                        <input type="text" value="${DealingContents.dl_Form2}" name="dl_Form2" disabled
+                            style="text-align: center; width: 106px;"></td>
                     </div>
                 </div>
 
                 <!-------------------------------가격,매물종류------------------------------->
                 <div id="dlComments3">
-                    <div id="dlC_1" style="display:flex">
-                    <div style="display: block;">
-                        <tr>
-                            <td>가격</td>
-                            <td><input type="text" value="${DealingContents.dl_Price}" name="dl_Price" disabled style="text-align: center;"></td>
-                        </tr>
-                    </div>
                     <div>
-                        <tr>
-                            <td>매물종류</td>
-                            <td><input type="text" value="${DealingContents.dl_Form2}" name="dl_Form2" disabled style="text-align: center;"></td>
-                        </tr>
-                    </div>
-                </div>
-                    <!-------------------------------판매자 전화번호------------------------------->
-                    <div id="dlComments4">
+                        <p>옵션</p>
+                        <input type="text" value="${DealingContents.dl_Option}" name="dl_Form2" disabled
+                            style="text-align: center;">
+                        <p>가격</p>
+                        <input type="text" value="${DealingContents.dl_Price}" name="dl_Price" disabled
+                            style="text-align: center;">
                         <div>
-                            <button type="button" class="btn btn-secondary btn-lg" onclick="showPopup();">전화하기</button>
+                            <button type="button" id="call" class="btn btn-secondary btn-lg"
+                                onclick="showPopup();">전화하기</button>
                         </div>
                     </div>
+                    <!-------------------------------판매자 전화번호------------------------------->
+
                 </div>
             </div>
         </div>
-    
         <div id="dlcontents">
-            <h3>매물 상세정보</h3>
-            <br><br>
-            <td>
-                <textarea rows="20" cols="60" value="${DealingContents.dl_Content}" name="dl_Content" disabled>${DealingContents.dl_Content } </textarea>
-            </td>
-        
+                <textarea rows="20" cols="147" value="${DealingContents.dl_Content}" name="dl_Content"
+                    disabled>${DealingContents.dl_Content } </textarea>
         </div>
-    
         <div id="reportbtn">
-            <button type="button" class="btn btn-secondary btn-lg" onclick="showPopup2();">신고하기</button>
+            <button type="button" class="btn btn-secondary btn-lg" onclick="showPopup2();">신고합니다</button>
         </div>
     </div>
 </body>

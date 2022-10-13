@@ -54,17 +54,16 @@
         }
 
         .pro_best_item ul {
-            margin-left: 35px;
+			width: 1130px;
+			display:flex;
         }
 
         .pro_best_item ul li {
-            width: 200px;
-            height: 300px;
-            margin: 10px 20px;
+            width: 280px;
         }
 
         .pro_best_item ul li img {
-            width: 200px;
+            width: 280px;
             height: 300px;
         }
 

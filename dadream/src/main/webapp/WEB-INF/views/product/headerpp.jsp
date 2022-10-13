@@ -47,6 +47,9 @@
                 </div>
                 <div class="headerul">
                     <ul>
+                        <a href="/inteboardlist.do" style="margin-top:10px">
+                            <li>인테리어</li>
+                        </a>
                         <li>
                             <form  method="POST" id ="result">
                                 <select name="path" id="path" onchange="search()" style="height: 30px;" >
@@ -208,11 +211,13 @@
                     </ul>
                 </div>
                 <script>
+                    // window.onload = function(){
                     let headerppli = document.querySelector(".headerppli");
                     let hiderpp = document.querySelector(".headerpp");
                     headerppli.addEventListener("click", function () {
                         hiderpp.classList.toggle("hidee");
                     })
+                // }
                 </script>
             </header>
         </c:otherwise>

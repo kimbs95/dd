@@ -54,7 +54,7 @@
     <div class="first">
         <h1>매물등록</h1>
 
-        <form method="post" action="${contextPath}/addNewdealing.do" enctype="multipart/form-data">
+        <form id="FORMTAG" method="post" action="${contextPath}/addNewdealing.do" enctype="multipart/form-data">
             <div class="middle">
 
                 <!--이미지 div-->
@@ -72,13 +72,13 @@
                 <!--상품 설명div-->
                 <div class="dealingcon">
                     <h3>매물이름</h3>
-                    <input type="text" name="dl_Title" placeholder="건물명을 입력해주세요." size="50">
+                    <input type="text" id="dl_Title" name="dl_Title" placeholder="건물명을 입력해주세요." size="50">
                     <br><br>
                     <h3>도시명</h3>
-                    <input type="text" name="dl_City" placeholder="ex) 서울, 부산, 대전" size="50">
+                    <input type="text" id="dl_City" name="dl_City" placeholder="ex) 서울, 부산, 대전" size="50">
                     <br><br>
                     <h3>주소입력</h3>
-                    <input type="text" id="sample5_address" name="dl_Address" placeholder="주소" size="38">
+                    <input type="text" id="sample5_address" name="dl_Address" value="" placeholder="주소" size="38" >
                     <input type="button" onclick="sample5_execDaumPostcode()" value="주소 검색"
                         style="height: 27px;"><br><br>
                     <div id="map" style="width:300px;height:300px;margin-top:10px;display:none"></div><br>
@@ -137,11 +137,14 @@
                                         return;
                                     }
 
+                                    
+
                                     var jibun_address = result[0].address.address_name; // 지번 주소
                                     var road_address = result[0].road_address.address_name; //도로명 주소
 
                                     //마커찍으면 주소 변환
                                     document.querySelector("#sample5_address").value = road_address;
+                                    
 
                                     console.log(road_address);
                                     console.log(jibun_address);
@@ -196,38 +199,38 @@
                     <input type="hidden" name="dl_Lat" id="dl_Lat" />
                     <input type="hidden" name="dl_Lng" id="dl_Lng" />
                     <h3>가격</h3>
-                    <input type="text" name="dl_Price" placeholder="희망하시는 가격을 입력해주세요." size="50">
+                    <input type="text" name="dl_Price" id="dl_Price" placeholder="희망하시는 가격을 입력해주세요." size="50">
                     <br><br>
                     <h3>옵션정보</h3>
-                    <input type="text" name="dl_Option" placeholder="매물의 추가정보를 입력해주세요." size="50">
+                    <input type="text" name="dl_Option" id="dl_Option" placeholder="매물의 추가정보를 입력해주세요." size="50">
 
                     <!--카테고리-->
                     <div class="cg">
                         <h3>카테고리 선택</h3>
                         <br><br>
                         <h5>건물형태</h5>
-                        <select name="dl_Form">
-                            <option name="dl_Form" value="아파트">아파트</option>
-                            <option name="dl_Form" value="투룸+">투룸+</option>
-                            <option name="dl_Form" value="원룸">원룸</option>
-                            <option name="dl_Form" value="오피스텔">오피스텔</option>
-                            <option name="dl_Form" value="주택">주택</option>
+                        <select name="dl_Form" id="dl_Form">
+                            <option value="아파트">아파트</option>
+                            <option value="투룸+">투룸+</option>
+                            <option value="원룸">원룸</option>
+                            <option value="오피스텔">오피스텔</option>
+                            <option value="주택">주택</option>
                         </select>
                         <br><br>
                         <h5>거래유형</h5>
-                        <select name="dl_Form2">
-                            <option name="dl_Form2" value="매매">매매</option>
-                            <option name="dl_Form2" value="월세">월세</option>
-                            <option name="dl_Form2" value="전세">전세</option>
+                        <select name="dl_Form2" id="dl_Form2">
+                            <option value="매매">매매</option>
+                            <option value="월세">월세</option>
+                            <option value="전세">전세</option>
                         </select>
                         <br><br>
                         <h5>방개수</h5>
-                        <select name="dl_Room">
-                            <option name="dl_Room" value="1">1개</option>
-                            <option name="dl_Room" value="2">2개</option>
-                            <option name="dl_Room" value="3">3개</option>
-                            <option name="dl_Room" value="4">4개</option>
-                            <option name="dl_Room" value="5">5개</option>
+                        <select name="dl_Room" id="dl_Room">
+                            <option value="1">1개</option>
+                            <option value="2">2개</option>
+                            <option value="3">3개</option>
+                            <option value="4">4개</option>
+                            <option value="5">5개</option>
                             <!-- <option name="dl_Room" value="6">6층</option>
                             <option name="dl_Room" value="7">7층</option>
                             <option name="dl_Room" value="8">8층</option>
@@ -236,7 +239,7 @@
                         </select>
                         <br><br>
                         <h5>평수</h5>
-                        <input type="text" name="dl_Size" placeholder="평수를 입력해주세요.">
+                        <input type="text" name="dl_Size" id="dl_Size" placeholder="평수를 입력해주세요.">
                         <br><br>
 
                     </div>
@@ -250,7 +253,7 @@
                 <textarea id="summernote" name="dl_Content"></textarea>
 
                 <div class="bds02">
-                    <input type="submit" id="submit" class="btn btn-secondary btn-lg" value="등록하기">
+                    <input type="submit" id="submitbtn" class="btn btn-secondary btn-lg" value="등록하기">
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <input type="reset" class="btn btn-secondary btn-lg" value="다시입력">
                 </div>
@@ -270,13 +273,6 @@
                 }
                 reader.readAsDataURL(e.target.files.item(0));
             })
-
-            // // 등록 버튼 누를시 
-            // document.querySelector("#productsubmit").addEventListener("click", async () => {
-
-
-
-            // })
         });
     </script>
 
@@ -285,7 +281,7 @@
         (function () {
 
 
-            $("#summernote").summernote({
+            $("#summernote").summernote("code", {
                 height: 300, // 에디터 높이
                 minHeight: 300, // 최소 높이
                 maxHeight: null, // 최대 높이(null 제한없음)
@@ -317,6 +313,72 @@
 
 
         })();
+        
+        
+        
+        
+        document.querySelector("#submitbtn").addEventListener("click", () => {
+            event.preventDefault();
+            check();
+            
+        });
+        let check = ()=>{
+
+        
+        let dealing_Image = document.querySelector("#dealing_Image").value.trim();
+        let dl_Title = document.querySelector("#dl_Title").value.trim();
+        let sample5_address = document.querySelector("#sample5_address").value.trim();
+        let dl_Price = document.querySelector("#dl_Price").value.trim();
+        let dl_Option = document.querySelector("#dl_Option").value.trim();
+        let dl_Form = document.querySelector("#dl_Form").value.trim();
+        let dl_Form2 = document.querySelector("#dl_Form2").value.trim();
+        let dl_Room = document.querySelector("#dl_Room").value.trim();
+        let dl_Size = document.querySelector("#dl_Size").value.trim();
+        let summernote = document.querySelector("#summernote").value.trim();
+        let FORMTAG =document.querySelector("#FORMTAG");
+        if (dealing_Image === '') {
+            alert("이미지를 넣어주세요");
+            dealing_Image.focus();
+            return ;
+        } else if (dl_Title === '') {
+            alert("매물명 을 입력해주세요");
+            dl_Title.focus();
+            return ;
+        } else if (sample5_address === '') {
+            alert("주소를 입력해주세요");
+            sample5_address.focus();
+            return ;
+        } else if (dl_Price === '') {
+            alert("가격을 입력해주세요");
+            dl_Price.focus();
+            return ;
+        } else if (dl_Option === '') {
+            alert("옵션을 입력해주세요");
+            dl_Price.focus();
+            return ;
+        } else if (dl_Form === '') {
+            alert("건물을 입력해주세요");
+            dl_From.focus();
+            return ;
+        } else if (dl_Form2 === '') {
+            alert("구매방식 입력해주세요");
+            dl_From2.focus();
+            return ;
+        } else if (dl_Room === '') {
+            alert("방 개수 를 입력해주세요");
+            dl_Room.focus();
+            return ;
+        } else if (dl_Size === '') {
+            alert("평수 를 입력해주세요");
+            dl_Size.focus();
+            return ;
+        } else if (summernote === '') {
+            alert("상세설명 을 입력해주세요");
+            summernote.focus();
+            return ;
+        }FORMTAG.submit();
+            
+    }
     </script>
 </body>
 
