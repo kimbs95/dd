@@ -8,6 +8,7 @@
 <%
 	request.setCharacterEncoding("UTF-8");
 %>
+<!-- <c:set var="member" value="${member.user_Id}"/> -->
 <c:set var="contextPath" value="${pageContext.request.contextPath }" />
 <c:set var="article" value="${articleMap.article }" />
 <c:set var="imageFileList" value="${articleMap.imageFileList }" />
@@ -113,16 +114,17 @@
 </style>
 </head>
 <body>
+	
 	<section id="container">
-	<form  id="readForm" method="post" action="${contextPath}/viewArticle.do" enctype="multipart/form-data">
+	<form  id="readForm" method="post" action="${contextPath}/board/update" enctype="multipart/form-data">
 		<input type="hidden" name="inte_Num" value="${boardContents.inte_Num }" />
 			<div id="viewboardform">
 
-				<div id="Number">
+				<!-- <div id="Number">
 				<td align="right" bgcolor="pink">글번호&nbsp;&nbsp;</td>
 					<input type="text" id="inputNumber" value="${boardContents.inte_Num }" disabled />	
 				
-			</div>
+				</div> -->
 
 			<div id="writerName">
 				<td align="center" bgcolor="pink">작성자</td>
@@ -146,73 +148,18 @@
 			</div>
 			
 			<div>
-				<td>조회수</td>
+				<!-- <td>조회수</td> -->
 				<td>
-					<input id="viewCount" type="text" value="${boardContents.viewCounts }" name="viewCounts" disabled />
+					<input id="viewCount" type="hidden" value="${boardContents.viewCounts }" name="viewCounts" disabled />
 				</td>
 			</div>
 			<div class="inteImg">
 			<div class="inteMain">
-                    <img src="/board/${boardContents.user_Id}/${boardContents.inte_Image}">
+                    <img src="/board/${boardContents.user_Id}/${boardContents.inte_Image}" width="250" height="250">
 			</div>
 		</div>
 			<!---------------------------------------------------------------------------------------------------------------->
-			<!-- <div id="insertImage">
-			<c:if test="${not empty imageFileList && imageFileList != 'null' }">
-				<c:forEach var="item" items="${imageFileList }" varStatus="status">
-					<tr>
-						<td width="150" align="center" bgcolor="pink" rowspan="2">
-							이미지 ${status.count }
-						</td>
-						<td>
-							<input type="hidden" name="originalFileName" value="${item.imageFileName }" />
-							<img src="${contextPath }/download.do?articleNO=${article.articleNO}&imageFileName=${item.imageFileName}" id="preview" width=300 height=300 /> <br> 
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<input type="file" name="imageFileName" id="i_imageFileName" disabled onchange="readURL(this);" />
-						</td>
-					</tr>
-				</c:forEach>
-			</c:if>
 			
-			<c:choose>
-				<c:when test="${not empty board.inte_Image && board.inte_Image != 'null' }">
-					<tr>
-						<td width="150" align="center" bgcolor="pink" rowspan="2">
-							이미지
-						</td>
-						<td>
-							<input type="hidden" name="inte_Image" value="${board.inte_Image }" />
-							<img src="${contextPath }/download.do?inte_Num=${board.inte_Num}&inte_Image=${board.inte_Image}" id="preview" width=300 height=300 /> <br> 
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<input type="file" name="inte_Image" id="i_imageFileName" disabled onChange="readURL(this);" />
-						</td>
-					</tr>
-				</c:when>
-				<c:otherwise>
-					<tr id="tr_file_upload">
-						<td width="150" align="center" bgcolor="pink" rowspan="2">
-							이미지
-						</td>
-						<td>
-							<input type="hidden" name="inte_Image" value="${board.inte_Image }" />
-						</td>
-					</tr>
-					<tr>
-						<td></td>
-						<td>
-							<img id="preview" /><br>
-							<input type="file" name="inte_Image" id="i_imageFileName" disabled onchange="readURL(this);" />
-						</td>
-					</tr>
-				</c:otherwise>
-			</c:choose> 
-		</div> -->
 			<div id="regDate">
 				<td width="150" align="center" bgcolor="pink">
 					등록일자
@@ -222,13 +169,15 @@
 					<input type="text" value="<fmt:formatDate value='${boardContents.inte_Date}'/>" disabled />
 				</td>
 
-			<div id="readbtn">				
+			<div id="readbtn">	
+					<c:if test="${user_Id == boardContents.user_Id}">
 				<button id="updatebtn"><a href="/board/update?inte_Num=${boardContents.inte_Num}" class="mod_btn">수정</a></button>
+			
 				<!-- <button type="submit" class="delete_btn">삭제</button> -->
 				<!-- <a href="javascript:void(0);" class="btn btn-danger" onclick="deleteConfirm();">삭제</a> -->
 				<input id="delete"type="button" value="삭제하기" onClick="fn_remove_article('${contextPath}/board/removeArticle.do','${boardContents.inte_Num}')">
 				<!-- <button type="submit" class="list_btn">목록</button> -->
-				
+			</c:if>
 				<input id="backList" type="button"  value="목록으로 이동"onClick="backToList(this.form)">
 			</div>
 		</section>

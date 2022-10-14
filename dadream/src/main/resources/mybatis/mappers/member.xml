@@ -36,14 +36,22 @@
 		where user_Id = #{user_Id} 		
 	]]>
 	</select>
-	<!-- 회원탈퇴 -->
-		<delete id="removeMem" parameterType="String">
+	<delete id="removeMem" parameterType="String">
 		  <![CDATA[
 		  	DELETE
 		  	FROM user_t
 		  	WHERE user_Id = #{user_Id}
 		  ]]>
-		</delete>
+	</delete>
+
+	<select id="pwdCheck" resultType="java.lang.Integer"
+		parameterType="String">
+		<![CDATA[
+			SELECT COUNT(*) 
+			FROM user_t	
+			WHERE user_Pwd = sha2(#{user_Pwd},256) AND user_Id = #{user_Id} 		
+		]]>
+	</select>
 
 
 

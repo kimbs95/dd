@@ -12,18 +12,17 @@
         <result property="rp_Date" column="rp_Date" />
         <result property="user_Id" column="user_Id" />
         <result property="dl_Num" column="dl_Num" />
-        <result property="dl_Title" column="dl_Title" />
 	</resultMap>
 	
 	
 
 	
-	<insert id="insertReport" parameterType="reportVO">
+	<insert id="insertReport" parameterType="java.util.Map">
 	<![CDATA[
 		insert into 
-		report_t(dl_ReportNum, rp_Title, rp_Content, user_Id, dl_Num, dl_Title) 
+		report_t(dl_ReportNum, rp_Title, rp_Content, user_Id, dl_Num) 
 		values(#{dl_ReportNum}, #{rp_Title}, #{rp_Content}, #{user_Id}, 
-		#{dl_Num}, #{dl_Title})
+		#{dl_Num})
 	]]>
 	</insert>
 	

@@ -34,9 +34,9 @@
                 <!--이미지 div-->
                 <div class="dlImg">
                     <div class="dlMain">
-                        <label for="product_Image" ><p style="width: 300px;border: 1px solid;height: 40px;text-align: center;line-height: 40px;">클릭 후 이미지 를 골라주세요</p></label><br>
-                        <input type="file" id="product_Image" name="product_Image" accept="image/*" multiple>
-                        <img id="preview" src="" width=200 height=200 />
+                        <input style="display: none;" type="file" id="product_Image" name="product_Image" accept="image/*" multiple>
+                        <img id="preview" src="" width=500 height=500 />
+                        <label for="product_Image" ><p style="width: 300px;border: 1px solid;height: 40px;text-align: center;line-height: 40px;">클릭 후 이미지 를 골라주세요</p></label>
                         <h1 class="imgh1" style="font-weight: bold;margin-top: 20px;"></h1>
                     </div>
                 </div>

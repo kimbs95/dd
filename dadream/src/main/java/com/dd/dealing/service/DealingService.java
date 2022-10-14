@@ -3,6 +3,7 @@ package com.dd.dealing.service;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.dao.DataAccessException;
 
 import com.dd.dealing.vo.BoardVO;
@@ -23,8 +24,9 @@ public interface DealingService {
 //	로그인체크
 	public MemberVO login(MemberVO memberVO) throws Exception;
 
-//회원탈퇴
 	public void removeMem(String user_Id) throws Exception;
+
+	public int pwdCheck(@Param("user_Pwd") String user_Pwd, @Param("user_Id") String user_Id) throws Exception;
 
 //	카카오 로그인 
 	public int kakaologin(Map<String, Object> user) throws Exception;
@@ -50,7 +52,7 @@ public interface DealingService {
 	public int addNewdealing(Map<String, Object> dealingMap) throws DataAccessException;
 
 	// 인테리어게시판 등록
-	public int addinteboard(BoardVO board) throws DataAccessException;
+	public int insertboard(Map<String, Object> boardMap) throws DataAccessException;
 
 	// 인테리어게시판 글 목록
 	public List<BoardVO> listArticles() throws Exception;
@@ -77,7 +79,7 @@ public interface DealingService {
 	public void updateView(int viewCounts) throws Exception;
 
 //	신고하기
-	public int addReport(Map rpMap) throws DataAccessException;
+	public int addReport(Map<String, Object> report) throws DataAccessException;
 
 	// 매물상세보기
 	public DealingVO getDealingContents(int dl_Num) throws Exception;

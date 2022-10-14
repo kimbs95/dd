@@ -90,13 +90,20 @@
    </definition>
    
    <!-- 부동산 게시판 글 상세보기 -->
-   <definition name="/dealing/read" extends="baseLayout2">
+   <definition name="/dealing/boardview" extends="baseLayout2">
       <put-attribute name="title" value="게시글 등록 페이지" />
       <put-attribute name="header" value="/WEB-INF/views/dealing/headerp_m.jsp" />
-      <put-attribute name="body" value="/WEB-INF/views/dealing/read.jsp" />
+      <put-attribute name="body" value="/WEB-INF/views/dealing/boardview.jsp" />
    </definition>
    
    <!-- 부동산 게시글 수정,삭제 -->
+   <definition name="/dealing/boardupdate" extends="baseLayout2">
+      <put-attribute name="title" value="게시글 수정 페이지" />
+      <put-attribute name="header" value="/WEB-INF/views/dealing/headerp_m.jsp" />
+      <put-attribute name="body" value="/WEB-INF/views/dealing/boardupdate.jsp" />
+   </definition>
+   
+   <!-- 부동산 게시글 수정 동작 화면 -->
    <definition name="/dealing/update" extends="baseLayout2">
       <put-attribute name="title" value="게시글 수정 페이지" />
       <put-attribute name="header" value="/WEB-INF/views/dealing/headerp_m.jsp" />

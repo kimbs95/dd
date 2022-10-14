@@ -55,30 +55,73 @@
 
         .pro_best_item ul {
 			width: 1130px;
-			display:flex;
+			display:inline-flex;
         }
 
         .pro_best_item ul li {
             width: 280px;
+            margin:0 1px;
+            height:360px;
+            border:1px solid black;
+            background:rgb(146, 142, 142);
+            
         }
+        .pro_best_item ul li h1{
+		font-size: 19px;
+		font-weight:bold;
+		padding-left: 5px;
+		margin: 5px 0;
+		color:black;
+		}
+	
+        .pro_best_item ul li p{
+		font-size: 16px;
+		padding-left: 5px;
+            color: white;
+		}
 
         .pro_best_item ul li img {
-            width: 280px;
+            width: 275px;
+            margin:0 1.5px;
+            background:white;
             height: 300px;
+            border:1px solid black;
+            
         }
 
         /* 인테리어 목록css */
-        .pro_myhouse_introduce {
+		.pro_myhouse_introduce ul{
+		 	width: 1130px;
+            display:inline-flex;
+            height:373px;
+            justify-content:space-around ;
             
-            width: 1130px;
-            height: auto;
-            display: flex;
-            justify-content: space-around;
-            margin: 10px 20px;
-            flex-wrap: wrap;
-        }
-
-        .pro_introduce img {
-            width: 280px;
-            height: 200px;
+		}
+		.pro_myhouse_introduce ul li{
+			border:1px solid #ccc;
+			width:355px;
+            background:lightgoldenrodyellow;
+		}
+		.pro_myhouse_introduce ul li h1 {
+			font-weight: bold;
+			font-size: 17px;
+			padding:9px 0 9px 5px;
+		}
+		.pro_myhouse_introduce ul li p{
+			width:353px;
+			height:50px;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: pre-line;
+			padding: 0 0 5px 5px;
+			margin-bottom: 8px;
+		}
+		.pro_myhouse_introduce span{
+			padding:0 0 0 5px;
+			font-size: 13px;
+		}
+        .pro_myhouse_introduce .image {
+			margin:0 4px;
+            width: 345px;
+            height: 250px;
         }

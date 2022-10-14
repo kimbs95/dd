@@ -115,14 +115,14 @@
 		</tr>
 			
 		<tbody>
-			<c:forEach var="notice" items="${noticlesList}">
+			<c:forEach var="i" items="${notic}">
 				<tr>
 					<!-- <td>${noticeTemp}</td> -->
-					<!-- <td>${notice.notice_Category}</td> -->
-					<td>${notice.notice_Num}</td>
-					<td>${notice.user_Id}</td>
-					<td>${notice.notice_Text}</td>
-					<td><fmt:formatDate value="${noticeTemp.notice_Date}" /></td>
+					<td>${i.notice_Category}</td>
+					<td>${i.notice_Num}</td>
+					<td>${i.user_Id}</td>
+					<td>${i.notice_Text}</td>
+					<!-- <td><fmt:formatDate value="${noticeTemp.notice_Date}" /></td> -->
 				</tr>
 			</c:forEach>
 		</tbody>

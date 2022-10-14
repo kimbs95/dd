@@ -3,6 +3,7 @@ package com.dd.dealing.service;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
@@ -41,6 +42,14 @@ public class DealingServiceImpl implements DealingService {
 	@Override
 	public void removeMem(String user_Id) throws Exception {
 		dealingDAO.removeMem(user_Id);
+	}
+
+	/* 회원탈퇴 비번 체크 */
+	@Override
+	public int pwdCheck(@Param("user_Pwd") String user_Pwd, @Param("user_Id") String user_Id) throws Exception {
+		int result = dealingDAO.pwdCheck(user_Pwd, user_Id);
+		return result;
+
 	}
 
 //	로그인확인
@@ -112,12 +121,6 @@ public class DealingServiceImpl implements DealingService {
 //		return dlMain;
 //	}
 
-	// 게시글추가
-	@Override
-	public int addinteboard(BoardVO board) throws DataAccessException {
-		return dealingDAO.insertboard(board);
-	}
-
 	// 게시글 목록 조회
 	@Override
 	public List<BoardVO> listArticles() throws Exception {
@@ -130,6 +133,12 @@ public class DealingServiceImpl implements DealingService {
 	@Override
 	public BoardVO getBoardContents(int inte_Num) throws Exception {
 		return dealingDAO.getBoardContents(inte_Num);
+	}
+
+	// 인테리어 글추가
+	@Override
+	public int insertboard(Map<String, Object> boardMap) throws DataAccessException {
+		return dealingDAO.insertboard(boardMap);
 	}
 
 	// 인테리어 글 수정
@@ -153,9 +162,7 @@ public class DealingServiceImpl implements DealingService {
 	// 공지사항 게시판 목록 조회
 	@Override
 	public List<NoticeVO> listNoticles() throws Exception {
-		List<NoticeVO> noticlesList = null;
-		noticlesList = dealingDAO.selectAllNoticlesList();
-		return noticlesList;
+		return dealingDAO.selectAllNoticlesList();
 	}
 
 	// 공지사항 글 등록
@@ -172,8 +179,8 @@ public class DealingServiceImpl implements DealingService {
 
 //	신고하기
 	@Override
-	public int addReport(Map rpMap) throws DataAccessException {
-		return dealingDAO.insertReport(rpMap);
+	public int addReport(Map<String, Object> report) throws DataAccessException {
+		return dealingDAO.insertReport(report);
 	}
 
 	// 매물상세보기

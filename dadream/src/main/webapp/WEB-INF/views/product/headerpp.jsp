@@ -85,6 +85,9 @@
                                 </a>
                             </c:when>
                             <c:otherwise>
+                                <a href="/inteboardlist.do" style="margin-top:10px">
+                                    <li>인테리어</li>
+                                </a>
                                 <a href="${contextPath}/login.do">
                                     <li>로그인</li>
                                 </a>
@@ -117,15 +120,16 @@
                         <c:when test="${isLogOn == true  && member!= null}">
                           
                             <div class="ppcursor">
+                                <a href="/inteboardlist.do" style="margin-top:10px">
+                                    <li>인테리어</li>
+                                </a>
                                 <li class="headerppli" style="display: block;">
                                     <h6>${member.user_Name}님</h6>
                                     <div class="headerpp hidee">
                                         <a href="/cartweb.do" style="margin-top:10px">
                                             장바구니
                                         </a>
-                                        <a href="" style="margin-top:10px">
-                                            인테리어
-                                        </a>
+                                        
                                     </div>
                                 </li>
                             </div>
@@ -135,6 +139,9 @@
 
                         </c:when>
                         <c:otherwise>
+                            <a href="/inteboardlist.do" style="margin-top:10px">
+                                <li>인테리어</li>
+                            </a>
                             <a href="${contextPath}/login.do">
                                 <li>로그인</li>
                             </a>
@@ -182,14 +189,14 @@
     
                                 </li>
                                 <div class="ppcursor">
+                                    <a href="/inteboardlist.do" style="margin-top:10px">
+                                        <li>인테리어</li>
+                                    </a>
                                     <li class="headerppli" style="display: block;">
                                         <h6>${member.user_Name}님</h6>
                                         <div class="headerpp hidee">
                                             <a href="/cartweb.do" style="margin-top:10px">
                                                 장바구니
-                                            </a>
-                                            <a href="" style="margin-top:10px">
-                                                인테리어
                                             </a>
                                         </div>
                                     </li>
@@ -200,6 +207,9 @@
 
                             </c:when>
                             <c:otherwise>
+                                <a href="/inteboardlist.do" style="margin-top:10px">
+                            <li>인테리어</li>
+                        </a>
                                 <a href="${contextPath}/login.do">
                                     <li>로그인</li>
                                 </a>
@@ -234,9 +244,8 @@
 
     <!-- TOP 부분 -->
     <!-- <a class="top" href=".headerleft">TOP</a> -->
-    <a class="top" href="#">TOP</a>
     <!-- 게시판 부분 -->
-    <a class="pan" href="#">게시판</a>
+    <a class="top" href="#">TOP</a>
     <!-- Channel Plugin Scripts -->
     <script>
         (function () {

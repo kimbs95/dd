@@ -78,7 +78,7 @@
                     <input type="text" id="dl_City" name="dl_City" placeholder="ex) 서울, 부산, 대전" size="50">
                     <br><br>
                     <h3>주소입력</h3>
-                    <input type="text" id="sample5_address" name="dl_Address" value="" placeholder="주소" size="38" >
+                    <input type="text" id="sample5_address" name="dl_Address" value="" placeholder="주소" size="38" readonly >
                     <input type="button" onclick="sample5_execDaumPostcode()" value="주소 검색"
                         style="height: 27px;"><br><br>
                     <div id="map" style="width:300px;height:300px;margin-top:10px;display:none"></div><br>

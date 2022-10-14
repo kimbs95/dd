@@ -6,11 +6,11 @@
    <mapper namespace="com.dd.dealing.dao.DealingDAO">
    
 	<resultMap id="noticeResult" type="noticeVO">
-		<result property="Notice_Num" column="Notice_Num" />
-		<result property="Notice_Title" column="Notice_Title" />
-		<result property="Notice_Text" column="Notice_Text" />
-		<result property="Notice_Date" column="Notice_Date" />
-		<result property="Notice_Category" column="Notice_Category" />
+		<result property="notice_Num" column="notice_Num" />
+		<result property="notice_Title" column="notice_Title" />
+		<result property="notice_Text" column="notice_Text" />
+		<result property="notice_Date" column="notice_Date" />
+		<result property="notice_Category" column="notice_Category" />
 		<result property="user_Id" column="user_Id" />
 		
 	
@@ -19,22 +19,18 @@
 		<!--공지사항 등록 -->
 	  <insert id="insertnotice"  parameterType="noticeVO">
 		<![CDATA[
-		 insert into notice_t(Notice_Num,Notice_Title,Notice_Text,Notice_Date,Notice_Category,user_Id)
-		 values(#{Notice_Num},#{Notice_Title},#{Notice_Text},#{Notice_Date},#{Notice_Category},#{user_Id})
+		 insert into notice_t(notice_Num,notice_Title,notice_Text,notice_Date,notice_Category,user_Id)
+		 values(#{notice_Num},#{notice_Title},#{notice_Text},#{notice_Date},#{notice_Category},#{user_Id})
 		]]>
 		  
 	</insert>
 	<!-- 공지사항 리스트 조회 -->
-	<select id="selectAllNoticlesList" parameterType="noticeVO" resultMap="noticeResult">
+	<select id="selectAllNoticlesList" resultMap="noticeResult">
 		
 	<![CDATA[
-		SELECT Notice_Num,Notice_Title,Notice_Text,Notice_Date,Notice_Category,user_Id
- 		FROM NOTICE_T 
+		SELECT * FROM notice_t
 		]]> 
-		WHERE 1=1
-		<if test='Notice_Num != null and Notice_Num != ""'>
-		AND NOTICE_NUM = #{Notice_Num}
-		</if>
+		
 		
 		
 	</select>

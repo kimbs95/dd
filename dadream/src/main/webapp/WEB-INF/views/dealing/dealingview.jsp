@@ -24,7 +24,7 @@
         }
 
         function showPopup2() {
-            window.open("${contextPath}/rpPopUp.do", "신고하기", "width=500, height=600, top=200 left=600");
+            window.open("${contextPath}/rpPopUp.do?dl_Num=${DealingContents.dl_Num}", "신고하기", "width=500, height=600, top=200 left=600");
         }
     </script>
     <!--부트스트랩-->

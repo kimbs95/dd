@@ -150,11 +150,17 @@
 
     <!-- 메인 베스트상품 -->
     <div class="pro_best_item">
+        <h1>인기상품</h1>
         <ul>
             <c:forEach var="i" items="${product}">
                 <li>
-                    <img class="image" src="/product/${i.user_Id}/${i.product_Image}">
-                    <span>제목 / 가격</span>                    
+                    <a href="/productview.do?product_Num=${i.product_Num}">
+                        <img class="image" src="/product/${i.user_Id}/${i.product_Image}">
+                    </a>
+                    <div>
+                        <h1>${i.product_Name}</h1>
+                        <p>￦ ${i.product_Price}</p>
+                    </div>
                 </li>
             </c:forEach>
         </ul>
@@ -162,32 +168,18 @@
 
     <!-- 인테리어 소개 -->
     <div class="pro_myhouse_introduce">
+        <h1>인테리어</h1>
         <ul>
-            <div class="pro_introduce">
-                <li>
-                    <img class="image" src="../image/메인로고.png">
-                    <p>내용</p>
-                    <p>KBS</p>
-                </li>
-            </div>
-        </ul>
-        <ul>
-            <div class="pro_introduce">
-                <li>
-                    <img class="image" src="../image/메인로고.png">
-                    <p>내용</p>
-                    <p>KBS</p>
-                </li>
-            </div>
-        </ul>
-        <ul>
-            <div class="pro_introduce">
-                <li>
-                    <img class="image" src="../image/메인로고.png">
-                    <p>내용</p>
-                    <p>KBS</p>
-                </li>
-            </div>
+            <c:forEach var="i" items="${board}" >
+                    <li>
+                        <a href="/board/read?inte_Num=${i.inte_Num}">
+                            <img class="image" src="/board/${i.user_Id}/${i.inte_Image}">
+                        </a>
+                        <h1>${i.inte_Title}</h1>
+                        <p>${i.inte_Text}</p>
+                        <span>작성자 ${i.user_Id}</span>
+                    </li>
+            </c:forEach>
         </ul>
     </div>
 

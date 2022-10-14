@@ -124,7 +124,7 @@
             text-decoration: none;
             color: black;
             position: fixed;
-            bottom: 150px;
+           bottom: 100px;
             right: 40px;
         }
         
@@ -140,14 +140,7 @@
        .hidee{
 			display:none;
 		}
-		.pan{
-			text-decoration: none;
-            color: black;
-            position: fixed;
-           bottom: 110px;
-            right: 33px;
-		}
-		
+	
 		
 		
        

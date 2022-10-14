@@ -61,11 +61,12 @@
     </head>
 
     <body>
+        <!-- <h1>${empty user_Pwd ? "안 넘어옴" : "넘어옴"}</h1> -->
         <div class="mypagecontrol" style="display: flex; flex-direction: column; margin-left: 140px;">
 
 
             <div class="mypage">
-                <h1 style="font-size:2.5em; font-weight: bold; margin: 30px 0 150px 0;">My Page</h1>
+
                 <div>
 
 
@@ -157,12 +158,70 @@
                     </table>
                 </div>
                 <br><br><br>
-                <form method="post" action="${contextPath}/removeMember.do">
-                    <input type="submit" value="회원탈퇴" style="width: 150px; height: 30px; font-weight: bolder; color: red;">
-                    </form>
+                <!-- <form method="post" action="${contextPath}/removeMember.do">
+                <input type="submit" value="회원탈퇴" style="width: 150px; height: 30px; font-weight: bolder; color: red;">
+                </form> -->
+                <button type="button" onclick="pwdCheck()" value="회원탈퇴" style="width: 150px; height: 30px; font-weight: bolder; color: red;">회원탈퇴</button>
             </div>
 
         </div>
+
+        <script>
+            var user_Id = "${member.user_Id}"
+            console.log(user_Id);
+
+            function pwdCheck() {
+                let pwdCheck = prompt("비밀번호 확인","비밀번호 를 입력해주세요");
+            console.log(pwdCheck);
+                if(pwdCheck === null && pwdCheck === "") {
+                    console.log("다시 시도하십시오.");
+                } else{
+                    if(!confirm("정말로 탈퇴하시겠습니까?")){
+                        alert("탈퇴가 취소되었습니다.");
+                        return;
+                    }
+                    $.ajax({
+                        url:"pwdCheck.do",
+                        type: "post",
+                        dataType: "json",
+                        data: {pwdCheck, user_Id},
+                        success: function(result) {
+                            console.log(result.userCheck);
+                            if(result.userCheck === 1 ) {
+                                location.href="/removeMember.do"
+                                alert("탈퇴가 완료되었습니다.");
+                                return;
+                            }
+                            else if(result.userCheck !== 1) {
+                                alert("비밀번호가 틀립니다.");
+                                return;
+                            }
+
+                            
+                        },
+                        error: function() {
+                            alert("오류");
+                        }
+
+                    });
+                    return;
+                } 
+
+                // function deleteMem() {
+                //     var form = document.createElement('form');
+                //     form.setAttribute('method', 'post');
+                //     form.setAttribute('action', 'removeMember.do');
+                //     document.charset = "utf-8";
+
+                //     form.submit();
+                // }
+
+                // if(!confirm("정말로 탈퇴하시겠습니까?")) {
+                //     console.log("탈퇴취소");
+                // }
+
+            }
+        </script>
     </body>
 
     </html>

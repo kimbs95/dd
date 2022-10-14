@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.dd.dealing.vo.BoardVO;
 import com.dd.product.dao.ProductDAO;
 import com.dd.product.vo.CartVO;
 import com.dd.product.vo.ProductVO;
@@ -19,10 +20,16 @@ public class ProductServiceImpl implements ProductService {
 	@Autowired
 	private ProductDAO productDAO;
 
-//	메뉴 정보 보기
+//	메뉴 상품 보기
 	@Override
 	public List<ProductVO> productView() throws Exception {
 		return productDAO.productView();
+	}
+
+//	메뉴 인테리어 게시판 보기
+	@Override
+	public List<BoardVO> inteView() throws Exception {
+		return productDAO.inteView();
 	}
 
 //상품등록

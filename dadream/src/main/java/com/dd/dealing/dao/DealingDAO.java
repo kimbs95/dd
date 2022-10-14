@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
@@ -22,10 +23,7 @@ public interface DealingDAO {
 
 	public MemberVO loginById(MemberVO memberVO) throws DataAccessException;
 
-	public int insertReport(Map rpMap) throws DataAccessException;
-
-	/* 회원탈퇴 */
-	public void removeMem(String user_Id) throws Exception;
+	public int insertReport(Map<String, Object> report) throws DataAccessException;
 
 //	카카오 로그인 
 	public int kakaologin(Map<String, Object> user) throws Exception;
@@ -37,7 +35,7 @@ public interface DealingDAO {
 	public int addNewdealing(Map<String, Object> dealingMap) throws DataAccessException;
 
 	// 게시글 DB전송
-	public int insertboard(BoardVO boardVO) throws DataAccessException;
+	public int insertboard(Map<String, Object> boardMap) throws DataAccessException;
 
 	// 게시판 글 목록
 	public List selectAllArticlesList() throws DataAccessException;
@@ -90,6 +88,11 @@ public interface DealingDAO {
 
 	// 마이페이지 매물리스트
 	public List<DealingVO> myDealing(String user_Id) throws DataAccessException;
+
+	/* 회원탈퇴 */
+	public void removeMem(String user_Id) throws Exception;
+
+	public int pwdCheck(@Param("user_Pwd") String user_Pwd, @Param("user_Id") String user_Id) throws Exception;
 
 	// 현재위치
 	public List<DealingVO> hereMe(Map<String, Object> hereMap) throws DataAccessException;

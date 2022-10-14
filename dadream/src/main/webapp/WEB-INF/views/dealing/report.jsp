@@ -41,7 +41,7 @@
             display: inline;
         }
 
-        #rpBtn{
+        #rpBtn {
             text-align: right;
             margin-top: 40px;
             margin-right: 20px;
@@ -50,24 +50,67 @@
 </head>
 
 <body>
-<!--부트스트랩-->
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!--부트스트랩-->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
     <h1 style="margin: 20px 0 20px 10px;">신고하기</h1>
     <hr>
     <form method="post" name="reprot" action="${contextPath}/report.do">
-        <div id="rp_Title">
+        <div>
+            <h3>매물 번호</h3>
+            <input type="text" id="dl_Num" name="dl_Num" value="${dl_Num}" readonly>
             <h3>제목 :&nbsp;&nbsp;</h3>
-            <input type="text" id="" name="rp_Title" />
+            <input type="text" id="rp_Title" name="rp_Title" />
         </div>
-        <div id="rp_Content">
+        <div >
             <h3>내용 :&nbsp;&nbsp;</h3>
-            <textarea rows="20" cols="50" name="rp_Content"></textarea>
+            <textarea rows="20" id="rp_Content" cols="50" name="rp_Content"></textarea>
         </div>
         <div id="rpBtn">
-        <input type="submit" value="신고완료">
+            <button id="rep" type="button">신고하기</button>
         </div>
     </form>
+    <script>
+        
+        document.querySelector("#rep").addEventListener("click", async (e) => {
+            let dl_Num = +document.querySelector("#dl_Num").value;
+            let rp_Title = document.querySelector("#rp_Title").value;
+            let rp_Content = document.querySelector("#rp_Content").value;
+
+            if (!confirm("신고하시겠습니까?")) {
+                return;
+            }
+            let req = await fetch("/report.do", {
+                method: "POST",
+                headers: {
+                    "content-type": "application/json"
+                },
+                body: JSON.stringify({
+                    dl_Num: dl_Num,
+                    rp_Title: rp_Title,
+                    rp_Content: rp_Content
+                })
+            })
+            if(req.status = 200 ){
+                let result = await req.json();
+                if(result.result === 1){
+                    alert("신고가 완료되었습니다.")
+                    window.close();
+                    return;
+                }else{
+                    alert("다시 시도 하세요");
+                    return;
+                }
+            }else{
+                alert("서버 오류");
+                return;
+            }
+
+
+
+
+        })
+    </script>
 </body>
 
 </html>

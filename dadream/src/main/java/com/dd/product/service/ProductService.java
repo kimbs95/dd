@@ -5,12 +5,16 @@ import java.util.Map;
 
 import org.springframework.dao.DataAccessException;
 
+import com.dd.dealing.vo.BoardVO;
 import com.dd.product.vo.CartVO;
 import com.dd.product.vo.ProductVO;
 
 public interface ProductService {
-//	메뉴 정보 보기
+//	메뉴 상품 보기
 	public List<ProductVO> productView() throws Exception;
+
+//	메뉴 인테리어 게시판 보기
+	public List<BoardVO> inteView() throws Exception;
 
 	public int addProduct(Map<String, Object> productMap) throws DataAccessException;
 

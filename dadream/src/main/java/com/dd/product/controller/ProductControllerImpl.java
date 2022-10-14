@@ -36,6 +36,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.dd.dealing.vo.BoardVO;
 import com.dd.dealing.vo.MemberVO;
 import com.dd.product.service.ProductService;
 import com.dd.product.vo.CartVO;
@@ -57,11 +58,13 @@ public class ProductControllerImpl implements ProductController {
 	@RequestMapping(value = { "/productmain.do" }, method = RequestMethod.GET)
 	private ModelAndView productmain(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = (String) request.getAttribute("viewName");
+		System.out.println("interceptor에서 온 viewName:" + viewName);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName(viewName);
 		List<ProductVO> product = productService.productView();
-		System.out.println("interceptor에서 온 viewName:" + viewName);
+		List<BoardVO> board = productService.inteView();
 		mav.addObject("product", product);
+		mav.addObject("board", board);
 		return mav;
 	}
 
