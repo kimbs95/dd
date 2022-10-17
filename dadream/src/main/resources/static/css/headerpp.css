@@ -56,10 +56,10 @@
 
         /* header */
         .header {
-            margin: 20px 0 0 30px;
+            margin: 20px 0 0 145px;
             display: flex;
             align-items: center;
-            justify-content: space-around;
+            justify-content: space-evenly;
             height:52.5px;
             font-weight:lighter;
 			font-family: 'Jua', sans-serif;
@@ -91,27 +91,24 @@
         .search form {
             display: flex;
             margin-top: 2.5%;
-            width: 450px;
             /*margin-left: 130px;*/
         }
 
         .search form input {
-            width: 400px;
+            width: 350px;
             height: 40px;
         }
 
         .headerul ul {
             margin-top: 2%;
             font-size: 18px;
-            margin-left: 100px;
-            width: 530px;
             height: 22.5px;
         }
 
         .headerul ul li {
             display: inline-flex;
             font-weight: bold;
-            margin-right: 50px;
+            margin-right: 30px;
         }
 
         .headerul ul a {

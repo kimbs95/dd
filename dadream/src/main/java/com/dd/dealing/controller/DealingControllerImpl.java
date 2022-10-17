@@ -44,6 +44,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.dd.dealing.service.DealingService;
 import com.dd.dealing.vo.BoardVO;
 import com.dd.dealing.vo.DealingVO;
+import com.dd.dealing.vo.JjimVO;
 import com.dd.dealing.vo.KakaoLoginVO;
 import com.dd.dealing.vo.MemberVO;
 import com.dd.dealing.vo.NoticeVO;
@@ -57,6 +58,7 @@ public class DealingControllerImpl {
 
 	private static final String DEALING_IMAGE_REPO = "C:\\spring\\KBS\\dadream\\src\\main\\resources\\static\\dealing";
 	private static final String BOARD_IMAGE_REPO = "C:\\spring\\KBS\\dadream\\src\\main\\resources\\static\\board";
+	private static final String NOTICE_IMAGE_REPO = "C:\\spring\\KBS\\dadream\\src\\main\\resources\\static\\notice";
 
 	@Autowired
 	private DealingService dealingService;
@@ -138,6 +140,33 @@ public class DealingControllerImpl {
 		mav.setViewName("redirect:/dealingmain.do");
 
 		return mav;
+	}
+
+	/* 마이페이지 정보변경 체크 */
+	@ResponseBody
+	@RequestMapping(value = "/infoCheck.do", method = RequestMethod.POST)
+	private Map<String, Object> infoCheck(@RequestBody MemberVO member, HttpServletRequest request) throws Exception {
+
+		int result = 0;
+		result = dealingService.infoCheck(member);
+		System.out.println("리저트 : " + result);
+		Map<String, Object> map = new HashMap<>();
+		map.put("userCheck", result);
+
+		return map;
+	}
+
+	/* 회원정보 수정 */
+	@ResponseBody
+	@RequestMapping(value = "/memberMod.do", method = RequestMethod.POST)
+	private Map<String, Object> memberMod(@RequestBody MemberVO member, HttpServletRequest request) throws Exception {
+		int result = 0;
+		result = dealingService.memberMod(member);
+		System.out.println("리저트 : " + result);
+		Map<String, Object> map = new HashMap<>();
+		map.put("check", result);
+
+		return map;
 	}
 
 	/* 회원탈퇴 체크 */
@@ -305,20 +334,29 @@ public class DealingControllerImpl {
 	}
 
 	/* 마이페이지 */
-	@RequestMapping(value = "/mypage.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/mypage.do", method = { RequestMethod.GET, RequestMethod.POST })
 	private ModelAndView mypage(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		HttpSession session = request.getSession();
 		ModelAndView mav = new ModelAndView();
 		String viewName = (String) request.getAttribute("viewName");
 		MemberVO member = (MemberVO) session.getAttribute("member");
 		String user_Id = member.getUser_Id();
+		String user_Pwd = member.getUser_Pwd();
 		System.out.println("유저아이디 : " + user_Id);
+		MemberVO members = dealingService.members(user_Id);
 		List<ReportVO> myReport = new ArrayList<ReportVO>();
 		List<DealingVO> myDealing = new ArrayList<DealingVO>();
+		List<JjimVO> myJjim = new ArrayList<JjimVO>();
 		myReport = dealingService.myReport(user_Id);
 		myDealing = dealingService.myDealing(user_Id);
+		myJjim = dealingService.myJjim(user_Id);
+		System.out.println("찜 목록 : " + myJjim);
 		mav.addObject("myReport", myReport);
 		mav.addObject("myDealing", myDealing);
+		mav.addObject("myJjim", myJjim);
+		mav.addObject("user_Pwd", user_Pwd);
+		mav.addObject("user_Id", user_Id);
+		mav.addObject("members", members);
 		mav.setViewName(viewName);
 		System.out.println("interceptor에서 온 viewName:" + viewName);
 		return mav;
@@ -339,6 +377,64 @@ public class DealingControllerImpl {
 		String viewName = (String) request.getAttribute("viewName");
 		System.out.println("interceptor에서 온 viewName:" + viewName);
 		return viewName;
+	}
+
+	/* 찜여부 체크 */
+	@ResponseBody
+	@RequestMapping(value = "/jjimCheck.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public int jjimCheck(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		HttpSession session = request.getSession();
+		MemberVO member = (MemberVO) session.getAttribute("member");
+		String user_Id = member.getUser_Id();
+		String dl_Num1 = request.getParameter("dl_Num");
+		int dl_Num = Integer.parseInt(dl_Num1);
+		System.out.println("찜 조건 : " + user_Id + ", " + dl_Num);
+		Map<String, Object> jjimMap = new HashMap<String, Object>();
+		jjimMap.put("user_Id", user_Id);
+		jjimMap.put("dl_Num", dl_Num);
+		int result = 0;
+		result = dealingService.jjimCheck(jjimMap);
+
+		return result;
+
+	}
+
+	/* 찜하기 */
+	@ResponseBody
+	@RequestMapping(value = "/jjim.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public String jjim(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		HttpSession session = request.getSession();
+		MemberVO member = (MemberVO) session.getAttribute("member");
+		String user_Id = member.getUser_Id();
+		String dl_Num1 = request.getParameter("dl_Num");
+		int dl_Num = Integer.parseInt(dl_Num1);
+		System.out.println("찜 하기 : " + user_Id + ", " + dl_Num);
+		Map<String, Object> jjimMap = new HashMap<String, Object>();
+		jjimMap.put("user_Id", user_Id);
+		jjimMap.put("dl_Num", dl_Num);
+		dealingService.jjim(jjimMap);
+
+		return null;
+
+	}
+
+	/* 찜 취소 */
+	@ResponseBody
+	@RequestMapping(value = "/jjimRemove.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public String jjimRemove(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		HttpSession session = request.getSession();
+		MemberVO member = (MemberVO) session.getAttribute("member");
+		String user_Id = member.getUser_Id();
+		String dl_Num1 = request.getParameter("dl_Num");
+		int dl_Num = Integer.parseInt(dl_Num1);
+		System.out.println("찜 취소 : " + user_Id + ", " + dl_Num);
+		Map<String, Object> jjimMap = new HashMap<String, Object>();
+		jjimMap.put("user_Id", user_Id);
+		jjimMap.put("dl_Num", dl_Num);
+		dealingService.jjimRemove(jjimMap);
+
+		return null;
+
 	}
 
 	/* 매물등록 DB전송 */
@@ -558,9 +654,9 @@ public class DealingControllerImpl {
 		Enumeration enu = multipartRequest.getParameterNames();
 		while (enu.hasMoreElements()) {
 			String name = (String) enu.nextElement();
-//				System.out.println(name);
+//					System.out.println(name);
 			String value = multipartRequest.getParameter(name);
-//				System.out.println(value);
+//					System.out.println(value);
 			boardMap.put(name, value);
 
 		}
@@ -578,12 +674,12 @@ public class DealingControllerImpl {
 		responseHeaders.add("content-Type", "text/html;charset=utf-8");
 		try {
 			int result = dealingService.insertboard(boardMap);
-//				if (imageFileName != null && imageFileName.length() != 0) {
-//					File srcFile = new File(PRODUCT_IMAGE_REPO + "\\" + imageFileName);
-//					File desDir = new File(PRODUCT_IMAGE_REPO);
-//				중간에 폴더 없으면 만들어주는 함수 moveFileToDirectory
-//					FileUtils.moveFileToDirectory(srcFile, desDir, true);
-//				}
+//					if (imageFileName != null && imageFileName.length() != 0) {
+//						File srcFile = new File(PRODUCT_IMAGE_REPO + "\\" + imageFileName);
+//						File desDir = new File(PRODUCT_IMAGE_REPO);
+//					중간에 폴더 없으면 만들어주는 함수 moveFileToDirectory
+//						FileUtils.moveFileToDirectory(srcFile, desDir, true);
+//					}
 			message = "<script>";
 			message += "alert('게시글 등록이 완료되었습니다.');";
 			message += "location.href='" + multipartRequest.getContextPath() + "/inteboardlist.do'";
@@ -595,7 +691,7 @@ public class DealingControllerImpl {
 
 			message = "<script>";
 			message += "alert('다시 작성해주세요');";
-//				message += "location.href='" + multipartRequest.getContextPath() + "location.reload();'";
+//					message += "location.href='" + multipartRequest.getContextPath() + "location.reload();'";
 			message += "";
 			message += "</script>";
 			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
@@ -619,7 +715,7 @@ public class DealingControllerImpl {
 	}
 
 	// 인테리어 게시글 상세보기
-	@RequestMapping(value = "/board/read", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/board/read", method = RequestMethod.GET)
 	public String read(BoardVO boardVO, @RequestParam("inte_Num") int inte_Num, Model model, HttpServletRequest req)
 			throws Exception {
 
@@ -761,7 +857,7 @@ public class DealingControllerImpl {
 	private ModelAndView noticelist(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = (String) request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("/dealing/list");
+		mav.setViewName("/dealing/noticelist");
 		List<NoticeVO> noticlesList = dealingService.listNoticles();
 		mav.addObject("notic", noticlesList);
 		System.out.println("notice" + noticlesList);
@@ -769,20 +865,97 @@ public class DealingControllerImpl {
 		return mav;
 	}
 
-	// 공지사항 글 화면 추가
-	@RequestMapping(value = "/board/create", method = RequestMethod.GET)
-	public String create(@ModelAttribute("searchVO") NoticeVO searchVO, Model model) throws Exception {
-		return "/dealing/create";
+	// 공지사항 글쓰기
+	@RequestMapping(value = "/noticeform.do", method = RequestMethod.GET)
+	public String addnotice(NoticeVO notice, HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		String viewName = (String) request.getAttribute("viewName");
+		return "/dealing/addnotice";
 	}
 
-	// 공지사항 글 추가
-	@RequestMapping(value = "/board/create_action", method = RequestMethod.POST)
-	public String create_action(@ModelAttribute("searchVO") NoticeVO searchVO, RedirectAttributes redirect)
-			throws Exception {
+//		// 공지사항 글 추가
+//		@RequestMapping(value = "/board/create_action", method = RequestMethod.POST)
+//		public String create_action(@ModelAttribute("noticeVO") NoticeVO noticeVO, RedirectAttributes redirect)
+//				throws Exception {
+	//
+//			dealingService.insertnotice(noticeVO);
+//			redirect.addFlashAttribute(noticeVO.getNotice_Num());
+//			return "/dealing/list";
+//		}
 
-		dealingService.insertnotice(searchVO);
-		redirect.addFlashAttribute("redirect", searchVO.getNotice_Num());
-		return "/dealing/list";
+	// 공지사항 글 전송
+	@RequestMapping(value = "/addnotice.do", method = RequestMethod.POST)
+	@ResponseBody
+	public ResponseEntity noticepost(MultipartHttpServletRequest multipartRequest, HttpServletResponse response)
+			throws Exception {
+		multipartRequest.setCharacterEncoding("UTF-8");
+		Map<String, Object> noticeMap = new HashMap<String, Object>();
+		Enumeration enu = multipartRequest.getParameterNames();
+		while (enu.hasMoreElements()) {
+			String name = (String) enu.nextElement();
+			System.out.println(name);
+			String value = multipartRequest.getParameter(name);
+			System.out.println(value);
+			noticeMap.put(name, value);
+		}
+//			String imageFileName2 = up2(multipartRequest);
+		HttpSession session = multipartRequest.getSession();
+		MemberVO memberVO = (MemberVO) session.getAttribute("member");
+		String user_Id = memberVO.getUser_Id();
+//			System.out.println("이미지 파일 이름 : " + imageFileName2);
+		noticeMap.put("user_Id", user_Id);
+//			noticeMap.put("Notice_Image", imageFileName2);
+		noticeMap.put("viewCnt", 1);
+		String message;
+		ResponseEntity resEnt = null;
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.add("content-Type", "text/html;charset=utf-8");
+		try {
+			int result = dealingService.insertnotice(noticeMap);
+//					if (imageFileName != null && imageFileName.length() != 0) {
+//						File srcFile = new File(PRODUCT_IMAGE_REPO + "\\" + imageFileName);
+//						File desDir = new File(PRODUCT_IMAGE_REPO);
+//					중간에 폴더 없으면 만들어주는 함수 moveFileToDirectory
+//						FileUtils.moveFileToDirectory(srcFile, desDir, true);
+//					}
+			message = "<script>";
+			message += "alert('공지글 등록이 완료되었습니다.');";
+			message += "location.href='" + multipartRequest.getContextPath() + "/noticelist.do'";
+			message += "</script>";
+			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+		} catch (Exception e) {
+			File srcFile = new File(NOTICE_IMAGE_REPO + "\\" + "imageFileName2");
+			srcFile.delete();
+
+			message = "<script>";
+			message += "alert('다시 작성해주세요');";
+//					message += "location.href='" + multipartRequest.getContextPath() + "location.reload();'";
+			message += "";
+			message += "</script>";
+			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+			e.printStackTrace();
+		}
+		return resEnt;
+	}
+
+	/* 공지사항 글 상세보기 */
+	@RequestMapping(value = "/notice/read", method = RequestMethod.GET)
+	public String noticeread(NoticeVO noticeVO, @RequestParam("notice_Num") int notice_Num, Model model,
+			HttpServletRequest req) throws Exception {
+		dealingService.updateViewCnt(notice_Num);
+		NoticeVO noticeContents = dealingService.getNoticeContents(notice_Num);
+		HttpSession session = req.getSession();
+
+		MemberVO memberVO = (MemberVO) session.getAttribute("member");
+		if (memberVO == null) {
+			model.addAttribute("user_Id", "guest");
+		} else {
+			String user_Id = memberVO.getUser_Id();
+			model.addAttribute("user_Id", user_Id);
+		}
+		model.addAttribute("noticeContents", noticeContents);
+
+		return "/dealing/noticeview";
 	}
 
 	/* 신고하기 */

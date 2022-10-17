@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
       PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-   
-   <mapper namespace="com.dd.dealing.dao.DealingDAO">
-   
+
+<mapper namespace="com.dd.dealing.dao.DealingDAO">
+
 	<resultMap id="dealResult" type="dealingVO">
 		<result property="dl_Num" column="dl_Num" />
 		<result property="dl_Title" column="dl_Title" />
@@ -22,92 +22,105 @@
 		<result property="dl_Image" column="dl_Image" />
 		<result property="dl_Lat" column="dl_Lat" />
 		<result property="dl_Lng" column="dl_Lng" />
- 		
-	</resultMap> 
-	<resultMap  id="imgResult" type="dealingVO">
-		<result property="dl_Image" column="dl_Image" />
-		<result property="dl_Num" column="dl_Image" />
+
 	</resultMap>
-	
-	<!-- 매물등록 --> 
-	  <insert id="addNewdealing"  parameterType="java.util.Map">
+	<resultMap id="jjimResult2" type="jjimVO">
+		<result property="dl_Num" column="dl_Num" />
+		<result property="user_Id" column="user_Id" />
+		<collection property="dealing" resultMap="dealResult">
+		</collection>
+	</resultMap>
+
+
+
+
+
+
+	<!-- 매물등록 -->
+	<insert id="addNewdealing" parameterType="java.util.Map">
 		<![CDATA[
 		 insert into dealing_t(dl_Num,dl_Title,dl_Views,user_Id,dl_City,dl_Address,dl_Option,dl_Form,dl_Form2,dl_Room,dl_Size,dl_Content,dl_Price,dl_Image, dl_Lat, dl_Lng)
 		 values(#{dl_Num},#{dl_Title},#{dl_Views},#{user_Id},#{dl_City},#{dl_Address},#{dl_Option},#{dl_Form},#{dl_Form2},#{dl_Room},#{dl_Size},#{dl_Content},#{dl_Price},#{dl_Image}, #{dl_Lat}, #{dl_Lng})
 		]]>
 	</insert>
-	
+
 	<insert id="insertNewImage" parameterType="java.util.Map">
 		INSERT INTO dealing_t(dl_Image,dl_Num)
 		VALUES
-		<foreach item="item" collection="list"  separator=", " >
-					(#{item.dl_Image}, 
-					)
+		<foreach item="item" collection="list" separator=", ">
+			(#{item.dl_Image},
+			)
 		</foreach>
 	</insert>
-	
+
 	<!-- 매물 상세보기 -->
-	<select id="getDealingContents" parameterType="int" resultType="dealingVO">
+	<select id="getDealingContents" parameterType="int"
+		resultType="dealingVO">
 		SELECT * FROM dealing_t
-			WHERE dl_Num = #{dl_Num}
+		WHERE dl_Num = #{dl_Num}
 	</select>
 
-	<update id ="viewCount" parameterType="int">
+	<update id="viewCount" parameterType="int">
 		update dealing_t
-		set dl_Views =dl_Views +1
+		set
+		dl_Views =dl_Views +1
 		where dl_Num =#{dl_Num}
 	</update>
 
 
-	
-	
-	<select id="selectMap" resultMap="dealResult" parameterType="java.util.Map">
-			SELECT *
-			FROM dealing_t
-			<if test="dl_Form != null and dl_Form != '' and dl_Form != 'all'">
+
+
+	<select id="selectMap" resultMap="dealResult"
+		parameterType="java.util.Map">
+		SELECT *
+		FROM dealing_t
+		<if test="dl_Form != null and dl_Form != '' and dl_Form != 'all'">
 			WHERE
 			dl_Form = #{dl_Form}
-			</if>
+		</if>
 	</select>
-	
-	
-	<select id="selectMap2" resultMap="dealResult" parameterType="java.util.Map">
-			SELECT *
-			FROM dealing_t
-			WHERE
-			1=1 
-			<if test="dl_Form != null and dl_Form !=''">
-			AND dl_Form LIKE CONCAT('%', #{dl_Form}, '%') 
-			</if>
-			<if test="dl_Form2 != null and dl_Form2 !=''">
-			AND dl_Form2 = #{dl_Form2}   
-			</if>
-			<if test="dl_Room != null and dl_Room !=''">
-			AND dl_Room LIKE CONCAT('%', #{dl_Room}, '%') 
-			</if>
-			<if test="dl_Option != null and dl_Option !=''"> 
-			AND dl_Option LIKE CONCAT('%', #{dl_Option}, '%') 
-			</if>
-			<if test="dl_Price != null and dl_Price !=''">
-			AND #{dl_Price} >= dl_Price 
-			</if>
-			<if test="dl_Address != null and dl_Address !=''">
+
+
+	<select id="selectMap2" resultMap="dealResult"
+		parameterType="java.util.Map">
+		SELECT *
+		FROM dealing_t
+		WHERE
+		1=1
+		<if test="dl_Form != null and dl_Form !=''">
+			AND dl_Form LIKE CONCAT('%', #{dl_Form}, '%')
+		</if>
+		<if test="dl_Form2 != null and dl_Form2 !=''">
+			AND dl_Form2 = #{dl_Form2}
+		</if>
+		<if test="dl_Room != null and dl_Room !=''">
+			AND dl_Room LIKE CONCAT('%', #{dl_Room}, '%')
+		</if>
+		<if test="dl_Option != null and dl_Option !=''">
+			AND dl_Option LIKE CONCAT('%', #{dl_Option}, '%')
+		</if>
+		<if test="dl_Price != null and dl_Price !=''">
+			AND #{dl_Price} >= dl_Price
+		</if>
+		<if test="dl_Address != null and dl_Address !=''">
 			AND dl_Address LIKE CONCAT('%', #{dl_Address}, '%')
-			</if>
+		</if>
 	</select>
-	
-	<select id="selectMap3" resultMap="dealResult" parameterType="java.util.Map">
-			SELECT *
-			FROM dealing_t
-			<if test="dl_Address != null and dl_Address != ''">
+
+	<select id="selectMap3" resultMap="dealResult"
+		parameterType="java.util.Map">
+		SELECT *
+		FROM dealing_t
+		<if test="dl_Address != null and dl_Address != ''">
 			WHERE
 			dl_Address LIKE CONCAT('%', #{dl_Address}, '%')
-			</if>
+		</if>
 	</select>
-	
+
 
 	<!--매물 전체검색 -->
-	<select id = "allListdealing" resultType="dealingVO"  parameterType="String">
+	<select id="allListdealing" resultType="dealingVO"
+		parameterType="String">
 	<![CDATA[
 			SELECT *
 			FROM dealing_t
@@ -115,16 +128,18 @@
 			dl_Form LIKE CONCAT('%', #{dl_Form}, '%')
 		]]>
 	</select>
-	
-	<select id="myDealing" resultMap="dealResult" parameterType="String">
+
+	<select id="myDealing" resultMap="dealResult"
+		parameterType="String">
 	<![CDATA[
 		SELECT *
 		FROM dealing_t
 		WHERE user_Id = #{user_Id}
 	]]>
 	</select>
-	
-	<select id="hereMe" resultMap="dealResult" parameterType="java.util.Map">
+
+	<select id="hereMe" resultMap="dealResult"
+		parameterType="java.util.Map">
 	<![CDATA[
 		SELECT *
 		FROM dealing_t
@@ -134,32 +149,35 @@
 		LIMIT 4
 	]]>
 	</select>
-	
+
 	<!-- 로컬스토리지 보류 -->
-	<!-- <select id="dlMainMap" resultMap="dealResult" parameterType="java.util.Map">
-			SELECT *
-			FROM dealing_t
-			WHERE
-			1=1 
-			<if test="dl_Form != null and dl_Form !=''">
-			AND dl_Form LIKE CONCAT('%', #{dl_Form}, '%') 
-			</if>
-			<if test="dl_Form2 != null and dl_Form2 !=''">
-			AND dl_Form2 = #{dl_Form2}   
-			</if>
-			<if test="dl_Room != null and dl_Room !=''">
-			AND dl_Room LIKE CONCAT('%', #{dl_Room}, '%') 
-			</if>
-			<if test="dl_Option != null and dl_Option !=''"> 
-			AND dl_Option LIKE CONCAT('%', #{dl_Option}, '%') 
-			</if>
-			<if test="dl_Price != null and dl_Price !=''">
-			AND #{dl_Price} >= dl_Price 
-			</if>
-			<if test="dl_Address != null and dl_Address !=''">
-			AND dl_Address LIKE CONCAT('%', #{dl_Address}, '%')
-			</if>
-	</select> -->
+	<!-- <select id="dlMainMap" resultMap="dealResult" parameterType="java.util.Map"> 
+		SELECT * FROM dealing_t WHERE 1=1 <if test="dl_Form != null and dl_Form !=''"> 
+		AND dl_Form LIKE CONCAT('%', #{dl_Form}, '%') </if> <if test="dl_Form2 != 
+		null and dl_Form2 !=''"> AND dl_Form2 = #{dl_Form2} </if> <if test="dl_Room 
+		!= null and dl_Room !=''"> AND dl_Room LIKE CONCAT('%', #{dl_Room}, '%') 
+		</if> <if test="dl_Option != null and dl_Option !=''"> AND dl_Option LIKE 
+		CONCAT('%', #{dl_Option}, '%') </if> <if test="dl_Price != null and dl_Price 
+		!=''"> AND #{dl_Price} >= dl_Price </if> <if test="dl_Address != null and 
+		dl_Address !=''"> AND dl_Address LIKE CONCAT('%', #{dl_Address}, '%') </if> 
+		</select> -->
+		
+		
 
 
-	</mapper>
+
+<!-- 찜 -->
+<select id="myJjim" resultMap="jjimResult2" parameterType="String">
+		<![CDATA[
+			SELECT a.dl_Num, a.dl_Title, a.dl_Image, a.dl_Price, a.dl_Address, a.dl_Content, 
+			a.dl_Views, a.dl_Date, a.user_Id, a.dl_City, a.dl_Form, a.dl_Form2, a.dl_Room, 
+			a.dl_Size, a.dl_Option, a.dl_Lat, a.dl_Lng 
+			FROM dealing_t a
+			JOIN like_t b
+			ON a.dl_Num = b.dl_Num
+			WHERE b.user_Id = #{user_Id}
+		]]>
+	</select>
+
+
+</mapper>

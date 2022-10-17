@@ -20,9 +20,10 @@
 
         #rp_Title {
             display: flex;
-            margin-top: 40px;
             margin-left: 10px;
-
+        }
+        #dl_Num{
+            margin-left: 10px;
         }
 
         #rp_Title input {
@@ -31,20 +32,27 @@
 
         #rp_Content {
             display: flex;
-            margin-top: 40px;
-            margin-left: 10px;
+         
         }
 
-        #rp_Content textarea {
-            width: 400px;
-            height: 300px;
-            display: inline;
+        #rp_Content  {
+            margin-top: 5px;
         }
 
         #rpBtn {
             text-align: right;
             margin-top: 40px;
             margin-right: 20px;
+        }
+        #title{
+            display: inline-flex;
+        }
+        #No{
+            display: inline-flex;
+            margin: 10px 0;
+        }
+        #reform{
+            margin-left: 10px;
         }
     </style>
 </head>
@@ -55,16 +63,18 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
     <h1 style="margin: 20px 0 20px 10px;">신고하기</h1>
     <hr>
-    <form method="post" name="reprot" action="${contextPath}/report.do">
-        <div>
-            <h3>매물 번호</h3>
+    <form id="reform" method="post" name="reprot" action="${contextPath}/report.do">
+        <div id="No">
+            <h3 >매물 번호 : </h3>
             <input type="text" id="dl_Num" name="dl_Num" value="${dl_Num}" readonly>
-            <h3>제목 :&nbsp;&nbsp;</h3>
-            <input type="text" id="rp_Title" name="rp_Title" />
+        </div>
+        <div id="title">
+            <h3>제목 :</h3><input type="text" size="40" id="rp_Title" name="rp_Title" />
         </div>
         <div >
-            <h3>내용 :&nbsp;&nbsp;</h3>
-            <textarea rows="20" id="rp_Content" cols="50" name="rp_Content"></textarea>
+            <h3>내용 :
+            <textarea rows="20" id="rp_Content" cols="65" name="rp_Content"></textarea>
+        </h3>
         </div>
         <div id="rpBtn">
             <button id="rep" type="button">신고하기</button>

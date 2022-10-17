@@ -98,6 +98,8 @@
                     <input type="text" id="sample4_roadAddress" placeholder="도로명주소" name="user_Address2"
                         size="40" /><br><br>
                     <input type="hidden" id="sample4_jibunAddress" placeholder="지번주소" name="user_Address2" size="40" />
+                    <input type="hidden" id="sample4_extraAddress">
+                    <input type="hidden" id="sample4_engAddress">
                     <span id="guide" style="color:#999;display:none"></span>
                 </div>
                 <h3>상세주소</h3>
@@ -260,12 +262,12 @@
                 if (data.autoRoadAddress) {
                     var expRoadAddr = data.autoRoadAddress + extraRoadAddr;
                     guideTextBox.innerHTML = '(예상 도로명 주소 : ' + expRoadAddr + ')';
-                    guideTextBox.style.display = 'block';
+                    guideTextBox.style.display = 'none';
 
                 } else if (data.autoJibunAddress) {
                     var expJibunAddr = data.autoJibunAddress;
                     guideTextBox.innerHTML = '(예상 지번 주소 : ' + expJibunAddr + ')';
-                    guideTextBox.style.display = 'block';
+                    guideTextBox.style.display = 'none';
                 } else {
                     guideTextBox.innerHTML = '';
                     guideTextBox.style.display = 'none';

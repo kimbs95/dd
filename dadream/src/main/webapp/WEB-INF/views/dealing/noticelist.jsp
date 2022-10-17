@@ -8,7 +8,7 @@
   request.setCharacterEncoding("UTF-8");
 %>
 <c:set var="contextPath" value="${pageContext.request.contextPath }" />
-<c:set var="noticlesList" value="${noticeMap.noticlesList }" />
+<c:set var="noticlesList" value="${noticlesMap.noticlesList }" />
 <c:set var="totArticles" value="${articlesMap.totArticles }" />
 <c:set var="section" value="${articlesMap.section }" />
 <c:set var="pageNum" value="${articlesMap.pageNum }" /> 
@@ -19,109 +19,54 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>공지사항 리스트</title>
-  <style>
-	*{
-		margin: 0 auto;
-		
-	}
-	th{
-		font-weight: bolder;
-		font-size: large;
-		padding: 8px 0 9px;
-     	border-bottom: solid 1px #d2d2d2;
-     	text-align: center;
-      	line-height: 18px;
-	}
-	
-   	
-    .write-btn :hover{ color: burlywood;
-    }
-    .write-btn{
-      margin-bottom: 2px;
-	  width: fit-content;
-    }
-	
-	
-	
-	
-  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+  <!-- <link  rel="stylesheet" type="text/css"  href="https://cdn.datatables.net/v/dt/dt-1.11.4/r-2.2.9/datatables.min.css"/> -->
+
+  <!-- css -->
+  <link rel="stylesheet" href="/css/noticelist.css">
+
+  <script src="/js/dealingJS/noticelist.js"></script>
 </head>
-<script>
-	function fn_addnotice(isLogOn, addboard, login) {
-		if(isLogOn != '' && isLogOn != 'false') {
-			location.href=addboard;
-			
-		} else {
-			alert("로그인 후 글쓰기가 가능합니다.")
-			location.href=login + '?action=/login.do';
-		}
-	}
+<script  src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<script  type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.11.4/r-2.2.9/datatables.min.js">
+
+
+	
 </script>
 <body>
-	<table align="center" border="0" width="960px">
-		<tr height="20" align="center" bgcolor="pink" >
-			<th style="border: 1px solid gray;">글번호</th>
-			<th style="border: 1px solid gray;">작성자</th>
-			<th style="border: 1px solid gray;">내용</th>
-			<th style="border: 1px solid gray;">작성일</th>
-			<th style="border: 1px solid gray;">조회수</th>
+	<form action="${contextPath}/noticeform.do" method="get" id="noticeForm">
+	<table id="noticeTable">
+		<tr>
+			<th  id="Category">카테고리</th>
+			<th  id="notice_Num">글번호</th>
+			<th  id="writer">작성자</th>
+			<th  id="notice_Title">제목</th>
+			<!-- <th style="border: 1px solid gray;">내용</th> -->
+			<th  id="RegDate">작성일</th>
+			<th  id="view">조회수</th>
 		</tr>
 			
-	
-		<c:forEach var="notice" items="${noticlesList}">
-			<tr>
-				<td>${notice.Notice_Num}</td>
-				<td>${notice.user_Id}</td>
-				<td>${notice.Notice_Title}</td>
-				<td><fmt:formatDate value="${notice.Notice_Date}" /></td>
-				<td></td>
-			</tr>
-		</c:forEach>
-	
+		<tbody>
+			<c:forEach var="i" items="${notic}">
+				<tr id="foreach_tr">
+					<!-- <td>${noticeTemp}</td> -->
+					<td id="Cate_td">${i.notice_Category}</td>
+					<td><c:out value="${i.notice_Num}"/></a></td>
+					<td>${i.user_Id}</td>
+					<td id="Title_td"><a href="/notice/read?notice_Num=${i.notice_Num}" id="a_none"><c:out value="${i.notice_Title}"/></a></td>
+					<!-- <td>${i.notice_Text}</td> -->
+					<td><fmt:formatDate value="${i.notice_Date}" pattern="yyyy-MM-dd"/></td>
+					<td>${i.viewCnt}</td>
+				</tr>
+			</c:forEach>
+		</tbody>
 	</table>
 	
+	<!-- <button type="submit" ><a class="write-btn" href="javascript:fn_addnotice('${isLogOn }','${contextPath}/noticeform.do', '${contextPath }/login.do')" style="text-decoration: none;"><p class="cls2">등록</p></a></button> -->
+			<button type="submit" id="notice_add_btn">등록하기</button>
 	
-	
-	<div class="cls2">
-		<c:if test="${totArticles != null }" >
-			<c:choose>
-				<c:when test="${totArticles > 5 }"> <!-- 글 개수가 100 초과인경우 -->
-					<c:forEach var="page" begin="1" end="10" step="1">
-						<c:if test="${section > 1 && page == 1 }">
-							<a class="no-uline" href="${contextPath }/selectInteboardlist.do?section=${section-1} & pageNum = ${(section-1) * 10 + 1}">&nbsp; pre </a>
-						</c:if>
-						<a class="no-uline" href="${contextPath }/selectInteboardlist.do?section=${section} & pageNum = ${page }" > ${(section-1) * 10 + page}"> </a>
-						<c:if test="${page == 10 }">
-							<a class="no-uline" href="${contextPath }/selectInteboardlist.do?section=${section+1} & pageNum = ${section * 10 + 1}">&nbsp; next </a>
-						</c:if>
-					</c:forEach>
-				</c:when>
-				<c:when test="${totArticles == 100 }"> <!-- 등록된 글 개수가 100개인 경우 -->
-					<c:forEach var="page" begin="1" end="10" step="1">
-						<a class="no-uline" href="#">${page}</a>
-					</c:forEach>
-				</c:when>
-				
-				<c:when test="${totArticles < 20 }">  <!-- 등록된 글 개수가 100개 미만인 경우 -->
-					<c:forEach var="page" begin="1" end="${totArticles/10 + 1 }" step="1">
-						<c:choose>
-							<c:when test="${page == pageNum }">
-								<a class="sel-page" href="${contextPath }/selectInteboardlist.do?section=${section }&pageNum=${page }">${page }</a>
-							</c:when>
-							<c:otherwise>
-								<a class="no-uline" href="${contextPath }/selectInteboardlist.do?section=${section }&pageNum=${page }">${page }</a>
-							</c:otherwise>
-						</c:choose>
-					</c:forEach>
-				</c:when>
-			</c:choose>
-		</c:if>
-		
-	</div>
-	
-
-
-	<br><br>
-	<a class="write-btn" href="javascript:fn_addnotice('${isLogOn }','${contextPath }/noticeform.do', '${contextPath }/login.do')"><p class="cls2">글쓰기</p></a>
+</form>
 </body>
 </html>

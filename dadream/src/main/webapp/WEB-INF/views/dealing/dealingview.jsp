@@ -16,7 +16,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>부동산 매물보기</title>
 
-
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
     <!--팝업창-->
     <script>
         function showPopup() {
@@ -35,7 +35,6 @@
 
 <body>
     <!--부트스트랩-->
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
     <div class="first">
         <h1 class="title">매물정보</h1>
@@ -101,7 +100,9 @@
                         <p>가격</p>
                         <input type="text" value="${DealingContents.dl_Price}" name="dl_Price" disabled
                             style="text-align: center;">
-                        <div>
+                        <div style="display: flex; justify-content:center">
+                            <!-- 하트 찜  -->
+                            <div class="heart"></div>
                             <button type="button" id="call" class="btn btn-secondary btn-lg"
                                 onclick="showPopup();">전화하기</button>
                         </div>
@@ -119,6 +120,94 @@
             <button type="button" class="btn btn-secondary btn-lg" onclick="showPopup2();">신고합니다</button>
         </div>
     </div>
+
+     <!-- 찜하기 -->
+     <script>
+        //처음 들어갈때 찜 여부 체크
+        var dl_Num = "${DealingContents.dl_Num}";
+        var result2 = null;
+        console.log("dl_Num"+dl_Num);
+        $(document).ready(function () {
+            $(".heart").css("backgroundImage", "url(../image/heart_default.png)");
+            $(".heart").css("width", "24px");
+            $(".heart").css("height", "24px");
+            $.ajax({
+                url: "jjimCheck.do",
+                type: "post",
+                data: {
+                    dl_Num
+                },
+                success: function (result) {
+                    console.log("result"+result);
+                    result2 = result;
+                    if (result == 0) {
+                        $(".heart").css("backgroundImage", "url(../image/heart_default.png)");
+                        $(".heart").css("width", "24px");
+                        $(".heart").css("height", "24px");
+                        $(".heart").css("margin-top", "13%");
+                        $(".heart").css("margin-right", "50px");
+                        return;
+                    } else {
+                        $(".heart").css("backgroundImage", "url(../image/heart_fill.png)");
+                        $(".heart").css("width", "24px");
+                        $(".heart").css("height", "24px");
+                        $(".heart").css("margin-top", "13%");
+                        $(".heart").css("margin-right", "50px");
+                    }
+                },
+                error: function () {}
+            });
+        });
+
+        //좋아요 찜 클릭
+        var user_Id = "${user_Id}";
+        console.log(user_Id);
+        $(".heart").click(function() {
+            console.log(result2);
+            if(result2 == 0) {
+                $.ajax({
+                    url: "jjim.do",
+                    type: "get",
+                    data: {dl_Num},
+                    success: function() {
+                        alert("찜 하기를 등록하셨습니다.");
+                        $(".heart").css("backgroundImage", "url(../image/heart_fill.png)");
+                        $(".heart").css("width", "24px");
+                        $(".heart").css("height", "24px");
+                        $(".heart").css("margin-top", "13%");
+                        $(".heart").css("margin-right", "50px");
+                        result2 = 1;
+                        return;
+                    },
+                    error: function() {
+                        alert("찜 하기를 실패했습니다.");
+                        return;
+                    }
+                });
+            }
+            if(result2 == 1) {
+                $.ajax({
+                    url: "jjimRemove.do",
+                    type: "get",
+                    data: {dl_Num},
+                    success: function() {
+                        alert("찜하기를 취소 했습니다.");
+                        $(".heart").css("backgroundImage", "url(../image/heart_default.png)");
+                        $(".heart").css("width", "24px");
+                        $(".heart").css("height", "24px");
+                        $(".heart").css("margin-top", "13%");
+                        $(".heart").css("margin-right", "50px");
+                        result2 = 0;
+                        return;
+                    },
+                    error: function() {
+                        alert("찜 취소 실패");
+                        return;
+                    }
+                });
+            }
+        });
+    </script>
 </body>
 
 </html>

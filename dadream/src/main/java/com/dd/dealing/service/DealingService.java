@@ -8,6 +8,7 @@ import org.springframework.dao.DataAccessException;
 
 import com.dd.dealing.vo.BoardVO;
 import com.dd.dealing.vo.DealingVO;
+import com.dd.dealing.vo.JjimVO;
 import com.dd.dealing.vo.KakaoLoginVO;
 import com.dd.dealing.vo.MemberVO;
 import com.dd.dealing.vo.NoticeVO;
@@ -69,17 +70,32 @@ public interface DealingService {
 	// 인테리어 게시글 삭제
 	public void removeArticle(int inte_Num) throws Exception;
 
+	// 공지사항 상세보기
+	public NoticeVO getNoticeContents(int notice_Num) throws DataAccessException;
+
+	// 공지사항 조회수
+	public void updateViewCnt(int notice_Num) throws Exception;
+
 	// 공지사항 글 목록
 	public List<NoticeVO> listNoticles() throws Exception;
 
 	// 공지사항 글 등록
-	public void insertnotice(NoticeVO searchVO) throws Exception;
+	public int insertnotice(Map<String, Object> noticeMap) throws DataAccessException;
 
 	// 게시판 조회수 증가
 	public void updateView(int viewCounts) throws Exception;
 
 //	신고하기
 	public int addReport(Map<String, Object> report) throws DataAccessException;
+
+	// 마이페이지 비밀번호 확인
+	public int infoCheck(MemberVO member) throws Exception;
+
+//	마이페이지에서 필요회원에대한 정보
+	public MemberVO members(String user_Id) throws Exception;
+
+//	마이페이지 정보 변경
+	public int memberMod(MemberVO member) throws Exception;
 
 	// 매물상세보기
 	public DealingVO getDealingContents(int dl_Num) throws Exception;
@@ -89,6 +105,15 @@ public interface DealingService {
 
 	// 마이페이지 매물리스트
 	public List<DealingVO> myDealing(String user_Id) throws DataAccessException;
+
+	// 마이페이지 찜 목록
+	public List<JjimVO> myJjim(String user_Id) throws DataAccessException;
+
+	public int jjimCheck(Map jjimMap) throws Exception;
+
+	public void jjim(Map jjimMap) throws Exception;
+
+	public void jjimRemove(Map jjimMap) throws Exception;
 
 	// 현재위치
 	public List<DealingVO> hereMe(Map<String, Object> hereMap) throws DataAccessException;

@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.dd.dealing.dao.DealingDAO;
 import com.dd.dealing.vo.BoardVO;
 import com.dd.dealing.vo.DealingVO;
+import com.dd.dealing.vo.JjimVO;
 import com.dd.dealing.vo.KakaoLoginVO;
 import com.dd.dealing.vo.MemberVO;
 import com.dd.dealing.vo.NoticeVO;
@@ -23,6 +24,11 @@ import com.dd.dealing.vo.ReportVO;
 public class DealingServiceImpl implements DealingService {
 	@Autowired
 	private DealingDAO dealingDAO;
+
+//	마이페이지에서 필요회원에대한 정보
+	public MemberVO members(String user_Id) throws Exception {
+		return dealingDAO.members(user_Id);
+	}
 
 //	회원가입
 	@Override
@@ -159,6 +165,18 @@ public class DealingServiceImpl implements DealingService {
 		dealingDAO.updateArticle(dealingMap);
 	}
 
+	/* 공지사항 상세보기 */
+	@Override
+	public NoticeVO getNoticeContents(int notice_Num) throws DataAccessException {
+		return dealingDAO.getNoticeContents(notice_Num);
+	}
+
+	/* 공지사항 조회수 */
+	@Override
+	public void updateViewCnt(int viewCnt) throws Exception {
+		dealingDAO.updateViewCnt(viewCnt);
+	}
+
 	// 공지사항 게시판 목록 조회
 	@Override
 	public List<NoticeVO> listNoticles() throws Exception {
@@ -167,8 +185,8 @@ public class DealingServiceImpl implements DealingService {
 
 	// 공지사항 글 등록
 	@Override
-	public void insertnotice(NoticeVO searchVO) throws Exception {
-		dealingDAO.insertnotice(searchVO);
+	public int insertnotice(Map<String, Object> noticeMap) throws DataAccessException {
+		return dealingDAO.insertnotice(noticeMap);
 	}
 
 	// 조회수 증가
@@ -181,6 +199,26 @@ public class DealingServiceImpl implements DealingService {
 	@Override
 	public int addReport(Map<String, Object> report) throws DataAccessException {
 		return dealingDAO.insertReport(report);
+	}
+
+	// 마이페이지 비밀번호 확인
+	@Override
+	public int infoCheck(MemberVO member) throws Exception {
+		return dealingDAO.infoCheck(member);
+	}
+
+//	마이페이지 정보 변경
+	@Override
+	public int memberMod(MemberVO member) throws Exception {
+		int check = 0;
+		check = dealingDAO.modPwd(member);
+		if (check == 1) {
+			return dealingDAO.memMod(member);
+		} else {
+
+			return dealingDAO.memberMod(member);
+		}
+
 	}
 
 	// 매물상세보기
@@ -199,5 +237,32 @@ public class DealingServiceImpl implements DealingService {
 	@Override
 	public List<DealingVO> myDealing(String user_Id) throws DataAccessException {
 		return dealingDAO.myDealing(user_Id);
+	}
+
+	/* 마이페이지 찜 목록 */
+	@Override
+	public List<JjimVO> myJjim(String user_Id) throws DataAccessException {
+		return dealingDAO.myJjim(user_Id);
+	}
+
+	/* 찜 여부 체크 */
+	@Override
+	public int jjimCheck(Map jjimMap) throws Exception {
+		int result = dealingDAO.jjimCheck(jjimMap);
+		return result;
+	}
+
+	/* 찜 하기 */
+	@Override
+	public void jjim(Map jjimMap) throws Exception {
+		dealingDAO.jjim(jjimMap);
+
+	}
+
+	/* 찜 취소 */
+	@Override
+	public void jjimRemove(Map jjimMap) throws Exception {
+		dealingDAO.jjimRemove(jjimMap);
+
 	}
 }

@@ -12,6 +12,7 @@
 		<result property="notice_Date" column="notice_Date" />
 		<result property="notice_Category" column="notice_Category" />
 		<result property="user_Id" column="user_Id" />
+		<result property="viewCnt" column="viewCnt" />
 		
 	
 	</resultMap> 
@@ -19,8 +20,8 @@
 		<!--공지사항 등록 -->
 	  <insert id="insertnotice"  parameterType="noticeVO">
 		<![CDATA[
-		 insert into notice_t(notice_Num,notice_Title,notice_Text,notice_Date,notice_Category,user_Id)
-		 values(#{notice_Num},#{notice_Title},#{notice_Text},#{notice_Date},#{notice_Category},#{user_Id})
+		 insert into notice_t(notice_Num,notice_Title,notice_Text,notice_Date,notice_Category,user_Id,viewCnt)
+		 values(#{notice_Num},#{notice_Title},#{notice_Text},#{notice_Date},#{notice_Category},#{user_Id},#{viewCnt})
 		]]>
 		  
 	</insert>
@@ -30,10 +31,21 @@
 	<![CDATA[
 		SELECT * FROM notice_t
 		]]> 
-		
-		
-		
 	</select>
+	
+	<select id="getNoticeContents" parameterType="noticeVO" resultType="noticeVO">
+		select * from notice_t
+		where notice_Num = #{notice_Num}
+	</select>
+	
+	<!-- 조회수 증가 -->
+	<update id="updateViewCnt" parameterType="int">
+		UPDATE notice_t 
+		SET
+		viewCnt = viewCnt + 1
+		WHERE 
+		notice_Num = #{notice_Num}
+	</update>
 	 
 	
 	

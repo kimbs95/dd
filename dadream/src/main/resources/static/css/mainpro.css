@@ -57,6 +57,11 @@
 			width: 1130px;
 			display:inline-flex;
         }
+        .pro_best_item > h1{
+		font-weight: bold;
+		font-size: 20px;
+		margin-bottom: 10px;
+}
 
         .pro_best_item ul li {
             width: 280px;
@@ -96,6 +101,20 @@
             height:373px;
             justify-content:space-around ;
             
+		}
+		.pro_myhouse_introduce >h1{
+			font-weight: bold;
+		font-size: 20px;
+		margin-bottom: 10px;
+		}
+		.pro_myhouse_introduce >p{
+			display:flex;
+			flex-direction: row-reverse;
+			margin-bottom:10px;
+		}
+		.pro_myhouse_introduce >p >a{
+			color:black;
+			font-weight: bold;
 		}
 		.pro_myhouse_introduce ul li{
 			border:1px solid #ccc;

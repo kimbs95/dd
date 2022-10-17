@@ -169,6 +169,7 @@
     <!-- 인테리어 소개 -->
     <div class="pro_myhouse_introduce">
         <h1>인테리어</h1>
+        <p><a href="/inteboardlist.do">MORE</a></p>
         <ul>
             <c:forEach var="i" items="${board}" >
                     <li>

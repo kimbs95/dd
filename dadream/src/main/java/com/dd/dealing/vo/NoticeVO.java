@@ -11,6 +11,7 @@ public class NoticeVO {
 	private String notice_Text;
 	private Date notice_Date;
 	private String user_Id;
+	private int viewCnt;
 	private String notice_Category;
 
 	public NoticeVO() {
@@ -18,13 +19,14 @@ public class NoticeVO {
 	}
 
 	public NoticeVO(int notice_Num, String notice_Title, String notice_Text, Date notice_Date, String user_Id,
-			String notice_Category) {
+			int viewCnt, String notice_Category) {
 		super();
 		this.notice_Num = notice_Num;
 		this.notice_Title = notice_Title;
 		this.notice_Text = notice_Text;
 		this.notice_Date = notice_Date;
 		this.user_Id = user_Id;
+		this.viewCnt = viewCnt;
 		this.notice_Category = notice_Category;
 	}
 
@@ -66,6 +68,14 @@ public class NoticeVO {
 
 	public void setUser_Id(String user_Id) {
 		this.user_Id = user_Id;
+	}
+
+	public int getViewCnt() {
+		return viewCnt;
+	}
+
+	public void setViewCnt(int viewCnt) {
+		this.viewCnt = viewCnt;
 	}
 
 	public String getNotice_Category() {

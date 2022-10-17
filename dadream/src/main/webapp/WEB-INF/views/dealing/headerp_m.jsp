@@ -47,27 +47,35 @@
                 <div class="headerul">
                    
                     <ul>
+                        <a href="${contextPath}/inteboardlist.do">
+                            <li>인테리어</li>
+                        </a>
                         <li>
-                            <form method="post" id="result">
-                                <select name="" id="path" onchange="search()" style="height: 30px;">
-                                    <option value="">중개관리</option>
-                                    <option value="">매물관리</option>
-                                    <option value="${contextPath}/mypage.do">마이페이지</option>
-                                </select>
+                            <form method="post"  action="">
+                                <p class="submit1">중개관리</p>
                             </form>
                         </li>
+                        <li>
+                            <form method="post"  action="">
+                                <p class="submit2">매물관리</p>
+                            </form>
+                        </li>  
+                        <li>
+                            <a href="/mypage.do">
+                                마이페이지
+                            </a>
+                        </li>
+                               
                           <!-- select 를 이용해 action -->
                           <script>
-                            function search(){
-
-                                let path = document.querySelector("#path");
-                                let pathresult =path.options[path.selectedIndex].value;
-                                // console.log(pathresult);
-                                const result = document.querySelector("#result");
-                                result.setAttribute('action',pathresult);
-                                result.submit();
+                            document.querySelector(".headerul").addEventListener("click",(e)=>{
+                                if(e.target.matches(".submit1")){
+                                    document.querySelector(".submit1").parentElement.submit();
+                                }else if(e.target.matches(".submit2")){
+                                    document.querySelector(".submit2").parentElement.submit();
+                                }
                                 
-                            };
+                            })
                                 
                             
                         </script>
@@ -75,12 +83,9 @@
                         
                         <c:choose>
                             <c:when test="${isLogOn == true  && member!= null}">
-                                
-                              
                                     <li>
                                         <h6>${member.user_Name}님</h6>
                                     </li>
-                                
                                 <a href="${contextPath}/logout.do">
                                     <li>로그아웃</li>
                                 </a>
@@ -127,7 +132,7 @@
                             <li>공지사항</li>
                         </a>
                         <a href="${contextPath}/inteboardlist.do">
-                            <li>게시판등록</li>
+                            <li>인테리어</li>
                         </a>
                         <a onclick="dont();" href="${contextPath}/dealingform.do">
                             <li>매물등록</li>
@@ -186,7 +191,7 @@
                             <li>공지사항</li>
                         </a>
                         <a href="${contextPath}/inteboardlist.do">
-                            <li>게시판등록</li>
+                            <li>인테리어</li>
                         </a>
                         <a onclick="dont();" href="${contextPath}/dealingform.do">
                             <li>매물등록</li>
