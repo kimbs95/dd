@@ -1,0 +1,61 @@
+	*{
+		
+		margin: 0 auto;
+		font-weight:lighter;
+		font-family: 'Jua', sans-serif;
+
+	}
+	
+	th{
+		font-weight: bolder;
+		font-size: large;
+		padding: 8px 0 9px;
+     	border-bottom: solid 1px #d2d2d2;
+     	text-align: center;
+      	line-height: 18px;
+		
+
+	}
+	td {
+		text-align: center;
+		border-bottom: 1px solid rgb(187, 187, 171);
+		
+	}
+	
+   	.write-btn{
+		text-decoration: none;
+
+	}
+	.write-btn:hover{
+		color: rgb(248, 14, 14);
+	}
+	#table_id{
+		text-align: center;
+		border:"0";
+		width:960px;
+		
+	}
+	#table_id thead tr {
+		background-color: hotpink;
+		text-align: center;
+		height:20px;
+	}
+	#table_id thead th{
+		border:1px solid gray;
+	}
+    
+	#table_id tbody tr:hover{
+		background-color: gainsboro;
+
+	}
+	#listForm{
+		width: 960px;
+		height: auto;
+	}
+	#table_id_wrapper{
+		font-family: 'Jua', sans-serif;
+	}
+	
+	#table_id td > a{
+		text-decoration: none;
+	}

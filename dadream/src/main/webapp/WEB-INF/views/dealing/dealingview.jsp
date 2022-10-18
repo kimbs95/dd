@@ -24,7 +24,8 @@
         }
 
         function showPopup2() {
-            window.open("${contextPath}/rpPopUp.do?dl_Num=${DealingContents.dl_Num}", "신고하기", "width=500, height=600, top=200 left=600");
+            window.open("${contextPath}/rpPopUp.do?dl_Num=${DealingContents.dl_Num}", "신고하기",
+                "width=500, height=600, top=200 left=600");
         }
     </script>
     <!--부트스트랩-->
@@ -113,24 +114,26 @@
             </div>
         </div>
         <div id="dlcontents">
-                <textarea rows="20" cols="147" value="${DealingContents.dl_Content}" name="dl_Content"
-                    disabled>${DealingContents.dl_Content } </textarea>
+            <textarea rows="20" cols="147" value="${DealingContents.dl_Content}" name="dl_Content"
+                disabled>${DealingContents.dl_Content } </textarea>
         </div>
         <div id="reportbtn">
             <button type="button" class="btn btn-secondary btn-lg" onclick="showPopup2();">신고합니다</button>
         </div>
     </div>
 
-     <!-- 찜하기 -->
-     <script>
+    <!-- 찜하기 -->
+    <script>
         //처음 들어갈때 찜 여부 체크
         var dl_Num = "${DealingContents.dl_Num}";
         var result2 = null;
-        console.log("dl_Num"+dl_Num);
+        console.log("dl_Num" + dl_Num);
         $(document).ready(function () {
             $(".heart").css("backgroundImage", "url(../image/heart_default.png)");
             $(".heart").css("width", "24px");
             $(".heart").css("height", "24px");
+            $(".heart").css("margin-top", "13%");
+            $(".heart").css("margin-right", "50px");
             $.ajax({
                 url: "jjimCheck.do",
                 type: "post",
@@ -138,7 +141,7 @@
                     dl_Num
                 },
                 success: function (result) {
-                    console.log("result"+result);
+                    console.log("result" + result);
                     result2 = result;
                     if (result == 0) {
                         $(".heart").css("backgroundImage", "url(../image/heart_default.png)");
@@ -162,14 +165,16 @@
         //좋아요 찜 클릭
         var user_Id = "${user_Id}";
         console.log(user_Id);
-        $(".heart").click(function() {
+        $(".heart").click(function () {
             console.log(result2);
-            if(result2 == 0) {
+            if (result2 == 0) {
                 $.ajax({
                     url: "jjim.do",
                     type: "get",
-                    data: {dl_Num},
-                    success: function() {
+                    data: {
+                        dl_Num
+                    },
+                    success: function () {
                         alert("찜 하기를 등록하셨습니다.");
                         $(".heart").css("backgroundImage", "url(../image/heart_fill.png)");
                         $(".heart").css("width", "24px");
@@ -179,18 +184,20 @@
                         result2 = 1;
                         return;
                     },
-                    error: function() {
+                    error: function () {
                         alert("찜 하기를 실패했습니다.");
                         return;
                     }
                 });
             }
-            if(result2 == 1) {
+            if (result2 == 1) {
                 $.ajax({
                     url: "jjimRemove.do",
                     type: "get",
-                    data: {dl_Num},
-                    success: function() {
+                    data: {
+                        dl_Num
+                    },
+                    success: function () {
                         alert("찜하기를 취소 했습니다.");
                         $(".heart").css("backgroundImage", "url(../image/heart_default.png)");
                         $(".heart").css("width", "24px");
@@ -200,7 +207,7 @@
                         result2 = 0;
                         return;
                     },
-                    error: function() {
+                    error: function () {
                         alert("찜 취소 실패");
                         return;
                     }

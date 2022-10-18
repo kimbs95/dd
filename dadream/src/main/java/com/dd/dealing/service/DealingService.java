@@ -82,6 +82,18 @@ public interface DealingService {
 	// 공지사항 글 등록
 	public int insertnotice(Map<String, Object> noticeMap) throws DataAccessException;
 
+	// 공지사항 수정
+	public void noticeupdate(NoticeVO noticeVO) throws Exception;
+
+	// 공지사항 글 삭제
+	public void removeNoticle(int notice_Num) throws Exception;
+
+	// 공지사항 글 수정화면
+	public void updateNotice(NoticeVO noticeVO) throws Exception;
+
+	// 공지사항 수정 완료
+	public void modNoticle(Map<String, Object> noticeMap) throws Exception;
+
 	// 게시판 조회수 증가
 	public void updateView(int viewCounts) throws Exception;
 

@@ -958,6 +958,95 @@ public class DealingControllerImpl {
 		return "/dealing/noticeview";
 	}
 
+	/*공지사항 글 수정화면*/
+	@RequestMapping(value = "/notice/update", method = {RequestMethod.POST,RequestMethod.GET})
+	public String noticeupdate(@ModelAttribute("noticeVO") NoticeVO noticeVO, @RequestParam("notice_Num") int notice_Num,
+			Model model) throws Exception {
+
+		NoticeVO noticeContents = dealingService.getNoticeContents(notice_Num);
+		model.addAttribute("noticeContents", noticeContents);
+		return "/dealing/noticeupdate";
+	}
+	  
+	//공지사항 글 수정 동작화면
+		@RequestMapping(value = "/notice/update_action", method = RequestMethod.POST)
+		public String notice_update_action(@ModelAttribute("noticeVO") NoticeVO noticeVO, HttpServletRequest request,
+				RedirectAttributes redirect, Model model) {
+			try {
+				dealingService.updateNotice(noticeVO);
+				redirect.addFlashAttribute("redirect", noticeVO.getNotice_Num());
+				redirect.addFlashAttribute("msg", "수정이 완료되었습니다.");
+			} catch (Exception e) {
+				redirect.addFlashAttribute("msg", "오류가 발생되었습니다.");
+			}
+			return "redirect:/notice/read?notice_Num=" + noticeVO.getNotice_Num();
+		}
+		
+	//공지사항 글 수정 완료
+		@RequestMapping(value = "/notice/modNoticle.do", method = RequestMethod.POST)
+		@ResponseBody
+		public ResponseEntity modNoticle(MultipartHttpServletRequest multipartRequest, HttpServletResponse response)
+				throws Exception {
+			multipartRequest.setCharacterEncoding("UTF-8");
+			Map<String, Object> noticeMap = new HashMap<String, Object>();
+			Enumeration enu = multipartRequest.getParameterNames();
+			while (enu.hasMoreElements()) {
+				String name = (String) enu.nextElement();
+				String value = multipartRequest.getParameter(name);
+				noticeMap.put(name, value);
+			}
+//			String notice_Image = up2(multipartRequest);
+
+			HttpSession session = multipartRequest.getSession();
+			session.setAttribute("user_Id", "testId");
+
+			MemberVO memberVO = (MemberVO) session.getAttribute("member");
+			String id = memberVO.getUser_Id();
+			System.out.println("user_Id:" + id);             
+			noticeMap.put("user_Id", id);
+//			noticeMap.put("notice_Image", notice_Image);
+			String notice_Num = (String) noticeMap.get("notice_Num");
+			System.out.println("notice_Num :" + notice_Num);
+			String message;
+			ResponseEntity resEnt = null;
+			HttpHeaders responseHeaders = new HttpHeaders();
+			responseHeaders.add("Content-Type", "text/html;charset=utf-8");
+
+			return resEnt;
+		}
+		//공지사항 글 삭제
+		@ResponseBody
+		@RequestMapping(value="/notice/removeNoticle", method = RequestMethod.POST)
+		public ResponseEntity removeNoticle(@RequestParam("notice_Num") int notice_Num,HttpServletRequest request,
+				HttpServletResponse response) throws Exception{
+			
+				response.setContentType("text/html;charset=UTF-8");
+				String message;
+				ResponseEntity resEnt = null;
+				HttpHeaders responseHeaders = new HttpHeaders();
+				responseHeaders.add("Content-Type", "text/html;charset=utf-8");
+				try {
+					dealingService.removeNoticle(notice_Num);
+					File destDir = new File(NOTICE_IMAGE_REPO + "\\" + notice_Num);
+					FileUtils.deleteDirectory(destDir);
+
+					message = "<script>";
+					message += "alert('삭제되었습니다.');";
+					message += "location.href='" + request.getContextPath() + "/noticelist.do';";
+					message += "</script>";
+					resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+				} catch (Exception e) {
+					message = "<script>";
+					message += "alert('오류입니다.');";
+					message += "location.href='" + request.getContextPath() + "/noticelist.do';";
+					message += "</script>";
+					resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+					e.printStackTrace();
+				}
+				return resEnt;
+		}
+	
+	
 	/* 신고하기 */
 	@ResponseBody
 	@RequestMapping(value = "/report.do", method = { RequestMethod.POST })

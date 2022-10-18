@@ -104,6 +104,17 @@ public interface DealingDAO {
 	// 공지사항 조회수
 	public void updateViewCnt(int viewCnt) throws Exception;
 
+	// 공지사항 글 수정화면
+	public void noticeupdate(NoticeVO noticeVO) throws Exception;
+
+	// 공지사항 삭제
+	public void deleteNoticle(int notice_Num) throws DataAccessException;
+
+	// 공지사항 수정 동작
+	public void updateNotice(NoticeVO noticeVO) throws Exception;
+
+	public void updateNoticle(Map noticeMap) throws Exception;
+
 	//////////////////////// 마이페이지 ////////////////////////////
 
 	// 마이페이지 비밀번호 확인

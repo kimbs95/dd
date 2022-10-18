@@ -8,6 +8,8 @@ import org.springframework.dao.DataAccessException;
 import com.dd.dealing.vo.BoardVO;
 import com.dd.product.vo.CartVO;
 import com.dd.product.vo.ProductVO;
+import com.dd.product.vo.ReviewReplyVO;
+import com.dd.product.vo.ReviewVO;
 
 public interface ProductService {
 //	메뉴 상품 보기
@@ -28,6 +30,15 @@ public interface ProductService {
 
 //	 상품번호 
 	public int productNum(String product_Num) throws DataAccessException;
+
+//	리뷰리스트
+	public List<ReviewVO> reviewList(int product_Nums) throws Exception;
+
+//	리뷰 댓글
+	public void reviewReply(ReviewReplyVO reply) throws Exception;
+
+//	리뷰 댓글 리스트
+	public List<ReviewReplyVO> revReply(int review_Num) throws Exception;
 
 //	장바구니
 	public int cart(Map<String, Object> body) throws DataAccessException;

@@ -189,6 +189,28 @@ public class DealingServiceImpl implements DealingService {
 		return dealingDAO.insertnotice(noticeMap);
 	}
 
+	/* 공지사항 글 수정 */
+	@Override
+	public void noticeupdate(NoticeVO noticeVO) throws Exception {
+		dealingDAO.noticeupdate(noticeVO);
+	}
+
+	/* 공지사항 글 삭제 */
+	@Override
+	public void removeNoticle(int notice_Num) throws Exception {
+		dealingDAO.deleteNoticle(notice_Num);
+	}
+
+	@Override
+	public void updateNotice(NoticeVO noticeVO) throws Exception {
+		dealingDAO.updateNotice(noticeVO);
+	}
+
+	@Override
+	public void modNoticle(Map noticeMap) throws Exception {
+		dealingDAO.updateNoticle(noticeMap);
+	}
+
 	// 조회수 증가
 	@Override
 	public void updateView(int viewCounts) throws Exception {

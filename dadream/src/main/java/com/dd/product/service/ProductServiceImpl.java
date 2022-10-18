@@ -13,6 +13,8 @@ import com.dd.dealing.vo.BoardVO;
 import com.dd.product.dao.ProductDAO;
 import com.dd.product.vo.CartVO;
 import com.dd.product.vo.ProductVO;
+import com.dd.product.vo.ReviewReplyVO;
+import com.dd.product.vo.ReviewVO;
 
 @Service("prodcutService")
 @Transactional(propagation = Propagation.REQUIRED)
@@ -64,6 +66,21 @@ public class ProductServiceImpl implements ProductService {
 //	상품 조회수 올리기
 	public void viewCount(int product_Nums) throws Exception {
 		productDAO.viewCount(product_Nums);
+	}
+
+//	리뷰리스트
+	public List<ReviewVO> reviewList(int product_Nums) throws Exception {
+		return productDAO.reviewList(product_Nums);
+	}
+
+//	리뷰 댓글
+	public void reviewReply(ReviewReplyVO reply) throws Exception {
+		productDAO.reviewReply(reply);
+	}
+
+//	리뷰 댓글 리스트
+	public List<ReviewReplyVO> revReply(int review_Num) throws Exception {
+		return productDAO.revReply(review_Num);
 	}
 
 //	장바구니

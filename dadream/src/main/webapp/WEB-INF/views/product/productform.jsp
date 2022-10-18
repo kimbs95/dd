@@ -15,15 +15,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>가구 상품등록</title>
-    
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <!-- 섬머노트 -->
+    <script src="/js/summernote/summernote-lite.js"></script>
+    <script src="/js/summernote/lang/summernote-ko-KR.js"></script>
+    <link rel="stylesheet" href="/css/summernote/summernote-lite.css">
+
     <!-- css -->
     <link rel="stylesheet" href="/css/productform.css">
-    
+
 </head>
 
 <body>
-    <!--부트스트랩-->
-    <!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script> -->
 
     <div class="first">
         <h1 style="margin:20px 0 0 10px; font: bold;">상품등록</h1>
@@ -34,15 +37,20 @@
                 <!--이미지 div-->
                 <div class="dlImg">
                     <div class="dlMain">
-                        <input style="display: none;" type="file" id="product_Image" name="product_Image" accept="image/*" multiple>
+                        <input style="display: none;" type="file" id="product_Image" name="product_Image"
+                            accept="image/*" multiple>
                         <img id="preview" src="" width=500 height=500 />
-                        <label for="product_Image" ><p style="width: 300px;border: 1px solid;height: 40px;text-align: center;line-height: 40px;">클릭 후 이미지 를 골라주세요</p></label>
+                        <label for="product_Image">
+                            <p
+                                style="width: 300px;border: 1px solid;height: 40px;text-align: center;line-height: 40px;">
+                                클릭 후 이미지 를 골라주세요</p>
+                        </label>
                         <h1 class="imgh1" style="font-weight: bold;margin-top: 20px;"></h1>
                     </div>
                 </div>
 
                 <!-- 텍스트추가 -->
-                <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+                
                 <script type="text/javascript">
                     var cnt = 1;
 
@@ -68,12 +76,7 @@
                         <input type="text" class="width300" id="product_Name" name="product_Name" placeholder="ex)뜨거운침대"
                             size="70">
                         <br><br>
-                        <h3>상품설명</h3>
-                        <!-- <input type="text" class="width300" name="product_Content" placeholder="ex) 뜨거운침대는 매우 큰 사이즈입니다."
-                            size="70"> -->
-                        <textarea id="product_Content" name="product_Content" id="" cols="70" rows="15"
-                            placeholder="상품 상세 설명"></textarea>
-                        <br><br>
+
                     </div>
                     <div class="pfcontrol">
                         <div class="flexnum">
@@ -94,7 +97,8 @@
                         <div class="option_all">
                             <div class="option">
                                 <div class="flex_option">
-                                    <h3>옵션 <input style="height: 30px;" type="button" value="추가" onclick="fn_addtext()" class="text_button" />
+                                    <h3>옵션 <input style="height: 30px;" type="button" value="추가" onclick="fn_addtext()"
+                                            class="text_button" />
                                     </h3>
 
                                 </div>
@@ -105,8 +109,8 @@
                             </div>
                             <div class="option1">
                                 <div class="flex_option">
-                                    <h3>추가옵션 <input style="height: 30px;" type="button" value="추가" onclick="fn_addtext2()"
-                                            class="text_button2" /></h3>
+                                    <h3>추가옵션 <input style="height: 30px;" type="button" value="추가"
+                                            onclick="fn_addtext2()" class="text_button2" /></h3>
                                 </div>
                                 <div id="d_text2"></div>
                             </div>
@@ -114,12 +118,11 @@
                     </div>
                 </div>
             </div>
+            <!-- 썸머노트 -->
+            <h3>상품설명</h3>
+            <textarea id="summernote" name="product_Content" cols="70" rows="15" placeholder="상품 상세 설명"></textarea>
 
-            <div class="dlThumbnail2">
-
-
-            </div>
-
+            <br><br>
 
             <div class="bds02">
                 <input type="submit" id="productsubmit" class="btn btn-secondary btn-lg"
@@ -146,14 +149,53 @@
 
             // // 등록 버튼 누를시 
             document.querySelector("#productsubmit").addEventListener("click", async (e) => {
-                if(!confirm("상품등록을 하시겠습니까?")){
+                if (!confirm("상품등록을 하시겠습니까?")) {
                     e.preventDefault();
                     return;
                 }
 
 
-             })
+            })
         });
+
+
+
+        // 썸머노트
+        (function () {
+
+
+            $("#summernote").summernote("code", {
+                height: 300, // 에디터 높이
+                minHeight: 300, // 최소 높이
+                maxHeight: null, // 최대 높이(null 제한없음)
+                focus: false, // 에디터 로딩후 포커스를 맞출지 여부
+                lang: "ko-KR", // 한글 설정
+                toolbar: [
+                    ['fontname', ['fontname']], // 글꼴 설정
+                    ['fontsize', ['fontsize']], // 글자 크기 설정
+                    ['style', ['bold', 'italic', 'underline', 'strikethrough',
+                        'clear'
+                    ]], // 굵기, 기울임꼴, 밑줄,취소 선, 서식지우기
+                    ['color', ['forecolor', 'color']], // 글자색
+                    ['table', ['table']], // 표만들기
+                    ['para', ['ul', 'ol', 'paragraph']], // 글머리 기호, 번호매기기, 문단정렬
+                    ['height', ['height']], // 줄간격
+                    ['insert', ['picture', 'link', 'video']], // 그림첨부, 링크만들기, 동영상첨부
+                    ['view', ['fullscreen', 'codeview', 'help']] // 코드보기, 확대해서보기, 도움말
+                ],
+                // 추가한 글꼴
+                fontNames: ['Arial', 'Arial Black', '맑은 고딕', '궁서',
+                    '굴림체', '굴림', '돋음체', '바탕체'
+                ],
+                // 추가한 폰트사이즈
+                fontSizes: ['8', '9', '10', '11', '12', '14', '16', '18', '20', '22', '24',
+                    '28', '30',
+                    '36', '50', '72'
+                ]
+            });
+
+
+        })();
     </script>
 
 </body>

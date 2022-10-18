@@ -10,6 +10,8 @@ import org.springframework.stereotype.Repository;
 import com.dd.dealing.vo.BoardVO;
 import com.dd.product.vo.CartVO;
 import com.dd.product.vo.ProductVO;
+import com.dd.product.vo.ReviewReplyVO;
+import com.dd.product.vo.ReviewVO;
 
 @Mapper
 @Repository("productDAO")
@@ -34,6 +36,15 @@ public interface ProductDAO {
 
 //	상품 조회수 올리기
 	public void viewCount(int product_Nums) throws Exception;
+
+//	리뷰리스트
+	public List<ReviewVO> reviewList(int product_Nums) throws Exception;
+
+//	리뷰 댓글
+	public void reviewReply(ReviewReplyVO reply) throws Exception;
+
+//	리뷰 댓글 리스트
+	public List<ReviewReplyVO> revReply(int review_Num) throws Exception;
 
 //	장바구니
 	public int cart(Map<String, Object> body) throws DataAccessException;

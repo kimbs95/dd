@@ -38,6 +38,14 @@
 		where notice_Num = #{notice_Num}
 	</select>
 	
+	<update id="updateNotice" parameterType="noticeVO">
+		UPDATE notice_t SET
+		notice_Title = #{notice_Title},
+		notice_Text = #{notice_Text},
+		user_Id = #{user_Id}
+		WHERE notice_Num = #{notice_Num}
+	</update>
+	
 	<!-- 조회수 증가 -->
 	<update id="updateViewCnt" parameterType="int">
 		UPDATE notice_t 
@@ -46,6 +54,16 @@
 		WHERE 
 		notice_Num = #{notice_Num}
 	</update>
+	
+	<delete id="deleteNoticle"  parameterType="noticeVO" >
+		<![CDATA[
+			delete
+			from
+			notice_t
+			WHERE
+			notice_Num = #{notice_Num}
+			]]>
+	</delete>
 	 
 	
 	

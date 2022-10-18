@@ -1,6 +1,7 @@
 package com.dd.product.vo;
 
 import java.sql.Date;
+import java.util.List;
 
 import org.springframework.stereotype.Component;
 
@@ -13,6 +14,7 @@ public class ReviewVO {
 	private String review_Image;
 	private int product_Num;
 	private String user_Id;
+	private List<ReviewReplyVO> reviewReply;
 
 	public ReviewVO() {
 
@@ -84,6 +86,14 @@ public class ReviewVO {
 
 	public void setUser_Id(String user_Id) {
 		this.user_Id = user_Id;
+	}
+
+	public List<ReviewReplyVO> getReviewReply() {
+		return reviewReply;
+	}
+
+	public void setReviewReply(List<ReviewReplyVO> reviewReply) {
+		this.reviewReply = reviewReply;
 	}
 
 }

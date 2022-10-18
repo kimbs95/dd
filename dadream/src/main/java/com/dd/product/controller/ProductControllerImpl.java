@@ -41,6 +41,7 @@ import com.dd.dealing.vo.MemberVO;
 import com.dd.product.service.ProductService;
 import com.dd.product.vo.CartVO;
 import com.dd.product.vo.ProductVO;
+import com.dd.product.vo.ReviewReplyVO;
 import com.dd.product.vo.ReviewVO;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -158,18 +159,19 @@ public class ProductControllerImpl implements ProductController {
 		MemberVO memberVO = (MemberVO) session.getAttribute("member");
 		String user_Id = memberVO.getUser_Id();
 		int count = 0;
-		while (fileNames.hasNext()) {
-			String fileName = fileNames.next();
-			MultipartFile mFile = multipartRequest.getFile(fileName);
-			imageFileName = mFile.getOriginalFilename();
-			File file = new File(PRODUCT_IMAGE_REPO + "\\" + user_Id + "\\" + imageFileName);
-			if (mFile.getSize() != 0) {
-				if (!file.exists()) {
-					file.getParentFile().mkdirs();
-					mFile.transferTo(new File(PRODUCT_IMAGE_REPO + "\\" + user_Id + "\\" + imageFileName));
-				}
+//		썸머노트가 뻇어가서 일단 주석
+//		while (fileNames.hasNext()) {
+		String fileName = fileNames.next();
+		MultipartFile mFile = multipartRequest.getFile(fileName);
+		imageFileName = mFile.getOriginalFilename();
+		File file = new File(PRODUCT_IMAGE_REPO + "\\" + user_Id + "\\" + imageFileName);
+		if (mFile.getSize() != 0) {
+			if (!file.exists()) {
+				file.getParentFile().mkdirs();
+				mFile.transferTo(new File(PRODUCT_IMAGE_REPO + "\\" + user_Id + "\\" + imageFileName));
 			}
 		}
+//		}
 		return imageFileName;
 	}
 
@@ -183,10 +185,12 @@ public class ProductControllerImpl implements ProductController {
 		int product_Nums = Integer.parseInt(product_Num);
 		System.out.println("product_Nums :" + product_Nums);
 		productService.viewCount(product_Nums);// 조회수
+		List<ReviewVO> reviewList = productService.reviewList(product_Nums);
+		System.out.println("reviewList" + reviewList);
 		ProductVO result = productService.productinfo(product_Nums);
 		model.addAttribute("product_Num", product_Num);
 		model.addAttribute("result", result);
-
+		model.addAttribute("review", reviewList);
 		return viewName;
 	}
 
@@ -270,6 +274,31 @@ public class ProductControllerImpl implements ProductController {
 		return response;
 	}
 
+//	리뷰 답글
+
+	@RequestMapping(value = "/reviewReply.do", method = { RequestMethod.POST })
+	private String reviewReply(@ModelAttribute ReviewReplyVO reply, HttpServletRequest req) throws Exception {
+		HttpSession session = req.getSession();
+		MemberVO member = (MemberVO) session.getAttribute("member");
+		String user_Id = member.getUser_Id();
+		String product_Num = req.getParameter("product_Num");
+		reply.setUser_Id(user_Id);
+		reply.setParent_No(0);
+		productService.reviewReply(reply);
+		return "redirect:/productview.do?product_Num=" + product_Num;
+	}
+
+//	리뷰 댓글 리스트
+	@RequestMapping(value = "/revReply.do", method = { RequestMethod.POST })
+	@ResponseBody
+	private Map<String, Object> revReply(@RequestBody int review_Num, HttpServletRequest req) throws Exception {
+		List<ReviewReplyVO> result = productService.revReply(review_Num);
+		System.out.println(review_Num);
+		Map<String, Object> map = new HashMap<>();
+		map.put("result", result);
+		System.out.println("result" + result);
+		return map;
+	}
 //	토스페이
 
 	private final RestTemplate restTemplate = new RestTemplate();

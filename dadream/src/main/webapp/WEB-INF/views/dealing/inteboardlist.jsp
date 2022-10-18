@@ -25,102 +25,33 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
-  <style>
-	*{
-		
-		margin: 0 auto;
-		font-weight:lighter;
-		font-family: 'Jua', sans-serif;
-
-	}
-	
-	th{
-		font-weight: bolder;
-		font-size: large;
-		padding: 8px 0 9px;
-     	border-bottom: solid 1px #d2d2d2;
-     	text-align: center;
-      	line-height: 18px;
-		
-
-	}
-	td {
-		text-align: center;
-		border-bottom: 1px solid rgb(187, 187, 171);
-		
-	}
-	
-   	.write_btn{
-		background-color: wheat;
-
-	}
-	.write-btn:hover{
-		color: rgb(248, 14, 14);
-	}
-    
-	#table_id tbody tr:hover{
-		background-color: gainsboro;
-
-	}
-	#listForm{
-		width: 960px;
-		height: auto;
-	}
-	#table_id_wrapper{
-		font-family: 'Jua', sans-serif;
-	}
-  </style>
+  
+<!-- css -->
+<link rel="stylesheet" href="/css/inteboardlist.css">
+<!--js-->
+<script src="/js/dealingJS/inteboardlist.js"></script>
 </head>
-<script
-    src="https://code.jquery.com/jquery-3.6.0.js"
-    integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
-    crossorigin="anonymous"></script>
-<link
-    rel="stylesheet"
-    type="text/css"
-    href="https://cdn.datatables.net/v/dt/dt-1.11.4/r-2.2.9/datatables.min.css"/>
-<script
-    type="text/javascript"
-    src="https://cdn.datatables.net/v/dt/dt-1.11.4/r-2.2.9/datatables.min.js"></script>
-
-<script>
-	function fn_addboard(isLogOn, addboard, login) {
-		if(isLogOn != '' && isLogOn != 'false') {
-			location.href=addboard;
-			
-		} else {
-			alert("로그인 후 글쓰기가 가능합니다.")
-			location.href=login + '?action=/login.do';
-		}
-		
-	}
-	$(document).ready(function(){
-		var msg = "${msg}";
-
-		if(msg !=""){
-			alert(msg);
-		}
-	});
-	function fn_search(){
-		$("#listForm").submit();
-		return false;
-	}
-	$(document).ready( function () {
-    $('#table_id').DataTable({
-        responsive : {deatail:{ type: 'column',
-                                target : 1}},
-        ordering: false,
-        language: {
-            url: '/js/user/dataTables.ko.json'
-        },
-        lengthChange: true,
-		info : false,
-		searching:true,
-		displayLength:10,
-		
+<script src="https://code.jquery.com/jquery-3.6.0.js"   integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.11.4/r-2.2.9/datatables.min.css"/>
+<script defer type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.11.4/r-2.2.9/datatables.min.js"></script>
+	<script>
+		$(document).ready( function () {
+			$('#table_id').DataTable({
+				responsive : {deatail:{ type: 'column',
+										target : 1}},
+				ordering: false,
+				language: {
+					url: '/js/user/dataTables.ko.json'
+				},
+				lengthChange: true,
+				info : false,
+				searching:true,
+				displayLength:10,
+				
 		
 		
     });
+    		
 	// let table = $('#table_id').DataTable();
 	// if(! table.data().count()){
 	// 	alert('글이 없습니다. 새로운 글을 작성해주세요.');
@@ -128,22 +59,27 @@
 	// 	return false;
 	// }
 } );
- 
+	/*$(document).ready(function(){
+		var msg = "${msg}";
 
-</script>
+		if(msg !=""){
+			alert(msg);
+		}
+	});*/
+	</script>
 
 <body>
 	
 	<form action="${contextPath}/inteboardlist.do" method="get" id="listForm">
 		
-	<table id="table_id" style="text-align: center;" border="0" width="960px" cellspacing="0">
+	<table id="table_id" cellspacing="0">
 		<thead>
-		<tr height="20" bgcolor="pink" style="text-align:center;" >
-			<th style="border: 1px solid gray;">글번호</th>
-			<th style="border: 1px solid gray;">작성자</th>
-			<th style="border: 1px solid gray;">제목</th>
-			<th style="border: 1px solid gray;">작성일</th>
-			<th style="border: 1px solid gray;">조회수</th>
+		<tr>
+			<th>글번호</th>
+			<th>작성자</th>
+			<th>제목</th>
+			<th>작성일</th>
+			<th>조회수</th>
 		</tr>
 		</thead>
 	<tbody>
@@ -203,7 +139,7 @@
 
 	<br><br>
 	
-	<button type="button" class="write_btn"><a class="write-btn" href="javascript:fn_addboard('${isLogOn }','${contextPath }/inteboardform.do', '${contextPath }/login.do')"  style="text-decoration: none;">글 작성</a></button>
+	<button type="button"><a class="write-btn" href="javascript:fn_addboard('${isLogOn }','${contextPath }/inteboardform.do', '${contextPath }/login.do')">글 작성</a></button>
 	
 	<!-- <div class="card-header py-3">
 		<input type="text" id="searchKeyword" name="searchKeyword" value="${boardVO.searchKeyword}" style="width: 250px; height: 30px;" placeholder="검색어를 입력하세요."/>

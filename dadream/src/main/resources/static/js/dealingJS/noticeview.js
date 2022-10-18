@@ -10,14 +10,14 @@
 		obj.submit();
 	}*/
 	
-	function fn_remove_article(url,notice_Num){
+	function fn_remove_noticle(url,notice_Num){
 	var form = document.createElement("form");
 	form.setAttribute("method", "post");
 	form.setAttribute("action", url);
- 	var inte_NumInput = document.createElement("input");
- 	inte_NumInput.setAttribute("type","hidden");
- 	inte_NumInput.setAttribute("name","notice_Num");
- 	inte_NumInput.setAttribute("value",notice_Num);
+ 	var notice_NumInput = document.createElement("input");
+ 	notice_NumInput.setAttribute("type","hidden");
+ 	notice_NumInput.setAttribute("name","notice_Num");
+ 	notice_NumInput.setAttribute("value",notice_Num);
  	form.appendChild(notice_NumInput);
  	document.body.appendChild(form);
  	form.submit();
