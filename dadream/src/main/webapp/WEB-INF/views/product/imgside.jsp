@@ -18,8 +18,9 @@ request.setCharacterEncoding("UTF-8");
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
   <script>
+    var bxSlider1;
     $(document).ready(function () {
-      $('.slider').bxSlider({
+      bxSlider1 = $('.slider').bxSlider({
         slideWidth: 600, //슬라이드 넓이
         mode: 'horizontal', //슬라이드 모드 ex)'horizontal', 'vertical', 'fade'
         speed: 0, // ms
@@ -42,9 +43,9 @@ request.setCharacterEncoding("UTF-8");
 <body>
 
   <div class=" slider">
-    <div class="slide_item"><img src="../image/han.jpg"></div>
-    <div class="slide_item"><img src="../image/han.jpg"></div>
-    <div class="slide_item"><img src="../image/메인로고.png"></div>
+    <!-- 추후 아이디 삭제 -->
+    <div class="slide_item"><img class="bx_slide_image" id="slide_image" src="../image/메인로고.png"></div>
+    <!-- <div class="slide_item"><img class="bx_slide_image" id="slide_image" src="../image/han.jpg"></div> -->
   </div>
 
 </body>

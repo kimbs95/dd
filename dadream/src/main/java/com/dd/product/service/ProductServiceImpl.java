@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.dd.dealing.vo.BoardVO;
+import com.dd.dealing.vo.JjimVO;
 import com.dd.product.dao.ProductDAO;
 import com.dd.product.vo.CartVO;
 import com.dd.product.vo.ProductVO;
@@ -68,6 +69,11 @@ public class ProductServiceImpl implements ProductService {
 		productDAO.viewCount(product_Nums);
 	}
 
+	/* 부동산 찜 목록 가져오기 */
+	public List<JjimVO> proDl(String user_Id) throws DataAccessException {
+		return productDAO.proDl(user_Id);
+	}
+
 //	리뷰리스트
 	public List<ReviewVO> reviewList(int product_Nums) throws Exception {
 		return productDAO.reviewList(product_Nums);
@@ -79,8 +85,24 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 //	리뷰 댓글 리스트
-	public List<ReviewReplyVO> revReply(int review_Num) throws Exception {
-		return productDAO.revReply(review_Num);
+	public List<ReviewReplyVO> revReply() throws Exception {
+		return productDAO.revReply();
+	}
+
+//	리뷰 대댓글 작성
+	public void daedatgle(ReviewReplyVO reply) throws Exception {
+		productDAO.daedatgle(reply);
+	}
+
+//	리뷰 최고 제일 높은 부모 
+	@Override
+	public int parentMax() throws Exception {
+		return productDAO.parentMax();
+	}
+
+//	댓글 토탈 리스트
+	public List<ReviewReplyVO> totalReply() throws Exception {
+		return productDAO.totalReply();
 	}
 
 //	장바구니

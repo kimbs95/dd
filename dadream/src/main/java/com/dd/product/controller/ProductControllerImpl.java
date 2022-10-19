@@ -37,6 +37,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.dd.dealing.vo.BoardVO;
+import com.dd.dealing.vo.JjimVO;
 import com.dd.dealing.vo.MemberVO;
 import com.dd.product.service.ProductService;
 import com.dd.product.vo.CartVO;
@@ -91,6 +92,18 @@ public class ProductControllerImpl implements ProductController {
 		String viewName = (String) request.getAttribute("viewName");
 		System.out.println("interceptor에서 온 viewName:" + viewName);
 		return viewName;
+	}
+
+	/* 상품목록창에서 부동산 리스트 */
+	@ResponseBody
+	@RequestMapping(value = "/proDealing.do", method = RequestMethod.POST)
+	private List<JjimVO> proDl(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String user_Id2 = request.getParameter("user_Id");
+		System.out.println("유저 아이디 : " + user_Id2);
+		List<JjimVO> proDlList = new ArrayList<JjimVO>();
+		proDlList = productService.proDl(user_Id2);
+		System.out.println("매물 리스트 : " + proDlList);
+		return proDlList;
 	}
 
 	/* 상품 글 등록 */
@@ -187,10 +200,18 @@ public class ProductControllerImpl implements ProductController {
 		productService.viewCount(product_Nums);// 조회수
 		List<ReviewVO> reviewList = productService.reviewList(product_Nums);
 		System.out.println("reviewList" + reviewList);
+		List<ReviewReplyVO> reply = productService.revReply();
 		ProductVO result = productService.productinfo(product_Nums);
+		int parentMax = productService.parentMax();
+		System.out.println("리뷰 부모 제일 높은거 : " + parentMax);
+		List<ReviewReplyVO> totalReply = productService.totalReply();
+		model.addAttribute("totalReply", totalReply);
+		System.out.println("totalReply" + totalReply);
+		model.addAttribute("parentMax", parentMax);
 		model.addAttribute("product_Num", product_Num);
 		model.addAttribute("result", result);
 		model.addAttribute("review", reviewList);
+		model.addAttribute("reply", reply);
 		return viewName;
 	}
 
@@ -289,15 +310,31 @@ public class ProductControllerImpl implements ProductController {
 	}
 
 //	리뷰 댓글 리스트
-	@RequestMapping(value = "/revReply.do", method = { RequestMethod.POST })
-	@ResponseBody
-	private Map<String, Object> revReply(@RequestBody int review_Num, HttpServletRequest req) throws Exception {
-		List<ReviewReplyVO> result = productService.revReply(review_Num);
-		System.out.println(review_Num);
-		Map<String, Object> map = new HashMap<>();
-		map.put("result", result);
-		System.out.println("result" + result);
-		return map;
+//	@RequestMapping(value = "/revReply.do", method = { RequestMethod.POST })
+//	@ResponseBody
+//	private Map<String, Object> revReply(@RequestBody int review_Num, HttpServletRequest req) throws Exception {
+//		List<ReviewReplyVO> result = productService.revReply(review_Num);
+//		System.out.println(review_Num);
+//		Map<String, Object> map = new HashMap<>();
+//		map.put("result", result);
+//		System.out.println("result" + result);
+//		return map;
+//	}
+
+//	대댓글
+	@RequestMapping(value = "/daedatgle.do", method = { RequestMethod.POST })
+	public ModelAndView daedatgle(@ModelAttribute ReviewReplyVO reply, HttpServletRequest req) throws Exception {
+		HttpSession session = req.getSession();
+		MemberVO member = (MemberVO) session.getAttribute("member");
+		String user_Id = member.getUser_Id();
+		reply.setUser_Id(user_Id);
+		String product_Nums = req.getParameter("product_Num");
+		int product_Num = Integer.parseInt(product_Nums);
+
+		productService.daedatgle(reply);
+
+		ModelAndView mav = new ModelAndView("redirect:/productview.do?product_Num=" + product_Num);
+		return mav;
 	}
 //	토스페이
 

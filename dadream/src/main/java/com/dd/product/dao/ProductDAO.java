@@ -8,6 +8,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
 import com.dd.dealing.vo.BoardVO;
+import com.dd.dealing.vo.JjimVO;
 import com.dd.product.vo.CartVO;
 import com.dd.product.vo.ProductVO;
 import com.dd.product.vo.ReviewReplyVO;
@@ -37,6 +38,9 @@ public interface ProductDAO {
 //	상품 조회수 올리기
 	public void viewCount(int product_Nums) throws Exception;
 
+//	찜목록 불러오기
+	public List<JjimVO> proDl(String user_Id) throws DataAccessException;
+
 //	리뷰리스트
 	public List<ReviewVO> reviewList(int product_Nums) throws Exception;
 
@@ -44,7 +48,17 @@ public interface ProductDAO {
 	public void reviewReply(ReviewReplyVO reply) throws Exception;
 
 //	리뷰 댓글 리스트
-	public List<ReviewReplyVO> revReply(int review_Num) throws Exception;
+	public List<ReviewReplyVO> revReply() throws Exception;
+
+//	리뷰 대댓글 작성
+	public void daedatgle(ReviewReplyVO reply) throws Exception;
+
+//	리뷰 최고 제일 높은 부모 
+	public int parentMax() throws Exception;
+
+	// 댓글 토탈리스트
+//	댓글 토탈 리스트
+	public List<ReviewReplyVO> totalReply() throws Exception;
 
 //	장바구니
 	public int cart(Map<String, Object> body) throws DataAccessException;

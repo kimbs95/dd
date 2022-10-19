@@ -53,9 +53,28 @@
 	<!-- 리뷰 댓글 리스트 -->
 	<select id ="revReply" resultMap="reviewReplyResult" parameterType="int">
 		<![CDATA[
-			select * from reviewreply_t where review_Num =#{review_Num}
+			select * from reviewreply_t  where parent_No = 0
 		]]>
 	</select>
-	
+	<!-- 리뷰 대댓글 -->
+	<insert id="daedatgle" parameterType="reviewReplyVO">
+	<![CDATA[
+		insert into reviewreply_t(reply_Count,review_Num,reply_Text,parent_No,user_Id,reply_Date)
+			values(#{reply_Count},#{review_Num},#{reply_Text},#{parent_No},#{user_Id},#{reply_Date})
+	]]>
+	</insert> 
+	<!-- parentNO max 구하기 -->
+	<select id="parentMax" resultType="int">
+		<![CDATA[
+			select MAX(parent_No) from reviewreply_t
+		]]>
+	</select>
+	<!-- 댓글 토탈리스트 -->
+		<!-- 리뷰 댓글 리스트 -->
+	<select id ="totalReply" resultMap="reviewReplyResult" >
+		<![CDATA[
+			select * from reviewreply_t  
+		]]>
+	</select>
 	
 </mapper>
