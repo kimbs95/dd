@@ -202,12 +202,12 @@ public class ProductControllerImpl implements ProductController {
 		System.out.println("reviewList" + reviewList);
 		List<ReviewReplyVO> reply = productService.revReply();
 		ProductVO result = productService.productinfo(product_Nums);
-		int parentMax = productService.parentMax();
-		System.out.println("리뷰 부모 제일 높은거 : " + parentMax);
+//		int parentMax = productService.parentMax();
+//		System.out.println("리뷰 부모 제일 높은거 : " + parentMax);
 		List<ReviewReplyVO> totalReply = productService.totalReply();
 		model.addAttribute("totalReply", totalReply);
 		System.out.println("totalReply" + totalReply);
-		model.addAttribute("parentMax", parentMax);
+//		model.addAttribute("parentMax", parentMax);
 		model.addAttribute("product_Num", product_Num);
 		model.addAttribute("result", result);
 		model.addAttribute("review", reviewList);

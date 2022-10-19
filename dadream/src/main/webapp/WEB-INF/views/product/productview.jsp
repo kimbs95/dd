@@ -320,10 +320,10 @@
                                             </div>
                                             <c:forEach var="total" items="${totalReply}">
                                                 <c:if test="${reply.reply_Count == total.parent_No}">
-                                                    <p>${total.user_Id} : ${total.reply_Text}</p>
-                                                    <p>${total.reply_Date}</p>
-                                                    <p id="plus">댓글달기</p>
-                                                    <div id="hide" class="divtag replying">
+                                                    <p style="padding-left: 40px;">${total.user_Id} : ${total.reply_Text}</p>
+                                                    <p style="padding-left: 40px;">${total.reply_Date}</p>
+                                                    <p style="padding-left: 40px;" id="plus">댓글달기</p>
+                                                    <div style="padding-left: 40px;" id="hide" class="divtag replying">
                                                         <form action="/daedatgle.do" method="post">
                                                             <div class="divtag">
                                                                 <textarea name="reply_Text" id="" cols="80"
@@ -340,10 +340,10 @@
                                                     </div>
                                                     <c:forEach var="totaltwo" items="${totalReply}">
                                                         <c:if test="${total.reply_Count == totaltwo.parent_No}">
-                                                            <p>${totaltwo.user_Id} : ${totaltwo.reply_Text}</p>
-                                                            <p>${totaltwo.reply_Date}</p>
-                                                            <p id="plus">댓글달기</p>
-                                                            <div id="hide" class="divtag replying">
+                                                            <p style="padding-left: 80px;">${totaltwo.user_Id} : ${totaltwo.reply_Text}</p>
+                                                            <p style="padding-left: 80px;">${totaltwo.reply_Date}</p>
+                                                            <p id="plus" style="padding-left: 80px;">댓글달기</p>
+                                                            <div  style="padding-left: 80px;"id="hide" class="divtag replying">
                                                                 <form action="/daedatgle.do" method="post">
                                                                     <div class="divtag">
                                                                         <textarea name="reply_Text" id="" cols="80"
@@ -358,6 +358,28 @@
                                                                         value="${i.review_Num}">
                                                                 </form>
                                                             </div>
+                                                            <c:forEach var="totalthree" items="${totalReply}">
+                                                        <c:if test="${totaltwo.reply_Count == totalthree.parent_No}">
+                                                            <p style="padding-left: 120px;">${totalthree.user_Id} : ${totalthree.reply_Text}</p>
+                                                            <p style="padding-left: 120px;">${totalthree.reply_Date}</p>
+                                                            <p id="plus" style="padding-left: 120px;">댓글달기</p>
+                                                            <div  style="padding-left: 120px;"id="hide" class="divtag replying">
+                                                                <form action="/daedatgle.do" method="post">
+                                                                    <div class="divtag">
+                                                                        <textarea name="reply_Text" id="" cols="80"
+                                                                            rows="3"></textarea>
+                                                                        <input type="submit" id="sub" value="등록">
+                                                                    </div>
+                                                                    <input type="hidden" name="product_Num"
+                                                                        value="${i.product_Num}">
+                                                                    <input type="hidden" name="parent_No"
+                                                                        value="${totalthree.reply_Count}">
+                                                                    <input type="hidden" name="review_Num"
+                                                                        value="${i.review_Num}">
+                                                                </form>
+                                                            </div>
+                                                        </c:if>
+                                                    </c:forEach>
                                                         </c:if>
                                                     </c:forEach>
                                                 </c:if>
