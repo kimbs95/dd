@@ -32,6 +32,15 @@ public interface ProductService {
 //	 상품번호 
 	public int productNum(String product_Num) throws DataAccessException;
 
+//	상품관리
+	public List<ProductVO> proMyList(String user_Id) throws Exception;
+
+//	상품 수정
+	public ProductVO proMod(ProductVO map) throws Exception;
+
+//	상품 삭제
+	public int proDelete(int pro) throws DataAccessException;
+
 //	찜목록불러오기
 	public List<JjimVO> proDl(String user_Id) throws DataAccessException;
 

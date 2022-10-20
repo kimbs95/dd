@@ -64,6 +64,24 @@ public class ProductServiceImpl implements ProductService {
 		return productDAO.productnum(product_Num);
 	}
 
+//	상품관리
+	@Override
+	public List<ProductVO> proMyList(String user_Id) throws Exception {
+		return productDAO.proMyList(user_Id);
+	}
+
+//	상품 수정
+	@Override
+	public ProductVO proMod(ProductVO map) throws Exception {
+		return productDAO.proMod(map);
+	}
+
+//	상품 삭제
+	@Override
+	public int proDelete(int pro) throws DataAccessException {
+		return productDAO.proDelete(pro);
+	}
+
 //	상품 조회수 올리기
 	public void viewCount(int product_Nums) throws Exception {
 		productDAO.viewCount(product_Nums);

@@ -56,8 +56,9 @@
                             <form method="POST" id="result">
                                 <select name="path" id="path" onchange="search()"
                                     style="height: 30px; border:none; outline: none; font-weight: bold; font-size: 18px;">
-                                    <option value="">상품관리</option>
+                                    <option style="text-align: center;" value="">메뉴</option>
                                     <option value="${contextPath}/productform.do">상품등록</option>
+                                    <option value="${contextPath}/productmanager.do">상품관리</option>
                                     <option value="${contextPath}/mypage.do">마이페이지</option>
                                 </select>
                             </form>

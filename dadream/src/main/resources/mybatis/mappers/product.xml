@@ -38,6 +38,25 @@
 			limit 4
 		]]>
 	</select>
+	<delete id ="proDelete" parameterType="int">
+		<![CDATA[
+			delete from product_t
+			where product_Num = #{pro}
+		]]>
+	</delete>
+	<!-- 상품관리 리스트 -->
+	<select id="proMyList" resultMap="proResult" parameterType="String">
+	<![CDATA[
+		select * from product_t where user_Id =#{user_Id}
+	]]>
+	</select>
+	
+		<!-- 상품수정 -->
+	<select id="proMod" resultType="productVO" parameterType="productVO">
+	<![CDATA[
+		select * from product_t where user_Id =#{user_Id} and product_Num=#{product_Num}
+	]]>
+	</select>
 
 
 	<select id="selectAllProductsList" resultType="productVO"

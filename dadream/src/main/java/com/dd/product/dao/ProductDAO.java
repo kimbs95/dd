@@ -35,6 +35,15 @@ public interface ProductDAO {
 //	  상품번호 
 	public int productnum(String product_Num) throws DataAccessException;
 
+//	상품관리
+	public List<ProductVO> proMyList(String user_Id) throws Exception;
+
+//	상품 수정
+	public ProductVO proMod(ProductVO map) throws Exception;
+
+//	상품 삭제
+	public int proDelete(int pro) throws DataAccessException;
+
 //	상품 조회수 올리기
 	public void viewCount(int product_Nums) throws Exception;
 

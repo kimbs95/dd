@@ -136,12 +136,27 @@
             border-bottom: 1px solid #000;
         }
 
+        #eye {
+            border: none;
+            background: white;
+            font-weight: bold;
+            margin: 10px;
+        }
+
         .replying {
             display: none;
         }
 
         .formTagclass {
             display: none;
+        }
+        .nump,.sump{
+            font-weight: bold;
+            font-size: 18px;
+            margin: 15px 0;
+        }
+        .totalprice{
+            margin-top: 20px;
         }
     </style>
 </head>
@@ -196,10 +211,10 @@
                 <div id="dlComments2">
                     <div>
                         <h3>상품가격</h3>
-                        <p>${result.product_Price}</p>
+                        <p class="resultPrice">${result.product_Price}</p>
                     </div>
                     <div>
-                        <h3>수량</h3>
+                        <h3>재고</h3>
                         <p>${result.product_TotalCount}</p>
                     </div>
                 </div>
@@ -221,6 +236,22 @@
                         </select>
                     </div>
                 </div>
+                <div class="totalprice">
+                    <p class="nump">수량 : <input type="number" class="num" value="1" step="1"></p>
+                    <p class="sump">결제 금액 : <span class="sum"></span></p>
+                </div>
+                <script>
+                    (function () {
+                        let num = document.querySelector(".num");
+                        let resultPrice = +document.querySelector(".resultPrice").textContent;
+                        let sum = document.querySelector(".sum");
+
+                        sum.textContent = (resultPrice * num.value);
+                        document.querySelector(".num").addEventListener("change", (e) => {
+                            sum.textContent = (resultPrice * num.value);
+                        })
+                    })();
+                </script>
                 <div id="dlComments4">
                     <div>
                         <!-- <form action="/cart.do?product_Num=${product_Num}" method="post"> -->
@@ -320,7 +351,8 @@
                                             </div>
                                             <c:forEach var="total" items="${totalReply}">
                                                 <c:if test="${reply.reply_Count == total.parent_No}">
-                                                    <p style="padding-left: 40px;">${total.user_Id} : ${total.reply_Text}</p>
+                                                    <p style="padding-left: 40px;">${total.user_Id} :
+                                                        ${total.reply_Text}</p>
                                                     <p style="padding-left: 40px;">${total.reply_Date}</p>
                                                     <p style="padding-left: 40px;" id="plus">댓글달기</p>
                                                     <div style="padding-left: 40px;" id="hide" class="divtag replying">
@@ -340,10 +372,12 @@
                                                     </div>
                                                     <c:forEach var="totaltwo" items="${totalReply}">
                                                         <c:if test="${total.reply_Count == totaltwo.parent_No}">
-                                                            <p style="padding-left: 80px;">${totaltwo.user_Id} : ${totaltwo.reply_Text}</p>
+                                                            <p style="padding-left: 80px;">${totaltwo.user_Id} :
+                                                                ${totaltwo.reply_Text}</p>
                                                             <p style="padding-left: 80px;">${totaltwo.reply_Date}</p>
                                                             <p id="plus" style="padding-left: 80px;">댓글달기</p>
-                                                            <div  style="padding-left: 80px;"id="hide" class="divtag replying">
+                                                            <div style="padding-left: 80px;" id="hide"
+                                                                class="divtag replying">
                                                                 <form action="/daedatgle.do" method="post">
                                                                     <div class="divtag">
                                                                         <textarea name="reply_Text" id="" cols="80"
@@ -359,27 +393,33 @@
                                                                 </form>
                                                             </div>
                                                             <c:forEach var="totalthree" items="${totalReply}">
-                                                        <c:if test="${totaltwo.reply_Count == totalthree.parent_No}">
-                                                            <p style="padding-left: 120px;">${totalthree.user_Id} : ${totalthree.reply_Text}</p>
-                                                            <p style="padding-left: 120px;">${totalthree.reply_Date}</p>
-                                                            <p id="plus" style="padding-left: 120px;">댓글달기</p>
-                                                            <div  style="padding-left: 120px;"id="hide" class="divtag replying">
-                                                                <form action="/daedatgle.do" method="post">
-                                                                    <div class="divtag">
-                                                                        <textarea name="reply_Text" id="" cols="80"
-                                                                            rows="3"></textarea>
-                                                                        <input type="submit" id="sub" value="등록">
+                                                                <c:if
+                                                                    test="${totaltwo.reply_Count == totalthree.parent_No}">
+                                                                    <p style="padding-left: 120px;">
+                                                                        ${totalthree.user_Id} : ${totalthree.reply_Text}
+                                                                    </p>
+                                                                    <p style="padding-left: 120px;">
+                                                                        ${totalthree.reply_Date}</p>
+                                                                    <p id="plus" style="padding-left: 120px;">댓글달기</p>
+                                                                    <div style="padding-left: 120px;" id="hide"
+                                                                        class="divtag replying">
+                                                                        <form action="/daedatgle.do" method="post">
+                                                                            <div class="divtag">
+                                                                                <textarea name="reply_Text" id=""
+                                                                                    cols="80" rows="3"></textarea>
+                                                                                <input type="submit" id="sub"
+                                                                                    value="등록">
+                                                                            </div>
+                                                                            <input type="hidden" name="product_Num"
+                                                                                value="${i.product_Num}">
+                                                                            <input type="hidden" name="parent_No"
+                                                                                value="${totalthree.reply_Count}">
+                                                                            <input type="hidden" name="review_Num"
+                                                                                value="${i.review_Num}">
+                                                                        </form>
                                                                     </div>
-                                                                    <input type="hidden" name="product_Num"
-                                                                        value="${i.product_Num}">
-                                                                    <input type="hidden" name="parent_No"
-                                                                        value="${totalthree.reply_Count}">
-                                                                    <input type="hidden" name="review_Num"
-                                                                        value="${i.review_Num}">
-                                                                </form>
-                                                            </div>
-                                                        </c:if>
-                                                    </c:forEach>
+                                                                </c:if>
+                                                            </c:forEach>
                                                         </c:if>
                                                     </c:forEach>
                                                 </c:if>
@@ -393,7 +433,6 @@
                     </li>
                 </c:forEach>
                 <script>
-           
                     // 댓글 달기
                     let reviewli = document.querySelectorAll(".reviewinfo");
                     console.log(reviewli);

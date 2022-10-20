@@ -215,6 +215,53 @@ public class ProductControllerImpl implements ProductController {
 		return viewName;
 	}
 
+//	상품관리 
+	@RequestMapping(value = "/productmanager.do", method = RequestMethod.POST)
+	public ModelAndView productmanager(HttpServletRequest req) throws Exception {
+		String viewName = (String) req.getAttribute("viewName");
+		HttpSession session = req.getSession();
+		MemberVO member = (MemberVO) session.getAttribute("member");
+		String user_Id = member.getUser_Id();
+		List<ProductVO> pro = productService.proMyList(user_Id);
+		System.out.println("viewName : " + viewName);
+		ModelAndView mav = new ModelAndView("/product/productmanager");
+		mav.addObject("pro", pro);
+		return mav;
+	}
+
+//	상품수정 
+	@RequestMapping(value = "/productMod.do", method = RequestMethod.POST)
+	public ModelAndView productMod(HttpServletRequest req) throws Exception {
+		String product_Nums = (String) req.getParameter("product_Num");
+		int product_Num = Integer.parseInt(product_Nums);
+		String user_Id = (String) req.getParameter("user_Id");
+		ProductVO map = new ProductVO();
+		map.setUser_Id(user_Id);
+		map.setProduct_Num(product_Num);
+		ProductVO pro = (ProductVO) productService.proMod(map);
+		ModelAndView mav = new ModelAndView("/product/productMod");
+		mav.addObject("pro", pro);
+
+		return mav;
+	}
+
+//	상품삭제 
+	@ResponseBody
+	@RequestMapping(value = "/proDelete.do", method = RequestMethod.POST)
+	public Map<String, Object> productdelete(@RequestBody int pro, HttpServletRequest req) throws Exception {
+		System.out.println(pro);
+
+//		HttpSession session = req.getSession();
+//		MemberVO member = (MemberVO) session.getAttribute("member");
+//		String user_Id = member.getUser_Id();
+		int result = 0;
+		result = productService.proDelete(pro);
+		Map<String, Object> map = new HashMap<>();
+		map.put("result", result);
+
+		return map;
+	}
+
 	/* 결제 */
 	@RequestMapping("/order.do")
 	public String order(Model model) {
