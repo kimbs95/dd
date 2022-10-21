@@ -248,10 +248,11 @@ public class ProductControllerImpl implements ProductController {
 
 		productService.proPatch(proModMap);
 		if (imageFileName != null && imageFileName.length() != 0) {
+
 			File srcFile = new File(PRODUCT_IMAGE_REPO + "\\" + user_Id + "\\" + imageFileName);
 //			File destDir = new File(PRODUCT_IMAGE_REPO + "\\" + user_Id);
 //			FileUtils.moveFileToDirectory(srcFile, destDir, true);
-
+//			FileUtils = srcfile 에 있는것을 destDir  장소로 옮긴다/
 			if (srcFile != null) {
 				String originalFileName = (String) proModMap.get("originalFileName");
 				File oldFile = new File(PRODUCT_IMAGE_REPO + "\\" + user_Id + "\\" + originalFileName);
