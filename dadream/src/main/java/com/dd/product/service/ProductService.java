@@ -38,6 +38,9 @@ public interface ProductService {
 //	상품 수정
 	public ProductVO proMod(ProductVO map) throws Exception;
 
+//	상품 패치
+	public void proPatch(Map<String, Object> proModMap) throws DataAccessException;
+
 //	상품 삭제
 	public int proDelete(int pro) throws DataAccessException;
 

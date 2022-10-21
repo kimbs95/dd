@@ -64,8 +64,13 @@
         </div>
         <script>
             let proDelete = document.querySelector("#proDelete");
-            let proNum = +document.querySelector("#proDelete").value;
-            proDelete.addEventListener("click", async (e) => {
+            let proDeletes =document.querySelectorAll("#proDelete");
+            for(let i = 0; i<proDeletes.length; i++){
+                let proNum = +document.querySelectorAll("#proDelete")[i].value;
+                console.log(proNum);
+                
+                
+                proDeletes[i].addEventListener("click", async (e) => {
                 console.log(typeof(proNum));
                 if(!confirm("상품을 삭제 하시겠습니까?")){
                     return;
@@ -93,6 +98,7 @@
                 alert("서버 오류");
 
             })
+        }
         </script>
     </body>
 

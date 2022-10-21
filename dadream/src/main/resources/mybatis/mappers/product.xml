@@ -57,6 +57,21 @@
 		select * from product_t where user_Id =#{user_Id} and product_Num=#{product_Num}
 	]]>
 	</select>
+	
+	<!-- 상품 패치 -->
+	<update id="proPatch" parameterType="java.util.Map">
+		<![CDATA[
+			update product_t 
+			set product_Name =#{product_Name},
+				product_Price = #{product_Price},
+				product_TotalCount =#{product_TotalCount},
+				product_Content =#{product_Content},
+				product_Image =#{product_Image},
+				product_Option1 =#{product_Option1},
+				product_Option2 =#{product_Option2} 
+				where product_Num = #{product_Num}
+		]]>
+	</update>
 
 
 	<select id="selectAllProductsList" resultType="productVO"

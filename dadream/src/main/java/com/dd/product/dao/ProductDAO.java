@@ -26,6 +26,9 @@ public interface ProductDAO {
 //	상품등록
 	public int insertProduct(Map<String, Object> productMap) throws DataAccessException;
 
+//	상품 패치
+	public void proPatch(Map<String, Object> proModMap) throws DataAccessException;
+
 	// 상품목록
 	public List<ProductVO> selectAllProductsList(String product_Name) throws DataAccessException;
 

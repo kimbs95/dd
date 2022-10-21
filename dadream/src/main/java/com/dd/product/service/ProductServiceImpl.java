@@ -39,7 +39,12 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public int addProduct(Map<String, Object> productMap) throws DataAccessException {
 		return productDAO.insertProduct(productMap);
+	}
 
+//	상품 패치
+	@Override
+	public void proPatch(Map<String, Object> proModMap) throws DataAccessException {
+		productDAO.proPatch(proModMap);
 	}
 
 	// 상품목록

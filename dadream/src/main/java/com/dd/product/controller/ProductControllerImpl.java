@@ -109,8 +109,8 @@ public class ProductControllerImpl implements ProductController {
 	/* 상품 글 등록 */
 	@RequestMapping(value = "/productpost.do", method = RequestMethod.POST)
 	@ResponseBody
-	public ResponseEntity productpost(MultipartHttpServletRequest multipartRequest, HttpServletResponse response)
-			throws Exception {
+	public ResponseEntity productpost(@RequestParam String product_Option1, @RequestParam String product_Option2,
+			MultipartHttpServletRequest multipartRequest, HttpServletResponse response) throws Exception {
 		multipartRequest.setCharacterEncoding("utf-8");
 		Map<String, Object> productMap = new HashMap<String, Object>();
 		Enumeration enu = multipartRequest.getParameterNames();
@@ -121,7 +121,9 @@ public class ProductControllerImpl implements ProductController {
 //			System.out.println(value);
 			productMap.put(name, value);
 		}
-
+//		MultivalueMap 도 사용가능
+		productMap.put("product_Option1", product_Option1);
+		productMap.put("product_Option2", product_Option2);
 		String imageFileName = upload(multipartRequest);
 		HttpSession session = multipartRequest.getSession();
 		MemberVO memberVO = (MemberVO) session.getAttribute("member");
@@ -137,12 +139,7 @@ public class ProductControllerImpl implements ProductController {
 
 		try {
 			int result = productService.addProduct(productMap);
-//			if (imageFileName != null && imageFileName.length() != 0) {
-//				File srcFile = new File(PRODUCT_IMAGE_REPO + "\\" + imageFileName);
-//				File desDir = new File(PRODUCT_IMAGE_REPO);
-//			중간에 폴더 없으면 만들어주는 함수 moveFileToDirectory
-//				FileUtils.moveFileToDirectory(srcFile, desDir, true);
-//			}
+//			
 			message = "<script>";
 			message += "alert('상품등록이 완료되었습니다.');";
 			message += "location.href='" + multipartRequest.getContextPath() + "/productmain.do'";
@@ -162,30 +159,6 @@ public class ProductControllerImpl implements ProductController {
 		}
 		return resEnt;
 
-	}
-
-//	이미지 업로드
-	private String upload(MultipartHttpServletRequest multipartRequest) throws Exception {
-		String imageFileName = null;
-		Iterator<String> fileNames = multipartRequest.getFileNames();
-		HttpSession session = multipartRequest.getSession();
-		MemberVO memberVO = (MemberVO) session.getAttribute("member");
-		String user_Id = memberVO.getUser_Id();
-		int count = 0;
-//		썸머노트가 뻇어가서 일단 주석
-//		while (fileNames.hasNext()) {
-		String fileName = fileNames.next();
-		MultipartFile mFile = multipartRequest.getFile(fileName);
-		imageFileName = mFile.getOriginalFilename();
-		File file = new File(PRODUCT_IMAGE_REPO + "\\" + user_Id + "\\" + imageFileName);
-		if (mFile.getSize() != 0) {
-			if (!file.exists()) {
-				file.getParentFile().mkdirs();
-				mFile.transferTo(new File(PRODUCT_IMAGE_REPO + "\\" + user_Id + "\\" + imageFileName));
-			}
-		}
-//		}
-		return imageFileName;
 	}
 
 	/* 판매자 상품 상세 */
@@ -230,7 +203,7 @@ public class ProductControllerImpl implements ProductController {
 	}
 
 //	상품수정 
-	@RequestMapping(value = "/productMod.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/productMod.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView productMod(HttpServletRequest req) throws Exception {
 		String product_Nums = (String) req.getParameter("product_Num");
 		int product_Num = Integer.parseInt(product_Nums);
@@ -243,6 +216,51 @@ public class ProductControllerImpl implements ProductController {
 		mav.addObject("pro", pro);
 
 		return mav;
+	}
+
+//	상품수정 전송
+	@RequestMapping(value = "/prdouctUpdate.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public String productUpdate(@RequestParam String product_Option1, @RequestParam String product_Option2,
+			MultipartHttpServletRequest req) throws Exception {
+		req.setCharacterEncoding("UTF-8");
+		Map<String, Object> proModMap = new HashMap<>();
+		Enumeration enu = req.getParameterNames();
+		while (enu.hasMoreElements()) {
+			String name = (String) enu.nextElement();
+			System.out.println("key : " + name);
+			String value = req.getParameter(name);
+			System.out.println("value : " + value);
+			proModMap.put(name, value);
+		}
+		String product_Nums = (String) req.getParameter("product_Num");
+		int product_Num = Integer.parseInt(product_Nums);
+		proModMap.put("product_Num", product_Num);
+
+		proModMap.put("product_Option1", product_Option1);
+		proModMap.put("product_Option2", product_Option2);
+		String imageFileName = upload(req);
+		HttpSession session = req.getSession();
+		MemberVO memberVO = (MemberVO) session.getAttribute("member");
+		String user_Id = memberVO.getUser_Id();
+		System.out.println("이미지 파일 이름 : " + imageFileName);
+		proModMap.put("user_Id", user_Id);
+		proModMap.put("product_Image", imageFileName);
+
+		productService.proPatch(proModMap);
+		if (imageFileName != null && imageFileName.length() != 0) {
+			File srcFile = new File(PRODUCT_IMAGE_REPO + "\\" + user_Id + "\\" + imageFileName);
+//			File destDir = new File(PRODUCT_IMAGE_REPO + "\\" + user_Id);
+//			FileUtils.moveFileToDirectory(srcFile, destDir, true);
+
+			if (srcFile != null) {
+				String originalFileName = (String) proModMap.get("originalFileName");
+				File oldFile = new File(PRODUCT_IMAGE_REPO + "\\" + user_Id + "\\" + originalFileName);
+				oldFile.delete();
+			}
+		}
+
+		return "redirect:/productview.do?product_Num=" + product_Num;
+
 	}
 
 //	상품삭제 
@@ -318,6 +336,30 @@ public class ProductControllerImpl implements ProductController {
 		Map<String, Object> map = new HashMap<>();
 		map.put("result", result);
 		return map;
+	}
+
+//	이미지 업로드
+	private String upload(MultipartHttpServletRequest multipartRequest) throws Exception {
+		String imageFileName = null;
+		Iterator<String> fileNames = multipartRequest.getFileNames();
+		HttpSession session = multipartRequest.getSession();
+		MemberVO memberVO = (MemberVO) session.getAttribute("member");
+		String user_Id = memberVO.getUser_Id();
+		int count = 0;
+//		썸머노트가 뻇어가서 일단 주석
+//		while (fileNames.hasNext()) {
+		String fileName = fileNames.next();
+		MultipartFile mFile = multipartRequest.getFile(fileName);
+		imageFileName = mFile.getOriginalFilename();
+		File file = new File(PRODUCT_IMAGE_REPO + "\\" + user_Id + "\\" + imageFileName);
+		if (mFile.getSize() != 0) {
+			if (!file.exists()) {
+				file.getParentFile().mkdirs();
+				mFile.transferTo(new File(PRODUCT_IMAGE_REPO + "\\" + user_Id + "\\" + imageFileName));
+			}
+		}
+//		}
+		return imageFileName;
 	}
 
 //	리뷰

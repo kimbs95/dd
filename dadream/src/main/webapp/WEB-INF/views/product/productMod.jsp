@@ -29,11 +29,13 @@
 <body>
 
     <div class="first">
-        <h1 style="margin:20px 0 0 10px; font: bold;">상품등록</h1>
+        <h1 style="margin:20px 0 0 10px; font: bold;">상품수정</h1>
         <br><br><br><br>
-        <form class="product_form" method="post" action="/productpost.do" enctype="multipart/form-data">
+        <form class="product_form" method="post" action="/prdouctUpdate.do" enctype="multipart/form-data">
             <div class="middle">
-
+                <input type="hidden" name ="product_Num" value="${pro.product_Num}">
+                <input type="hidden" name ="originalFileName" value="${pro.product_Image}">
+                
                 <!--이미지 div-->
                 <div class="dlImg">
                     <div class="dlMain">
@@ -50,7 +52,7 @@
                 </div>
 
                 <!-- 텍스트추가 -->
-                
+
                 <script type="text/javascript">
                     var cnt = 1;
 
@@ -73,8 +75,8 @@
                 <div class="productcg">
                     <div class="productcon">
                         <h3>상품제목</h3>
-                        <input type="text" class="width300" id="product_Name" name="product_Name" value="${pro.product_Name}"
-                            size="70">
+                        <input type="text" class="width300" id="product_Name" name="product_Name"
+                            value="${pro.product_Name}" size="70">
                         <br><br>
 
                     </div>
@@ -83,13 +85,13 @@
                             <div class="margin10">
                                 <h3>상품가격</h3>
                                 <input type="text" class="width145" id="product_Price" name="product_Price"
-                                   value="${pro.product_Price}" size="32">
+                                    value="${pro.product_Price}" size="32">
                                 <br><br>
                             </div>
                             <div class="margin10">
                                 <h3>상품수량</h3>
                                 <input type="text" class="width145" id="product_TotalCount" name="product_TotalCount"
-                                   value="${pro.product_TotalCount}" size="32">
+                                    value="${pro.product_TotalCount}" size="32">
                                 <br><br>
                             </div>
                         </div>
@@ -120,7 +122,7 @@
             </div>
             <!-- 썸머노트 -->
             <h3>상품설명</h3>
-            <textarea id="summernote" name="product_Content" cols="70" rows="15" ></textarea>
+            <textarea id="summernote" name="product_Content" cols="70" rows="15"></textarea>
 
             <br><br>
 
@@ -136,10 +138,36 @@
     <script>
         // 썸네일 코드 
         document.addEventListener('DOMContentLoaded', () => {
-           document.querySelector(".note-editable").innerHTML="${pro.product_Content}";
-           if("${pro.product_Option1}"!==''){
-            
-           }
+            document.querySelector(".note-editable").innerHTML = "${pro.product_Content}";
+
+            //상품옵션1
+            let Option1 = "${pro.product_Option1}";
+
+            let op1Result = Option1.split(",");
+            if (op1Result.length !== 0) {
+
+                for (let i = 0; i < op1Result.length; i++) {
+                    fn_addtext();
+                    let optAll1 = document.querySelectorAll("#product_Option1");
+                    optAll1[i].value = op1Result[i];
+                }
+            }
+            // 상품옵션2
+            let Option2 = "${pro.product_Option2}";
+
+            let op2Result = Option2.split(",");
+            if (op2Result.length !== 0) {
+                console.log("0이 아님");   
+                for (let i = 0; i < op2Result.length; i++) {
+                    fn_addtext2();
+                    let optAll2 = document.querySelectorAll("#product_Option2");
+                    optAll2[i].value = op2Result[i];
+                }
+            }
+           
+
+            //
+
             document.querySelector("#product_Image").addEventListener("change", async e => {
                 const preview = document.querySelector("#preview");
                 document.querySelector(".imgh1").innerHTML = "사진이 등록 되었습니다.";
