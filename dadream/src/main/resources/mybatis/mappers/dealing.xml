@@ -32,7 +32,63 @@
 	</resultMap>
 
 
-
+<!-- 공실검색 -->
+	<select id="gongsilSearch" resultMap="dealResult" parameterType="java.util.Map">
+		SELECT *
+		FROM dealing_t
+		<where>
+			<if test="gsList != null and gsList.size != 0">
+				dl_Form IN 
+				<foreach collection="gsList" item="item" open="(" close=")" separator=",">
+					#{item}
+				</foreach>
+			</if>
+		</where>
+		<if test="dl_Address != null and dl_Address !=''">
+			AND dl_Address LIKE CONCAT('%', #{dl_Address}, '%')
+		</if>
+	</select>
+	
+	<!-- 매물수정 창 -->
+	<select id="modDealing" resultMap="dealResult" parameterType="java.util.Map">
+		<![CDATA[
+			SELECT *
+			FROM dealing_t
+			WHERE user_Id = #{user_Id} AND dl_Num = #{dl_Num}
+		]]>
+	</select>
+	
+	<!-- 매물수정 -->
+	<update id="modDealing2" parameterType="java.util.Map">
+			UPDATE dealing_t 
+			SET 
+			dl_Title = #{dl_Title}, 
+			dl_City = #{dl_City},
+			dl_Address = #{dl_Address},
+			dl_Lat = #{dl_Lat}, 
+			dl_Lng = #{dl_Lng}, 
+			dl_Price = #{dl_Price}, 
+			dl_Option = #{dl_Option},
+			dl_Form = #{dl_Form},
+			dl_Form2 = #{dl_Form2}, 
+			dl_Room = #{dl_Room}, 
+			dl_Size = #{dl_Size} 
+		<if test="dl_Content != null and dl_Content != ''">
+			, dl_Content = #{dl_Content}
+		</if>
+		<if test="dl_Image != null and dl_Image != ''"> 
+			, dl_Image = #{dl_Image} 
+		</if>
+			WHERE dl_Num = #{dl_Num}
+	</update>
+	
+	<delete id="deleteDealing" parameterType="int">
+		<![CDATA[
+			DELETE
+			FROM dealing_t
+			WHERE dl_Num = #{dl_Num}
+		]]>
+	</delete>
 
 
 

@@ -37,7 +37,7 @@
             <header class="header">
                 <div class="headerleft">
                     <a href="${contextPath}/productmain.do" style="width:200px;"><img class="Main_Logo"
-                             src="../image/메인로고.png" alt="다드림 메인로고"></a>
+                            src="../image/메인로고.png" alt="다드림 메인로고"></a>
                 </div>
                 <div class="search" style="margin-left:50px">
                     <form action="/product.do" method="get">
@@ -47,6 +47,11 @@
                 </div>
                 <div class="headerul">
                     <ul style="display:flex">
+                        <li style="margin-top: 4px;">
+                            <a href="${contextPath}/noticelist.do">
+                                공지사항
+                            </a>
+                        </li>
                         <li style="margin-top: 4px;">
                             <a href="/inteboardlist.do">
                                 인테리어
@@ -87,7 +92,7 @@
                                 </a>
                             </c:when>
                             <c:otherwise>
-                                <a href="/inteboardlist.do" >
+                                <a href="/inteboardlist.do">
                                     <li>인테리어</li>
                                 </a>
                                 <a href="${contextPath}/login.do">
@@ -108,7 +113,7 @@
             <header class="header">
                 <div class="headerleft">
                     <a href="${contextPath}/productmain.do" style="width:200px;"><img class="Main_Logo"
-                             src="../image/메인로고.png" alt="다드림 메인로고"></a>
+                            src="../image/메인로고.png" alt="다드림 메인로고"></a>
                 </div>
                 <div class="search" style="margin-left:50px">
                     <form action="/product.do" method="get">
@@ -118,23 +123,32 @@
                 </div>
                 <div class="headerul">
                     <ul style="display: flex;">
+                        <a href="${contextPath}/noticelist.do">
+                            <li>공지사항</li>
+                        </a>
+                        <li>
+                            <a href="/inteboardlist.do">
+                                인테리어
+                            </a>
+                        </li>
                         <c:choose>
                             <c:when test="${isLogOn == true  && member!= null}">
-                                <li>
-                                    <a href="/inteboardlist.do" >
-                                        인테리어
-                                    </a>
-                                </li>
                                 <div class="ppcursor">
+                                    <li>
+                                        <a href="/cartweb.do" style="margin-top:10px">
+                                            장바구니
+                                        </a>
+                                    </li>
                                     <li class="headerppli" style="display: block;">
                                         <h6>${member.user_Name}님</h6>
-                                        <div class="headerpp hidee">
+                                        <!-- <div class="headerpp hidee">
                                             <a href="/cartweb.do" style="margin-top:10px">
                                                 장바구니
                                             </a>
 
-                                        </div>
+                                        </div> -->
                                     </li>
+                                    
                                 </div>
                                 <a href="${contextPath}/logout.do">
                                     <li>로그아웃</li>
@@ -142,9 +156,6 @@
 
                             </c:when>
                             <c:otherwise>
-                                <a href="/inteboardlist.do" >
-                                    <li>인테리어</li>
-                                </a>
                                 <a href="${contextPath}/login.do">
                                     <li>로그인</li>
                                 </a>
@@ -169,7 +180,7 @@
             <header class="header">
                 <div class="headerleft">
                     <a href="${contextPath}/productmain.do" style="width:200px;"><img class="Main_Logo"
-                             src="../image/메인로고.png" alt="다드림 메인로고"></a>
+                            src="../image/메인로고.png" alt="다드림 메인로고"></a>
                 </div>
                 <div class="search" style="margin-left:50px">
                     <form action="/product.do" method="get">
@@ -179,6 +190,14 @@
                 </div>
                 <div class="headerul">
                     <ul style="display: flex;">
+                        <a href="${contextPath}/noticelist.do">
+                            <li>공지사항</li>
+                        </a>
+                        <li>
+                            <a href="/inteboardlist.do">
+                                인테리어
+                            </a>
+                        </li>
                         <c:choose>
                             <c:when test="${isLogOn == true  && member!= null}">
                                 <li>
@@ -186,19 +205,15 @@
                                         마이페이지
                                     </a>
                                 </li>
+                               
                                 <li>
-                                    <a href="/inteboardlist.do">
-                                        인테리어
+                                    <a href="/cartweb.do" >
+                                        장바구니
                                     </a>
                                 </li>
                                 <div class="ppcursor">
                                     <li class="headerppli" style="display: block;">
                                         <h6>${member.user_Name}님</h6>
-                                        <div class="headerpp hidee">
-                                            <a href="/cartweb.do" style="margin-top:10px">
-                                                장바구니
-                                            </a>
-                                        </div>
                                     </li>
                                 </div>
                                 <a href="${contextPath}/logout.do">
@@ -207,9 +222,7 @@
 
                             </c:when>
                             <c:otherwise>
-                                <a href="/inteboardlist.do">
-                                    <li>인테리어</li>
-                                </a>
+                                
                                 <a href="${contextPath}/login.do">
                                     <li>로그인</li>
                                 </a>

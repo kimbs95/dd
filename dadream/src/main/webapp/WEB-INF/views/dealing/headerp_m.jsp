@@ -47,19 +47,22 @@
                 <div class="headerul">
                    
                     <ul>
+                        <a href="${contextPath}/noticelist.do">
+                            <li>공지사항</li>
+                        </a>
                         <a href="${contextPath}/inteboardlist.do">
                             <li>인테리어</li>
                         </a>
                         <li>
-                            <form method="post"  action="">
+                            <form method="post"  action="/dealing/gongsilCenter.do">
                                 <p class="submit1">중개관리</p>
                             </form>
                         </li>
-                        <li>
+                        <!-- <li>
                             <form method="post"  action="">
                                 <p class="submit2">매물관리</p>
                             </form>
-                        </li>  
+                        </li>   -->
                         <li>
                             <a href="/mypage.do">
                                 마이페이지

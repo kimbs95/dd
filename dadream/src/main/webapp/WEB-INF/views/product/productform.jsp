@@ -50,7 +50,7 @@
                 </div>
 
                 <!-- 텍스트추가 -->
-                
+
                 <script type="text/javascript">
                     var cnt = 1;
 
@@ -147,16 +147,55 @@
                 reader.readAsDataURL(e.target.files.item(0));
             })
 
-            // // 등록 버튼 누를시 
-            document.querySelector("#productsubmit").addEventListener("click", async (e) => {
-                if (!confirm("상품등록을 하시겠습니까?")) {
+
+            let check = (e) => {
+                    let product_Image = document.querySelector("#product_Image");
+                    let product_Name = document.querySelector("#product_Name");
+                    let product_Price = document.querySelector("#product_Price");
+                    let product_Option1 = document.querySelector("#product_Option1");
+                    let product_Option2 = document.querySelector("#product_Option2");
+                    let product_TotalCount = document.querySelector("#product_TotalCount");
+                    let summernote = document.querySelector("#summernote");
+                    let FORMTAG = document.querySelector(".product_form");
+                    if (product_Image.value.trim() === '') {
+                        alert("이미지를 넣어주세요");
+                        product_Image.focus();
+                        return;
+                    } else if (product_Name.value.trim() === '') {
+                        alert("상품명 을 입력해주세요");
+                        product_Name.focus();
+                        return;
+                    } else if (product_Price.value.trim() === '') {
+                        alert("가격을 입력해주세요");
+                        product_Price.focus();
+                        return;
+                    } else if (product_TotalCount.value.trim() === '') {
+                        alert("재고량을 입력해주세요");
+                        product_TotalCount.focus();
+                        return;
+                    } else if (summernote.value.trim() === '') {
+                        alert("상세설명 을 입력해주세요");
+                        summernote.focus();
+                        return;
+                    }
+                    if (!confirm("상품등록을 하시겠습니까?")) {
                     e.preventDefault();
                     return;
                 }
+                    FORMTAG.submit();
+                }
 
+
+
+
+            // // 등록 버튼 누를시 
+            document.querySelector("#productsubmit").addEventListener("click", async (e) => {
+                e.preventDefault();
+                check(e);
 
             })
         });
+
 
 
 
@@ -196,7 +235,13 @@
 
 
         })();
+        document.querySelector("#productsubmit").addEventListener("click", () => {
+            event.preventDefault();
+            check();
+
+        });
     </script>
+
 
 </body>
 

@@ -20,22 +20,22 @@
                 overflow-x: auto;
                 height: 200px;
             }
+
             #mydl {
-                border: 1px solid #ccc; 
-                width: 300px; 
-                height: 200px;
+                border: 1px solid #ccc;
+                width: 300px;
+                height: 270px;
                 padding: 10px;
             }
 
             #likeroom {
                 overflow-x: scroll;
-                
+
             }
-         
+
             .myLike {
                 overflow-x: auto;
                 overflow-y: hidden;
-                margin-bottom: 100px;
             }
 
             .jjimContents {
@@ -44,8 +44,13 @@
                 height: 200px;
                 padding: 10px;
             }
-            #btn{
+
+            #btn {
                 margin-left: 10px;
+            }
+            .modelete{
+                display: inline-flex;
+                margin-top: 10px;
             }
         </style>
         <!-- reset css -->
@@ -93,110 +98,126 @@
                         <p>비밀번호</p>
                         <input type="password" value="${members.user_Pwd}" id="infoPwdCheck" name="user_Pwd" disabled>
                         <p>비밀번호 재확인</p>
-                        <input type="password" id="infoPwdCheck2" value="${members.user_Pwd}"  disabled>
+                        <input type="password" id="infoPwdCheck2" value="${members.user_Pwd}" disabled>
                         <p>이메일</p>
                         <input type="text" id="infoEmailCheck" value="${members.user_Email}" disabled>
                         <p>핸드폰</p>
                         <input type="text" id="infoPhoneCheck" value="${members.user_Phone}" disabled>
                         <p style="margin-bottom: 5px; font-weight: bold;">주소</p>
-                        <input type="text" size="50" id="infoAddress2Check" value ="${members.user_Address2}" disabled>
+                        <input type="text" size="50" id="infoAddress2Check" value="${members.user_Address2}" disabled>
                         <br>
                         <br>
                         <p style="margin-bottom: 5px; font-weight: bold;">상세주소</p>
-                        <input type="text" size="20" id="infoAddress3Check" value="${members.user_Address3}" style="margin-top: 3px;" disabled>
+                        <input type="text" size="20" id="infoAddress3Check" value="${members.user_Address3}"
+                            style="margin-top: 3px;" disabled>
                         <br><br>
                         <input type="submit" name="mod" id="change" value="변경"
                             style="font-weight:700; margin-top:10px;width: 100px; height:30px;"><br><br>
                     </form>
                     <div class="passwordcheck"></div>
                     <script>
-                        let infoPwdCheck2= document.querySelector("#infoPwdCheck2");
-                        let passwordcheck =document.querySelector(".passwordcheck");
-                        let infoPwdCheck =document.querySelector("#infoPwdCheck");
-                        let infoEmailCheck=document.querySelector("#infoEmailCheck");
-                        let infoPhoneCheck=document.querySelector("#infoPhoneCheck");
-                        let infoAddress2Check=document.querySelector("#infoAddress2Check");
-                        let infoAddress3Check=document.querySelector("#infoAddress3Check");
-                        document.querySelector("#change").addEventListener("click",(e)=>{
+                        let infoPwdCheck2 = document.querySelector("#infoPwdCheck2");
+                        let passwordcheck = document.querySelector(".passwordcheck");
+                        let infoPwdCheck = document.querySelector("#infoPwdCheck");
+                        let infoEmailCheck = document.querySelector("#infoEmailCheck");
+                        let infoPhoneCheck = document.querySelector("#infoPhoneCheck");
+                        let infoAddress2Check = document.querySelector("#infoAddress2Check");
+                        let infoAddress3Check = document.querySelector("#infoAddress3Check");
+                        document.querySelector("#change").addEventListener("click", (e) => {
                             e.preventDefault();
                             let check = document.createElement("input");
                             let btn = document.createElement("input");
-                            btn.setAttribute("type","button");
-                            btn.setAttribute("id","btn");
-                            btn.setAttribute("value","비밀번호확인");
-                            check.setAttribute("type","password");
-                            check.setAttribute("placeholder","기존 비밀번호");
+                            btn.setAttribute("type", "button");
+                            btn.setAttribute("id", "btn");
+                            btn.setAttribute("value", "비밀번호확인");
+                            check.setAttribute("type", "password");
+                            check.setAttribute("placeholder", "기존 비밀번호");
                             passwordcheck.appendChild(check);
                             passwordcheck.appendChild(btn);
                             check.focus();
-                            btn.addEventListener("click", async (e)=>{
+                            btn.addEventListener("click", async (e) => {
                                 console.log(check.value);
-                                if(e.target.matches("#btn")){
-                                    let pwd = await fetch("/infoCheck.do",{
-                                        method:"POST",
-                                        headers:{"content-type":"application/json"},
-                                        body:JSON.stringify({
-                                            user_Id:"${member.user_Id}",
-                                            user_Pwd:check.value
+                                if (e.target.matches("#btn")) {
+                                    let pwd = await fetch("/infoCheck.do", {
+                                        method: "POST",
+                                        headers: {
+                                            "content-type": "application/json"
+                                        },
+                                        body: JSON.stringify({
+                                            user_Id: "${member.user_Id}",
+                                            user_Pwd: check.value
                                         })
 
                                     })
-                                    if(pwd.status ===200){
+                                    if (pwd.status === 200) {
                                         let res = await pwd.json();
-                                        if(res.userCheck === 1){
+                                        if (res.userCheck === 1) {
                                             alert("확인되었습니다");
-                                            passwordcheck.setAttribute("style","display:none;");
+                                            passwordcheck.setAttribute("style", "display:none;");
                                             infoPwdCheck.removeAttribute("disabled");
                                             infoPwdCheck2.removeAttribute("disabled");
                                             infoEmailCheck.removeAttribute("disabled");
                                             infoPhoneCheck.removeAttribute("disabled");
                                             infoAddress2Check.removeAttribute("disabled");
                                             infoAddress3Check.removeAttribute("disabled");
-                                            document.querySelector("#change").setAttribute("value","수정하기");
-                                            document.querySelector("#change").classList.add("changeMod");
-                                        }else{
+                                            document.querySelector("#change").setAttribute("value",
+                                                "수정하기");
+                                            document.querySelector("#change").classList.add(
+                                                "changeMod");
+                                        } else {
                                             alert("비밀번호가 틀립니다.");
                                         }
-                                        document.querySelector(".changeMod").addEventListener("click", async (e)=>{
-                                            if(e.target.matches(".changeMod")){
-                                                if(!confirm("수정하시겠습니까?")){
-                                                    return;
-                                                }
-                                                if(infoPwdCheck.value !== infoPwdCheck2.value){
-                                                    alert("비밀번호가 일치하지않습니다.");
-                                                    infoPwdCheck.focus();
-                                                    infoPwdCheck.value='';
-                                                    infoPwdCheck2.value='';
-                                                    return;
-                                                }
-                                                let mod = await fetch("/memberMod.do",{
-                                                    method:"POST",
-                                                    headers:{"content-type":"application/json"},
-                                                    body:JSON.stringify({
-                                                        user_Id:"${member.user_Id}",
-                                                        user_Pwd:infoPwdCheck.value,
-                                                        user_Email:infoEmailCheck.value,
-                                                        user_Phone:infoPhoneCheck.value,
-                                                        user_Address2:infoAddress2Check.value,
-                                                        user_Address3:infoAddress3Check.value
+                                        document.querySelector(".changeMod").addEventListener(
+                                            "click", async (e) => {
+                                                if (e.target.matches(".changeMod")) {
+                                                    if (!confirm("수정하시겠습니까?")) {
+                                                        return;
+                                                    }
+                                                    if (infoPwdCheck.value !== infoPwdCheck2
+                                                        .value) {
+                                                        alert("비밀번호가 일치하지않습니다.");
+                                                        infoPwdCheck.focus();
+                                                        infoPwdCheck.value = '';
+                                                        infoPwdCheck2.value = '';
+                                                        return;
+                                                    }
+                                                    let mod = await fetch("/memberMod.do", {
+                                                        method: "POST",
+                                                        headers: {
+                                                            "content-type": "application/json"
+                                                        },
+                                                        body: JSON.stringify({
+                                                            user_Id: "${member.user_Id}",
+                                                            user_Pwd: infoPwdCheck
+                                                                .value,
+                                                            user_Email: infoEmailCheck
+                                                                .value,
+                                                            user_Phone: infoPhoneCheck
+                                                                .value,
+                                                            user_Address2: infoAddress2Check
+                                                                .value,
+                                                            user_Address3: infoAddress3Check
+                                                                .value
+                                                        })
                                                     })
-                                                })
-                                                if(mod.status === 200){
-                                                    let response = await mod.json();
-                                                    if(response.check ===1){
-                                                        alert("수정이 완료되었습니다.");
-                                                        infoPwdCheck.disabled=true;
-                                                        infoPwdCheck2.disabled=true;
-                                                        infoEmailCheck.disabled=true;
-                                                        infoPhoneCheck.disabled=true;
-                                                        infoAddress2Check.disabled=true;
-                                                        infoAddress3Check.disabled=true;
-                                                        location.reload();
+                                                    if (mod.status === 200) {
+                                                        let response = await mod.json();
+                                                        if (response.check === 1) {
+                                                            alert("수정이 완료되었습니다.");
+                                                            infoPwdCheck.disabled = true;
+                                                            infoPwdCheck2.disabled = true;
+                                                            infoEmailCheck.disabled = true;
+                                                            infoPhoneCheck.disabled = true;
+                                                            infoAddress2Check.disabled =
+                                                                true;
+                                                            infoAddress3Check.disabled =
+                                                                true;
+                                                            location.reload();
+                                                        }
                                                     }
                                                 }
-                                            }
 
-                                        })
+                                            })
                                     }
                                 }
                             })
@@ -206,22 +227,36 @@
                 <br>
                 <h2 style="font-weight: 900; font-size: 2em; margin-top: 80px; margin-bottom: 40px;">내가 등록한 방</h2>
                 <div id="myroom">
-                <c:forEach var="myDealing" items="${myDealing}">
-                    <div style="display: flex; margin-right: 20px;">
-                        <div style="width: 200px; height: 200px;">
-                            <img src="/dealing/${myDealing.user_Id}/${myDealing.dl_Image}" alt="매물사진"
-                            style="width:200px; height: 200px;">
+                    <c:forEach var="myDealing" items="${myDealing}">
+                        <div style="display: flex; margin-right: 20px;">
+                            <div style="width: 200px; height: 200px;">
+                                <img src="/dealing/${myDealing.user_Id}/${myDealing.dl_Image}" alt="매물사진"
+                                    style="width:200px; height: 200px;">
+                            </div>
+                            <div id="mydl">
+                                <p>매물이름 : ${myDealing.dl_Title}</p><br>
+                                <P>건물형태 : ${myDealing.dl_Form}</P><br>
+                                <P>매매종류 : ${myDealing.dl_Form2}</P><br>
+                                <p>방 개수 : ${myDealing.dl_Room}</p><br>
+                                <p>매매가격 : ${myDealing.dl_Price}</p><br>
+                                <p>조회수 : ${myDealing.dl_Views}</p><br>
+                                <div class="modelete">
+
+                                    <form name="modmod" method="post" action="${contextPath}/dealing/modDealing.do">
+                                        <input type="hidden" name="modDlUser_Id" value="${myDealing.user_Id}">
+                                        <input type="hidden" name="modDl_Num" value="${myDealing.dl_Num}">
+                                        <input type="submit" value="수정">
+                                    </form>
+                                    <form method="post" action="${contextPath}/dealing/deleteDealing.do">
+                                        <input type="hidden" name="delDlUser_Id" value="${myDealing.user_Id}">
+                                        <input type="hidden" name="delDl_Num" value="${myDealing.dl_Num}">
+                                        <input type="hidden" name="delDl_Image" value="${myDealing.dl_Image}">
+                                        <input type="submit" value="삭제">
+                                    </form>
+                                </div>
+                            </div>
                         </div>
-                        <div id="mydl">
-                            <p>매물이름 : ${myDealing.dl_Title}</p><br>
-                            <P>건물형태 : ${myDealing.dl_Form}</P><br>
-                            <P>매매종류 : ${myDealing.dl_Form2}</P><br>
-                            <p>방 개수 : ${myDealing.dl_Room}</p><br>
-                            <p>매매가격 : ${myDealing.dl_Price}</p><br>
-                            <p>조회수  : ${myDealing.dl_Views}</p><br>
-                        </div>
-                    </div>
-                </c:forEach>
+                    </c:forEach>
                 </div>
                 <br>
                 <h2 style="font-weight: 900; font-size: 2em; margin-top: 80px; margin-bottom: 40px;">관심목록</h2>
@@ -230,7 +265,8 @@
                         <c:forEach var="myDealing2" items="${jjimList.dealing}">
                             <div style="display: flex; margin-right: 20px;">
                                 <div>
-                                    <img src="/dealing/${jjimList.user_Id}/${myDealing2.dl_Image}" alt="매물사진" style="width:200px; height:200px">
+                                    <img src="/dealing/${jjimList.user_Id}/${myDealing2.dl_Image}" alt="매물사진"
+                                        style="width:200px; height:200px">
                                 </div>
                                 <div class="jjimContents">
                                     <p>매물이름 : ${myDealing2.dl_Title}</p><br>
@@ -247,7 +283,8 @@
                 <hr>
                 <br><br>
                 <div class="report" style="width: 1000px;">
-                    <h2 style="font-weight: 900; font-size: 2em; margin-top: 80px; margin-bottom: 40px;">허위매물 신고목록</h2><br>
+                    <h2 style="font-weight: 900; font-size: 2em; margin-top: 80px; margin-bottom: 40px;">허위매물 신고목록</h2>
+                    <br>
                     <table class="table">
                         <tr style="height: 30px; line-height: 30px;">
                             <th>No</th>
@@ -269,7 +306,8 @@
                 <!-- <form method="post" action="${contextPath}/removeMember.do">
                 <input type="submit" value="회원탈퇴" style="width: 150px; height: 30px; font-weight: bolder; color: red;">
                 </form> -->
-                <button type="button" onclick="pwdCheck()" value="회원탈퇴" style="width: 150px; height: 30px; font-weight: bolder; color: red;">회원탈퇴</button>
+                <button type="button" onclick="pwdCheck()" value="회원탈퇴"
+                    style="width: 150px; height: 30px; font-weight: bolder; color: red;">회원탈퇴</button>
             </div>
 
         </div>
@@ -279,41 +317,43 @@
             console.log(user_Id);
 
             function pwdCheck() {
-                let pwdCheck = prompt("비밀번호 확인","비밀번호 를 입력해주세요");
-            console.log(pwdCheck);
-                if(pwdCheck === null && pwdCheck === "") {
+                let pwdCheck = prompt("비밀번호 확인", "비밀번호 를 입력해주세요");
+                console.log(pwdCheck);
+                if (pwdCheck === null && pwdCheck === "") {
                     console.log("다시 시도하십시오.");
-                } else{
-                    if(!confirm("정말로 탈퇴하시겠습니까?")){
+                } else {
+                    if (!confirm("정말로 탈퇴하시겠습니까?")) {
                         alert("탈퇴가 취소되었습니다.");
                         return;
                     }
                     $.ajax({
-                        url:"pwdCheck.do",
+                        url: "pwdCheck.do",
                         type: "post",
                         dataType: "json",
-                        data: {pwdCheck, user_Id},
-                        success: function(result) {
+                        data: {
+                            pwdCheck,
+                            user_Id
+                        },
+                        success: function (result) {
                             console.log(result.userCheck);
-                            if(result.userCheck === 1 ) {
-                                location.href="/removeMember.do"
+                            if (result.userCheck === 1) {
+                                location.href = "/removeMember.do"
                                 alert("탈퇴가 완료되었습니다.");
                                 return;
-                            }
-                            else if(result.userCheck !== 1) {
+                            } else if (result.userCheck !== 1) {
                                 alert("비밀번호가 틀립니다.");
                                 return;
                             }
 
-                            
+
                         },
-                        error: function() {
+                        error: function () {
                             alert("오류");
                         }
 
                     });
                     return;
-                } 
+                }
 
                 // function deleteMem() {
                 //     var form = document.createElement('form');

@@ -1,5 +1,6 @@
 package com.dd.dealing.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -12,6 +13,7 @@ import com.dd.dealing.vo.JjimVO;
 import com.dd.dealing.vo.KakaoLoginVO;
 import com.dd.dealing.vo.MemberVO;
 import com.dd.dealing.vo.NoticeVO;
+import com.dd.dealing.vo.ReplyVO;
 import com.dd.dealing.vo.ReportVO;
 
 public interface DealingService {
@@ -42,6 +44,18 @@ public interface DealingService {
 
 	// 지도창에서 검색
 	public List<DealingVO> selectMap2(Map<String, Object> dlMap) throws DataAccessException;
+
+	// 공실센터 검색
+	public List<DealingVO> gongsilSearch(Map<String, Object> gsMap) throws DataAccessException;
+
+	// 매물수정 창 이동
+	public DealingVO modDealing(Map<String, Object> modDlmap) throws DataAccessException;
+
+	// 매물수정 하기
+	public void modDealing2(Map<String, Object> dealingMap) throws DataAccessException;
+
+	// 매물 삭제
+	public void deleteDealing(int dl_Num) throws DataAccessException;
 
 //	매물 전부검색
 	public List<DealingVO> allListdealing() throws DataAccessException;
@@ -96,6 +110,18 @@ public interface DealingService {
 
 	// 게시판 조회수 증가
 	public void updateView(int viewCounts) throws Exception;
+
+	// 댓글 작성
+	public int rewrite(ReplyVO reply) throws Exception;
+
+	// 댓글 목록
+	public ArrayList<ReplyVO> list(int inte_Num) throws Exception;
+
+	// 댓글 수정
+	public int modify(ReplyVO reply) throws Exception;
+
+	// 댓글 삭제
+	public int remove(int reply_Num) throws Exception;
 
 //	신고하기
 	public int addReport(Map<String, Object> report) throws DataAccessException;

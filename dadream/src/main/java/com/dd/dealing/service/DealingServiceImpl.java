@@ -1,5 +1,6 @@
 package com.dd.dealing.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -17,6 +18,7 @@ import com.dd.dealing.vo.JjimVO;
 import com.dd.dealing.vo.KakaoLoginVO;
 import com.dd.dealing.vo.MemberVO;
 import com.dd.dealing.vo.NoticeVO;
+import com.dd.dealing.vo.ReplyVO;
 import com.dd.dealing.vo.ReportVO;
 
 @Service("dealingService")
@@ -72,6 +74,30 @@ public class DealingServiceImpl implements DealingService {
 //	카카오 아이디 이름 반환
 	public KakaoLoginVO kakaoresult(Map<String, Object> user) throws Exception {
 		return dealingDAO.kakaoresult(user);
+	}
+
+	// 공실 검색
+	@Override
+	public List<DealingVO> gongsilSearch(Map<String, Object> gsMap) throws DataAccessException {
+		List<DealingVO> dlReqp = dealingDAO.gongsilSearch(gsMap);
+		return dlReqp;
+	}
+
+	// 매물 수정
+	@Override
+	public DealingVO modDealing(Map<String, Object> modDlmap) throws DataAccessException {
+		DealingVO modDealingVO = dealingDAO.modDealing(modDlmap);
+		return modDealingVO;
+	}
+
+	@Override
+	public void modDealing2(Map<String, Object> dealingMap) throws DataAccessException {
+		dealingDAO.modDealing2(dealingMap);
+	}
+
+	@Override
+	public void deleteDealing(int dl_Num) throws DataAccessException {
+		dealingDAO.deleteDealing(dl_Num);
 	}
 
 	// 매물등록
@@ -215,6 +241,31 @@ public class DealingServiceImpl implements DealingService {
 	@Override
 	public void updateView(int viewCounts) throws Exception {
 		dealingDAO.updateView(viewCounts);
+	}
+
+	// 댓글 등록
+	@Override
+	public int rewrite(ReplyVO reply) throws Exception {
+		return dealingDAO.rewrite(reply);
+	}
+
+	// 댓글 리스트
+	@Override
+	public ArrayList<ReplyVO> list(int inte_Num) throws Exception {
+		return dealingDAO.list(inte_Num);
+	}
+
+	// 댓글 수정
+	@Override
+	public int modify(ReplyVO reply) throws Exception {
+		System.out.println(reply);
+		return dealingDAO.modify(reply);
+	}
+
+	// 댓글 삭제
+	@Override
+	public int remove(int reply_Num) throws Exception {
+		return dealingDAO.remove(reply_Num);
 	}
 
 //	신고하기

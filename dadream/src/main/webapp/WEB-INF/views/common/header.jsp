@@ -44,18 +44,21 @@
 
         <div class="headerul">
             <ul>
+                <a href="${contextPath}/noticelist.do">
+                    <li>공지사항</li>
+                </a>
+                <a href="${contextPath}/inteboardlist.do">
+                    <li>인테리어</li>
+                </a>
                 <c:choose>
                     <c:when test="${isLogOn == true  && member!= null}">
-
                         <li>
                             <form method="POST" action="/mypage.do">
                                 <button style="background-color: white; cursor:pointer;border: none; font-weight: bold;font-size: 18px;padding: 0;">
                                     마이페이지
                                 </button>
                             </form>
-
                         </li>
-
                         <li>
                             <h6>${member.user_Name}님</h6>
                         </li>

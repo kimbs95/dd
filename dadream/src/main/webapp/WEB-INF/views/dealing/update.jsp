@@ -19,7 +19,7 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
 	<!--CSS-->
-	<link rel="stylesheet" href="/css/addboard.css">
+	<link rel="stylesheet" href="/css/update.css">
 	<!--JS-->
 	<script src="/js/dealingJS/update.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -59,41 +59,33 @@
     <form name="frmArticle" action="/board/update_action" method="post" enctype="multipart/form-data" onsubmit="return _onSubmit();">
 		<input type="hidden" id="inte_Num" name="inte_Num" value="${boardContents.inte_Num}"/>
 		
-		<table border="0" align="center" class="table-responsive">
-			<tr>
-				<td align="right"> 작성자: </td>
-				<td class="form-inline" colspan="2" align="left">
+		<input type="hidden" id="inte_Num" name="inte_Num" value="${boardContents.inte_Num}"/>
+		
+		<div id="updatecontent">
+			<div id="writer1">
+				<td align="right">작성자:&nbsp;&nbsp; </td>
 					<input type="text" size="20" maxlength="100" name="user_Id" value="${boardContents.user_Id}" readonly />
-				</td>
-			</tr>
+			</div>
 
-			<tr>
-				<td align="right">제목: </td>
-				<td class="form-inline" colspan="2"><input type="text" size="67" maxlength="500" name="inte_Title" value="${boardContents.inte_Title}"/></td>
-			</tr>
+			<div id="update_title_form">
+				<td align="right">제목:&nbsp;&nbsp; </td>
+				<input type="text" size="63" maxlength="100" name="inte_Title" value="${boardContents.inte_Title}"/>
+			</div>
 
-			<tr>
-				<td align="right" valign="top"><br>내용: </td>
-				<td class="form-inline" colspan="2">
-					<textarea rows="10" cols="65" maxlength="4000" name="inte_Text"
-					value="${boardContents.inte_Text}">${boardContents.inte_Text}
+			<div id="update_content">
+				내용:&nbsp;&nbsp; 
+					<textarea rows="10" cols="65" maxlength="5000" name="inte_Text" value="${boardContents.inte_Text}">${boardContents.inte_Text}
 					</textarea>
-				</td>
-			</tr>
-
-			<tr>
-				<td align="right">파일첨부: </td>
-				<td colspan="2"><input type="button" value="파일 추가" onClick="fn_addFile()"  name="inte_Image"/> </td>
-				<td><div id="d_file"></div></td>
-				<td><img id="preview" scr="#" width=200 height=200 aria-placeholder="미리보기"/></td>
-			</tr>
-
-        </table>
-			<tr>
+			</div>
+			
+			
+		</div>
+       
+			<div>
 				<div id="update_btn">
-				<button type="submit" class="btn btn-success" onClick="fn_modify_article(frmArticle)" >수정 완료</button>
-				<button type="button"><a href="/board/read?inte_Num=${boardContents.inte_Num}" class="btn btn-danger" style="text-decoration: none;">취소</a></button>		
-			</tr>
+				<button type="submit" id="submit_btn" class="btn btn-success" onClick="fn_modify_article(frmArticle)" >수정 완료</button>
+				<button type="button" id="cancel_btn"><a href="/board/read?inte_Num=${boardContents.inte_Num}" class="btn btn-danger" style="text-decoration: none;">취소</a></button>		
+				</div>
         </form>
 </body>
 </html>

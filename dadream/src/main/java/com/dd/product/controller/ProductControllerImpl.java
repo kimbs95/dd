@@ -109,7 +109,8 @@ public class ProductControllerImpl implements ProductController {
 	/* 상품 글 등록 */
 	@RequestMapping(value = "/productpost.do", method = RequestMethod.POST)
 	@ResponseBody
-	public ResponseEntity productpost(@RequestParam String product_Option1, @RequestParam String product_Option2,
+	public ResponseEntity productpost(@RequestParam(value = "product_Option1", required = false) String product_Option1,
+			@RequestParam(value = "product_Option2", required = false) String product_Option2,
 			MultipartHttpServletRequest multipartRequest, HttpServletResponse response) throws Exception {
 		multipartRequest.setCharacterEncoding("utf-8");
 		Map<String, Object> productMap = new HashMap<String, Object>();

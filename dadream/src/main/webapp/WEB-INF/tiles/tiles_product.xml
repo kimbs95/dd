@@ -36,6 +36,19 @@
       <put-attribute name="header" value="/WEB-INF/views/product/headerpp.jsp" />
 	  <put-attribute name="body" value="/WEB-INF/views/product/productform.jsp" />
    </definition>
+   <!-- 판매자 가구 상품관리 -->
+   <definition name="/product/productmanager" extends="baseLayout">
+      <put-attribute name="title" value="상품관리" />
+      <put-attribute name="header" value="/WEB-INF/views/product/headerpp.jsp" />
+	  <put-attribute name="body" value="/WEB-INF/views/product/productmanager.jsp" />
+   </definition>
+  	<!-- 판매자 가구 상품 수정 -->
+    <definition name="/product/productMod" extends="baseLayout">
+      <put-attribute name="title" value="상품관리" />
+      <put-attribute name="header" value="/WEB-INF/views/product/headerpp.jsp" />
+	  <put-attribute name="body" value="/WEB-INF/views/product/productMod.jsp" />
+   </definition>
+   
    <!-- 상품상세보기 -->
    <definition name="/productview" extends="baseLayout">
       <put-attribute name="title" value="상품리스트" />

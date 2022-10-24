@@ -65,12 +65,17 @@
 			set product_Name =#{product_Name},
 				product_Price = #{product_Price},
 				product_TotalCount =#{product_TotalCount},
-				product_Content =#{product_Content},
-				product_Image =#{product_Image},
 				product_Option1 =#{product_Option1},
 				product_Option2 =#{product_Option2} 
-				where product_Num = #{product_Num}
+				
 		]]>
+		<if test="product_Image != null and product_Image !=''">
+		,product_Image =#{product_Image}
+		</if>
+		<if test="product_Content != null and product_Content !=''">
+		,product_Content =#{product_Content}
+		</if>
+		where product_Num = #{product_Num}
 	</update>
 
 

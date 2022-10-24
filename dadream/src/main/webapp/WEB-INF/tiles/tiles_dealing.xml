@@ -47,6 +47,20 @@
       <put-attribute name="header" value="/WEB-INF/views/dealing/headerp_m.jsp" />
       <put-attribute name="body" value="/WEB-INF/views/dealing/main.jsp" />
    </definition>
+   
+   <!-- 공실센터 -->
+   <definition name="/dealing/gongsilCenter" extends="baseLayout2">
+      <put-attribute name="title" value="공실센터" />
+      <put-attribute name="header" value="/WEB-INF/views/dealing/headerp_m.jsp" />
+      <put-attribute name="body" value="/WEB-INF/views/dealing/gongsilCenter.jsp" />
+   </definition>
+   
+   <!-- 매물수정 -->
+   <definition name="/dealing/modDealing" extends="baseLayout2">
+      <put-attribute name="title" value="매물수정" />
+      <put-attribute name="header" value="/WEB-INF/views/dealing/headerp_m.jsp" />
+      <put-attribute name="body" value="/WEB-INF/views/dealing/modDealing.jsp" />
+   </definition>
   
    
    <!-- 매물등록 -->

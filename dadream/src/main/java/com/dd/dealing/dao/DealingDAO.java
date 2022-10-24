@@ -1,5 +1,6 @@
 package com.dd.dealing.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -14,6 +15,7 @@ import com.dd.dealing.vo.JjimVO;
 import com.dd.dealing.vo.KakaoLoginVO;
 import com.dd.dealing.vo.MemberVO;
 import com.dd.dealing.vo.NoticeVO;
+import com.dd.dealing.vo.ReplyVO;
 import com.dd.dealing.vo.ReportVO;
 
 @Mapper
@@ -44,6 +46,18 @@ public interface DealingDAO {
 	public KakaoLoginVO kakaoresult(Map<String, Object> user) throws Exception;
 
 	//////////////////////// 부동산////////////////////////////
+	// 공실검색
+	public List<DealingVO> gongsilSearch(Map<String, Object> gsMap) throws DataAccessException;
+
+	// 매물수정 창 불러오기
+	public DealingVO modDealing(Map<String, Object> modDlmap) throws DataAccessException;
+
+	// 매물 수정하기
+	public void modDealing2(Map<String, Object> dealingMap) throws DataAccessException;
+
+	// 매물삭제
+	public void deleteDealing(int dl_Num) throws DataAccessException;
+
 	// 매물 DB전송
 	public int addNewdealing(Map<String, Object> dealingMap) throws DataAccessException;
 
@@ -114,6 +128,20 @@ public interface DealingDAO {
 	public void updateNotice(NoticeVO noticeVO) throws Exception;
 
 	public void updateNoticle(Map noticeMap) throws Exception;
+
+	// 댓글 쓰기
+	public int rewrite(ReplyVO reply) throws Exception;
+	// return타입이 int일때, 1이면 insert 성공
+	// 0이면 insert 실패
+
+	// 댓글 리스트
+	public ArrayList<ReplyVO> list(int inte_Num) throws Exception;
+
+	// 댓글 수정
+	public int modify(ReplyVO reply) throws Exception;
+
+	// 댓글 삭제
+	public int remove(int reply_Num) throws Exception;
 
 	//////////////////////// 마이페이지 ////////////////////////////
 
