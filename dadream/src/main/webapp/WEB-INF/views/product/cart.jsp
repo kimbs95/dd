@@ -17,55 +17,9 @@ request.setCharacterEncoding("UTF-8");
     <title>장바구니</title>
     <!-- reset css -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
-    <style>
-        .cart {
-            /* margin-left: 100px; */
-        }
+    <!-- css -->
+    <link rel="stylesheet" href="/css/cart.css">
 
-        .cart>* {
-            margin-top: 30px;
-        }
-
-        .cart>h3 {
-            font-weight: bold;
-            font-size: 40px;
-        }
-
-        #carttable {
-            width: 1100px;
-        }
-
-        #carttable td {
-            width: 250px;
-            height: 80px;
-            padding: 20px;
-
-        }
-
-        #carttable tr>th {
-            font-weight: bold;
-            font-size: 20px;
-            width: 30px;
-            /* height: 50px; */
-            padding: 20px;
-        }
-
-        #carttable tr {
-            margin-left: 20px;
-
-        }
-
-        .cartfoot,
-        .cartbuy {
-            display: flex;
-            justify-content: center;
-        }
-
-        .cartbuy button {
-            width: 150px;
-            height: 40px;
-        }
-    </style>
 </head>
 
 <body>
@@ -74,7 +28,7 @@ request.setCharacterEncoding("UTF-8");
         <h3>장바구니</h3>
         <table id=carttable>
             <thead>
-                <tr style="background: gray;">
+                <tr>
                     <th>No</th>
                     <th>상품명</th>
                     <th>수량</th>
@@ -82,54 +36,54 @@ request.setCharacterEncoding("UTF-8");
                     <th>삭제</th>
                 </tr>
             </thead>
-            
-                <tbody>
-                    <c:forEach var="cart" items="${info}" varStatus="status">
+
+            <tbody>
+                <c:forEach var="cart" items="${info}" varStatus="status">
                     <c:forEach var="pro" items="${cart.product}">
-                    <tr align="center">
-                        <td>${status.count}</td>
-                        <td>${pro.product_Name}</td>
-                        <td><input id="productCount" type="number" min="0" onchange="price()"
-                            value=${cart.cart_BuytCount} style="width: 50px ;">
+                        <tr align="center">
+                            <td>${status.count}</td>
+                            <td>${pro.product_Name}</td>
+                            <td><input id="productCount" type="number" min="0" onchange="price()"
+                                    value=${cart.cart_BuytCount} style="width: 50px ;">
                             </td>
                             <td id="productprice">${pro.product_Price}</td>
                             <td><button class="cartdelete" id="num" value="${cart.cart_Num}">삭제</button></td>
-                            </tr>
-                            </c:forEach>
-                            </c:forEach>
-                            </tbody>
-                            
-            
-                            <script>
-                                // 1000단위로 . 찍기
-                                const number = num => 
-                                num.toString().replace(/\B(?=(\d{3})+(?!\d))/g,".");
-                                
-                                
-                                
-                                // 계산하는 함수 총 개수 총 금액
-                                const price = () => {
-                                    
-                                    let tr = [...document.querySelectorAll("#carttable > tbody > tr")];
-                                    let total = tr.reduce((acc, curr) => {
-                                        let currcount = +curr.querySelector("#productCount").value;
-                                        let currprice = +curr.querySelector("#productprice").innerText;
-                                        acc.count += currcount;
-                                        acc.price += (currprice * currcount);
-                                        return acc;
-                                    }, {
-                                        count: 0,
-                                        price: 0
-                                    });
-                                    document.querySelector("#productnum").innerHTML = number(total.count);
-                                    document.querySelector("#totalprice").innerHTML = number(total.price);
-                                    document.querySelector("#totalpriceplus").innerHTML = number(total.price + 2500);
-                
-                                }
-                                document.addEventListener("DOMContentLoaded", () => {
-                                    price();
-                                })
-                            </script>
+                        </tr>
+                    </c:forEach>
+                </c:forEach>
+            </tbody>
+
+
+            <script>
+                // 1000단위로 . 찍기
+                const number = num =>
+                    num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+
+
+
+                // 계산하는 함수 총 개수 총 금액
+                const price = () => {
+
+                    let tr = [...document.querySelectorAll("#carttable > tbody > tr")];
+                    let total = tr.reduce((acc, curr) => {
+                        let currcount = +curr.querySelector("#productCount").value;
+                        let currprice = +curr.querySelector("#productprice").innerText;
+                        acc.count += currcount;
+                        acc.price += (currprice * currcount);
+                        return acc;
+                    }, {
+                        count: 0,
+                        price: 0
+                    });
+                    document.querySelector("#productnum").innerHTML = number(total.count);
+                    document.querySelector("#totalprice").innerHTML = number(total.price);
+                    document.querySelector("#totalpriceplus").innerHTML = number(total.price + 2500);
+
+                }
+                document.addEventListener("DOMContentLoaded", () => {
+                    price();
+                })
+            </script>
 
             <script>
                 document.addEventListener("DOMContentLoaded", () => {
@@ -175,8 +129,8 @@ request.setCharacterEncoding("UTF-8");
         <hr>
         <div class="cartfoot">
             <h5>
-                <span id="productnum"></span>개 상품 : <span id="totalprice"></span>원 + 배송비 : 2.500원 총 금액 : 
-                <span id="totalpriceplus" style="font-weight: bold"></span>원
+                <span id="productnum"></span>개 상품 : <span id="totalprice"></span>원 + 배송비 : 2.500원 총 금액 :
+                <span id="totalpriceplus"></span>원
             </h5>
         </div>
         <div class="cartbuy">

@@ -16,6 +16,9 @@
       height:500px;
       
     }
+    .scroll{
+	min-height: 570px;
+}
     
 
     .slide_item {

@@ -54,6 +54,7 @@
 	}
 	#table_id_wrapper{
 		font-family: 'Jua', sans-serif;
+		min-height: 520px;
 	}
 	
 	#table_id td > a{

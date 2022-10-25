@@ -68,3 +68,6 @@
 	#a_none{
 		text-decoration: none;
 	}
+	#noticeForm{
+		min-height: 572px;
+	}

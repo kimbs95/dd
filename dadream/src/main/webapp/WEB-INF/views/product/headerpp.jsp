@@ -65,6 +65,7 @@
                                     <option value="${contextPath}/productform.do">상품등록</option>
                                     <option value="${contextPath}/productmanager.do">상품관리</option>
                                     <option value="${contextPath}/mypage.do">마이페이지</option>
+                                    <option value="${contextPath}/cartweb.do">장바구니</option>
                                 </select>
                             </form>
                         </li>

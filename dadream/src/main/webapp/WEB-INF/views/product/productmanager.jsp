@@ -19,25 +19,50 @@
             #productInfo {}
 
             .proImage {
-                width: 180px;
-                height: 180px;
+                width: 222px;
+                height: 222px;
             }
 
             #proform {
-                display: flex;
+                /* display: flex; */
+                
+            }
+            #proform>*{
+                margin: 10px;
             }
 
             .sun {
                 display: flex;
+                border-bottom: 1px solid #000;
+                margin: 10px;
+                padding: 10px;
+            }
+            #myproduct{
+                width: 700px;
+            }
+            .modelete{
+                display: flex;
 
             }
+            .modelete > form{
+                margin-right: 10px;
+            }
+            .modman{
+                font-weight: bold;
+                font-size: 30px;
+            }
+            #myproduct{
+                border: 1px solid #000;
+                margin-top: 10px;
+            }
+        
         </style>
         <!-- css -->
     </head>
 
     <body>
         <div>
-            <h2>상품관리</h2>
+            <h2 class="modman">상품관리</h2>
             <div id="myproduct">
                 <c:forEach var="i" items="${pro}">
                     <div id="productInfo">
@@ -49,12 +74,14 @@
                                     <p>상품 가격 : ${i.product_Price}</p>
                                     <p>재고 : ${i.product_TotalCount}</p>
                                     <p>조회수 : ${i.product_Views}</p>
-                                    <form action="/productMod.do" method="post">
-                                        <input type="hidden" value ="${i.product_Num}" name="product_Num">
-                                        <input type="hidden" value="${i.user_Id}" name="user_Id">
-                                        <button type="submit">수정</button>
-                                    </form>
+                                    <div class="modelete">
+                                        <form action="/productMod.do" method="post">
+                                            <input type="hidden" value ="${i.product_Num}" name="product_Num">
+                                            <input type="hidden" value="${i.user_Id}" name="user_Id">
+                                            <button type="submit">수정</button>
+                                        </form>
                                         <button type="button" value="${i.product_Num}" name="product_Num" id="proDelete">삭제</button>
+                                    </div>
                                 </div>
                             </div>
                         </c:if>

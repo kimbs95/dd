@@ -23,7 +23,11 @@
 
     <!-- css -->
     <link rel="stylesheet" href="/css/productform.css">
-
+    <style>
+        .xbox{
+            display: none;
+        }
+    </style>
 </head>
 
 <body>
@@ -39,7 +43,7 @@
                     <div class="dlMain">
                         <input style="display: none;" type="file" id="product_Image" name="product_Image"
                             accept="image/*" multiple>
-                        <img id="preview" src="" width=500 height=500 />
+                        <img id="preview" class="xbox" src="" width=500 height=500 >
                         <label for="product_Image">
                             <p
                                 style="width: 300px;border: 1px solid;height: 40px;text-align: center;line-height: 40px;">
@@ -142,6 +146,7 @@
                 let reader = new FileReader();
                 reader.onloadend = finished => {
                     preview.setAttribute('src', finished.target.result);
+                    preview.classList.remove("xbox");
                     console.log(finished.target.result);
                 }
                 reader.readAsDataURL(e.target.files.item(0));
@@ -149,41 +154,41 @@
 
 
             let check = (e) => {
-                    let product_Image = document.querySelector("#product_Image");
-                    let product_Name = document.querySelector("#product_Name");
-                    let product_Price = document.querySelector("#product_Price");
-                    let product_Option1 = document.querySelector("#product_Option1");
-                    let product_Option2 = document.querySelector("#product_Option2");
-                    let product_TotalCount = document.querySelector("#product_TotalCount");
-                    let summernote = document.querySelector("#summernote");
-                    let FORMTAG = document.querySelector(".product_form");
-                    if (product_Image.value.trim() === '') {
-                        alert("이미지를 넣어주세요");
-                        product_Image.focus();
-                        return;
-                    } else if (product_Name.value.trim() === '') {
-                        alert("상품명 을 입력해주세요");
-                        product_Name.focus();
-                        return;
-                    } else if (product_Price.value.trim() === '') {
-                        alert("가격을 입력해주세요");
-                        product_Price.focus();
-                        return;
-                    } else if (product_TotalCount.value.trim() === '') {
-                        alert("재고량을 입력해주세요");
-                        product_TotalCount.focus();
-                        return;
-                    } else if (summernote.value.trim() === '') {
-                        alert("상세설명 을 입력해주세요");
-                        summernote.focus();
-                        return;
-                    }
-                    if (!confirm("상품등록을 하시겠습니까?")) {
+                let product_Image = document.querySelector("#product_Image");
+                let product_Name = document.querySelector("#product_Name");
+                let product_Price = document.querySelector("#product_Price");
+                let product_Option1 = document.querySelector("#product_Option1");
+                let product_Option2 = document.querySelector("#product_Option2");
+                let product_TotalCount = document.querySelector("#product_TotalCount");
+                let summernote = document.querySelector("#summernote");
+                let FORMTAG = document.querySelector(".product_form");
+                if (product_Image.value.trim() === '') {
+                    alert("이미지를 넣어주세요");
+                    product_Image.focus();
+                    return;
+                } else if (product_Name.value.trim() === '') {
+                    alert("상품명 을 입력해주세요");
+                    product_Name.focus();
+                    return;
+                } else if (product_Price.value.trim() === '') {
+                    alert("가격을 입력해주세요");
+                    product_Price.focus();
+                    return;
+                } else if (product_TotalCount.value.trim() === '') {
+                    alert("재고량을 입력해주세요");
+                    product_TotalCount.focus();
+                    return;
+                } else if (summernote.value.trim() === '') {
+                    alert("상세설명 을 입력해주세요");
+                    summernote.focus();
+                    return;
+                }
+                if (!confirm("상품등록을 하시겠습니까?")) {
                     e.preventDefault();
                     return;
                 }
-                    FORMTAG.submit();
-                }
+                FORMTAG.submit();
+            }
 
 
 

@@ -19,7 +19,13 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
     <!-- css -->
     <link rel="stylesheet" href="/css/mainpro.css">
-
+    <style>
+        .pro_category_image button{
+            font-weight: bold;
+            font-size: 18px;
+            cursor: pointer;
+        }
+    </style>
 </head>
 
 <body>
@@ -31,7 +37,8 @@
                 <form action="/product.do" class="submit">
                     <li onclick="">
                         <button style="background: none; border: none;" type="submit" name="product_Name" value="책상">
-                            <img src="../메인 카테고리 사진/책상.png">
+                            <!-- <img src="../메인 카테고리 사진/책상.png"> -->
+                            책상
                         </button>
                     </li>
                 </form>
@@ -42,7 +49,8 @@
                 <form action="/product.do" class="submit">
                     <li>
                         <button style="background: none; border: none;" type="submit" name="product_Name" value="침대">
-                            <img src="../메인 카테고리 사진/침대.png">
+                            <!-- <img src="../메인 카테고리 사진/침대.png"> -->
+                            침대
                         </button>
                     </li>
                 </form>
@@ -53,7 +61,8 @@
                 <form action="/product.do" class="submit">
                     <li>
                         <button style="background: none; border: none;" type="submit" name="product_Name" value="의자">
-                            <img src="../메인 카테고리 사진/의자.png">
+                            <!-- <img src="../메인 카테고리 사진/의자.png"> -->
+                            의자
                         </button>
                     </li>
                 </form>
@@ -64,7 +73,8 @@
                 <form action="/product.do" class="submit">
                     <li>
                         <button style="background: none; border: none;" type="submit" name="product_Name" value="스탠드">
-                            <img src="../메인 카테고리 사진/스텐드.png">
+                            <!-- <img src="../메인 카테고리 사진/스텐드.png"> -->
+                            스텐드
                         </button>
                     </li>
                 </form>
@@ -75,7 +85,8 @@
                 <form action="/product.do" class="submit">
                     <li>
                         <button style="background: none; border: none;" type="submit" name="product_Name" value="거울">
-                            <img src="../메인 카테고리 사진/거울.png">
+                            <!-- <img src="../메인 카테고리 사진/거울.png"> -->
+                            거울
                         </button>
                     </li>
                 </form>
@@ -86,7 +97,8 @@
                 <form action="/product.do" class="submit">
                     <li>
                         <button style="background: none; border: none;" type="submit" name="product_Name" value="서랍장">
-                            <img src="../메인 카테고리 사진/서랍장.png">
+                            <!-- <img src="../메인 카테고리 사진/서랍장.png"> -->
+                            서랍장
                         </button>
                     </li>
                 </form>
@@ -97,7 +109,8 @@
                 <form action="/product.do" class="submit">
                     <li>
                         <button style="background: none; border: none;" type="submit" name="product_Name" value="소파">
-                            <img src="../메인 카테고리 사진/소파.png">
+                            <!-- <img src="../메인 카테고리 사진/소파.png"> -->
+                            소파
                         </button>
                     </li>
                 </form>
@@ -108,7 +121,8 @@
                 <form action="/product.do" class="submit">
                     <li>
                         <button style="background: none; border: none;" type="submit" name="product_Name" value="식탁">
-                            <img src="../메인 카테고리 사진/식탁.png">
+                            <!-- <img src="../메인 카테고리 사진/식탁.png"> -->
+                            식탁
                         </button>
                     </li>
                 </form>
@@ -119,7 +133,8 @@
                 <form action="/product.do" class="submit">
                     <li>
                         <button style="background: none; border: none;" type="submit" name="product_Name" value="옷장">
-                            <img src="../메인 카테고리 사진/옷장.png">
+                            <!-- <img src="../메인 카테고리 사진/옷장.png"> -->
+                            옷장
                         </button>
                     </li>
                 </form>

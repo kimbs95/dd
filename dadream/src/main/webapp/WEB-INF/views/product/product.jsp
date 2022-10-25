@@ -18,7 +18,6 @@ request.setCharacterEncoding("UTF-8");
 </head>
 
 <body>
-<div style="display: none;"><%= application.getRealPath("/image") %></div>
   <!-- 슬라이드 body  절대 절대 건드리지 마시오 이거 없으면 화면 뒤틀림 -->
   <div id="stupit" style="display:none; ">
     <div class="slide_item">1</div>
@@ -32,14 +31,15 @@ request.setCharacterEncoding("UTF-8");
   </div>
   <!-- 카테고리상품들 -->
   <!-- 함부로 inlinecss 건드리면 안돼요 깨져용 -->
-  <div class =scroll style="border:1px solid ;margin-left: 270px;">
+  <div class=scroll style="margin-left: 270px;">
     <c:forEach var="product" items="${productsList}">
       <div class="pro_category_padding" style="width: 850px; padding: 5px 5px; border-bottom: 1px solid;">
         <div class="pro_category_content">
           <div class="productimg">
             <a href="${contextPath}/productview.do?product_Num=${product.product_Num}">
               <!-- <img src="../${contextPath}/product/${product.user_Id}/${product.product_Image}" alt="상품사진" width="200px" height="170px" style="margin-right: 10px;"> -->
-              <img src="/product/${product.user_Id}/${product.product_Image}" alt="상품사진" width="200px" height="170px" style="border:1px solid #ccc;">
+              <img src="/product/${product.user_Id}/${product.product_Image}" alt="상품사진" width="200px" height="170px"
+                style="border:1px solid #ccc;">
             </a>
           </div>
           <div class="productcontent" style="padding: 5px 0 0 5px;">
@@ -51,7 +51,7 @@ request.setCharacterEncoding("UTF-8");
       </div>
     </c:forEach>
   </div>
-    
+
 </body>
 
 </html>

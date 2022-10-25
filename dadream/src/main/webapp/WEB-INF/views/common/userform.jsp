@@ -139,7 +139,7 @@
                         </div>
                     </c:when>
                 </c:choose>
-                <input type="submit" value="회원가입"
+                <input id="userSubmit" type="submit" value="회원가입"
                     style="margin-left: 135px; margin-top: 20px; width: 100px; height: 40px;">
 
         </fieldset>
@@ -279,7 +279,7 @@
 <!-- 아이디 중복체크 -->
 <script>
     document.addEventListener("DOMContentLoaded", () => {
-
+        let ID ='';
         const idcheck = document.querySelector("#idcheck");
         idcheck.addEventListener("click", async (e) => {
             const idcheckresult = document.querySelector(".idcheckresult");
@@ -305,6 +305,7 @@
                     return;
                 } else if (jsondata.resultCode === 0) {
                     alert("사용가능한 아이디입니다.");
+                    ID =0;
                 }
             } else {
                 alert('예상치 못한 오류가 발생하였습니다.');
@@ -312,6 +313,15 @@
 
 
         });
+
+        document.querySelector("#userSubmit").addEventListener("click",(e)=>{
+            e.preventDefault();
+            if(ID === 0 ){
+                document.querySelector("#userform").submit();
+            }else{
+                alert("id 중복체크를 해주세요")
+            }
+        })
     });
 </script>
 

@@ -223,25 +223,46 @@
                         <h3>옵션</h3>
                         <select name="ot_1" class="select" id="ot_1">
                             <option>-</option>
-                            <option>크기2</option>
-                            <option>크기3</option>
                         </select>
                     </div>
                     <div>
                         <h3>추가옵션</h3>
                         <select name="ot_2" class="select" id="ot_2">
                             <option>-</option>
-                            <option>크기2</option>
-                            <option>크기3</option>
+                            
+                            
                         </select>
                     </div>
                 </div>
                 <div class="totalprice">
-                    <p class="nump">수량 : <input type="number" class="num" value="1" step="1"></p>
+                    <p class="nump">수량 : <input type="number" class="num" min="1" value="1" step="1"></p>
                     <p class="sump">결제 금액 : <span class="sum"></span></p>
                 </div>
                 <script>
                     (function () {
+                        let option1 = "${result.product_Option1}";
+                        let ot_1 =document.querySelector("#ot_1");
+                        option1 = option1.split(",");
+                        for(let i = 0; i < option1.length ; i++){
+                            let op1 = document.createElement("option");
+                            op1.setAttribute("value",option1[i]);
+                            op1.innerHTML=option1[i];
+                            ot_1.appendChild(op1);
+                        }
+
+                        let option2 = "${result.product_Option2}";
+                        let ot_2 =document.querySelector("#ot_2");
+                        option2 = option2.split(",");
+                        console.log(option2);
+                        for(let i = 0; i < option2.length ; i++){
+                            let op2 = document.createElement("option");
+                            op2.setAttribute("value",option2[i]);
+                            op2.innerHTML=option2[i];
+                            ot_2.appendChild(op2);
+                        }
+
+
+                        // 수량 계산
                         let num = document.querySelector(".num");
                         let resultPrice = +document.querySelector(".resultPrice").textContent;
                         let sum = document.querySelector(".sum");

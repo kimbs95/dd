@@ -46,7 +46,7 @@
 				lengthChange: true,
 				info : false,
 				searching:true,
-				displayLength:10,
+				displayLength:13,
 				
 		
 		
