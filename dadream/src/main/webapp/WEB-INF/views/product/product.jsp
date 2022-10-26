@@ -33,7 +33,7 @@ request.setCharacterEncoding("UTF-8");
   <!-- 함부로 inlinecss 건드리면 안돼요 깨져용 -->
   <div class=scroll style="margin-left: 270px;">
     <c:forEach var="product" items="${productsList}">
-      <div class="pro_category_padding" style="width: 850px; padding: 5px 5px; border-bottom: 1px solid;">
+      <div class="pro_category_padding" style="width: 850px; padding: 5px 5px;">
         <div class="pro_category_content">
           <div class="productimg">
             <a href="${contextPath}/productview.do?product_Num=${product.product_Num}">

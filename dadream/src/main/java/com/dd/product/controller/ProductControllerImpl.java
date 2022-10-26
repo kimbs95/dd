@@ -80,8 +80,21 @@ public class ProductControllerImpl implements ProductController {
 
 		List<ProductVO> productsList = productService.listProducts(product_Name);
 		ModelAndView mav = new ModelAndView(viewName);
+		HttpSession session = request.getSession();
+		MemberVO member = (MemberVO) session.getAttribute("member");
+		String user_Id = "";
+		if (member == null) {
+			user_Id = "guest";
+		} else {
+			user_Id = member.getUser_Id();
+		}
+
+		List<CartVO> info = new ArrayList();
+//		Map<String, Object> info = new HashMap<>();
+		info = productService.cartlist(user_Id);
 //		mav.setViewName(viewName);
 		mav.addObject("productsList", productsList);
+		mav.addObject("info", info);
 		return mav;
 	}
 
