@@ -8,24 +8,19 @@ import org.springframework.web.servlet.view.tiles3.TilesViewResolver;
 
 @Configuration
 public class TilesConfig {
-	
+
 	@Bean
 	public TilesConfigurer tilesConfigurer() {
 		final TilesConfigurer configurer = new TilesConfigurer();
-		
-		 
+
 //		configurer.setDefinitions(new String[] {"WEB-INF/tiles/tiles_product.xml"});
 //		configurer.setDefinitions(new String[] {"WEB-INF/tiles/tiles_dealing.xml"});
-		configurer.setDefinitions(new String[] {"WEB-INF/tiles/tiles_dealing.xml","WEB-INF/tiles/tiles_product.xml"});
+		configurer
+				.setDefinitions(new String[] { "WEB-INF/tiles/tiles-dealing.xml", "WEB-INF/tiles/tiles-product.xml" });
 		configurer.setCheckRefresh(true);
 		return configurer;
 	}
-	
-	
-	
-	
-	
-	
+
 	@Bean
 	public TilesViewResolver tilesViewResolver() {
 		final TilesViewResolver resolver = new TilesViewResolver();

@@ -20,6 +20,8 @@
 		<mapper resource="mybatis/mappers/jjim.xml"/>
 		<mapper resource="mybatis/mappers/prodealing.xml"/>
 		<mapper resource="mybatis/mappers/reply.xml"/>
+		<mapper resource="mybatis/mappers/adminDealing.xml"/>
+		<mapper resource="mybatis/mappers/adminReport.xml"/>
 		
 	</mappers>
 </configuration>
