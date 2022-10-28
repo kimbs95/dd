@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.dd.admin.dao.AdminDAO;
 import com.dd.dealing.vo.ReportVO;
+import com.dd.product.vo.ProductVO;
 
 @Service("adminSerivce")
 @Transactional(propagation = Propagation.REQUIRED)
@@ -40,6 +41,12 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public void deleteReport(int dl_ReportNum) throws DataAccessException {
 		adminDAO.deleteReport(dl_ReportNum);
+	}
+
+	/* 상품조회 */
+	@Override
+	public List<ProductVO> adminpro() throws DataAccessException {
+		return adminDAO.adminpro();
 	}
 
 }

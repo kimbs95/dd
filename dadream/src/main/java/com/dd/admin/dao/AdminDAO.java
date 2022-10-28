@@ -8,6 +8,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
 import com.dd.dealing.vo.ReportVO;
+import com.dd.product.vo.ProductVO;
 
 @Mapper
 @Repository("adminDAO")
@@ -22,4 +23,7 @@ public interface AdminDAO {
 	public void reportState(Map<String, Object> map) throws DataAccessException;
 
 	public void deleteReport(int dl_ReportNum) throws DataAccessException;
+
+	/* 상품조회 */
+	public List<ProductVO> adminpro() throws DataAccessException;
 }

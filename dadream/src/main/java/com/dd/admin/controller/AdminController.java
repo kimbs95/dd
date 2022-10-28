@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.dd.admin.service.AdminService;
 import com.dd.dealing.vo.ReportVO;
+import com.dd.product.vo.ProductVO;
 
 @Controller("adminController")
 public class AdminController {
@@ -108,16 +110,12 @@ public class AdminController {
 		return "redirect:/admin/reportList.do";
 	}
 
-//	/* 매물목록 */
-//	@RequestMapping(value = "/admin/reportList.do", method = { RequestMethod.GET, RequestMethod.POST })
-//	private ModelAndView (HttpServletRequest request, HttpServletResponse response) throws Exception {
-//		String viewName = (String) request.getAttribute("viewName");
-//		ModelAndView mav = new ModelAndView();
-//		List<ReportVO> reportsList = new ArrayList();
-//		reportsList = adminService.reportsList();
-//		mav.setViewName(viewName);
-//		mav.addObject("reportsList", reportsList);
-//		return mav;
-//	}
+//	상품조회
+	@RequestMapping(value = "/admin/pro.do", method = RequestMethod.POST)
+	private String adminpro(HttpServletRequest req, Model mo) throws Exception {
+		List<ProductVO> proselect = adminService.adminpro();
+		mo.addAttribute("proselect", proselect);
+		return "/admin/productList";
+	}
 
 }
