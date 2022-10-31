@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.dao.DataAccessException;
 
+import com.dd.dealing.vo.MemberVO;
 import com.dd.dealing.vo.ReportVO;
 import com.dd.product.vo.ProductVO;
 
@@ -20,4 +21,7 @@ public interface AdminService {
 
 //	상품조회
 	public List<ProductVO> adminpro() throws DataAccessException;
+
+	/* 유저 정보 */
+	public List<MemberVO> adminMember() throws DataAccessException;
 }

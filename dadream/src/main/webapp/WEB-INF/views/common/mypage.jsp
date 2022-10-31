@@ -48,7 +48,8 @@
             #btn {
                 margin-left: 10px;
             }
-            .modelete{
+
+            .modelete {
                 display: inline-flex;
                 margin-top: 10px;
             }
@@ -123,19 +124,23 @@
                         let infoPhoneCheck = document.querySelector("#infoPhoneCheck");
                         let infoAddress2Check = document.querySelector("#infoAddress2Check");
                         let infoAddress3Check = document.querySelector("#infoAddress3Check");
+                        let cnt = 1 ; 
                         document.querySelector("#change").addEventListener("click", (e) => {
                             e.preventDefault();
-                            let check = document.createElement("input");
-                            let btn = document.createElement("input");
-                            btn.setAttribute("type", "button");
-                            btn.setAttribute("id", "btn");
-                            btn.setAttribute("value", "비밀번호확인");
-                            check.setAttribute("type", "password");
-                            check.setAttribute("placeholder", "기존 비밀번호");
-                            passwordcheck.appendChild(check);
-                            passwordcheck.appendChild(btn);
-                            check.focus();
-                            btn.addEventListener("click", async (e) => {
+                            if(cnt ===1 ){
+                                let check = document.createElement("input");
+                                let btn = document.createElement("input");
+                                btn.setAttribute("type", "button");
+                                btn.setAttribute("id", "btn");
+                                btn.setAttribute("value", "비밀번호확인");
+                                check.setAttribute("type", "password");
+                                check.setAttribute("placeholder", "기존 비밀번호");
+                                passwordcheck.appendChild(check);
+                                passwordcheck.appendChild(btn);
+                                check.focus();
+                                cnt = 2;
+                                
+                                btn.addEventListener("click", async (e) => {
                                 console.log(check.value);
                                 if (e.target.matches("#btn")) {
                                     let pwd = await fetch("/infoCheck.do", {
@@ -147,7 +152,7 @@
                                             user_Id: "${member.user_Id}",
                                             user_Pwd: check.value
                                         })
-
+                                        
                                     })
                                     if (pwd.status === 200) {
                                         let res = await pwd.json();
@@ -161,67 +166,70 @@
                                             infoAddress2Check.removeAttribute("disabled");
                                             infoAddress3Check.removeAttribute("disabled");
                                             document.querySelector("#change").setAttribute("value",
-                                                "수정하기");
+                                            "수정하기");
                                             document.querySelector("#change").classList.add(
                                                 "changeMod");
-                                        } else {
-                                            alert("비밀번호가 틀립니다.");
-                                        }
-                                        document.querySelector(".changeMod").addEventListener(
-                                            "click", async (e) => {
-                                                if (e.target.matches(".changeMod")) {
-                                                    if (!confirm("수정하시겠습니까?")) {
-                                                        return;
-                                                    }
-                                                    if (infoPwdCheck.value !== infoPwdCheck2
+                                            } else {
+                                                alert("비밀번호가 틀립니다.");
+                                            }
+                                            document.querySelector(".changeMod").addEventListener(
+                                                "click", async (e) => {
+                                                    if (e.target.matches(".changeMod")) {
+                                                        if (!confirm("수정하시겠습니까?")) {
+                                                            return;
+                                                        }
+                                                        if (infoPwdCheck.value !== infoPwdCheck2
                                                         .value) {
-                                                        alert("비밀번호가 일치하지않습니다.");
-                                                        infoPwdCheck.focus();
-                                                        infoPwdCheck.value = '';
-                                                        infoPwdCheck2.value = '';
-                                                        return;
-                                                    }
-                                                    let mod = await fetch("/memberMod.do", {
-                                                        method: "POST",
-                                                        headers: {
-                                                            "content-type": "application/json"
-                                                        },
-                                                        body: JSON.stringify({
-                                                            user_Id: "${member.user_Id}",
-                                                            user_Pwd: infoPwdCheck
+                                                            alert("비밀번호가 일치하지않습니다.");
+                                                            infoPwdCheck.focus();
+                                                            infoPwdCheck.value = '';
+                                                            infoPwdCheck2.value = '';
+                                                            return;
+                                                        }
+                                                        let mod = await fetch("/memberMod.do", {
+                                                            method: "POST",
+                                                            headers: {
+                                                                "content-type": "application/json"
+                                                            },
+                                                            body: JSON.stringify({
+                                                                user_Id: "${member.user_Id}",
+                                                                user_Pwd: infoPwdCheck
                                                                 .value,
-                                                            user_Email: infoEmailCheck
+                                                                user_Email: infoEmailCheck
                                                                 .value,
-                                                            user_Phone: infoPhoneCheck
+                                                                user_Phone: infoPhoneCheck
                                                                 .value,
-                                                            user_Address2: infoAddress2Check
+                                                                user_Address2: infoAddress2Check
                                                                 .value,
-                                                            user_Address3: infoAddress3Check
+                                                                user_Address3: infoAddress3Check
                                                                 .value
+                                                            })
                                                         })
-                                                    })
-                                                    if (mod.status === 200) {
-                                                        let response = await mod.json();
-                                                        if (response.check === 1) {
-                                                            alert("수정이 완료되었습니다.");
-                                                            infoPwdCheck.disabled = true;
-                                                            infoPwdCheck2.disabled = true;
-                                                            infoEmailCheck.disabled = true;
-                                                            infoPhoneCheck.disabled = true;
-                                                            infoAddress2Check.disabled =
+                                                        if (mod.status === 200) {
+                                                            let response = await mod.json();
+                                                            if (response.check === 1) {
+                                                                alert("수정이 완료되었습니다.");
+                                                                infoPwdCheck.disabled = true;
+                                                                infoPwdCheck2.disabled = true;
+                                                                infoEmailCheck.disabled = true;
+                                                                infoPhoneCheck.disabled = true;
+                                                                infoAddress2Check.disabled =
                                                                 true;
-                                                            infoAddress3Check.disabled =
+                                                                infoAddress3Check.disabled =
                                                                 true;
-                                                            location.reload();
+                                                                location.reload();
+                                                            }
                                                         }
                                                     }
-                                                }
-
-                                            })
-                                    }
+                                                    
+                                                })
+                                            }
+                                        }
+                                    })
+                                }else{
+                                    e.preventDefault()
                                 }
-                            })
-                        })
+                                })
                     </script>
                 </div>
                 <br>

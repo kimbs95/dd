@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.dd.admin.dao.AdminDAO;
+import com.dd.dealing.vo.MemberVO;
 import com.dd.dealing.vo.ReportVO;
 import com.dd.product.vo.ProductVO;
 
@@ -47,6 +48,11 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public List<ProductVO> adminpro() throws DataAccessException {
 		return adminDAO.adminpro();
+	}
+
+	/* 유저 정보 */
+	public List<MemberVO> adminMember() throws DataAccessException {
+		return adminDAO.adminMember();
 	}
 
 }

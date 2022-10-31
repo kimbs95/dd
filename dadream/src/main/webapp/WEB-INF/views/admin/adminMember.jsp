@@ -212,65 +212,27 @@
                     <table id="datatablesSimple">
                         <thead>
                             <tr>
-                                <th>상품번호</th>
                                 <th>유저 아이디</th>
-                                <th>상품명</th>
-                                <th>등록일</th>
-                                <th>상품조회수</th>
-                                <th>삭제</th>
+                                <th>이름</th>
+                                <th>이메일</th>
+                                <th>가입일</th>
+                                <th>사업자 번호</th>
                             </tr>
                         </thead>
-
-                        <tbody id="proT">
-                            <c:forEach var="i" items="${proselect}">
-                                <tr>
-                                    <td>${i.product_Num}</td>
-                                    <td>${i.user_Id}</td>
-                                    <td id="proName"><a
-                                            href="/productview.do?product_Num=${i.product_Num}">${i.product_Name}</a>
-                                    </td>
-                                    <td>${i.product_Date}</td>
-                                    <td>${i.product_Views}</td>
-                                    <td><button id="proDelete" type="button" onclick="del('${i.product_Num}')"
-                                            value="${i.product_Num}">삭제</button></td>
-                                </tr>
-
-                            </c:forEach>
+                        <tbody id="proMember">
+                         <c:forEach var ="i" items="${adminMember}">
+                            <tr>
+                                <td>${i.user_Id}</td>
+                                <td>${i.user_Name}</td>
+                                <td>${i.user_Email}</td>
+                                <td>${i.user_Sign}</td>
+                                <td>${i.user_Business}</td>
+                            </tr>
+                         </c:forEach>
                         </tbody>
                     </table>
                 </div>
-                <script>
-                    let del = async (proNum) => {
-                        console.log(typeof (proNum));
-                        console.log();
-                        if (!confirm("상품을 삭제 하시겠습니까?")) {
-                            return;
-                        }
-                        let res = await fetch("/proDelete.do", {
-                            method: "POST",
-                            headers: {
-                                "content-type": "application/json"
-                            },
-                            body: JSON.stringify(
-                                proNum
-                            )
-                        })
-                        if (res.status === 200) {
-                            let check = await res.json();
-                            if (check.result === 1) {
-                                alert("삭제 완료");
-                                location.reload();
-                                return;
-                            } else {
-                                alert("다시 시도해주세요");
-                                return;
-                            }
-                        } else {
-                            alert("서버 오류");
-                        }
-
-                    }
-                </script>
+                
             </main>
 
             <footer class="py-4 bg-light mt-auto">

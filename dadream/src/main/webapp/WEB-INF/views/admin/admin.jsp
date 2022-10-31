@@ -103,6 +103,9 @@
                                             document.querySelector("#proList").addEventListener("click",(e)=>{
                                                 e.target.parentElement.submit();
                                             })
+                                            document.querySelector("#proMem").addEventListener("click",(e)=>{
+                                                e.target.submit();
+                                            })
                                         })
                                     </script>
                                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseDealing" aria-expanded="false" aria-controls="pagesCollapseDealing">
@@ -120,7 +123,7 @@
                                     </a>
                                     <div class="collapse" id="pagesCollapseMember" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
                                         <nav class="sb-sidenav-menu-nested nav">
-                                            <a class="nav-link" href="#">회원조회</a>
+                                            <form id="proMem"class="nav-link" method="POST" action="/admin/member.do">회원조회</form>
                                         </nav>
                                     </div>
                                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseReport" aria-expanded="false" aria-controls="pagesCollapseReport">

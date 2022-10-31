@@ -120,8 +120,8 @@
                         proDljjim +=
                             '<div style="margin-right:20px; margin-top:25px;"><button type="button" onclick="show_slide(proDl_Num=' +
                             item.dl_Num + ', proUser_Id=' + "'" + item.user_Id + "', proDl_img='" +
-                            item.dealing[0].dl_Image + "'" + ')" style="width:45px; height:35px;">';
-                        proDljjim += '<img src="../image/slideicon.png"></button></div>';
+                            item.dealing[0].dl_Image + "'" + ')">';// style="width:45px; height:35px;"
+                        proDljjim += '<img src="/dealing/'+item.user_Id+'/'+item.dealing[0].dl_Image+'" style="width:50px; height:50px" >'+'</button></div>';
                         proDljjim += '<div><p>매물번호 : ' + item.dl_Num + '</p><br>';
                         proDljjim += '<p>제목 : ' + item.dealing[0].dl_Title + '</p><br>';
                         proDljjim += '<p>가격 : ' + item.dealing[0].dl_Price + '</p>';

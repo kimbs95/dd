@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.dd.admin.service.AdminService;
+import com.dd.dealing.vo.MemberVO;
 import com.dd.dealing.vo.ReportVO;
 import com.dd.product.vo.ProductVO;
 
@@ -108,6 +109,14 @@ public class AdminController {
 		System.out.println("신고삭제");
 		adminService.deleteReport(dl_ReportNum);
 		return "redirect:/admin/reportList.do";
+	}
+
+//	유저정보
+	@RequestMapping(value = "/admin/member.do", method = RequestMethod.POST)
+	private String adminmember(HttpServletRequest req, Model mo) throws Exception {
+		List<MemberVO> adminMember = adminService.adminMember();
+		mo.addAttribute("adminMember", adminMember);
+		return "/admin/adminMember";
 	}
 
 //	상품조회

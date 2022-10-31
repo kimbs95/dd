@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
+import com.dd.dealing.vo.MemberVO;
 import com.dd.dealing.vo.ReportVO;
 import com.dd.product.vo.ProductVO;
 
@@ -26,4 +27,7 @@ public interface AdminDAO {
 
 	/* 상품조회 */
 	public List<ProductVO> adminpro() throws DataAccessException;
+
+	/* 유저 정보 */
+	public List<MemberVO> adminMember() throws DataAccessException;
 }

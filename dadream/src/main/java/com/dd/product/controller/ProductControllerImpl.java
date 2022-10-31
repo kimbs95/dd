@@ -180,7 +180,7 @@ public class ProductControllerImpl implements ProductController {
 
 	/* 판매자 상품 상세 */
 
-	@RequestMapping(value = { "/productview.do" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "/productview.do" }, method = { RequestMethod.GET })
 	private String productmod(Model model, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = (String) request.getAttribute("viewName");
 		System.out.println("interceptor에서 온 viewName:" + viewName);

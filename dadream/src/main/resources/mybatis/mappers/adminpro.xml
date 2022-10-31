@@ -23,7 +23,7 @@
 
 	<select id="adminpro" resultMap="proResult">
 		<![CDATA[
-			select * from product_t
+			select * from product_t  order by product_Views DESC
 		]]>
 	</select>	
 
