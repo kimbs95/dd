@@ -8,7 +8,7 @@
 			}
 		}
 		function backToList(obj) {
-			obj.action = "${contextPath}/noticelist.do";
+			obj.action = "${contextPath}/inteboardlist.do";
 			obj.submit();
 		}
 		var cnt = 1;
@@ -21,7 +21,7 @@
 				return false;
 			}
 		}
-		function fn_modify_noticle(obj) {
-			obj.action = "${contextPath}/notice/update_action";
+		function fn_modify_article(obj) {
+			obj.action = "${contextPath}/board/update_action";
 			obj.submit();
 		}

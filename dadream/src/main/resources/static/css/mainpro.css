@@ -1,15 +1,11 @@
-  /*html {
-        
-        }*/
-
-        * {
+		 * {
             box-sizing: border-box;
             user-select: none;
             /* margin: 0 auto; */
             
         }
 
-        /* 카테고리 css */
+/*------------------------------ 카테고리 ------------------------------ */
         .pro_category {
             
             margin-bottom: 10px;
@@ -58,9 +54,9 @@
 			display:inline-flex;
         }
         .pro_best_item > h1{
-		font-weight: bold;
-		font-size: 20px;
-		margin-bottom: 10px;
+			font-weight: bold;
+			font-size: 20px;
+			margin-bottom: 10px;
 }
 
         .pro_best_item ul li {
@@ -72,16 +68,16 @@
             
         }
         .pro_best_item ul li h1{
-		font-size: 19px;
-		font-weight:bold;
-		padding-left: 5px;
-		margin: 5px 0;
-		color:black;
+			font-size: 19px;
+			font-weight:bold;
+			padding-left: 5px;
+			margin: 5px 0;
+			color:black;
 		}
 	
         .pro_best_item ul li p{
-		font-size: 16px;
-		padding-left: 5px;
+			font-size: 16px;
+			padding-left: 5px;
             color: white;
 		}
 
@@ -94,7 +90,7 @@
             
         }
 
-        /* 인테리어 목록css */
+/*------------------------------ 인테리어 목록------------------------------ */
 		.pro_myhouse_introduce ul{
 		 	width: 1130px;
             display:inline-flex;
@@ -104,8 +100,8 @@
 		}
 		.pro_myhouse_introduce >h1{
 			font-weight: bold;
-		font-size: 20px;
-		margin-bottom: 10px;
+			font-size: 20px;
+			margin-bottom: 10px;
 		}
 		.pro_myhouse_introduce >p{
 			display:flex;

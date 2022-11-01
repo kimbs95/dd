@@ -32,6 +32,11 @@
 	 	 obj.action="${contextPath}/inteboardlist.do";
 		 obj.submit();
 	 }
+	 ////이미지 업로드전 엑박 표시 제거 할 대체 이미지
+	 function no_image(){
+            $("img").attr("src","choice.png");
+        }
+
 	</script>
 
 	
@@ -66,7 +71,7 @@
 						<div class="inteMain">
 							<label for="inteboard_Image">
 								<p>업로드 하실 사진을 선택해주세요.</p></label><br>
-							<img id="preview" src="" />
+							<img id="preview" src="/image/choice.png"  onerror="no_image()"/>
 							<input type="file" id="inteboard_Image" name="inte_Image" accept="image/*" multiple>
 							<h1 class="imgh2"></h1>
 						</div>

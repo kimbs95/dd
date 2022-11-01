@@ -1,12 +1,7 @@
-/** {
-            margin: 0px;
-            padding: 0px;
-
-        }*/
-        .first{
-			font-weight:lighter;
-			font-family: 'Jua', sans-serif;
-		}
+		.first {
+            font-weight: 50;
+            font-family: 'Jua', sans-serif;
+        }
        
         .first>h1 {
             font-weight: bold;
@@ -31,7 +26,7 @@
         }
         .dlMain  p{
 		font-weight: bold;
-}
+		}
 
         /* 나중에 width길이 조정 필요할 수 있음 */
         .middle {
@@ -41,7 +36,6 @@
 
         }
 
-       
         .dealingcon >h3{
             font-weight: bold;
             margin-bottom: 10px;
@@ -65,8 +59,6 @@
         .cg {
             margin: 50px 0 0 0;
         }
-
-        
 
         .bds02 {
             /*margin: 50% 0 0 0px;*/
@@ -93,4 +85,13 @@
 			font-weight: bold;
 			color:blue;
 		}
-		
+		.dropdown-toggle::after {
+            display: none;
+        }
+        #map{
+			width:300px;
+	        height:300px;
+	        margin-top:10px;
+	        display:none
+	
+}

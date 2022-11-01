@@ -1,4 +1,4 @@
-* {
+		* {
             box-sizing: border-box;
             user-select: none;
             
@@ -15,8 +15,8 @@
 
         }
         .footer > div {
-		line-height: 1.4;
-}
+			line-height: 1.4;
+		}
 
         .footer .footer_img img {
             width: 300px;
@@ -27,9 +27,9 @@
             margin-top: 20px;
         }
         .footer_content span{
-	display:inline-block;
-	width:219px;
-}
+			display:inline-block;
+			width:219px;
+		}
         .footerinfo {
             /* margin: 20px 30px; */
             width:550px;
@@ -38,6 +38,6 @@
             
         }
         .footerinfo > span{
-	display:inline-block;
+			display:inline-block;
 			width:600px;
-}
+		}

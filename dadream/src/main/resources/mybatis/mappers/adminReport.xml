@@ -39,4 +39,18 @@
 			WHERE dl_ReportNum = #{dl_ReportNum}
 		]]>
 	</delete>
+	
+	<!-- 신고삭제 여러개 -->
+	<delete id="deleteReport2" parameterType="java.util.Map">
+		DELETE
+		FROM report_t
+		<where>
+			<if test="rpsList != null and rpsList.size != 0">
+				dl_ReportNum IN 
+			<foreach collection="rpsList" item="item" open="(" close=")" separator=",">
+				#{item}
+			</foreach>
+			</if>
+		</where>
+	</delete>
 </mapper>

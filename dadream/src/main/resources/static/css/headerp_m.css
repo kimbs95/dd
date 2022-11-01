@@ -1,4 +1,4 @@
-* {
+		* {
             box-sizing: border-box;
             user-select: none;
             
@@ -16,15 +16,15 @@
             
         }
         #mypage{
-	font-family: 'Jua', sans-serif;
+			font-family: 'Jua', sans-serif;
 			padding:0;
-}
+		}
 
           .maintab a{
             width: 100%;
             text-decoration: none;
             color: black;
-}
+		}
 
         .maintab a li {
             padding: 20px 20px;
@@ -38,7 +38,6 @@
 			border-right: solid 0.5px;
 			
 		}
-
 
         .maintab .a:hover {
             background-color: rgb(146, 142, 142);
@@ -61,7 +60,7 @@
         }
 
 
-        /* header */
+ /*---------------------------------------- header---------------------------------- */
         .header {
             margin: 20px 0 0 150px;
             display: flex;
@@ -84,29 +83,14 @@
 		cursor: pointer;
 	
 		}
-		    	.ppcursor li h6 {
+    	.ppcursor li h6 {
 			text-decoration: underline;
-			 text-underline-position : under;
-			  text-decoration-thickness: 2px;
+		 	text-underline-position : under;
+		  	text-decoration-thickness: 2px;
 		}
 		.ppcursor li h6:hover{
 			color:gray;
 		}
-		
-
-        /*.search form {
-            display: flex;
-            margin-top: 2.5%;
-            width: 450px;
-            margin-left: 130px;
-        }
-
-        .search form input {
-            width: 400px;
-            height: 40px;
-        }*/
-        
-
 
         .headerul ul {
             /*margin-top: 2%;*/
@@ -156,6 +140,13 @@
             position: fixed;
            bottom: 110px;
             right: 33px;
+		}
+		
+		
+ /*-----------------------User_Id(hidden처리된부분)-------------------------- */
+ 
+ 		#user_id{
+			display: none;
 		}
 		
 		

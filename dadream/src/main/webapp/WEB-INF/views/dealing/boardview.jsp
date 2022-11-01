@@ -27,18 +27,7 @@
 <script src="/js/dealingJS/boardview.js"></script>
 <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script>
-	$(document).ready(function(){
-		var msg = "${msg}";
-		if(msg != ""){
-			alert(msg);
-		}
-	});
-	function backToList(obj) {
-		obj.action="${contextPath}/inteboardlist.do";
-		obj.submit();
-	}
-</script>
+
 </head>
 <body>
 	<section id="container">
@@ -51,12 +40,15 @@
 					<input type="text" id="inputNumber" value="${boardContents.inte_Num }" disabled />	
 				
 				</div> -->
-
+				
 			<div id="writerName">
 				<td align="center" bgcolor="pink">작성자</td>
+				<div id="Eachform">
 				<td>
 					<input type="text" value="${boardContents.user_Id }" name="user_Id" disabled />
+					<input id="backList" type="button"  value="목록으로 이동" onClick="backToList(this.form)">
 				</td>
+				</div>
 			</div>
 
 			<div >
@@ -96,29 +88,32 @@
 				</td>
 
 			<div id="readbtn">	
-					<c:if test="${user_Id == boardContents.user_Id}">
-				<button id="updatebtn"><a href="/board/update?inte_Num=${boardContents.inte_Num}" class="mod_btn">수정</a></button>
-			
-				<!-- <button type="submit" class="delete_btn">삭제</button> -->
-				<!-- <a href="javascript:void(0);" class="btn btn-danger" onclick="deleteConfirm();">삭제</a> -->
-				<input id="delete"type="button" value="삭제하기" onClick="fn_remove_article('${contextPath}/board/removeArticle.do','${boardContents.inte_Num}')">
-				<!-- <button type="submit" class="list_btn">목록</button> -->
+			<c:if test="${user_Id == boardContents.user_Id}">
+				<input type="button" id="updatebtn" value="수정하기" onClick="fn_update_article('/board/update?inte_Num=${boardContents.inte_Num}','${boardContents.inte_Num}')">
+				<input type="button" id="delete" value="삭제하기" onClick="fn_remove_article('${contextPath}/board/removeArticle.do','${boardContents.inte_Num}')">	
 			</c:if>
-				<input id="backList" type="button"  value="목록으로 이동"onClick="backToList(this.form)">
+				
 			</div>
-		</section>
+		
 	</div>
 	</form>
-	<div style="display: flex;">
+	<div id="write_form">
+		<input type="hidden" name="user_Id" value="${user_Id}">
+		<input type="hidden" name="reply_regDate" value="${reply_regDate}">
+		<input type="hidden" name="reply_Num" value="${reply_Num}">
+
 		<textarea rows="5" cols="50" id="reply_content"></textarea>
-		
 		<button type="button" id="btn_add">댓글쓰기</button>
 	</div>
+</section>
 	<div id="chat">
 		
 		<ul id="replyUL">
 			
 		</ul>
+		
+		</a>
 	</div>
+
 </body>
 </html>

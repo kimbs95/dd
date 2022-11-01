@@ -89,6 +89,9 @@
                                     <li>
                                         <h6>${member.user_Name}님</h6>
                                     </li>
+                                    <li>
+                                        <h6>${member.user_Id}</h6>
+                                    </li>
                                 <a href="${contextPath}/logout.do">
                                     <li>로그아웃</li>
                                 </a>
@@ -148,6 +151,9 @@
                                     <div class="pmcurosr">
                                     <h6>${member.user_Name} 님</h6>
                                     </div>
+                                </li>
+                                <li>
+                                    <h6 id="user_id" style="display: none;">${member.user_Id}</h6>
                                 </li>
                                 <a href="${contextPath}/logout.do">
                                     <li>로그아웃</li>
@@ -212,6 +218,10 @@
                                     <div class="pmcurosr">
                                     <h6>${member.user_Name} 님</h6>
                                     </div>
+                                </li>
+                                            <!--댓글 수정,삭제시 가져올 User_Id-->
+                                <li>
+                                    <h6 id="user_id">${member.user_Id}</h6>
                                 </li>
                                 <a href="${contextPath}/logout.do">
                                     <li>로그아웃</li>

@@ -1,170 +1,170 @@
- * {
-     margin: 0px;
-     
-
- }
-
- .first>h1 {
-     font-weight: bold;
-     font-size: 22px;
- }
-
-
-
- .dlImg {
-     display: flex;
-     margin: 0 0 0 20px;
-     flex-wrap: wrap;
-     height: 610px
- }
-
- .dlMain {
-     margin-bottom: 0px;
- }
-
- /* 나중에 width길이 조정 필요할 수 있음 */
- .middle {
-     display: flex;
-     justify-content: space-between;
-     width: 1130px;
-
- }
-
- .productcon  *{
-	
-}
-.productcon> input{
-	height:40px;
-}
-
- .productcon>h3 {
-     margin-bottom: 10px;
-     font-weight: bold;
-     font-size: 22px;
- }
-
- .dlThumbnail1 {
-     display: flex;
-     position: relative;
-     margin: 10px 0 0 5px;
-     right: 5px;
-     overflow-x: auto;
-     white-space: nowarp;
- }
-
- .dlThumbnail2 {
-     width: 100px;
-     height: 100px;
-     margin-right: 10px;
- }
-
- .flexnum {
-     display: flex;
- }
- .flexnum h3 {
-	font-size: 22px;
-}
-.flexnum input{
-	height:40px;
-}
-
- .margin10:nth-child(1) {
-     margin-right: 10px;
- }
-
- .option:nth-child(1) {
-     margin-right: 10px;
- }
-
- .option_all {
-     display: flex;
- }
- .option_all h3{
-	font-size: 22px;
-}
-.option_all input{
-	height:40px;
-}
- .cg {
-     margin: 50px 0 0 20px;
- }
-
-
-
- .bds02 {
-     display: flex;
-     /*margin-top: 100px;*/
-     justify-content: center;
- }
-
- .cg>h3 {
-     font-weight: bold;
-     font-size: 19px;
- }
-
- .cg>h5 {
-     line-height: 2;
-     font-weight: bold;
- }
-
- .product_form {
-     display: flex;
-     flex-direction: column;
- }
-
- .pfcontrol h3 {
-     margin-bottom: 10px;
-     font-weight: bold;
- }
-
- .option_all input {
-
-     margin-bottom: 10px;
- }
-
-
- .dropzone .dz-preview .dz-image img {
-     width: 496px;
-     height: 400px;
- }
-
- .dropzone .dz-preview .dz-image {
-     width: 496px;
-     height: 400px;
- }
-
- .dlThumbnail1 .dropzone .dz-preview .dz-image img {
-     width: 100px;
-     height: 100px;
- }
-
- .dlThumbnail1 .dropzone .dz-preview .dz-image {
-     width: 100px;
-     height: 100px;
- }
-
- .dlThumbnail2 .dropzone .dz-preview .dz-image img {
-     width: 150px;
-     height: 150px;
- }
-
- .dlThumbnail2 .dropzone .dz-preview .dz-image {
-     width: 150px;
-     height: 150px;
- }
-
- .dropzone.dz3.dz-clickable {
-     padding: 0 20px 20px 20px;
- }
-
- .dropzone {
-     padding: 0;
- }
-
- .dropzone .dz-preview {
-     margin: 0px;
- }
- .bds02 input{
-	height:40px;
-	width:100px
-}
+			 * {
+			     margin: 0px;
+			     
+			
+			 }
+			
+			 .first>h1 {
+			     font-weight: bold;
+			     font-size: 22px;
+			 }
+			
+			
+			
+			 .dlImg {
+			     display: flex;
+			     margin: 0 0 0 20px;
+			     flex-wrap: wrap;
+			     height: 610px
+			 }
+			
+			 .dlMain {
+			     margin-bottom: 0px;
+			 }
+			
+			 /* 나중에 width길이 조정 필요할 수 있음 */
+			 .middle {
+			     display: flex;
+			     justify-content: space-between;
+			     width: 1130px;
+			
+			 }
+			
+			 .productcon  *{
+				
+			}
+			.productcon> input{
+				height:40px;
+			}
+			
+			 .productcon>h3 {
+			     margin-bottom: 10px;
+			     font-weight: bold;
+			     font-size: 22px;
+			 }
+			
+			 .dlThumbnail1 {
+			     display: flex;
+			     position: relative;
+			     margin: 10px 0 0 5px;
+			     right: 5px;
+			     overflow-x: auto;
+			     white-space: nowarp;
+			 }
+			
+			 .dlThumbnail2 {
+			     width: 100px;
+			     height: 100px;
+			     margin-right: 10px;
+			 }
+			
+			 .flexnum {
+			     display: flex;
+			 }
+			 .flexnum h3 {
+				font-size: 22px;
+			}
+			.flexnum input{
+				height:40px;
+			}
+			
+			 .margin10:nth-child(1) {
+			     margin-right: 10px;
+			 }
+			
+			 .option:nth-child(1) {
+			     margin-right: 10px;
+			 }
+			
+			 .option_all {
+			     display: flex;
+			 }
+			 .option_all h3{
+				font-size: 22px;
+			}
+			.option_all input{
+				height:40px;
+			}
+			 .cg {
+			     margin: 50px 0 0 20px;
+			 }
+			
+			
+			
+			 .bds02 {
+			     display: flex;
+			     /*margin-top: 100px;*/
+			     justify-content: center;
+			 }
+			
+			 .cg>h3 {
+			     font-weight: bold;
+			     font-size: 19px;
+			 }
+			
+			 .cg>h5 {
+			     line-height: 2;
+			     font-weight: bold;
+			 }
+			
+			 .product_form {
+			     display: flex;
+			     flex-direction: column;
+			 }
+			
+			 .pfcontrol h3 {
+			     margin-bottom: 10px;
+			     font-weight: bold;
+			 }
+			
+			 .option_all input {
+			
+			     margin-bottom: 10px;
+			 }
+			
+			
+			 .dropzone .dz-preview .dz-image img {
+			     width: 496px;
+			     height: 400px;
+			 }
+			
+			 .dropzone .dz-preview .dz-image {
+			     width: 496px;
+			     height: 400px;
+			 }
+			
+			 .dlThumbnail1 .dropzone .dz-preview .dz-image img {
+			     width: 100px;
+			     height: 100px;
+			 }
+			
+			 .dlThumbnail1 .dropzone .dz-preview .dz-image {
+			     width: 100px;
+			     height: 100px;
+			 }
+			
+			 .dlThumbnail2 .dropzone .dz-preview .dz-image img {
+			     width: 150px;
+			     height: 150px;
+			 }
+			
+			 .dlThumbnail2 .dropzone .dz-preview .dz-image {
+			     width: 150px;
+			     height: 150px;
+			 }
+			
+			 .dropzone.dz3.dz-clickable {
+			     padding: 0 20px 20px 20px;
+			 }
+			
+			 .dropzone {
+			     padding: 0;
+			 }
+			
+			 .dropzone .dz-preview {
+			     margin: 0px;
+			 }
+			 .bds02 input{
+				height:40px;
+				width:100px
+			}

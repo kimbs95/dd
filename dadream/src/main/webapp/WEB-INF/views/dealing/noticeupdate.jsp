@@ -32,25 +32,25 @@
 		 }
 		 reader.readAsDataURL(input.files[0]);
 		 }
-	 } 
-	 function backToList(obj){
-	 	 obj.action="${contextPath}/noticelist.do";
-		 obj.submit();
-	 }
-	 var cnt = 1;
-	function fn_addFile(){
-		$("#d_file").append("<br>" + "<input type='file' name='file" + cnt +"' />");
-		cnt++;
-	}
-	function _onSubmit(){
-		if(!confirm("수정하시겠습니까?")){
-			return false;
+		} 
+		function backToList(obj){
+			obj.action="${contextPath}/noticelist.do";
+			obj.submit();
 		}
-	}
-	function fn_modify_noticle(obj){
-	obj.action="${contextPath}/notice/update_action";
-	obj.submit();
-	}
+		var cnt = 1;
+		function fn_addFile(){
+			$("#d_file").append("<br>" + "<input type='file' name='file" + cnt +"' />");
+			cnt++;
+		}
+		function _onSubmit(){
+			if(!confirm("수정하시겠습니까?")){
+				return false;
+			}
+		}
+		function fn_modify_noticle(obj){
+		obj.action="${contextPath}/notice/update_action";
+		obj.submit();
+		}
     </script>
 
 	
@@ -84,14 +84,6 @@
 					</textarea>
 				</td>
 			</tr>
-
-			<!-- <tr>
-				<td align="right">파일첨부: </td>
-				<td colspan="2"><input type="button" value="파일 추가" onClick="fn_addFile()"  name="inte_Image"/> </td>
-				<td><div id="d_file"></div></td>
-				<td><img id="preview" scr="#" width=200 height=200 aria-placeholder="미리보기"/></td>
-			</tr> -->
-
         </table>
 			<tr>
 				<div id="update_btn">

@@ -78,7 +78,7 @@ public interface DealingDAO {
 	// 모든매물 리스트
 	public List<DealingVO> allListdealing() throws DataAccessException;
 
-	//////////////////////// 게시판////////////////////////////
+/////////////////////////////////////////// 게시판///////////////////////////////////////////
 
 	// 게시글 DB전송
 	public int insertboard(Map<String, Object> boardMap) throws DataAccessException;
@@ -166,14 +166,20 @@ public interface DealingDAO {
 	// 마이페이지 찜 목록
 	public List<JjimVO> myJjim(String user_Id) throws DataAccessException;
 
+	// 마이페이지 찜 확인
 	public int jjimCheck(Map jjimMap) throws Exception;
 
+	// 마이페이지 찜 하기
 	public void jjim(Map jjimMap) throws Exception;
 
+	// 마이페이지 찜 삭제
 	public void jjimRemove(Map jjimMap) throws Exception;
 
 	// 마이페이지 매물리스트
 	public List<DealingVO> myDealing(String user_Id) throws DataAccessException;
+
+	// 마이페이지 내가 쓴 게시글
+	public List<BoardVO> myboardList(String user_Id) throws Exception;
 
 	// 현재위치
 	public List<DealingVO> hereMe(Map<String, Object> hereMap) throws DataAccessException;

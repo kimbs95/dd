@@ -35,16 +35,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
 
-    <style>
-        .dropdown-toggle::after {
-            display: none;
-        }
-
-        .first {
-            font-weight: 50;
-            font-family: 'Jua', sans-serif;
-        }
-    </style>
 </head>
 
 <body>
@@ -63,7 +53,7 @@
                         <label for="dealing_Image" style="margin-bottom: 5px;">
                             <p style="font-weight: bold;">대표이미지를 선택해주세요.</p>
                         </label><br>
-                        <img id="preview" src="" width=500 height=500 />
+                        <img id="preview" src="/image/choice.png" width=500 height=500  onerror="no_image()"/>
                         <input type="file" id="dealing_Image" name="dl_Image" accept="image/*" multiple>
                         <h1 class="imgh1"></h1>
                     </div>
@@ -202,7 +192,14 @@
                     <input type="text" name="dl_Price" id="dl_Price" placeholder="희망하시는 가격을 입력해주세요." size="50">
                     <br><br>
                     <h3>옵션정보</h3>
-                    <input type="text" name="dl_Option" id="dl_Option" placeholder="매물의 추가정보를 입력해주세요." size="50">
+                    <select name="dl_Option" id="dl_Option">
+                        <option value="-----">-----</option>
+                        <option value="풀옵션">풀옵션</option>
+                        <option value="엘레베이터">엘레베이터</option>
+                        <option value="주차가능">주차가능</option>
+                        <option value="반려동물 ">반려동물 </option>
+                        <option value="신축">신축</option>
+                    </select>
 
                     <!--카테고리-->
                     <div class="cg">
@@ -231,11 +228,7 @@
                             <option value="3">3개</option>
                             <option value="4">4개</option>
                             <option value="5">5개</option>
-                            <!-- <option name="dl_Room" value="6">6층</option>
-                            <option name="dl_Room" value="7">7층</option>
-                            <option name="dl_Room" value="8">8층</option>
-                            <option name="dl_Room" value="9">9층</option>
-                            <option name="dl_Room" value="10">10층</option> -->
+
                         </select>
                         <br><br>
                         <h5>평수</h5>
@@ -379,6 +372,13 @@
         }FORMTAG.submit();
             
     }
+
+
+    ////이미지 업로드전 엑박 표시 제거 할 대체 이미지
+    function no_image(){
+            $("img").attr("src","choice.png");
+        }
+
     </script>
 </body>
 

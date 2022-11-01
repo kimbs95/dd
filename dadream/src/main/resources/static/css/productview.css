@@ -1,9 +1,7 @@
-  * {
+	  * {
             margin: 0px;
             padding: 0px;
         }
-
-
 
         .dlImg {
             display: flex;
@@ -35,19 +33,15 @@
 
         .dlComments {
             border: 2px solid black;
-            /* display: flex; */
             text-align: center;
-		height:420.25px;
+			height:420.25px;
         }
-        .dlComments div{
-		
-}
-        
+
         .dlComments h3{
-		font-size: 22px;
-		font-weight:bold;
-		margin: 10px 0;
-}
+			font-size: 22px;
+			font-weight:bold;
+			margin: 10px 0;
+		}
 
         .dlComments1 {
             width: 400px;
@@ -72,13 +66,13 @@
         }
         
         #dlComments2 h3{
-	text-align: center;
-}
+			text-align: center;
+		}
         
         
          #dlComments2 h3{
-	text-align: center;
-}
+			text-align: center;
+		}
 
         #dlComments2 p {
             border: 1px solid black;
@@ -125,11 +119,7 @@
             table-layout: fixed
         }
 
-        /* li {
-            font: 11px/15px "돋움", dotum, Verdana, sans-serif;
-        } */
-
-        /* 상품상세정보, 고객상품평, 상품Q&A, 배송/반품/교환 */
+/* --------------상품상세정보, 고객상품평, 상품Q&A, 배송/반품/교환 --------------*/
         ul.detail_tab:after {
             content: "";
             display: block;
@@ -196,7 +186,7 @@
             margin: 0 0 30px 0;
         }
 
-        /* select option크기 */
+/* ------------------------------select option크기------------------------------ */
         .select {
             margin: 0;
             padding: 0;
@@ -204,8 +194,8 @@
             height: 26.23px;
         }
    		.img-fluid{
-	height:400px;
-}
+			height:400px;
+		}
 
         .ot_1 option {
             width: 170px;
@@ -213,4 +203,4 @@
         }
         #ot_1 ,#ot_2 {
 	  text-align: center;
-}
+		}

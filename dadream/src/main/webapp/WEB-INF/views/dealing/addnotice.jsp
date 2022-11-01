@@ -47,12 +47,6 @@
 				<td colspan="2"><textarea rows="10" cols="65" maxlength="4000" name="notice_Text"></textarea>
 				</td>
 			</div>
-			<!-- <tr>
-				<td align="right">파일첨부: </td>
-				<td colspan="2"><input type="button" value="파일 추가" onClick="fn_addFile()"  name="inte_Image"/> </td>
-				<td><div id="d_file"></div></td>
-				<td><img id="preview" scr="#" width=200 height=200 aria-placeholder="미리보기"/></td>
-			</tr> -->
 			<tr>
                 	<tr>
                    

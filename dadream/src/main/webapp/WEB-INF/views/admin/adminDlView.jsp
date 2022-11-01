@@ -18,6 +18,8 @@
         <title>다드림 관리자페이지</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="/css/admin/styles.css" rel="stylesheet" />
+        <!--CSS-->
+	    <link rel="stylesheet" href="/css/dealingview.css">
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
     </head>
     <body class="sb-nav-fixed">
@@ -25,14 +27,7 @@
             <!-- Navbar Brand-->
             <a class="navbar-brand ps-3" href="${contextPath}/admin/admin.do">다드림 Admin</a>
             <!-- Sidebar Toggle-->
-            <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
-            <!-- Navbar Search-->
-            <!-- <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0"> -->
-                <div class="input-group">
-                    <!-- <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" /> -->
-                    <!-- <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button> -->
-                </div>
-            <!-- </form> -->
+            <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>      
             <!-- Navbar-->
             <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
                 <li class="nav-item dropdown">
@@ -56,31 +51,17 @@
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 매출관리
                             </a>
-                           
                                 <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                                
                                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseProduct" aria-expanded="false" aria-controls="pagesCollapseProduct">
                                         상품관리
                                         <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                                     </a>
                                     <div class="collapse" id="pagesCollapseProduct" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
                                         <nav class="sb-sidenav-menu-nested nav">
-                                            <form action="/admin/pro.do" method="POST">
-                                                <p id="proList" class="nav-link" >상품조회</p>
-                                            </form>
+                                            <a class="nav-link" href="#">상품조회</a>
                                             <a class="nav-link" href="#">상품리뷰관리</a>
                                         </nav>
                                     </div>
-                                    <script>
-                                        document.addEventListener("DOMContentLoaded",()=>{
-                                            document.querySelector("#proList").addEventListener("click",(e)=>{
-                                                e.target.parentElement.submit();
-                                            })
-                                            document.querySelector("#proMem").addEventListener("click",(e)=>{
-                                                e.target.submit();
-                                            })
-                                        })
-                                    </script>
                                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseDealing" aria-expanded="false" aria-controls="pagesCollapseDealing">
                                         매물관리
                                         <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
@@ -96,7 +77,7 @@
                                     </a>
                                     <div class="collapse" id="pagesCollapseMember" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
                                         <nav class="sb-sidenav-menu-nested nav">
-                                            <form id="proMem"class="nav-link" method="POST" action="/admin/member.do">회원조회</form>
+                                            <a class="nav-link" href="#">회원조회</a>
                                         </nav>
                                     </div>
                                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseReport" aria-expanded="false" aria-controls="pagesCollapseReport">
@@ -109,69 +90,91 @@
                                         </nav>
                                     </div>
                                 </nav>
-                         
                         </div>
-                    </div>
-                    <div class="sb-sidenav-footer">
-                        <div class="small">Logged in as:</div>
-                        Start Bootstrap
                     </div>
                 </nav>
             </div>
             <div id="layoutSidenav_content">
-            <main>
-                <div class="card-body">
-                    <table id="datatablesSimple">
-                        <thead>
-                            <tr>
-                                <th>유저 아이디</th>
-                                <th>이름</th>
-                                <th>이메일</th>
-                                <th>가입일</th>
-                                <th>사업자 번호</th>
-                            </tr>
-                        </thead>
-                        <tbody id="proMember">
-                         <c:forEach var ="i" items="${adminMember}">
-                            <tr>
-                                <td>${i.user_Id}</td>
-                                <td>${i.user_Name}</td>
-                                <td>${i.user_Email}</td>
-                                <td>${i.user_Sign}</td>
-                                <td>${i.user_Business}</td>
-                            </tr>
-                         </c:forEach>
-                        </tbody>
-                    </table>
-                </div>
                 
-            </main>
-
-            <footer class="py-4 bg-light mt-auto">
-                <div class="container-fluid px-4">
-                    <div class="d-flex align-items-center justify-content-between small">
-                        <div class="text-muted">Copyright &copy; Your Website 2022</div>
-                        <div>
-                            <a href="#">Privacy Policy</a>
-                            &middot;
-                            <a href="#">Terms &amp; Conditions</a>
+                <main>
+                    <div class="first">
+                        <h1 class="title" style="margin-left: 10%;">매물정보</h1>
+                
+                        <div class="middle" style="justify-content: end; margin-left: 10%;">
+                            <!--이미지 div-->
+                            <div class="dlImg">
+                                <div class="dlMain">
+                                    <img src="/dealing/${dlContents.user_Id}/${dlContents.dl_Image}">
+                                </div>
+                
+                                
+                            </div>
+                
+                                        <!-----------------------상품 설명----------------------->
+                
+                            <div class="dlComments">
+                
+                                <!-------------------------------건물명,주소------------------------------->
+                                <div class="dlComments1">
+                                    <p>매물명</p>
+                                    <input type="text" value="${dlContents.dl_Title}" name="dl_Title" disabled
+                                        style="text-align: center;">
+                                    <p>상세 주소</p>
+                                    <input id="dl_Address1" type="text" value="${dlContents.dl_Address}"
+                                         name="dl_Address" maxlength="50" disabled>
+                                </div>
+                                <br><br>
+                                <!-------------------------------방종류, 층수------------------------------->
+                                <div id="dlComments2">
+                                    <div class="">
+                                        <p>건물 유형</p>
+                                        <input type="text" value="${dlContents.dl_Form}" name="dl_Form" size="10" disabled
+                                            style="text-align: center;">
+                                    </div>
+                                    <div class="">
+                                        <p>매물 유형</p>
+                                        <input id="dl_Form2_1" type="text" value="${dlContents.dl_Form2}" name="dl_Form2" disabled></td>
+                                    </div>
+                                </div>
+                
+                                <!-------------------------------가격,매물종류------------------------------->
+                                <div id="dlComments3">
+                                    <div>
+                                        <p>옵션</p>
+                                        <input id="" type="text" value="${dlContents.dl_Option}" name="dl_Form2" disabled
+                                            style="text-align: center;">
+                                        <p>가격</p>
+                                        <input id="dl_Price1" type="text" value="${dlContents.dl_Price}" name="dl_Price" disabled>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="dlcontents">
+                            <textarea rows="10" cols="100" value="${dlContents.dl_Content}" name="dl_Content"
+                                disabled style="margin-left: 63%;">${dlContents.dl_Content } </textarea>
                         </div>
                     </div>
-                </div>
-            </footer>
+                </main>
+                <footer class="py-4 bg-light mt-auto">
+                    <div class="container-fluid px-4">
+                        <div class="d-flex align-items-center justify-content-between small">
+                            <div class="text-muted">Copyright &copy; Your Website 2022</div>
+                            <div>
+                                <a href="#">Privacy Policy</a>
+                                &middot;
+                                <a href="#">Terms &amp; Conditions</a>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+            </div>
         </div>
-    </div>
-    <script>
-
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous">
-    </script>
-    <script src="/js/admin/scripts.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-    <script src="/js/admin/chart-area-demo.js"></script>
-    <script src="/js/admin/chart-bar-demo.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
-    <script src="/js/admin/datatables-simple-demo.js"></script>
-</body>
-
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="/js/admin/scripts.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+        <script src="/js/admin/chart-area-demo.js"></script>
+        <script src="/js/admin/chart-bar-demo.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
+        <script src="/js/admin/datatables-simple-demo.js"></script>
+    </body>
 </html>

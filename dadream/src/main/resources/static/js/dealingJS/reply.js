@@ -6,28 +6,46 @@
 			list(inte_NumValue);
 	///////////////////////////////////리스트 함수///////////////////////////////////////////
 		function list(inte_Num){
-//		debugger;
+		
 //		alert(inte_Num);
 		
 		$.getJSON("/replies/"+inte_Num, function(data){
-			
 			var str ="";
-			
+			var datalistr = data[0].user_Id;
+			if(data.length > 0){
 			
 			for(var i=0; i < data.length; i++){		//for 안에 넣으면 댓글 수만큼 반복되게 됨.
-				
+			str +=`<div id="Replyeachform>"`
+			str += `<div id="writer_Date">`
+			str += `<li style="font-size:larger; font-weight:bolder;">${data[i].user_Id}</li>`
+			str += `<li style="font-size:small">${data[i].reply_regDate}</li>`
+			str += `</div>`
 			
-			str += `<li>${data[i].user_Id}</li>`
-			str += `<li>${data[i].reply_regDate}</li>`
-			str += `<li><textarea rows="5" cols="50" id="replycontent${data[i].reply_Num}">${data[i].reply_content}</textarea></li>`
+			str += `<li><textarea  id="replycontent${data[i].reply_Num}">${data[i].reply_content}</textarea></li>`
+			str += `</div>`
+			
+			str +=`<div id="re_reply">`
+			str +=`<button type="button" id="reComment">답글달기</button>`
+			str +=`</div>`
+			
+			
+		if($('#user_id').text() === data[i].user_Id){
+			
+			str += `<div id="mod_del">`
 			str += `<li><button type="button" class="update" data-reply_Num=${data[i].reply_Num} value=${data[i].reply_Num}>수정</button>` //value값에 넣어서 던져줌
 			str += `<button type="button" class="remove" data-reply_Num=${data[i].reply_Num} value=${data[i].reply_Num}>삭제</button></li>`
-//			str += `<button class="replyBtn">답글</button>`
+			str += `</div>`
 			
-		
-
+			}
+			
+			str +=`<hr id="line">`
 
 			}
+		}else{
+			str += `<div class="No_reply">`;
+			str += `<h6><strong>등록된 댓글이 없습니다.</strong></h6>`;
+			str += `</div>`;
+		}
 			$("#replyUL").html(str);   
 			
 		});
@@ -40,7 +58,7 @@
 //////////////////////////////////댓글 쓰기////////////////////////////////////////////			
 			$("#btn_add").on("click",function(){// 댓글 쓰기 쓰기 버튼을 클릭하면
 				
-			
+					
 				var reply_contentValue = $("#reply_content").val();				
 				var user_IdValue = $("#user_Id").val(); //세션값으로 받아옴
 				var reply_regDateValue = $("#reply_regDate").val();
@@ -66,12 +84,13 @@
 					
 				},
 				error : function(){
-					alert("로그인하세요");
+					alert("로그인 후 이용하세요.");
 					location.replace("/login.do");
 					
 				}
 				
 			})
+			
 		}		//add 함수 끝
 		
 
@@ -79,8 +98,8 @@
 ///////////////////////////////////댓글 수정  함수///////////////////////////////////////
 		$("#chat").on("click", ".update", function(){		//수정 버튼을 클릭하면
 			var reply_Num = this.value;  //value라는 애를 num에다가 넣어준다
-			
 			var reply_content = $("#replycontent"+reply_Num).val();  //"#replycontent"+reply_Num    ->이 자체가 id
+			
 //			$(".update").val(reply_Num);
 			//댓글 수정 하기 위한 함수  호출(댓글번호,댓글내용)
 			var mod = {reply_Num : reply_Num,
@@ -125,7 +144,7 @@
 	
 /////////////////////////////////////댓글 삭제 함수/////////////////////////////////
 		$("#chat").on("click",".remove", function(){
-			debugger;
+			
 			var reply_Num = this.value;
 
 			var del = {reply_Num:reply_Num
@@ -147,7 +166,7 @@
 //					data : JSON.stringify(reply_Num),
 //					contentType:"application/json; charset=utf-8",
 					success : function(result){
-						debugger;
+						
 						if(result == "success"){
 							alert("삭제 성공");
 							location.reload();
@@ -155,13 +174,14 @@
 						
 					},
 					error : function(){
-						debugger;
+						
 							alert("삭제실패")
-//							location.reload();
+							location.replace("/board/{inte_Num}")
 					}
 				})
 			}
 	}
+	
 	
 			
 })

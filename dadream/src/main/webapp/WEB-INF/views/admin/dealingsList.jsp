@@ -3,10 +3,11 @@
     isELIgnored="false" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:set var="contextPath" value="${pageContext.request.contextPath}" />
+
 <%
   request.setCharacterEncoding("UTF-8");
 %>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -27,12 +28,8 @@
             <!-- Sidebar Toggle-->
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
             <!-- Navbar Search-->
-            <!-- <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0"> -->
-                <div class="input-group">
-                    <!-- <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" /> -->
-                    <!-- <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button> -->
+                <div class="input-group">            
                 </div>
-            <!-- </form> -->
             <!-- Navbar-->
             <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
                 <li class="nav-item dropdown">
@@ -56,31 +53,17 @@
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 매출관리
                             </a>
-                           
                                 <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                                
                                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseProduct" aria-expanded="false" aria-controls="pagesCollapseProduct">
                                         상품관리
                                         <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                                     </a>
                                     <div class="collapse" id="pagesCollapseProduct" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
                                         <nav class="sb-sidenav-menu-nested nav">
-                                            <form action="/admin/pro.do" method="POST">
-                                                <p id="proList" class="nav-link" >상품조회</p>
-                                            </form>
+                                            <a class="nav-link" href="#">상품조회</a>
                                             <a class="nav-link" href="#">상품리뷰관리</a>
                                         </nav>
                                     </div>
-                                    <script>
-                                        document.addEventListener("DOMContentLoaded",()=>{
-                                            document.querySelector("#proList").addEventListener("click",(e)=>{
-                                                e.target.parentElement.submit();
-                                            })
-                                            document.querySelector("#proMem").addEventListener("click",(e)=>{
-                                                e.target.submit();
-                                            })
-                                        })
-                                    </script>
                                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseDealing" aria-expanded="false" aria-controls="pagesCollapseDealing">
                                         매물관리
                                         <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
@@ -96,7 +79,7 @@
                                     </a>
                                     <div class="collapse" id="pagesCollapseMember" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
                                         <nav class="sb-sidenav-menu-nested nav">
-                                            <form id="proMem"class="nav-link" method="POST" action="/admin/member.do">회원조회</form>
+                                            <a class="nav-link" href="#">회원조회</a>
                                         </nav>
                                     </div>
                                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseReport" aria-expanded="false" aria-controls="pagesCollapseReport">
@@ -109,7 +92,6 @@
                                         </nav>
                                     </div>
                                 </nav>
-                         
                         </div>
                     </div>
                     <div class="sb-sidenav-footer">
@@ -119,59 +101,86 @@
                 </nav>
             </div>
             <div id="layoutSidenav_content">
-            <main>
-                <div class="card-body">
-                    <table id="datatablesSimple">
-                        <thead>
-                            <tr>
-                                <th>유저 아이디</th>
-                                <th>이름</th>
-                                <th>이메일</th>
-                                <th>가입일</th>
-                                <th>사업자 번호</th>
-                            </tr>
-                        </thead>
-                        <tbody id="proMember">
-                         <c:forEach var ="i" items="${adminMember}">
-                            <tr>
-                                <td>${i.user_Id}</td>
-                                <td>${i.user_Name}</td>
-                                <td>${i.user_Email}</td>
-                                <td>${i.user_Sign}</td>
-                                <td>${i.user_Business}</td>
-                            </tr>
-                         </c:forEach>
-                        </tbody>
-                    </table>
-                </div>
-                
-            </main>
-
-            <footer class="py-4 bg-light mt-auto">
-                <div class="container-fluid px-4">
-                    <div class="d-flex align-items-center justify-content-between small">
-                        <div class="text-muted">Copyright &copy; Your Website 2022</div>
-                        <div>
-                            <a href="#">Privacy Policy</a>
-                            &middot;
-                            <a href="#">Terms &amp; Conditions</a>
+                <main>
+                    <h1>매물관리</h1>
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item active">Dealin Management</li>
+                </ol>
+                <h3>매물내역</h3>
+                <div style="margin: 100px 20px 0 20px;">
+                    <div class="card mb-12">
+                        <div class="card-header">
+                            <i class="fas fa-table me-1"></i>
+                            매물 목록
                         </div>
+                        <div class="card-body">
+                            <input type="checkbox" name="checkAll" onclick="selectAll(this)"> 전체선택
+                            <form name="dealingForm" method="post" action="/admin/deleteDealing.do">
+                        <table id="datatablesSimple">
+                            <thead>
+                                <div style="margin-bottom: 40px;">
+                                </div>
+                                <tr>
+                                    <th style="width: 3%;">체크</th>
+                                    <th>매물번호</th>
+                                    <th>매물명</th>
+                                    <th>매물종류</th>
+                                    <th>매매종류</th>
+                                    <th>등록날짜</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <c:forEach var="dl" items="${dealingsList}">
+                            <tr>
+                                <td>
+                                    <input id="checkAll" name="checkAll" type="checkbox" value="${dl.dl_Num}">
+                                </td>
+                                <td>${dl.dl_Num}</td>
+                                <td><a href="${contextPath}/admin/adminDlView.do?dl_Num=${dl.dl_Num}">${dl.dl_Title}</a></td>
+                                <td>${dl.dl_Form}</a></td>
+                                <td>${dl.dl_Form2}</td>
+                                <td>${dl.dl_Date}</td>
+                                </tr>
+                        </c:forEach>
+                            </tbody>
+                        </table>
+                        <input type="submit" value="선택삭제">
+                    </form>
                     </div>
                 </div>
-            </footer>
+            </div>
+                </main>
+                <footer class="py-4 bg-light mt-auto">
+                    <div class="container-fluid px-4">
+                        <div class="d-flex align-items-center justify-content-between small">
+                            <div class="text-muted">Copyright &copy; Your Website 2022</div>
+                            <div>
+                                <a href="#">Privacy Policy</a>
+                                &middot;
+                                <a href="#">Terms &amp; Conditions</a>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+            </div>
         </div>
-    </div>
-    <script>
+        <script>
+            /* 전체선택 */
+            function selectAll(selectAll) {
+                var checkboxes = document.getElementsByName('checkAll');
 
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous">
-    </script>
-    <script src="/js/admin/scripts.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-    <script src="/js/admin/chart-area-demo.js"></script>
-    <script src="/js/admin/chart-bar-demo.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
-    <script src="/js/admin/datatables-simple-demo.js"></script>
-</body>
-
+                checkboxes.forEach(function (checkbox) {
+                    checkbox.checked = selectAll.checked;
+                });
+                console.log(checkboxes);
+            }
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="/js/admin/scripts.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+        <script src="/js/admin/chart-area-demo.js"></script>
+        <script src="/js/admin/chart-bar-demo.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
+        <script src="/js/admin/datatables-simple-demo.js"></script>
+    </body>
 </html>

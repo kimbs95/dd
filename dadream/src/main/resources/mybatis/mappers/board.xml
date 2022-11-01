@@ -21,8 +21,8 @@
 		<!--인테리어 게시글 등록 -->
 	  <insert id="insertboard"  parameterType="boardVO">
 		<![CDATA[
-		 insert into interior_t(inte_Num,inte_Title,inte_Text,inte_Image,inte_Date,user_Id,viewCounts)
-		 values(#{inte_Num},#{inte_Title},#{inte_Text},#{inte_Image},#{inte_Date},#{user_Id},#{viewCounts})
+		 INSERT INTO interior_t(inte_Num,inte_Title,inte_Text,inte_Image,inte_Date,user_Id,viewCounts)
+		 VALUES(#{inte_Num},#{inte_Title},#{inte_Text},#{inte_Image},#{inte_Date},#{user_Id},#{viewCounts})
 		]]>
 		  
 	</insert>
@@ -30,18 +30,15 @@
 	<select id="selectAllArticlesList" parameterType="boardVO" resultMap="boardResult">
 	
 	<![CDATA[
-		SELECT inte_Num,inte_Title,inte_Text,inte_Image,inte_Date,user_Id,viewCounts
-		FROM INTERIOR_T
+		SELECT *
+		FROM INTERIOR_T ORDER BY inte_Num DESC
 		]]>
-		WHERE 1=1
-		<if test='inte_Num != null and inte_Num != ""'>
-		AND INTE_NUM = #{inte_Num}
-		</if>
+		 
 	</select>
 	
 	<select id="getBoardContents" parameterType="boardVO" resultType="boardVO">
-		select * from interior_t
-		where inte_Num = #{inte_Num}
+		SELECT * FROM interior_t
+		WHERE inte_Num = #{inte_Num}
 	</select>
 	
 	<update id="updateBoard" parameterType="boardVO">
@@ -54,8 +51,8 @@
 	
 	<delete id="deleteArticle"  parameterType="boardVO" >
 		<![CDATA[
-			delete
-			from
+			DELETE
+			FROM
 			interior_t
 			WHERE
 			inte_Num = #{inte_Num}
@@ -70,6 +67,14 @@
 		WHERE 
 		inte_Num = #{inte_Num}
 	</update>
+	
+	<select id="myboardList" resultMap="boardResult" parameterType="String">
+		
+		<![CDATA[
+		SELECT inte_Num,inte_Title,inte_Text,inte_Date,user_Id
+		FROM INTERIOR_T
+		]]>
+	</select>
 	
 	
 	</mapper>

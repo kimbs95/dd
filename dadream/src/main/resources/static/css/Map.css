@@ -1,0 +1,172 @@
+		#range1::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+        }
+
+        .dealingcontent>* {
+            margin-bottom: 5px;
+        }
+
+        #dlli {
+            border-bottom: 1px solid #ccc;
+            margin-bottom: 10px;
+        }
+        #selectbox{
+			display: flex; 
+			height: 30px;
+			margin: 30px 0 20px 31%;
+		}
+        
+        #dl_Form1{
+			width: 100px; 
+			height: 25px; 
+			text-align: center; 
+			margin-right: 8px;
+}
+
+		#dl_Form2{
+			width: 100px; 
+			height: 25px; 
+			text-align: center; 
+			margin-right: 8px;
+		}
+		
+		#dl_Room{
+			width: 100px; 
+			height: 25px; 
+			text-align: center; 
+			margin-right: 8px;
+		}
+		
+		#dl_Option{
+			width: 100px; 
+			height: 25px; 
+			text-align:center;
+			margin-right: 8px;
+		}
+		
+		#PriceForm{
+			margin-left:30%; 
+			margin-bottom:15px;
+			height: 29px;
+		}
+		#dl_Price_p{
+			text-align:center;
+			margin-right:3px;
+			height: 27px; 
+			line-height: 27px;
+			border:none;
+			border-bottom: 1px solid black;
+			outline:none;
+		}
+		
+		#dealingsearch{
+			height: 27px;
+			line-height:27px;
+			margin-right:5px;
+			border:none;
+			border-bottom: 1px solid black;
+			outline:none;
+		}
+		#dl_Search_Btn{
+			height:27px;
+		}
+		
+		#prs-position{
+			display:flex; 
+			width: 700px;
+		}
+		
+		#MapForm{
+			display: flex;
+		}
+		
+		#map{
+			width:1100px; 
+			height:1000px; 
+			right: 10px; 
+			top:3px; 
+			border: 1px solid #ccc;
+		}
+/*------------------------------resultList----------------------------------*/
+
+		#result1{
+			cursor:pointer; 
+			border:none; 
+			background-color:white;
+		}
+		
+		#result2{
+			width:400px;
+			height:350px;
+			border:0.1px solid #ccc;
+		}
+		
+		#result3{
+			margin:5px 0; 
+			border:1px solid #ccc; 
+			width:380px;  
+			height:190px
+		}
+		
+		#result4{
+			font-size:18px; 
+			font-weight:bold; 
+			margin:10px 0 5px 0;
+		}
+		
+		#result5{
+			font-weight:bold;
+		}
+		
+		#result6{
+			margin-right:5px; 
+			font-weight:bold;
+		}
+		
+		#result7{
+			font-weight:bold;
+		}
+		
+		#result8{
+			font-weight:bold;
+		}
+		
+/*------------------------------resultList2---------------------------------*/
+		
+		#res1{
+			width:450px; 
+			height:300px; 
+			background-color:white; 
+			border:outset;
+		}
+		
+		#res2{
+			display: flex; 
+			border-bottom: 1px solid #ccc; 
+			margin-bottom: 20px; 
+			margin-left: 30px;
+		}
+		
+		#res3{
+			width:200px; 
+			height:190px;
+		}
+		
+		#res4{
+			flex-grow:1; 
+			margin:auto; 
+			line-height:14px; 
+			font-weight:bold; 
+			color:darkorange
+		}
+		
+/*------------------------------resultList2 END---------------------------*/
+
+		#resultListForm{
+			width: 500px; 
+			height:1000px; 
+			overflow-y: auto;
+		}
+		
+		

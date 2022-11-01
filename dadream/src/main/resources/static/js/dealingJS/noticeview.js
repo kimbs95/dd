@@ -1,14 +1,8 @@
 // 뒤로가기
-	/*$(document).ready(function(){
-		var msg = "${msg}";
-		if(msg != ""){
-			alert(msg);
-		}
-	});
 	function backToList(obj) {
 		obj.action="${contextPath}/noticelist.do";
 		obj.submit();
-	}*/
+	}
 	
 	function fn_remove_noticle(url,notice_Num){
 	var form = document.createElement("form");

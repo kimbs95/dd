@@ -8,59 +8,20 @@
 %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="ko">
 <head>
     <title>신고하기</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-        }
 
-        #rp_Title {
-            display: flex;
-            margin-left: 10px;
-        }
-        #dl_Num{
-            margin-left: 10px;
-        }
-
-        #rp_Title input {
-            width: 400px;
-        }
-
-        #rp_Content {
-            display: flex;
-         
-        }
-
-        #rp_Content  {
-            margin-top: 5px;
-        }
-
-        #rpBtn {
-            text-align: right;
-            margin-top: 40px;
-            margin-right: 20px;
-        }
-        #title{
-            display: inline-flex;
-        }
-        #No{
-            display: inline-flex;
-            margin: 10px 0;
-        }
-        #reform{
-            margin-left: 10px;
-        }
-    </style>
-</head>
-
-<body>
     <!--부트스트랩-->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!--CSS-->
+	<link rel="stylesheet" href="/css/report.css">
+    <!--JS-->
+    <script src="/js/dealingJS/report.js"></script>
+</head>
+
+<body>
     <h1 style="margin: 20px 0 20px 10px;">신고하기</h1>
     <hr>
     <form id="reform" method="post" name="reprot" action="${contextPath}/report.do">
@@ -81,7 +42,6 @@
         </div>
     </form>
     <script>
-        
         document.querySelector("#rep").addEventListener("click", async (e) => {
             let dl_Num = +document.querySelector("#dl_Num").value;
             let rp_Title = document.querySelector("#rp_Title").value;
@@ -115,10 +75,6 @@
                 alert("서버 오류");
                 return;
             }
-
-
-
-
         })
     </script>
 </body>

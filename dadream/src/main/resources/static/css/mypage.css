@@ -1,32 +1,67 @@
- .mypage {
-           margin-top: 40px;
+		.mypagecontrol{
+			display: flex; 
+			flex-direction: column; 
+			margin-left: 140px;
+		}
+ 		.mypage {
+           	margin-top: 40px;
 
         }
         .mypage p{
-	margin:5px 0;
-}
-
+			margin:5px 0;
+		}
+		#userinfo_mod{
+			width:960px;
+		}
+		#change{
+			font-weight:700;
+			margin-top:10px;
+			width: 100px; 
+			height:30px;
+			}
+			
+/*------------------------------내가등록한방------------------------------*/		
+	
         #myroom {
             width: 1130px;
             height: 320px;
             display: flex;
             margin: 5px;
             background:gainsboro;
-            /* margin: 0px auto; */
+            overflow-x: auto;
         }
-
-        #likeroom {
-            width: 1130px;
-            height: 220px;
+		#mydl {
+            border: 1px solid #ccc;
+            width: 300px;
+            height: 270px;
+            padding: 10px;
+            margin-left: 100px;
+            }
+        .modelete{
             display: inline-flex;
-            background:gainsboro;
-            /* margin: 0px auto; */
+            margin-top: 10px;
+            }
+            
+/*------------------------------관심목록------------------------------*/	
 
-        }
+        .myLike {
+            overflow-x: auto;
+            overflow-y: hidden;
+            background: gainsboro;
+            }
+        .jjimContents {
+                border: 1px solid #ccc;
+                width: 300px;
+                height: 200px;
+                padding: 10px;
+            }
+            
+/*------------------------------허위 매물 신고------------------------------*/	
 
         .report {
             align-content: center;
             margin: 0px;
+            width: 1000px;
             /* margin: 0px auto; */
         }
 
@@ -37,18 +72,16 @@
             /* margin: 0px auto; */
         }
 
-        td,
-        th {
+        td,th {
             border-bottom: 1px solid #444444;
             border-left: 1px solid #444444;
             padding: 10px;
             text-align: center;
 
-
         }
         .table tr {
 			height:22px
-}
+		}
 
         td:first-child,
         th:first-child {
@@ -61,3 +94,47 @@
             font-weight: 700;
             background-color: gainsboro;
         }
+        
+/*------------------------------나의 게시글------------------------------*/	
+     
+		#table_id{
+			text-align: center;
+			border:"0";
+			width:1130px;
+			margin-top: 20px;
+			
+		}
+		#table_id tr{
+			line-height: 30px;
+			height:30px;
+		}
+		#table_id tbody tr:hover{
+			background-color: rgb(249, 245, 191);
+		}
+		#table_id td > a{
+			text-decoration: none;
+		}
+		#quit{
+			width:150px;
+			height:30px;
+			font-weight: bolder;
+			color:red;
+			margin-top: 40px;
+		}
+		.mypage h2{
+			font-weight: 900; 
+			font-size: 2em; 
+			margin-top: 80px; 
+			margin-bottom: 40px;
+			
+		}
+		#btn {
+            margin-left: 10px;
+            }
+        
+            #infoAddress3Check{
+			margin-top: 3px;
+			}
+		
+			
+	

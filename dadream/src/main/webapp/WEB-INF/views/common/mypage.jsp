@@ -15,87 +15,55 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>마이페이지</title>
-        <style>
-            #myroom {
-                overflow-x: auto;
-                height: 200px;
-            }
-
-            #mydl {
-                border: 1px solid #ccc;
-                width: 300px;
-                height: 270px;
-                padding: 10px;
-            }
-
-            #likeroom {
-                overflow-x: scroll;
-
-            }
-
-            .myLike {
-                overflow-x: auto;
-                overflow-y: hidden;
-            }
-
-            .jjimContents {
-                border: 1px solid #ccc;
-                width: 300px;
-                height: 200px;
-                padding: 10px;
-            }
-
-            #btn {
-                margin-left: 10px;
-            }
-
-            .modelete {
-                display: inline-flex;
-                margin-top: 10px;
-            }
-        </style>
         <!-- reset css -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
         <!-- css -->
         <link rel="stylesheet" href="/css/mypage.css">
+        <!--JS-->
+        <script src="/js/common/mypage.js" defer></script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script type="text/javascript">
-            $(function () {
-                $("#alert-success").hide();
-                $("#alert-danger").hide();
-                $("input").keyup(function () {
-                    var pwd1 = $("#pwd1").val();
-                    var pwd2 = $("#pwd2").val();
-                    if (pwd1 != "" || pwd2 != "") {
-                        if (pwd1 == pwd2) {
-                            $("#alert-success").show();
-                            $("#alert-danger").hide();
-                            $("submit").removeAttr("disabled");
-                        } else {
-                            $("#alert-success").hide();
-                            $("#alert-danger").show();
-                            $("submit").attr("disabled", "disabled");
-                        }
-                    }
-                });
-            });
-        </script>
+        <!--DataTable-->
+        <script src="https://code.jquery.com/jquery-3.6.0.js"   integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.11.4/r-2.2.9/datatables.min.css"/>
+        <script defer type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.11.4/r-2.2.9/datatables.min.js"></script>
     </head>
+    <script>
+		$(document).ready( function () {
+			$.fn.DataTable.ext.pager.numbers_length = 5;	//페이징처리 버튼 갯수
+            
+			$('#table_id').DataTable({
+				
+				responsive : {deatail:{ type: 'column',
+										target : 1}},
+				ordering: true, 
+                order :[[0, 'desc']],
+            	url: '/js/user/dataTables.ko.json',
+				lengthChange: true,
+				info : false,
+				searching:true,
+				"search":{caseInsensitive:false},	//검색 시 영 대소문자 구별
+				displayLength:13,
+				scrollCollapse : false,
+				"pagingType": "simple_numbers",
+				columnDefs:[{targets:0, width: 60},{targets:1,width: 80}
+							 ,{targets:2,width:280},{targets:3,width:130}],
+                      
+    });
+} );
+	
+	</script>
+
 
     <body>
         <!-- <h1>${empty user_Pwd ? "안 넘어옴" : "넘어옴"}</h1> -->
-        <div class="mypagecontrol" style="display: flex; flex-direction: column; margin-left: 140px;">
-
-
+        <div class="mypagecontrol">
             <div class="mypage">
-
-                <div>
-
+                <div id="userinfo_mod">
 
                     <form>
-                        <h3 style="font-weight: 900; font-size: 2em;">회원정보 변경</h3><br>
+                        <h2>회원정보 변경</h2><br>
                         <label style="font-weight: 700; ">ID</label><br>
-                        <input type="text" style="margin: 10px 0;" value="${member.user_Id}" disabled><br>
+                        <input type="text" style="margin: 10px 0;" id="userId" value="${member.user_Id}" disabled><br>
                         <p>비밀번호</p>
                         <input type="password" value="${members.user_Pwd}" id="infoPwdCheck" name="user_Pwd" disabled>
                         <p>비밀번호 재확인</p>
@@ -109,137 +77,21 @@
                         <br>
                         <br>
                         <p style="margin-bottom: 5px; font-weight: bold;">상세주소</p>
-                        <input type="text" size="20" id="infoAddress3Check" value="${members.user_Address3}"
-                            style="margin-top: 3px;" disabled>
+                        <input type="text" size="20" id="infoAddress3Check" value="${members.user_Address3}" disabled>
                         <br><br>
-                        <input type="submit" name="mod" id="change" value="변경"
-                            style="font-weight:700; margin-top:10px;width: 100px; height:30px;"><br><br>
+                        <input type="submit" name="mod" id="change" value="변경" >
+                        <br><br>
                     </form>
                     <div class="passwordcheck"></div>
-                    <script>
-                        let infoPwdCheck2 = document.querySelector("#infoPwdCheck2");
-                        let passwordcheck = document.querySelector(".passwordcheck");
-                        let infoPwdCheck = document.querySelector("#infoPwdCheck");
-                        let infoEmailCheck = document.querySelector("#infoEmailCheck");
-                        let infoPhoneCheck = document.querySelector("#infoPhoneCheck");
-                        let infoAddress2Check = document.querySelector("#infoAddress2Check");
-                        let infoAddress3Check = document.querySelector("#infoAddress3Check");
-                        let cnt = 1 ; 
-                        document.querySelector("#change").addEventListener("click", (e) => {
-                            e.preventDefault();
-                            if(cnt ===1 ){
-                                let check = document.createElement("input");
-                                let btn = document.createElement("input");
-                                btn.setAttribute("type", "button");
-                                btn.setAttribute("id", "btn");
-                                btn.setAttribute("value", "비밀번호확인");
-                                check.setAttribute("type", "password");
-                                check.setAttribute("placeholder", "기존 비밀번호");
-                                passwordcheck.appendChild(check);
-                                passwordcheck.appendChild(btn);
-                                check.focus();
-                                cnt = 2;
-                                
-                                btn.addEventListener("click", async (e) => {
-                                console.log(check.value);
-                                if (e.target.matches("#btn")) {
-                                    let pwd = await fetch("/infoCheck.do", {
-                                        method: "POST",
-                                        headers: {
-                                            "content-type": "application/json"
-                                        },
-                                        body: JSON.stringify({
-                                            user_Id: "${member.user_Id}",
-                                            user_Pwd: check.value
-                                        })
-                                        
-                                    })
-                                    if (pwd.status === 200) {
-                                        let res = await pwd.json();
-                                        if (res.userCheck === 1) {
-                                            alert("확인되었습니다");
-                                            passwordcheck.setAttribute("style", "display:none;");
-                                            infoPwdCheck.removeAttribute("disabled");
-                                            infoPwdCheck2.removeAttribute("disabled");
-                                            infoEmailCheck.removeAttribute("disabled");
-                                            infoPhoneCheck.removeAttribute("disabled");
-                                            infoAddress2Check.removeAttribute("disabled");
-                                            infoAddress3Check.removeAttribute("disabled");
-                                            document.querySelector("#change").setAttribute("value",
-                                            "수정하기");
-                                            document.querySelector("#change").classList.add(
-                                                "changeMod");
-                                            } else {
-                                                alert("비밀번호가 틀립니다.");
-                                            }
-                                            document.querySelector(".changeMod").addEventListener(
-                                                "click", async (e) => {
-                                                    if (e.target.matches(".changeMod")) {
-                                                        if (!confirm("수정하시겠습니까?")) {
-                                                            return;
-                                                        }
-                                                        if (infoPwdCheck.value !== infoPwdCheck2
-                                                        .value) {
-                                                            alert("비밀번호가 일치하지않습니다.");
-                                                            infoPwdCheck.focus();
-                                                            infoPwdCheck.value = '';
-                                                            infoPwdCheck2.value = '';
-                                                            return;
-                                                        }
-                                                        let mod = await fetch("/memberMod.do", {
-                                                            method: "POST",
-                                                            headers: {
-                                                                "content-type": "application/json"
-                                                            },
-                                                            body: JSON.stringify({
-                                                                user_Id: "${member.user_Id}",
-                                                                user_Pwd: infoPwdCheck
-                                                                .value,
-                                                                user_Email: infoEmailCheck
-                                                                .value,
-                                                                user_Phone: infoPhoneCheck
-                                                                .value,
-                                                                user_Address2: infoAddress2Check
-                                                                .value,
-                                                                user_Address3: infoAddress3Check
-                                                                .value
-                                                            })
-                                                        })
-                                                        if (mod.status === 200) {
-                                                            let response = await mod.json();
-                                                            if (response.check === 1) {
-                                                                alert("수정이 완료되었습니다.");
-                                                                infoPwdCheck.disabled = true;
-                                                                infoPwdCheck2.disabled = true;
-                                                                infoEmailCheck.disabled = true;
-                                                                infoPhoneCheck.disabled = true;
-                                                                infoAddress2Check.disabled =
-                                                                true;
-                                                                infoAddress3Check.disabled =
-                                                                true;
-                                                                location.reload();
-                                                            }
-                                                        }
-                                                    }
-                                                    
-                                                })
-                                            }
-                                        }
-                                    })
-                                }else{
-                                    e.preventDefault()
-                                }
-                                })
-                    </script>
                 </div>
                 <br>
-                <h2 style="font-weight: 900; font-size: 2em; margin-top: 80px; margin-bottom: 40px;">내가 등록한 방</h2>
+                <h2>내가 등록한 방</h2>
                 <div id="myroom">
                     <c:forEach var="myDealing" items="${myDealing}">
-                        <div style="display: flex; margin-right: 20px;">
+                        <div style="display: flex;">
                             <div style="width: 200px; height: 200px;">
                                 <img src="/dealing/${myDealing.user_Id}/${myDealing.dl_Image}" alt="매물사진"
-                                    style="width:200px; height: 200px;">
+                                    style="width:300px; height: 270px;">
                             </div>
                             <div id="mydl">
                                 <p>매물이름 : ${myDealing.dl_Title}</p><br>
@@ -267,8 +119,8 @@
                     </c:forEach>
                 </div>
                 <br>
-                <h2 style="font-weight: 900; font-size: 2em; margin-top: 80px; margin-bottom: 40px;">관심목록</h2>
-                <div class="myLike" style="background: gainsboro;">
+                <h2>관심목록</h2>
+                <div class="myLike">
                     <c:forEach var="jjimList" items="${myJjim}">
                         <c:forEach var="myDealing2" items="${jjimList.dealing}">
                             <div style="display: flex; margin-right: 20px;">
@@ -290,8 +142,8 @@
                 </div>
                 <hr>
                 <br><br>
-                <div class="report" style="width: 1000px;">
-                    <h2 style="font-weight: 900; font-size: 2em; margin-top: 80px; margin-bottom: 40px;">허위매물 신고목록</h2>
+                <div class="report">
+                    <h2>허위매물 신고목록</h2>
                     <br>
                     <table class="table">
                         <tr style="height: 30px; line-height: 30px;">
@@ -311,73 +163,39 @@
                     </table>
                 </div>
                 <br><br><br>
-                <!-- <form method="post" action="${contextPath}/removeMember.do">
-                <input type="submit" value="회원탈퇴" style="width: 150px; height: 30px; font-weight: bolder; color: red;">
-                </form> -->
-                <button type="button" onclick="pwdCheck()" value="회원탈퇴"
-                    style="width: 150px; height: 30px; font-weight: bolder; color: red;">회원탈퇴</button>
+                <hr>
+
+                <h2>나의 게시글</h2>
+                <div id="myboardlist">
+                            <table id="table_id" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>작성자</th>
+                                        <th>제목</th>
+                                        <th>작성일</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <c:forEach var="myboardList" items="${myboardList}" >
+                                        <c:if test="${user_Id == myboardList.user_Id}">
+                                            <tr>
+                                                <td>${myboardList.inte_Num}</td>
+                                        <!--<td>${boardNum.count}</td>은 게시글1번을 삭제하면 2번이 1번으로-->
+                                        <td>${myboardList.user_Id}</td>
+                                        <td><a href="/board/read?inte_Num=${myboardList.inte_Num}" title="${myboardList.inte_Text}">
+                                            <c:out value="${myboardList.inte_Title}" /></a></td>
+                                            <td><fmt:formatDate value="${myboardList.inte_Date}" /></td>
+                                    </tr>
+                                </c:if>
+                            </c:forEach>
+                        </tbody>
+                    </table>
+                    
+                <button id="quit"type="button" onclick="pwdCheck()" value="회원탈퇴">회원탈퇴</button>
+                    </div>
             </div>
-
         </div>
-
-        <script>
-            var user_Id = "${member.user_Id}"
-            console.log(user_Id);
-
-            function pwdCheck() {
-                let pwdCheck = prompt("비밀번호 확인", "비밀번호 를 입력해주세요");
-                console.log(pwdCheck);
-                if (pwdCheck === null && pwdCheck === "") {
-                    console.log("다시 시도하십시오.");
-                } else {
-                    if (!confirm("정말로 탈퇴하시겠습니까?")) {
-                        alert("탈퇴가 취소되었습니다.");
-                        return;
-                    }
-                    $.ajax({
-                        url: "pwdCheck.do",
-                        type: "post",
-                        dataType: "json",
-                        data: {
-                            pwdCheck,
-                            user_Id
-                        },
-                        success: function (result) {
-                            console.log(result.userCheck);
-                            if (result.userCheck === 1) {
-                                location.href = "/removeMember.do"
-                                alert("탈퇴가 완료되었습니다.");
-                                return;
-                            } else if (result.userCheck !== 1) {
-                                alert("비밀번호가 틀립니다.");
-                                return;
-                            }
-
-
-                        },
-                        error: function () {
-                            alert("오류");
-                        }
-
-                    });
-                    return;
-                }
-
-                // function deleteMem() {
-                //     var form = document.createElement('form');
-                //     form.setAttribute('method', 'post');
-                //     form.setAttribute('action', 'removeMember.do');
-                //     document.charset = "utf-8";
-
-                //     form.submit();
-                // }
-
-                // if(!confirm("정말로 탈퇴하시겠습니까?")) {
-                //     console.log("탈퇴취소");
-                // }
-
-            }
-        </script>
     </body>
 
     </html>

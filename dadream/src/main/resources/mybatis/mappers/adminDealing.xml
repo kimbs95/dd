@@ -47,4 +47,32 @@
 			WHERE b.dl_ReportNum = #{rp_Num}
 		]]>
 	</select>
+	
+	<select id="dealingsList" resultMap="dealResult2">
+		<![CDATA[
+			SELECT *
+			FROM dealing_t
+		]]>
+	</select>
+	
+	<select id="adminDlView" resultMap="dealResult2" parameterType="int">
+		<![CDATA[
+			SELECT *
+			FROM dealing_t
+			WHERE dl_Num = #{dl_Num}
+		]]>
+	</select>
+	
+	<delete id="deleteDealing" parameterType="java.util.Map">
+		DELETE
+		FROM dealing_t
+		<where>
+			<if test="dlsList != null and dlsList.size != 0">
+				dl_Num IN
+				<foreach collection="dlsList" item="item" open="(" close=")" separator=",">
+					#{item}
+				</foreach>
+			</if>
+		</where>
+	</delete>
 </mapper>

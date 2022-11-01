@@ -27,18 +27,18 @@ public class DealingServiceImpl implements DealingService {
 	@Autowired
 	private DealingDAO dealingDAO;
 
-//	마이페이지에서 필요회원에대한 정보
+	// 마이페이지에서 필요회원에대한 정보
 	public MemberVO members(String user_Id) throws Exception {
 		return dealingDAO.members(user_Id);
 	}
 
-//	회원가입
+	// 회원가입
 	@Override
 	public int addMember(MemberVO member) throws DataAccessException {
 		return dealingDAO.insertMember(member);
 	}
 
-//	회원가입 아이디 중복체크
+	// 회원가입 아이디 중복체크
 	@Override
 	public int idcheck(String user_Id) throws DataAccessException {
 
@@ -46,13 +46,13 @@ public class DealingServiceImpl implements DealingService {
 		return result;
 	}
 
-	/* 회원탈퇴 */
+	// 회원탈퇴
 	@Override
 	public void removeMem(String user_Id) throws Exception {
 		dealingDAO.removeMem(user_Id);
 	}
 
-	/* 회원탈퇴 비번 체크 */
+	// 회원탈퇴 비번 체크
 	@Override
 	public int pwdCheck(@Param("user_Pwd") String user_Pwd, @Param("user_Id") String user_Id) throws Exception {
 		int result = dealingDAO.pwdCheck(user_Pwd, user_Id);
@@ -60,18 +60,18 @@ public class DealingServiceImpl implements DealingService {
 
 	}
 
-//	로그인확인
+	// 로그인확인
 	@Override
 	public MemberVO login(MemberVO memberVO) throws Exception {
 		return dealingDAO.loginById(memberVO);
 	}
 
-//	카카오 로그인 
+	// 카카오 로그인
 	public int kakaologin(Map<String, Object> user) throws Exception {
 		return dealingDAO.kakaologin(user);
 	}
 
-//	카카오 아이디 이름 반환
+	// 카카오 아이디 이름 반환
 	public KakaoLoginVO kakaoresult(Map<String, Object> user) throws Exception {
 		return dealingDAO.kakaoresult(user);
 	}
@@ -90,11 +90,13 @@ public class DealingServiceImpl implements DealingService {
 		return modDealingVO;
 	}
 
+	// 매물 수정2
 	@Override
 	public void modDealing2(Map<String, Object> dealingMap) throws DataAccessException {
 		dealingDAO.modDealing2(dealingMap);
 	}
 
+	// 매물 삭제
 	@Override
 	public void deleteDealing(int dl_Num) throws DataAccessException {
 		dealingDAO.deleteDealing(dl_Num);
@@ -106,12 +108,12 @@ public class DealingServiceImpl implements DealingService {
 		return dealingDAO.addNewdealing(dealingMap);
 	}
 
-//	매물 조회수
+	// 매물 조회수
 	public void viewCount(int dl_Num) throws DataAccessException {
 		dealingDAO.viewCount(dl_Num);
 	}
 
-//	매물 전부 리스트 검색
+	// 매물 전부 리스트 검색
 	public List<DealingVO> allListdealing() throws DataAccessException {
 		List<DealingVO> allListdealing = dealingDAO.allListdealing();
 		return allListdealing;
@@ -145,14 +147,6 @@ public class DealingServiceImpl implements DealingService {
 		return hereList;
 	}
 
-	/* 로컬스토리지 보류 */
-	/* 메인페이지 검색조건 리스트 */
-//	@Override
-//	public List<DealingVO> dlMainMap(Map<String, Object> mainMap) throws DataAccessException {
-//		List<DealingVO> dlMain = dealingDAO.dlMainMap(mainMap);
-//		return dlMain;
-//	}
-
 	// 게시글 목록 조회
 	@Override
 	public List<BoardVO> listArticles() throws Exception {
@@ -161,13 +155,13 @@ public class DealingServiceImpl implements DealingService {
 		return articlesList;
 	}
 
-	// 상세보기
+	// 인테리어 상세보기
 	@Override
 	public BoardVO getBoardContents(int inte_Num) throws Exception {
 		return dealingDAO.getBoardContents(inte_Num);
 	}
 
-	// 인테리어 글추가
+	// 인테리어 글 등록
 	@Override
 	public int insertboard(Map<String, Object> boardMap) throws DataAccessException {
 		return dealingDAO.insertboard(boardMap);
@@ -191,13 +185,13 @@ public class DealingServiceImpl implements DealingService {
 		dealingDAO.updateArticle(dealingMap);
 	}
 
-	/* 공지사항 상세보기 */
+	// 공지사항 상세보기
 	@Override
 	public NoticeVO getNoticeContents(int notice_Num) throws DataAccessException {
 		return dealingDAO.getNoticeContents(notice_Num);
 	}
 
-	/* 공지사항 조회수 */
+	// 공지사항 조회수
 	@Override
 	public void updateViewCnt(int viewCnt) throws Exception {
 		dealingDAO.updateViewCnt(viewCnt);
@@ -215,23 +209,25 @@ public class DealingServiceImpl implements DealingService {
 		return dealingDAO.insertnotice(noticeMap);
 	}
 
-	/* 공지사항 글 수정 */
+	// 공지사항 글 수정 화면
 	@Override
 	public void noticeupdate(NoticeVO noticeVO) throws Exception {
 		dealingDAO.noticeupdate(noticeVO);
 	}
 
-	/* 공지사항 글 삭제 */
+	// 공지사항 글 삭제
 	@Override
 	public void removeNoticle(int notice_Num) throws Exception {
 		dealingDAO.deleteNoticle(notice_Num);
 	}
 
+	// 공지사항 글 수정 동작
 	@Override
 	public void updateNotice(NoticeVO noticeVO) throws Exception {
 		dealingDAO.updateNotice(noticeVO);
 	}
 
+	// 공지사항 수정 완료
 	@Override
 	public void modNoticle(Map noticeMap) throws Exception {
 		dealingDAO.updateNoticle(noticeMap);
@@ -268,7 +264,7 @@ public class DealingServiceImpl implements DealingService {
 		return dealingDAO.remove(reply_Num);
 	}
 
-//	신고하기
+	// 신고하기
 	@Override
 	public int addReport(Map<String, Object> report) throws DataAccessException {
 		return dealingDAO.insertReport(report);
@@ -280,7 +276,7 @@ public class DealingServiceImpl implements DealingService {
 		return dealingDAO.infoCheck(member);
 	}
 
-//	마이페이지 정보 변경
+	// 마이페이지 정보 변경
 	@Override
 	public int memberMod(MemberVO member) throws Exception {
 		int check = 0;
@@ -318,6 +314,12 @@ public class DealingServiceImpl implements DealingService {
 		return dealingDAO.myJjim(user_Id);
 	}
 
+	// 마이페이지 내가 쓴 글
+	@Override
+	public List<BoardVO> myboardList(String user_Id) throws Exception {
+		return dealingDAO.myboardList(user_Id);
+	}
+
 	/* 찜 여부 체크 */
 	@Override
 	public int jjimCheck(Map jjimMap) throws Exception {
@@ -338,4 +340,5 @@ public class DealingServiceImpl implements DealingService {
 		dealingDAO.jjimRemove(jjimMap);
 
 	}
+
 }

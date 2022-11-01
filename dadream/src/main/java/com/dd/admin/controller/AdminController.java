@@ -1,5 +1,6 @@
 package com.dd.admin.controller;
 
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.dd.admin.service.AdminService;
+import com.dd.dealing.vo.DealingVO;
 import com.dd.dealing.vo.MemberVO;
 import com.dd.dealing.vo.ReportVO;
 import com.dd.product.vo.ProductVO;
@@ -102,13 +104,70 @@ public class AdminController {
 		return "redirect:/admin/reportList.do";
 	}
 
-	/* 신고삭제 */
+	/* 신고삭제(상세페이지) */
 	@RequestMapping(value = "/admin/deleteReport.do", method = RequestMethod.POST)
 	private String deleteReport(@RequestParam("dl_ReportNum") int dl_ReportNum, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		System.out.println("신고삭제");
 		adminService.deleteReport(dl_ReportNum);
 		return "redirect:/admin/reportList.do";
+	}
+
+	/* 신고삭제(여러개) */
+	@RequestMapping(value = "/admin/deleteReport2.do", method = RequestMethod.POST)
+	private void deleteReport2(@RequestParam("checkAll") List<Integer> rpsList, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		System.out.println(rpsList);
+		Map<String, Object> rpsMap = new HashMap<String, Object>();
+		rpsMap.put("rpsList", rpsList);
+		adminService.deleteReport2(rpsMap);
+		ModelAndView mav = new ModelAndView();
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		out.println("<script>alert('삭제가 완료되었습니다.'); location.href='/admin/reportList.do'</script>");
+		out.flush();
+	}
+
+	/* 매물목록 */
+	@RequestMapping(value = "/admin/dealingsList.do", method = { RequestMethod.GET, RequestMethod.POST })
+	private ModelAndView dealingsList(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		System.out.println("매물목록 들어옴");
+		String viewName = (String) request.getAttribute("viewName");
+		ModelAndView mav = new ModelAndView();
+		List<DealingVO> dealingsList = new ArrayList<DealingVO>();
+		dealingsList = adminService.dealingsList();
+		mav.setViewName(viewName);
+		mav.addObject("dealingsList", dealingsList);
+		System.out.println(dealingsList);
+		return mav;
+	}
+
+	/* 매물상세보기(관리자) */
+	@RequestMapping(value = "/admin/adminDlView.do", method = { RequestMethod.GET, RequestMethod.POST })
+	private ModelAndView adminDlView(@RequestParam("dl_Num") int dl_Num, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		System.out.println(dl_Num);
+		String viewName = (String) request.getAttribute("viewName");
+		ModelAndView mav = new ModelAndView();
+		DealingVO dlContents = adminService.adminDlView(dl_Num);
+		mav.addObject("dlContents", dlContents);
+		mav.setViewName(viewName);
+		System.out.println(dlContents);
+		return mav;
+	}
+
+	/* 매물삭제(관리자) */
+	@RequestMapping(value = "/admin/deleteDealing.do", method = RequestMethod.POST)
+	private void deleteDealing(@RequestParam("checkAll") List<Integer> dlsList, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		System.out.println(dlsList);
+		Map<String, Object> dlsMap = new HashMap<String, Object>();
+		dlsMap.put("dlsList", dlsList);
+		adminService.deleteDealing(dlsMap);
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		out.println("<script>alert('삭제가 완료되었습니다.'); location.href='/admin/dealingsList.do'</script>");
+		out.flush();
 	}
 
 //	유저정보

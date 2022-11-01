@@ -23,27 +23,12 @@
 	<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
 	<!-- css -->
 	<link rel="stylesheet" href="/css/noticeview.css">
-
+	<!-- JS -->
 	<script src="/js/dealingJS/noticeview.js"></script>
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
-	<script>
-		$(document).ready(function () {
-			var msg = "${msg}";
-			if (msg != "") {
-				alert(msg);
-			}
-		});
-
-		function backToList(obj) {
-			obj.action = "${contextPath}/noticelist.do";
-			obj.submit();
-		}
-	</script>
 
 </head>
-
 <body>
-
 	<section id="container">
 		<form id="readForm" method="post" action="${contextPath}/notice/update" enctype="multipart/form-data">
 			<input type="hidden" name="notice_Num" value="${noticeContents.notice_Num }" />
@@ -52,11 +37,6 @@
 					<option value="부동산">부동산</option>
 					<option value="가구">가구</option>
 				</select>
-				<!-- <div id="Number">
-				<td align="right" bgcolor="pink">글번호&nbsp;&nbsp;</td>
-					<input type="text" id="inputNumber" value="${boardContents.inte_Num }" disabled />	
-				
-				</div> -->
 
 				<div id="writerName">
 					<td align="center" bgcolor="pink">작성자</td>
@@ -86,9 +66,7 @@
 					<input id="viewCnt" type="hidden" value="${noticeContents.viewCnt }" name="viewCnt" disabled />
 				</td>
 			</div>
-			
-			
-
+	
 			<div id="regDate">
 				<td width="150" align="center" bgcolor="pink">
 					등록일자
@@ -102,11 +80,9 @@
 				<c:if test="${user_Id == noticeContents.user_Id}">
 					<button id="updatebtn"><a href="/notice/update?notice_Num=${noticeContents.notice_Num}"
 							class="mod_btn">수정</a></button>
-
-					
+							
 					<input id="delete" type="button" value="삭제하기" 
 						onClick="fn_remove_noticle('${contextPath}/notice/removeNoticle','${noticeContents.notice_Num}')">
-					<!-- <button type="submit" class="list_btn">목록</button> -->
 				</c:if>
 				<input id="backList" type="button" value="목록으로 이동" onClick="backToList(this.form)">
 			</div>

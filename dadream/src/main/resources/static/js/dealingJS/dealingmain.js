@@ -61,39 +61,3 @@ $(document).ready(function () {
                 alert("현재위치를 불러올 수 없습니다.")
             }
         });
-
-
-
-        /* 로컬스토리지 보류 */
-        // $(document).ready(function () {
-        //     var dlLocalStorage = null;
-        //     var dlLocalStorage = window.localStorage.getItem("dlLocalStorage");
-        //     console.log(dlLocalStorage);
-        //     //메인페이지에 검색리스트 띄우기
-        //     $.ajax({
-        //         url: "/dlLocalStorage.do",
-        //         type: "get",
-        //         data: {
-        //             dlLocalStorage
-        //         },
-        //         success: function (dlMain) {
-        //             console.log(dlMain);
-        // var mainList = "";
-        // $.each(dlMain, function (index, item) {
-        //     mainList +=
-        //         '<div style="display: flex; border-bottom: 1px solid #ccc; margin-bottom: 20px; margin-left: 30px;">';
-        //     mainList += '<div>' +
-        //         '<img src="../메인 카테고리 사진/스텐드.png" alt="" width="200px" height="170px">' +
-        //         '</div>';
-        //     mainList += '<div>' + item.dl_Title + '<br>' + item.dl_Form +
-        //         '<br>' + item.dl_Form2 + '<br>' +
-        //         item.dl_Price + '</div>' + '</div>';
-        // });
-
-        // document.getElementById("mainList").innerHTML = mainList;
-        //         },
-        //         error: function () {
-        //             alert("오류 발생");
-        //         }
-        //     });
-        // });

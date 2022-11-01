@@ -1,4 +1,4 @@
-.pro_side {
+		.pro_side {
             background-image: url(../img/sea.jpg);
             border-radius: 2%;
             background-position: center;
@@ -11,8 +11,7 @@
             width: 280px;
             height: 500px;
             position: relative;
-            background: white;
-            border:1px solid #ccc;
+            background: rgb(129, 127, 126);
             overflow: hidden;
         }
 

@@ -1,0 +1,41 @@
+		* {
+            margin: 0;
+            padding: 0;
+        }
+
+        #rp_Title {
+            display: flex;
+            margin-left: 10px;
+        }
+        #dl_Num{
+            margin-left: 10px;
+        }
+
+        #rp_Title input {
+            width: 400px;
+        }
+
+        #rp_Content {
+            display: flex;
+         
+        }
+
+        #rp_Content  {
+            margin-top: 5px;
+        }
+
+        #rpBtn {
+            text-align: right;
+            margin-top: 40px;
+            margin-right: 20px;
+        }
+        #title{
+            display: inline-flex;
+        }
+        #No{
+            display: inline-flex;
+            margin: 10px 0;
+        }
+        #reform{
+            margin-left: 10px;
+        }

@@ -1,0 +1,106 @@
+			body {
+                margin: 20px;
+                padding: 0;
+            }
+
+            #locationChk {
+                margin: 0 0 50px 50px;
+            }
+
+            #formChk {
+                text-align: center;
+                padding-top: 15px;
+            }
+            
+            #mainName{
+			margin-bottom: 100px;
+			}
+			
+			#formChkmain{
+				display: flex;
+			}
+			
+			#dealingsearch{
+				height: 27px;
+				line-height:27px;
+				margin-right:5px;
+				border:none;
+				border-bottom: 1px solid black;
+				outline:none;
+			}
+			
+			#dl_search{
+				height:27px;
+			}
+			
+
+/*------------------------------MainList------------------------------------*/
+
+			#main1{
+				color:black;
+			}
+			
+			#main2{
+				display: inline-block; 
+				border: 1px solid #ccc; 
+				margin-bottom: 20px; 
+				margin-left: 30px; 
+				width:350px;
+				 height:485px;
+			}
+			
+			#main3{
+				text-align:center;
+			}
+			
+			#main4{
+				width:300px; 
+				height:250px; 
+				margin:20px 0 20px 0;
+				border:0.5px solid #ccc
+			}
+
+			#main5{
+				margin-left:15px;
+			}
+			
+			#main6{
+				font-size:20px;
+				font-weight:bold;
+			}
+			
+			
+/*------------------------------검색기능(Array)------------------------------------*/
+
+			#Arr1{
+				color:black;
+			}
+			
+			#Arr2{
+				display: inline-block; 
+				border: 1px solid #ccc; 
+				margin-bottom: 20px; 
+				margin-left: 30px; 
+				width:350px; 
+				height:485px;
+			}
+			
+			#Arr3{
+				margin: 20px 0 20px 0;
+				border:0.5px solid #ccc;
+				width:300px; 
+				height:250px;
+			}
+			
+			#Arr4{
+				margin-left:15px;
+			}
+			
+			#Arr5{
+				font-size:20px;
+				font-weight:bold;
+			}
+			
+			
+
+

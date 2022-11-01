@@ -2,8 +2,6 @@
 		
 		margin: 0 auto;
 		font-weight:lighter;
-		font-family: 'Jua', sans-serif;
-
 	}
 	
 	th{
@@ -22,17 +20,20 @@
 		
 	}
 	
-   	.write-btn{
-		text-decoration: none;
+   	#write_Btn{
+		cursor:pointer;
+		width:100px;
+		height:30px;
 
 	}
-	.write-btn:hover{
+	
+	#write_Btn:hover{
 		color: rgb(248, 14, 14);
 	}
 	#table_id{
 		text-align: center;
 		border:"0";
-		width:960px;
+		width:1130px;
 		
 	}
 	#table_id thead tr {
@@ -49,14 +50,29 @@
 
 	}
 	#listForm{
-		width: 960px;
+		width: 1130px;
 		height: auto;
+		
 	}
 	#table_id_wrapper{
-		font-family: 'Jua', sans-serif;
 		min-height: 520px;
+		width:1130px;
+		
 	}
 	
 	#table_id td > a{
 		text-decoration: none;
 	}
+	#table_id_filter{
+		width:240px;
+	}
+	#table_id_length{
+		width:160px;
+	}
+	#table_id_paginate{
+		width:440px;
+		margin-right: 339px;
+		display: flex;
+		text-decoration: underline;
+	}
+	
