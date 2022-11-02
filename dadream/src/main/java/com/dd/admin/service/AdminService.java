@@ -33,4 +33,7 @@ public interface AdminService {
 
 	/* 유저 정보 */
 	public List<MemberVO> adminMember() throws DataAccessException;
+
+//	허위 매물 막기 변경
+	public int levelPost(Map<String, Object> mem) throws Exception;
 }

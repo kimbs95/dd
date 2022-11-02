@@ -12,9 +12,11 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.dd.admin.service.AdminService;
@@ -186,4 +188,28 @@ public class AdminController {
 		return "/admin/productList";
 	}
 
+//	허위매물 막기
+	@RequestMapping(value = "/admin/level.do", method = { RequestMethod.GET, RequestMethod.POST })
+	private String adminlevel(HttpServletRequest req, Model mo) throws Exception {
+		String user_Id = req.getParameter("user_Id");
+		System.out.println("user_Id : " + user_Id);
+		System.out.println("유저레벨 권한 들어옴");
+		mo.addAttribute("user_Id", user_Id);
+		return "/admin/level";
+	}
+
+//	허위매물 막기 post
+	@ResponseBody
+	@RequestMapping(value = "/admin/levelPost.do", method = { RequestMethod.GET, RequestMethod.POST })
+	private Map<String, Object> adminlevelpost(HttpServletRequest req, Model mo, @RequestBody Map<String, Object> mem)
+			throws Exception {
+		System.out.println("레벨 포스트 들어옴");
+
+		int result = 0;
+		result = adminService.levelPost(mem);
+		Map<String, Object> map = new HashMap<>();
+		map.put("res", result);
+		return map;
+
+	}
 }

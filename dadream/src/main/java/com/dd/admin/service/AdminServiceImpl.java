@@ -80,4 +80,10 @@ public class AdminServiceImpl implements AdminService {
 		return adminDAO.adminpro();
 	}
 
+//	허위 매물 막기 변경
+	@Override
+	public int levelPost(Map<String, Object> mem) throws Exception {
+		return adminDAO.levelPost(mem);
+	}
+
 }
