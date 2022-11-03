@@ -20,16 +20,28 @@
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
     <link href="/css/admin/styles.css" rel="stylesheet" />
     <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
-    <c:choose>
-        <c:when test="${msg != null }">
-            <script>
-                window.onload = function () {
-                    alert("${msg}");
-                    
-                }
-            </script>
-        </c:when>
-    </c:choose>
+    <style>
+        *{
+            user-select: none;
+        }
+        #userLevel {
+            text-align: center;
+        }
+
+        #iPending {
+            text-align: center;
+        }
+
+        #iPendingSpan {
+            cursor: pointer;
+
+        }
+
+        #iPendingSpan:hover {
+            color: red;
+            text-decoration: underline;
+        }
+    </style>
 </head>
 
 <body class="sb-nav-fixed">
@@ -137,6 +149,8 @@
                                     <a class="nav-link" href="${contextPath}/admin/reportList.do">신고내역</a>
                                 </nav>
                             </div>
+
+                            <a class="nav-link" href="/admin/noticeList.do">공지관리</a>
                         </nav>
 
                     </div>
@@ -159,6 +173,7 @@
                                 <th>가입일</th>
                                 <th>사업자 번호</th>
                                 <th>권한</th>
+                                <th>매물등록제한</th>
                             </tr>
                         </thead>
                         <tbody id="proMember">
@@ -169,9 +184,11 @@
                                     <td>${i.user_Email}</td>
                                     <td>${i.user_Sign}</td>
                                     <td>${i.user_Business}</td>
-                                    <td
-                                        onclick="window.open('/admin/level.do?user_Id=${i.user_Id}&user_Level=${i.user_Level}','권한 설정','width=600 , height=500,top=200, left=600 ' )">
-                                        ${i.user_Level}</td>
+                                    <td id="userLevel">${i.user_Level}</td>
+                                    <td id="iPending">
+                                        <span id="iPendingSpan"
+                                            onclick="window.open('/admin/level.do?user_Id=${i.user_Id}&user_Level=${i.user_Level}','권한 설정','width=600 , height=500,top=200, left=600 ' )">${i.pending}</span>
+                                    </td>
                                 </tr>
                             </c:forEach>
                         </tbody>

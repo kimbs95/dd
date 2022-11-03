@@ -34,7 +34,7 @@
         </div>
         <div >
             <h3>내용 :
-            <textarea rows="20" id="rp_Content" cols="65" name="rp_Content"></textarea>
+            <textarea rows="20" id="rp_Content" cols="65" name="rp_Content"  style="resize: none;"></textarea>
         </h3>
         </div>
         <div id="rpBtn">

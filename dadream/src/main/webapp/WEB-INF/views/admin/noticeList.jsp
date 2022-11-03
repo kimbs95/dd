@@ -3,10 +3,11 @@
     isELIgnored="false" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:set var="contextPath" value="${pageContext.request.contextPath}" />
+
 <%
   request.setCharacterEncoding("UTF-8");
 %>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -30,13 +31,9 @@
         <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i
                 class="fas fa-bars"></i></button>
         <!-- Navbar Search-->
-
         <div class="input-group">
-
-
         </div>
-
-
+        <!-- Navbar-->
         <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown"
@@ -141,139 +138,52 @@
         </div>
         <div id="layoutSidenav_content">
             <main>
-                <div class="container-fluid px-4">
-                    <h1 class="mt-4">대시보드</h1>
-                    <ol class="breadcrumb mb-4">
-                        <li class="breadcrumb-item active">Dashboard</li>
-                    </ol>
-
-                    <h3>매출 현황</h3>
-                    <div class="row">
-                        <div class="col-xl-6">
-                            <div class="card mb-4">
-                                <div class="card-header">
-                                    <i class="fas fa-chart-area me-1"></i>
-                                    이번달 가구 매출액
-                                </div>
-                                <div class="card-body"><canvas id="myAreaChart" width="100%" height="40"></canvas></div>
-                            </div>
-                        </div>
-                        <div class="col-xl-6">
-                            <div class="card mb-4">
-                                <div class="card-header">
-                                    <i class="fas fa-chart-bar me-1"></i>
-                                    부동산 공실 채택(건당 100,000￦)
-                                </div>
-                                <div class="card-body"><canvas id="myBarChart" width="100%" height="40"></canvas></div>
-                            </div>
-                        </div>
+                <h1>공지사항</h1>
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item active">Notice Management</li>
+                </ol>
+                <h3>공지관리</h3>
+                <div class="card mb-12" style="margin: 100px 20px 0 20px;">
+                    <div class="card-header">
+                        <i class="fas fa-table me-1"></i>
+                        공지 목록
                     </div>
-                    <div class="card mb-4">
-                        <div class="card-header">
-                            <i class="fas fa-table me-1"></i>
-                            DataTable Example
-                        </div>
-                        <div class="card-body">
+                    <div class="card-body">
+                        <input type="checkbox" name="checkAll" onclick="selectAll(this)"> 전체선택
+                        <form name="reportForm" method="post" action="/admin/deleteNotice.do">
                             <table id="datatablesSimple">
                                 <thead>
+                                    <div style="margin-bottom: 40px;">
+                                    </div>
                                     <tr>
-                                        <th>Name</th>
-                                        <th>Position</th>
-                                        <th>Office</th>
-                                        <th>Age</th>
-                                        <th>Start date</th>
-                                        <th>Salary</th>
+                                        <th style="width: 5%;">체크</th>
+                                        <th style="width: 10%;">카테고리</th>
+                                        <th style="width: 10%;">글번호</th>
+                                        <th style="width: 10%;">작성자</th>
+                                        <th style="width: 55%;">제목</th>
+                                        <th style="width: 20%">작성일</th>
                                     </tr>
                                 </thead>
-                                <tfoot>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Position</th>
-                                        <th>Office</th>
-                                        <th>Age</th>
-                                        <th>Start date</th>
-                                        <th>Salary</th>
-                                    </tr>
-                                </tfoot>
                                 <tbody>
-                                    <tr>
-                                        <td>Tiger Nixon</td>
-                                        <td>System Architect</td>
-                                        <td>Edinburgh</td>
-                                        <td>61</td>
-                                        <td>2011/04/25</td>
-                                        <td>$320,800</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Garrett Winters</td>
-                                        <td>Accountant</td>
-                                        <td>Tokyo</td>
-                                        <td>63</td>
-                                        <td>2011/07/25</td>
-                                        <td>$170,750</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Ashton Cox</td>
-                                        <td>Junior Technical Author</td>
-                                        <td>San Francisco</td>
-                                        <td>66</td>
-                                        <td>2009/01/12</td>
-                                        <td>$86,000</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Cedric Kelly</td>
-                                        <td>Senior Javascript Developer</td>
-                                        <td>Edinburgh</td>
-                                        <td>22</td>
-                                        <td>2012/03/29</td>
-                                        <td>$433,060</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Airi Satou</td>
-                                        <td>Accountant</td>
-                                        <td>Tokyo</td>
-                                        <td>33</td>
-                                        <td>2008/11/28</td>
-                                        <td>$162,700</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>Sonya Frost</td>
-                                        <td>Software Engineer</td>
-                                        <td>Edinburgh</td>
-                                        <td>23</td>
-                                        <td>2008/12/13</td>
-                                        <td>$103,600</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Jena Gaines</td>
-                                        <td>Office Manager</td>
-                                        <td>London</td>
-                                        <td>30</td>
-                                        <td>2008/12/19</td>
-                                        <td>$90,560</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>Thor Walton</td>
-                                        <td>Developer</td>
-                                        <td>New York</td>
-                                        <td>61</td>
-                                        <td>2013/08/11</td>
-                                        <td>$98,540</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Finn Camacho</td>
-                                        <td>Support Engineer</td>
-                                        <td>San Francisco</td>
-                                        <td>47</td>
-                                        <td>2009/07/07</td>
-                                        <td>$87,500</td>
-                                    </tr>
-
+                                    <c:forEach var="nt" items="${noticList}">
+                                        <tr>
+                                            <td style="width: 5%;">
+                                                <input id="checkAll" name="checkAll" type="checkbox"
+                                                    value="${nt.notice_Num}">
+                                            </td>
+                                            <td style="width: 10%;">${nt.notice_Category}</td>
+                                            <td style="width: 10%;">${nt.notice_Num}</td>
+                                            <td style="width: 10%;">${nt.user_Id}</td>
+                                            <td style="width: 55%;"><a
+                                                    href="${contextPath}/admin/noticeViewAdmin.do?Notice_Num=${nt.notice_Num}">${nt.notice_Title}</a>
+                                            </td>
+                                            <td style="width: 20%">${nt.notice_Date}</td>
+                                        </tr>
+                                    </c:forEach>
                                 </tbody>
                             </table>
-                        </div>
+                            <input type="submit" value="선택삭제">
+                        </form>
                     </div>
                 </div>
             </main>
@@ -291,6 +201,17 @@
             </footer>
         </div>
     </div>
+    <script>
+        /* 전체선택 */
+        function selectAll(selectAll) {
+            var checkboxes = document.getElementsByName('checkAll');
+
+            checkboxes.forEach(function (checkbox) {
+                checkbox.checked = selectAll.checked;
+            });
+            console.log(checkboxes);
+        }
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous">
     </script>
     <script src="/js/admin/scripts.js"></script>

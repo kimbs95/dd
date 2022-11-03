@@ -89,9 +89,9 @@
                 <div id="myroom">
                     <c:forEach var="myDealing" items="${myDealing}">
                         <div style="display: flex;">
-                            <div style="width: 200px; height: 200px;">
+                            <div>
                                 <img src="/dealing/${myDealing.user_Id}/${myDealing.dl_Image}" alt="매물사진"
-                                    style="width:300px; height: 270px;">
+                                    style="width:300px; height: 320px;">
                             </div>
                             <div id="mydl">
                                 <p>매물이름 : ${myDealing.dl_Title}</p><br>
@@ -107,11 +107,11 @@
                                         <input type="hidden" name="modDl_Num" value="${myDealing.dl_Num}">
                                         <input type="submit" value="수정">
                                     </form>
-                                    <form method="post" action="${contextPath}/dealing/deleteDealing.do">
+                                    <form method="post" action="${contextPath}/dealing/deleteDealing.do" onsubmit="return deleteSub();">
                                         <input type="hidden" name="delDlUser_Id" value="${myDealing.user_Id}">
                                         <input type="hidden" name="delDl_Num" value="${myDealing.dl_Num}">
                                         <input type="hidden" name="delDl_Image" value="${myDealing.dl_Image}">
-                                        <input type="submit" value="삭제">
+                                        <input type="submit" value="삭제" >
                                     </form>
                                 </div>
                             </div>

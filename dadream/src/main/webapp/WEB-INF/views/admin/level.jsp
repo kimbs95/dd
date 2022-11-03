@@ -47,7 +47,7 @@
                 if(result.res===1){
                     alert("변경되었습니다");
                     window.close();
-                    location.reload();
+                    opener.parent.location.reload(); // open 시켜주었던 부모의 창을 새로고침
                 }else{
                     alert(`무슨오류일까요?`);
                 }

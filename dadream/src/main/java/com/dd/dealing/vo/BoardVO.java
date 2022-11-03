@@ -15,7 +15,6 @@ public class BoardVO {
 	private String user_Id;
 	private Date inte_Date;
 	private int viewCounts;
-
 	private String searchKeyword;
 
 	public BoardVO() {

@@ -55,8 +55,7 @@
 				<div>
 					<div>
 						<td align="rigth" valign="top">내용&nbsp;&nbsp; </td>
-						<td><textarea rows="20" cols="65" value="${noticeContents.notice_Text}" name="notice_Text"
-								disabled>${noticeContents.notice_Text } </textarea>
+						<td><textarea rows="20" cols="65" value="${noticeContents.notice_Text}" name="notice_Text"disabled  style="resize: none;">${noticeContents.notice_Text }</textarea>
 						</td>
 					</div>
 				</div>

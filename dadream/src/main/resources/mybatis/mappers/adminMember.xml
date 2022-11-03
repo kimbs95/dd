@@ -18,19 +18,21 @@
 		<result property="user_Address2" column="user_Address2" />
 		<result property="user_Address3" column="user_Address3" />
 		<result property="user_Business" column="user_Business" />
-		<result property="pending" column="pending" />
 	</resultMap>
-	<select id="adminMember" resultMap="memResult" >
-		select * from user_t order by user_Sign DESC
+
+
+	<select id="adminMember" resultMap="memResult">
+		select * from
+		user_t order by user_Sign DESC
+
 	</select>
-	<update id="levelPost"  parameterType="java.util.Map">
+
+	<update id="levelPost" parameterType="java.util.Map">
 		<![CDATA[
 			update user_t
 			set pending =#{pending}
 			where user_Id =#{user_Id}
 		]]>
 	</update>
-
-
 
 </mapper>

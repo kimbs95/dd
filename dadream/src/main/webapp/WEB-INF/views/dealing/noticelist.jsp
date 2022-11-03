@@ -22,13 +22,19 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+  <!-- <link  rel="stylesheet" type="text/css"  href="https://cdn.datatables.net/v/dt/dt-1.11.4/r-2.2.9/datatables.min.css"/> -->
+
   <!-- css -->
   <link rel="stylesheet" href="/css/noticelist.css">
-  <!-- JS -->
+
   <script src="/js/dealingJS/noticelist.js"></script>
 </head>
 <script  src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-<script  type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.11.4/r-2.2.9/datatables.min.js"></script>
+<script  type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.11.4/r-2.2.9/datatables.min.js">
+
+
+	
+</script>
 <body>
 	<form action="${contextPath}/noticeform.do" method="get" id="noticeForm">
 	<table id="noticeTable">
@@ -48,7 +54,7 @@
 					<!-- <td>${noticeTemp}</td> -->
 					<td id="Cate_td">${i.notice_Category}</td>
 					<td><c:out value="${i.notice_Num}"/></a></td>
-					<td>${i.user_Id}</td>
+					<td>관리자</td>
 					<td id="Title_td"><a href="/notice/read?notice_Num=${i.notice_Num}" id="a_none"><c:out value="${i.notice_Title}"/></a></td>
 					<!-- <td>${i.notice_Text}</td> -->
 					<td><fmt:formatDate value="${i.notice_Date}" pattern="yyyy-MM-dd"/></td>
@@ -56,7 +62,11 @@
 				</tr>
 			</c:forEach>
 		</tbody>
-	</table>	
+	</table>
+	
+	<!-- <button type="submit" ><a class="write-btn" href="javascript:fn_addnotice('${isLogOn }','${contextPath}/noticeform.do', '${contextPath }/login.do')" style="text-decoration: none;"><p class="cls2">등록</p></a></button> -->
+			<button type="submit" id="notice_add_btn">등록하기</button>
+	
 </form>
 </body>
 </html>

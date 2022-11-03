@@ -22,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.dd.admin.service.AdminService;
 import com.dd.dealing.vo.DealingVO;
 import com.dd.dealing.vo.MemberVO;
+import com.dd.dealing.vo.NoticeVO;
 import com.dd.dealing.vo.ReportVO;
 import com.dd.product.vo.ProductVO;
 
@@ -188,6 +189,54 @@ public class AdminController {
 		return "/admin/productList";
 	}
 
+	/* 공지사항 */
+	@RequestMapping(value = "/admin/noticeList.do", method = { RequestMethod.GET, RequestMethod.POST })
+	private ModelAndView adminNoticeList(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String viewName = (String) request.getAttribute("viewName");
+		ModelAndView mav = new ModelAndView();
+		List<NoticeVO> noticList = adminService.adminNoticeList();
+		mav.addObject("noticList", noticList);
+		mav.setViewName(viewName);
+
+		return mav;
+	}
+
+	/* 공지사항 상세보기 */
+	@RequestMapping(value = "/admin/noticeViewAdmin.do", method = RequestMethod.GET)
+	private ModelAndView adminNoticeView(@RequestParam("Notice_Num") int Notice_Num, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		String viewName = (String) request.getAttribute("viewName");
+		ModelAndView mav = new ModelAndView();
+		NoticeVO noticeVO = adminService.adminNoticeView(Notice_Num);
+		mav.addObject("noticeView", noticeVO);
+		mav.setViewName(viewName);
+		return mav;
+	}
+
+	/* 공지사항 수정창 */
+	@RequestMapping(value = "/admin/modNoticeView.do", method = RequestMethod.POST)
+	private ModelAndView modNoticeView(@RequestParam("notice_Num") int Notice_Num, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		String viewName = (String) request.getAttribute("viewName");
+		ModelAndView mav = new ModelAndView();
+		NoticeVO noticeVO = adminService.adminNoticeView(Notice_Num);
+		mav.addObject("noticeView", noticeVO);
+		mav.setViewName(viewName);
+		return mav;
+	}
+
+	/* 공지사항 수정 */
+	@RequestMapping(value = "/admin/modNotice.do", method = RequestMethod.POST)
+	private void modNotice(NoticeVO noticeVO, HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		System.out.println(noticeVO);
+		adminService.modNotice(noticeVO);
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		out.println("<script>alert('수정이 완료되었습니다.'); location.href='/admin/noticeList.do'</script>");
+		out.flush();
+	}
+
 //	허위매물 막기
 	@RequestMapping(value = "/admin/level.do", method = { RequestMethod.GET, RequestMethod.POST })
 	private String adminlevel(HttpServletRequest req, Model mo) throws Exception {
@@ -212,4 +261,5 @@ public class AdminController {
 		return map;
 
 	}
+
 }

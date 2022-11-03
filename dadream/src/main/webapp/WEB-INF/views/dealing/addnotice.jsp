@@ -44,7 +44,7 @@
 			</div>
 			<div id="notice_Context">
 				<td align="right" valign="top">공지내용: </td>
-				<td colspan="2"><textarea rows="10" cols="65" maxlength="4000" name="notice_Text"></textarea>
+				<td colspan="2"><textarea rows="10" cols="65" maxlength="4000" name="notice_Text" style="resize: none;"></textarea>
 				</td>
 			</div>
 			<tr>

@@ -12,11 +12,13 @@ public class ReportVO {
 	private Date rp_Date;
 	private String user_Id;
 	private int dl_Num;
+	private String rp_State;
 
 	public ReportVO() {
 	}
 
-	public ReportVO(int dl_ReportNum, String rp_Title, String rp_Content, Date rp_Date, String user_Id, int dl_Num) {
+	public ReportVO(int dl_ReportNum, String rp_Title, String rp_Content, Date rp_Date, String user_Id, int dl_Num,
+			String rp_State) {
 		super();
 		this.dl_ReportNum = dl_ReportNum;
 		this.rp_Title = rp_Title;
@@ -24,6 +26,7 @@ public class ReportVO {
 		this.rp_Date = rp_Date;
 		this.user_Id = user_Id;
 		this.dl_Num = dl_Num;
+		this.rp_State = rp_State;
 	}
 
 	public int getDl_ReportNum() {
@@ -72,6 +75,14 @@ public class ReportVO {
 
 	public void setDl_Num(int dl_Num) {
 		this.dl_Num = dl_Num;
+	}
+
+	public String getRp_State() {
+		return rp_State;
+	}
+
+	public void setRp_State(String rp_State) {
+		this.rp_State = rp_State;
 	}
 
 }

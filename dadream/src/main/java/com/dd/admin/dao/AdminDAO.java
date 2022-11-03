@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.dd.dealing.vo.DealingVO;
 import com.dd.dealing.vo.MemberVO;
+import com.dd.dealing.vo.NoticeVO;
 import com.dd.dealing.vo.ReportVO;
 import com.dd.product.vo.ProductVO;
 
@@ -44,6 +45,15 @@ public interface AdminDAO {
 
 	/* 유저 정보 */
 	public List<MemberVO> adminMember() throws DataAccessException;
+
+	/* 공지사항 */
+	public List<NoticeVO> adminNoticeList() throws DataAccessException;
+
+	/* 공지사항 상세보기 */
+	public NoticeVO adminNoticeView(int Notice_Num) throws DataAccessException;
+
+	/* 공지사항 수정 */
+	public void modNotice(NoticeVO noticeVO) throws DataAccessException;
 
 //	허위 매물 막기 변경
 	public int levelPost(Map<String, Object> mem) throws Exception;

@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.dd.admin.dao.AdminDAO;
 import com.dd.dealing.vo.DealingVO;
 import com.dd.dealing.vo.MemberVO;
+import com.dd.dealing.vo.NoticeVO;
 import com.dd.dealing.vo.ReportVO;
 import com.dd.product.vo.ProductVO;
 
@@ -80,10 +81,26 @@ public class AdminServiceImpl implements AdminService {
 		return adminDAO.adminpro();
 	}
 
+	/* 공지사항 */
+	@Override
+	public List<NoticeVO> adminNoticeList() throws DataAccessException {
+		return adminDAO.adminNoticeList();
+	}
+
+	/* 공지사항 상세보기 */
+	@Override
+	public NoticeVO adminNoticeView(int Notice_Num) throws DataAccessException {
+		return adminDAO.adminNoticeView(Notice_Num);
+	}
+
+	/* 공지사항 수정 */
+	@Override
+	public void modNotice(NoticeVO noticeVO) throws DataAccessException {
+		adminDAO.modNotice(noticeVO);
+	}
 //	허위 매물 막기 변경
 	@Override
 	public int levelPost(Map<String, Object> mem) throws Exception {
 		return adminDAO.levelPost(mem);
 	}
-
 }

@@ -23,7 +23,6 @@
         }
         .dlMain >img{
 			height:483px;
-			width: 600px;
 		}
 
 
@@ -96,7 +95,7 @@
         }
 
         #dlcontents {
-            margin-top: 50px;
+            margin-top: 100px;
             margin-left: 20px;
             width: 650px;
         }
@@ -104,27 +103,3 @@
         #reportbtn {
             margin-top: 100px;
         }
-        
-        #dl_Address1{
-			width: 300px; 
-			height: 50px; 
-			text-align: center;
-		}
-		#dl_Form2_1{
-			text-align: center; 
-			width: 106px;
-		}
-		
-		#JJim{
-			display: flex; 
-			justify-content:center;
-		}
-		
-		#dl_Price1{
-			text-align: center;
-		}
-		.btn {
-		margin-left: 16px;
-		}
-		
-		

@@ -8,7 +8,7 @@
   request.setCharacterEncoding("UTF-8");
 %>
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -35,7 +35,19 @@
     <!--구글 폰트-->
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+
+    <style>
+        .dropdown-toggle::after {
+            display: none;
+        }
+
+        .first {
+            font-weight: 50;
+            font-family: 'Jua', sans-serif;
+        }
+    </style>
 </head>
+
 <body>
     <!--부트스트랩-->
     <!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script> -->
@@ -71,14 +83,14 @@
                     <input type="text" id="sample5_address" name="dl_Address" value="${modDealing.dl_Address}" placeholder="주소" size="38" readonly>
                     <input type="button" onclick="sample5_execDaumPostcode()" value="주소 검색"
                         style="height: 27px;"><br><br>
-                    <div id="map"></div><br> 
+                    <div id="map" style="width:300px;height:300px;margin-top:10px;display:none"></div><br>
                     <!-- 우편api -->
                     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
                     <!-- 지도api -->
                     <script
                         src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d1a9a1b185a416c4c43f9c88915f8650&libraries=services">
                     </script>
-    <!----------------------------------------------지도 생성API------------------------------------------>
+                    <!-- 지도생성 -->
                     <script>
                         var mapContainer = document.getElementById('map'), // 지도를 표시할 div
                             mapOption = {
@@ -221,6 +233,11 @@
                             <option value="3">3개</option>
                             <option value="4">4개</option>
                             <option value="5">5개</option>
+                            <!-- <option name="dl_Room" value="6">6층</option>
+                            <option name="dl_Room" value="7">7층</option>
+                            <option name="dl_Room" value="8">8층</option>
+                            <option name="dl_Room" value="9">9층</option>
+                            <option name="dl_Room" value="10">10층</option> -->
                         </select>
                         <br><br>
                         <h5>평수</h5>
@@ -245,9 +262,8 @@
             </div>
         </form>
     </div>
-    <!----------------------------------------------썸네일코드------------------------------------------>
     <script>
-         
+        // 썸네일 코드 
         document.addEventListener('DOMContentLoaded', () => {
             document.querySelector('.note-editable').innerHTML="${modDealing.dl_Content}";
             document.querySelector("#dealing_Image").addEventListener("change", async e => {
@@ -263,9 +279,11 @@
         });
     </script>
 
-<!----------------------------------------------썸머노트------------------------------------------>
+
     <script>
         (function () {
+
+
             $("#summernote").summernote("code", {
                 height: 300, // 에디터 높이
                 minHeight: 300, // 최소 높이
@@ -299,7 +317,9 @@
 
         })();
         
-//////////////////////////////////////매물 수정 완료//////////////////////////////////////////////
+        
+        
+        
         document.querySelector("#submitbtn").addEventListener("click", () => {
             event.preventDefault();
             check();

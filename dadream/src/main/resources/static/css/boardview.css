@@ -48,6 +48,10 @@
 		text-align: center;
 		margin-bottom: 8px;
 	}
+	
+
+/*---------------------댓글--------------------- */
+
 	#reply_form{
 		margin-right: 30px;
 		margin-top: 10px;
@@ -57,10 +61,6 @@
 		margin-top: 10px;
 		margin-left:50%;
 	}
-	
-
-/*---------------------댓글--------------------- */
-
 	#chat{
 		width: 480px;
 		height: auto;
@@ -73,6 +73,9 @@
 		margin-right: 334px;
 		padding: 5px;
 
+	}
+	#reply_content{
+		 resize: none;
 	}
 	#writer_Date{
 		

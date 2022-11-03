@@ -80,8 +80,7 @@
 			<tr>
 				<td align="right" valign="top"><br>내용: </td>
 				<td class="form-inline" colspan="2">
-					<textarea rows="10" cols="65" maxlength="4000" name="notice_Text" value="${noticeContents.notice_Text}">${noticeContents.notice_Text}
-					</textarea>
+					<textarea rows="10" cols="65" maxlength="4000" name="notice_Text" value="${noticeContents.notice_Text}" style="resize: none;">${noticeContents.notice_Text}</textarea>
 				</td>
 			</tr>
         </table>

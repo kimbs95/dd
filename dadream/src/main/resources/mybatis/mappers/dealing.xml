@@ -194,8 +194,6 @@
 	]]>
 	</select>
 
-	<!-- 위치기반 -->
-	<!-- 쿼리문 BETWEEN a AND b 를 이용해서 a~b사이에 있는 값을 구함 위도경도기준 0.01 = 1km -->
 	<select id="hereMe" resultMap="dealResult"
 		parameterType="java.util.Map">
 	<![CDATA[

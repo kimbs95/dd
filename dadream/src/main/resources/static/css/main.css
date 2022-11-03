@@ -68,7 +68,8 @@
 			
 	        #main2{
 	            width: 1130px;
-	         
+	            justify-content: center;
+            	justify-items: center;
 	            /* margin: 15px; */
 	            
 	        }
@@ -82,12 +83,12 @@
 			
 			#main2 h1{
 				margin-top:15px;
-				font-weight:600; 
 				line-height: 25px;
 				margin-left: 10px;
-				font-size: 14px;
+				font-size: 30px;
 				/*font-weight: 600;*/
-				 /*margin-bottom: 40px;*/
+				font-weight:bold; 
+				 margin-bottom: 40px;
 			}
 	        
 	        #main3{

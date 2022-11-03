@@ -60,7 +60,7 @@
 			<div >
 					<div>
 						<td align="rigth" valign="top">내용&nbsp;&nbsp; </td>
-					<td><textarea rows="20" cols="65" value="${boardContents.inte_Text}" name="inte_Text" disabled>${boardContents.inte_Text } </textarea>
+					<td><textarea rows="20" cols="65" value="${boardContents.inte_Text}" name="inte_Text" disabled style="resize: none;">${boardContents.inte_Text } </textarea>
 					</td>
 					</div>
 			</div>

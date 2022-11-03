@@ -97,7 +97,7 @@ public class DealingControllerImpl {
 		return mav;
 	}
 
-	// 아이디 중복체크
+//	아이디 중복체크
 	@ResponseBody
 	@RequestMapping(value = "/idcheck.do", method = { RequestMethod.POST })
 	private Map<String, Object> idcheck(@RequestBody Map<String, Object> body) throws Exception {
@@ -111,7 +111,7 @@ public class DealingControllerImpl {
 		return map;
 	}
 
-	// 회원가입 전송
+//	회원가입 전송 
 	@RequestMapping(value = "/addMember.do", method = RequestMethod.POST)
 	private ModelAndView addMember(MemberVO member, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
@@ -122,7 +122,7 @@ public class DealingControllerImpl {
 		return mav;
 	}
 
-	// 회원가입 완료
+//	회원가입 완료
 	@RequestMapping(value = "/formcheck.do", method = RequestMethod.GET)
 	private String uformcheck(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = (String) request.getAttribute("viewName");
@@ -150,6 +150,7 @@ public class DealingControllerImpl {
 	@ResponseBody
 	@RequestMapping(value = "/infoCheck.do", method = RequestMethod.POST)
 	private Map<String, Object> infoCheck(@RequestBody MemberVO member, HttpServletRequest request) throws Exception {
+
 		int result = 0;
 		result = dealingService.infoCheck(member);
 		System.out.println("리저트 : " + result);
@@ -210,8 +211,8 @@ public class DealingControllerImpl {
 		kakaoreq.put("client_id", "35aa1216a2a526e324dd20cbbf64bc06");
 		kakaoreq.put("redirect_uri", "http://localhost:8080/kakaologin.do");
 		kakaoreq.put("code", token);
-		// ==================================
-		// 1번째 방법 http통신 방식으로 받는법
+//			==================================
+//				1번째 방법 http통신 방식으로 받는법
 
 		String kakaoURL = "https://kauth.kakao.com/oauth/token";
 		URL url = new URL(kakaoURL);
@@ -258,18 +259,18 @@ public class DealingControllerImpl {
 		br.close();
 		bw.close();
 
-		// ==========유저 정보 =================
+//			==========유저 정보 =================
 		String userInfo = "https://kapi.kakao.com/v2/user/me";
 		Map<String, Object> user = new HashMap<>();
-		// =========================================
-		// /* 2번째방법 Jsoup "url" 주소 HTMl 을 파싱해옴 */
-		// ==========================================
+//			=========================================
+//			/* 2번째방법 Jsoup "url" 주소 HTMl 을 파싱해옴 */
+//			==========================================
 		Response response = Jsoup.connect(userInfo).method(Method.GET)
 				.header("Authorization", " Bearer " + access_token).ignoreHttpErrors(true).ignoreContentType(true)
 				.execute();
 		System.out.println(response.body());
-		// ==========================================
-		// 파싱 하는곳 Gson, json-simple 주입
+//			==========================================
+//			파싱 하는곳  Gson, json-simple 주입
 		JsonParser parser1 = new JsonParser();
 		JsonElement element1 = parser.parse(response.body());
 		System.out.println("유저 파싱 뽑은거 : " + element1);
@@ -305,8 +306,8 @@ public class DealingControllerImpl {
 		return ("redirect:/login.do");
 
 	}
+//	로그인 확인
 
-	// 로그인 확인
 	@RequestMapping(value = "/logincheck.do", method = RequestMethod.POST)
 	public ModelAndView logincheck(@ModelAttribute("member") MemberVO member, RedirectAttributes rAttr,
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -325,7 +326,7 @@ public class DealingControllerImpl {
 		return mav;
 	}
 
-	// 로그아웃
+//	로그아웃
 	@RequestMapping(value = "/logout.do", method = RequestMethod.GET)
 	public ModelAndView logout(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		HttpSession session = request.getSession();
@@ -350,11 +351,9 @@ public class DealingControllerImpl {
 		List<ReportVO> myReport = new ArrayList<ReportVO>();
 		List<DealingVO> myDealing = new ArrayList<DealingVO>();
 		List<JjimVO> myJjim = new ArrayList<JjimVO>();
-		List<BoardVO> myboardList = new ArrayList<BoardVO>();
 		myReport = dealingService.myReport(user_Id);
 		myDealing = dealingService.myDealing(user_Id);
 		myJjim = dealingService.myJjim(user_Id);
-		myboardList = dealingService.myboardList(user_Id);
 		System.out.println("찜 목록 : " + myJjim);
 		mav.addObject("myReport", myReport);
 		mav.addObject("myDealing", myDealing);
@@ -362,7 +361,6 @@ public class DealingControllerImpl {
 		mav.addObject("user_Pwd", user_Pwd);
 		mav.addObject("user_Id", user_Id);
 		mav.addObject("members", members);
-		mav.addObject("myboardList", myboardList);
 		mav.setViewName(viewName);
 		System.out.println("interceptor에서 온 viewName:" + viewName);
 		return mav;
@@ -426,7 +424,7 @@ public class DealingControllerImpl {
 
 	/* 매물수정 */
 	@RequestMapping(value = "/dealing/modDealing2.do", method = RequestMethod.POST)
-
+	@ResponseBody
 	public ResponseEntity modDealing2(MultipartHttpServletRequest multipartRequest, HttpServletResponse response)
 			throws Exception {
 		multipartRequest.setCharacterEncoding("UTF-8");
@@ -450,11 +448,10 @@ public class DealingControllerImpl {
 
 		try {
 			dealingService.modDealing2(dealingMap);
-			// if (imageFileName != null && imageFileName.length() != 0) {
-			// File srcFile = new File(DEALING_IMAGE_REPO + "\\" + user_Id + "\\" +
-			// imageFileName);
-			// File destDir = new File(DEALING_IMAGE_REPO + "\\" + dl_Num);
-			// FileUtils.moveFileToDirectory(srcFile, destDir, true);
+//			if (imageFileName != null && imageFileName.length() != 0) {
+//				File srcFile = new File(DEALING_IMAGE_REPO + "\\" + user_Id + "\\" + imageFileName);
+//				File destDir = new File(DEALING_IMAGE_REPO + "\\" + dl_Num);
+//				FileUtils.moveFileToDirectory(srcFile, destDir, true);
 
 			// if (srcFile != null) {
 			String originalFileName = (String) dealingMap.get("originalFileName");
@@ -482,7 +479,7 @@ public class DealingControllerImpl {
 
 	/* 매물삭제 */
 	@RequestMapping(value = "/dealing/deleteDealing.do", method = RequestMethod.POST)
-
+	@ResponseBody
 	public ResponseEntity deleteDealing(@RequestParam("delDl_Num") int dl_Num,
 			@RequestParam("delDlUser_Id") String user_Id, @RequestParam("delDl_Image") String dl_Image,
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -518,6 +515,7 @@ public class DealingControllerImpl {
 	}
 
 	/* 매물등록 */
+
 	@RequestMapping(value = "/dealingform.do", method = RequestMethod.GET)
 	private String dealingform(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = (String) request.getAttribute("viewName");
@@ -585,7 +583,7 @@ public class DealingControllerImpl {
 
 	/* 매물등록 DB전송 */
 	@RequestMapping(value = "/addNewdealing.do", method = RequestMethod.POST)
-
+	@ResponseBody
 	public ResponseEntity dealingpost(MultipartHttpServletRequest multipartRequest, HttpServletResponse response)
 			throws Exception {
 		multipartRequest.setCharacterEncoding("utf-8");
@@ -614,14 +612,14 @@ public class DealingControllerImpl {
 
 		try {
 			int result = dealingService.addNewdealing(dealingMap);
-			// if (imageFileName != null && imageFileName.length() != 0) {
-			// File srcFile = new File(PRODUCT_IMAGE_REPO + "\\" + imageFileName);
-			// File desDir = new File(PRODUCT_IMAGE_REPO);
-			// 중간에 폴더 없으면 만들어주는 함수 moveFileToDirectory
-			// FileUtils.moveFileToDirectory(srcFile, desDir, true);
-			// }
+//			if (imageFileName != null && imageFileName.length() != 0) {
+//				File srcFile = new File(PRODUCT_IMAGE_REPO + "\\" + imageFileName);
+//				File desDir = new File(PRODUCT_IMAGE_REPO);
+//			중간에 폴더 없으면 만들어주는 함수 moveFileToDirectory
+//				FileUtils.moveFileToDirectory(srcFile, desDir, true);
+//			}
 			message = "<script>";
-			message += "alert('매물등록이 완료되었습니다.');";
+			message += "alert('상품등록이 완료되었습니다.');";
 			message += "location.href='" + multipartRequest.getContextPath() + "/dealingmain.do'";
 			message += "</script>";
 			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
@@ -663,6 +661,21 @@ public class DealingControllerImpl {
 		return "/dealing/call";
 	}
 
+	/* 매물수정 */
+
+	@RequestMapping(value = "/dealingmod.do", method = RequestMethod.GET)
+	private String dealingmod(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String viewName = (String) request.getAttribute("viewName");
+		System.out.println("interceptor에서 온 viewName:" + viewName);
+		return viewName;
+	}
+
+	/* 매물 수정,삭제 */
+	@RequestMapping("/modanddel.do")
+	public String modanddel(Model model) {
+		return "/dealing/modanddel";
+	}
+
 	/* 지도창 */
 	@RequestMapping(value = "/map.do", method = RequestMethod.GET)
 	private ModelAndView map(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -682,6 +695,7 @@ public class DealingControllerImpl {
 
 	/* 지도 첫 검색 */
 	@RequestMapping(value = "/showMap.do", method = RequestMethod.GET)
+	@ResponseBody
 	public ResponseEntity showMap(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
 		// String dl_Lat = request.getParameter("dl_Lat");
@@ -711,7 +725,9 @@ public class DealingControllerImpl {
 
 	/* 지도창에서 검색 */
 	@RequestMapping(value = "/showMap2.do", method = RequestMethod.GET)
+	@ResponseBody
 	public ResponseEntity showMap2(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
 		Map<String, Object> dlMap = new HashMap<String, Object>();
 		Enumeration enu = request.getParameterNames();
 		while (enu.hasMoreElements()) {
@@ -728,6 +744,7 @@ public class DealingControllerImpl {
 	}
 
 	/* 현재위치기반 매물검색 */
+	@ResponseBody
 	@RequestMapping(value = "/hereMe.do", method = RequestMethod.GET)
 	public ResponseEntity hereMe(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
@@ -746,6 +763,23 @@ public class DealingControllerImpl {
 		return new ResponseEntity(hereList, HttpStatus.OK);
 
 	}
+	/* 로컬스토리지 보류 */
+	/* 부동산메인페이지 검색조건 가져오기 */
+//	@ResponseBody
+//	@RequestMapping(value = "/dlLocalStorage.do", method = RequestMethod.GET)
+//	public ResponseEntity dlMain2(HttpServletRequest request, HttpServletResponse response) throws Exception {
+//		Map<String, Object> mainMap = new HashMap<String, Object>();
+//		Enumeration enu = request.getParameterNames();
+//		while (enu.hasMoreElements()) {
+//			String name = (String) enu.nextElement();
+//			String value = request.getParameter(name);
+//			mainMap.put(name, value);
+//		}
+//		List<DealingVO> dlMain = new ArrayList<DealingVO>();
+//		dlMain = dealingService.dlMainMap(mainMap);
+//
+//		return new ResponseEntity(dlMain, HttpStatus.OK);
+//	}
 
 	// 인테리어게시판 글쓰기
 	@RequestMapping(value = "/inteboardform.do", method = { RequestMethod.GET })
@@ -764,9 +798,9 @@ public class DealingControllerImpl {
 		Enumeration enu = multipartRequest.getParameterNames();
 		while (enu.hasMoreElements()) {
 			String name = (String) enu.nextElement();
-//					System.out.println(name);
+//						System.out.println(name);
 			String value = multipartRequest.getParameter(name);
-//					System.out.println(value);
+//						System.out.println(value);
 			boardMap.put(name, value);
 
 		}
@@ -784,12 +818,12 @@ public class DealingControllerImpl {
 		responseHeaders.add("content-Type", "text/html;charset=utf-8");
 		try {
 			int result = dealingService.insertboard(boardMap);
-//					if (imageFileName != null && imageFileName.length() != 0) {
-//						File srcFile = new File(PRODUCT_IMAGE_REPO + "\\" + imageFileName);
-//						File desDir = new File(PRODUCT_IMAGE_REPO);
-//					중간에 폴더 없으면 만들어주는 함수 moveFileToDirectory
-//						FileUtils.moveFileToDirectory(srcFile, desDir, true);
-//					}
+//						if (imageFileName != null && imageFileName.length() != 0) {
+//							File srcFile = new File(PRODUCT_IMAGE_REPO + "\\" + imageFileName);
+//							File desDir = new File(PRODUCT_IMAGE_REPO);
+//						중간에 폴더 없으면 만들어주는 함수 moveFileToDirectory
+//							FileUtils.moveFileToDirectory(srcFile, desDir, true);
+//						}
 			message = "<script>";
 			message += "alert('게시글 등록이 완료되었습니다.');";
 			message += "location.href='" + multipartRequest.getContextPath() + "/inteboardlist.do'";
@@ -801,7 +835,7 @@ public class DealingControllerImpl {
 
 			message = "<script>";
 			message += "alert('다시 작성해주세요');";
-//					message += "location.href='" + multipartRequest.getContextPath() + "location.reload();'";
+//						message += "location.href='" + multipartRequest.getContextPath() + "location.reload();'";
 			message += "";
 			message += "</script>";
 			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
@@ -826,7 +860,7 @@ public class DealingControllerImpl {
 	}
 
 	// 인테리어 게시글 상세보기
-	@RequestMapping(value = "/board/{inte_Num}", method = RequestMethod.GET)
+	@RequestMapping(value = "/board/read", method = RequestMethod.GET)
 	public String read(BoardVO boardVO, @RequestParam("inte_Num") int inte_Num, Model model, HttpServletRequest req,
 			HttpServletResponse res) throws Exception {
 
@@ -842,15 +876,15 @@ public class DealingControllerImpl {
 			String user_Id = memberVO.getUser_Id();
 			model.addAttribute("user_Id", user_Id);
 		}
-//		Cookie[] cookies = req.getCookies();
-//		String user_Id = null;
-//		
-//		for(Cookie cookie : cookies) {
-//			System.out.println(cookie.getName());
-//			if(cookie.getName().equals("user_Id")) {
-//				user_Id !==1; 
+//			Cookie[] cookies = req.getCookies();
+//			String user_Id = null;
+//			
+//			for(Cookie cookie : cookies) {
+//				System.out.println(cookie.getName());
+//				if(cookie.getName().equals("user_Id")) {
+//					user_Id !==1; 
+//				}
 //			}
-//		}
 
 		model.addAttribute("boardContents", boardContents);
 
@@ -867,72 +901,56 @@ public class DealingControllerImpl {
 		return "/dealing/boardupdate";
 	}
 
-	// 인테리어 글 수정 동작화면
-	@RequestMapping(value = "/board/update_action", method = RequestMethod.POST)
-	public String update_action(@ModelAttribute("boardVO") BoardVO boardVO, HttpServletRequest request,
-			RedirectAttributes redirect, Model model) {
-		try {
-			dealingService.updateBoard(boardVO);
-			redirect.addFlashAttribute("redirect", boardVO.getInte_Num());
-			redirect.addFlashAttribute("msg", "수정이 완료되었습니다.");
-		} catch (Exception e) {
-			redirect.addFlashAttribute("msg", "오류가 발생되었습니다.");
-		}
-		return "redirect:/board/read?inte_Num=" + boardVO.getInte_Num();
-	}
-
 	// 인테리어 글 수정
-	@RequestMapping(value = "/board/modArticle.do", method = RequestMethod.POST)
-
+	@RequestMapping(value = "/board/update_action", method = { RequestMethod.GET, RequestMethod.POST })
 	public ResponseEntity modArticle(MultipartHttpServletRequest multipartRequest, HttpServletResponse response)
 			throws Exception {
 		multipartRequest.setCharacterEncoding("UTF-8");
-		Map<String, Object> dealingMap = new HashMap<String, Object>();
+		Map<String, Object> boardMap = new HashMap<String, Object>();
 		Enumeration enu = multipartRequest.getParameterNames();
 		while (enu.hasMoreElements()) {
 			String name = (String) enu.nextElement();
 			String value = multipartRequest.getParameter(name);
-			dealingMap.put(name, value);
+			boardMap.put(name, value);
 		}
-		String inte_Image = up(multipartRequest);
-
 		HttpSession session = multipartRequest.getSession();
-		session.setAttribute("user_Id", "testId");
-
 		MemberVO memberVO = (MemberVO) session.getAttribute("member");
-		String id = memberVO.getUser_Id();
-		System.out.println("user_Id:" + id);
-		dealingMap.put("user_Id", id);
-		dealingMap.put("inte_Image", inte_Image);
-		String inte_Num = (String) dealingMap.get("inte_Num");
-		System.out.println("inte_Num :" + inte_Num);
-		String message;
+		String user_Id = memberVO.getUser_Id();
+
+		String imageFileName1 = up1(multipartRequest);
+		boardMap.put("inte_Image", imageFileName1);
+		String inte_Num = (String) boardMap.get("inte_Num");
+		String message = null;
 		ResponseEntity resEnt = null;
+
 		HttpHeaders responseHeaders = new HttpHeaders();
 		responseHeaders.add("Content-Type", "text/html;charset=utf-8");
 
 		try {
-			dealingService.modArticle(dealingMap);
-			if (inte_Image != null && inte_Image.length() != 0) {
-				File srcFile = new File(DEALING_IMAGE_REPO + "\\" + "temp" + "\\" + inte_Image);
-				File destDir = new File(DEALING_IMAGE_REPO + "\\" + inte_Num);
-				FileUtils.moveFileToDirectory(srcFile, destDir, true);
+			dealingService.modArticle(boardMap);
+//				if (imageFileName1 != null && imageFileName1.length() != 0) {
+//					File srcFile = new File(BOARD_IMAGE_REPO + "\\" + "user_Id" + "\\" + imageFileName1);
+//					File destDir = new File(BOARD_IMAGE_REPO + "\\" + user_Id);
+//					destDir.mkdirs();
+//					FileUtils.moveFileToDirectory(srcFile, destDir, true);
 
-				String originalFileName = (String) dealingMap.get("originalFileName");
-				File oldFile = new File(DEALING_IMAGE_REPO + "\\" + inte_Num + "\\" + originalFileName);
-				oldFile.delete();
-			}
+			String originalFileName = (String) boardMap.get("originalFileName");
+			File oldFile = new File(BOARD_IMAGE_REPO + "\\" + user_Id + "\\" + originalFileName);
+			oldFile.delete();
+
+//			}
 			message = "<script>";
-			message += "alert('수정이 완료되었습니다.');";
+			message += "alert('Success');";
 			message += "location.href='" + multipartRequest.getContextPath() + "/board/read?inte_Num=" + inte_Num
 					+ "';";
 			message += "</script>";
 			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+
 		} catch (Exception e) {
-			File srcFile = new File(DEALING_IMAGE_REPO + "\\" + "temp" + "\\" + inte_Image);
+			File srcFile = new File(BOARD_IMAGE_REPO + "\\" + "temp" + "\\" + imageFileName1);
 			srcFile.delete();
 			message = "<script>";
-			message += "alert('오류 입니다.');";
+			message += "alert('Error');";
 			message += "location.href='" + multipartRequest.getContextPath() + "/board/read?inte_Num=" + inte_Num
 					+ "';";
 			message += "</script>";
@@ -953,7 +971,7 @@ public class DealingControllerImpl {
 		responseHeaders.add("Content-Type", "text/html;charset=utf-8");
 		try {
 			dealingService.removeArticle(inte_Num);
-			File destDir = new File(DEALING_IMAGE_REPO + "\\" + inte_Num);
+			File destDir = new File(BOARD_IMAGE_REPO + "\\" + inte_Num);
 			FileUtils.deleteDirectory(destDir);
 
 			message = "<script>";
@@ -993,9 +1011,19 @@ public class DealingControllerImpl {
 		return "/dealing/addnotice";
 	}
 
+//		// 공지사항 글 추가
+//		@RequestMapping(value = "/board/create_action", method = RequestMethod.POST)
+//		public String create_action(@ModelAttribute("noticeVO") NoticeVO noticeVO, RedirectAttributes redirect)
+//				throws Exception {
+	//
+//			dealingService.insertnotice(noticeVO);
+//			redirect.addFlashAttribute(noticeVO.getNotice_Num());
+//			return "/dealing/list";
+//		}
+
 	// 공지사항 글 전송
 	@RequestMapping(value = "/addnotice.do", method = RequestMethod.POST)
-
+	@ResponseBody
 	public ResponseEntity noticepost(MultipartHttpServletRequest multipartRequest, HttpServletResponse response)
 			throws Exception {
 		multipartRequest.setCharacterEncoding("UTF-8");
@@ -1094,7 +1122,7 @@ public class DealingControllerImpl {
 
 	// 공지사항 글 수정 완료
 	@RequestMapping(value = "/notice/modNoticle.do", method = RequestMethod.POST)
-
+	@ResponseBody
 	public ResponseEntity modNoticle(MultipartHttpServletRequest multipartRequest, HttpServletResponse response)
 			throws Exception {
 		multipartRequest.setCharacterEncoding("UTF-8");
@@ -1105,7 +1133,7 @@ public class DealingControllerImpl {
 			String value = multipartRequest.getParameter(name);
 			noticeMap.put(name, value);
 		}
-		// String notice_Image = up2(multipartRequest);
+//			String notice_Image = up2(multipartRequest);
 
 		HttpSession session = multipartRequest.getSession();
 		session.setAttribute("user_Id", "testId");
@@ -1114,7 +1142,7 @@ public class DealingControllerImpl {
 		String id = memberVO.getUser_Id();
 		System.out.println("user_Id:" + id);
 		noticeMap.put("user_Id", id);
-		// noticeMap.put("notice_Image", notice_Image);
+//			noticeMap.put("notice_Image", notice_Image);
 		String notice_Num = (String) noticeMap.get("notice_Num");
 		System.out.println("notice_Num :" + notice_Num);
 		String message;
@@ -1126,6 +1154,7 @@ public class DealingControllerImpl {
 	}
 
 	// 공지사항 글 삭제
+	@ResponseBody
 	@RequestMapping(value = "/notice/removeNoticle", method = RequestMethod.POST)
 	public ResponseEntity removeNoticle(@RequestParam("notice_Num") int notice_Num, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
@@ -1156,6 +1185,7 @@ public class DealingControllerImpl {
 		return resEnt;
 	}
 
+	/////////////////////////////////////// 댓글
 	// 댓글 쓰기
 	@RequestMapping(value = "/replies/new", method = RequestMethod.POST)
 	public ResponseEntity<String> replywrite(@RequestBody ReplyVO reply, HttpServletRequest req) throws Exception {
@@ -1168,7 +1198,7 @@ public class DealingControllerImpl {
 		// insert가 성공했으면 result변수에 1저장
 		// insert가 실패했으면 result변수에 0저장
 		// 다음 MV패턴 호출
-
+		System.out.println(reply);
 		int result = dealingService.rewrite(reply);
 
 		// result가 1이면 HTTP.OK
@@ -1182,30 +1212,27 @@ public class DealingControllerImpl {
 	// 댓글 목록
 	@RequestMapping(value = "/replies/{inte_Num}", method = RequestMethod.GET)
 	public ResponseEntity<ArrayList<ReplyVO>> getlist(@PathVariable int inte_Num) throws Exception {
-		// System.out.println(inte_Num);
+//				System.out.println(inte_Num);
 
 		return new ResponseEntity<>(dealingService.list(inte_Num), HttpStatus.OK);
 	}
 
 	// 댓글 수정
+
 	@RequestMapping(value = "/replies/modify", method = RequestMethod.PUT, consumes = "application/json", produces = "text/plain;charset=utf-8")
 	public ResponseEntity<String> replymodify(@RequestBody ReplyVO reply, HttpServletRequest req, Model model)
 			throws Exception {
-		// HttpSession session = req.getSession();
-		//// reply.setUser_Id(user_Id);
-		//
-		// MemberVO memberVO = (MemberVO) session.getAttribute("member");
-		// if (memberVO == null) {
-		// model.addAttribute("user_Id", "guest");
-		//
-		// } else {
-		// String user_Id = memberVO.getUser_Id();
-		// model.addAttribute("user_Id", user_Id);
-		// }
 		HttpSession session = req.getSession();
-		MemberVO member = (MemberVO) session.getAttribute("member");
-		String user_Id = member.getUser_Id();
-		member.setUser_Id(user_Id);
+//				reply.setUser_Id(user_Id);
+
+		MemberVO memberVO = (MemberVO) session.getAttribute("member");
+		if (memberVO == null) {
+			model.addAttribute("user_Id", "guest");
+
+		} else {
+			String user_Id = memberVO.getUser_Id();
+			model.addAttribute("user_Id", user_Id);
+		}
 
 		dealingService.modify(reply);
 
@@ -1215,9 +1242,8 @@ public class DealingControllerImpl {
 	}
 
 	// 댓글 삭제
-	// @JsonProperty("reply")
-	// @RequestMapping(value = "/replies/remove/{reply_Num}", method =
-	// RequestMethod.DELETE)
+//			@JsonProperty("reply")
+//			@RequestMapping(value = "/replies/remove/{reply_Num}", method = RequestMethod.DELETE)
 	@DeleteMapping(value = "/replies/{reply_Num}", produces = { MediaType.TEXT_PLAIN_VALUE })
 	public ResponseEntity<String> replyremove(@PathVariable("reply_Num") int reply_Num, HttpServletRequest req,
 			ReplyVO reply) throws Exception {
@@ -1259,7 +1285,7 @@ public class DealingControllerImpl {
 		return "/dealing/report";
 	}
 
-	// 이미지 업로드
+//	이미지 업로드
 	private String up(MultipartHttpServletRequest multipartRequest) throws Exception {
 		String imageFileName = null;
 		Iterator<String> fileNames = multipartRequest.getFileNames();

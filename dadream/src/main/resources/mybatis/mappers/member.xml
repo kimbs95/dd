@@ -18,7 +18,6 @@
 		<result property="user_Address2" column="user_Address2" />
 		<result property="user_Address3" column="user_Address3" />
 		<result property="user_Business" column="user_Business" />
-		<result property="pending" column="pending" />
 	</resultMap>
 	<select id="members" resultType="memberVO" parameterType="String">
 		select * from user_t

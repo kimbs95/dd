@@ -16,11 +16,13 @@
 <body>
     <footer>
         <div class="footer">
-
-                <div class="footer_content">
-                    <span>대표자 : 뜨거운 감자</span><br>
-                    <span>사업장 : 사랑시 고백구 행복동</span><br>
-                    <span>사업자 번호 : 02-222-2222</span><br>
+            <!-- <div class="footer_img">
+                <img src="../image/메인로고.png" alt="다드림 메인이미지">
+            </div> -->
+            <div class="footer_content">
+                <span>대표자 : 뜨거운 감자</span><br>
+                <span>사업장 : 사랑시 고백구 행복동</span><br>
+                <span>사업자 번호 : 02-222-2222</span><br>
                 <span>Email : DaDream@test.com</span><br><br>
                 <span><button>회사위치보기</button></span>
             </div>

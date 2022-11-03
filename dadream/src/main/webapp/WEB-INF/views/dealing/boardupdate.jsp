@@ -22,7 +22,9 @@
 	<link rel="stylesheet" href="/css/boardupdate.css">
 	<!--JS-->
 	<script src="/js/dealingJS/boardupdate.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+	
+	
 	<script>
 		function readURL(input) {
 	 	if (input.files && input.files[0]) {
@@ -43,23 +45,33 @@
 		cnt++;
 	}
 	function _onSubmit(){
-		if(!confirm("수정하시겠습니까?")){
-			return false;
+			if (!confirm("수정하시겠습니까?")) {
+				return false;
+			}
 		}
-	}
-	function fn_modify_article(obj){
-	obj.action="${contextPath}/board/update_action";
-	obj.submit();
-	}
+	//////////////////////////////////////// 썸네일 코드 //////////////////////////////////
+document.addEventListener('DOMContentLoaded', () => {
+	document.querySelector("#inteboard_Image").addEventListener("change", async e => {
+		const preview = document.querySelector("#preview");
+		document.querySelector(".imgh2").innerHTML = "성공적으로 등록했습니다!";
+		let reader = new FileReader();
+		reader.onloadend = finished => {
+			preview.setAttribute('src', finished.target.result);
+			console.log(finished.target.result);
+		}
+		reader.readAsDataURL(e.target.files.item(0));
+	})
+
+});
 	</script>
 
 	
 </head>
 <body>
-    <form name="frmArticle" action="${contextPath}/board/update_action" method="post" enctype="multipart/form-data" onsubmit="return _onSubmit();">
+    <form id="FORMTAG2" name="frmArticle" action="${contextPath}/board/update_action" method="post" enctype="multipart/form-data" onsubmit="return _onSubmit();">
 		<input type="hidden" id="inte_Num" name="inte_Num" value="${boardContents.inte_Num}"/>
 		
-		<input type="hidden" id="inte_Num" name="inte_Num" value="${boardContents.inte_Num}"/>
+		
 		
 		<div id="updatecontent">
 			<div id="writer1">
@@ -69,23 +81,38 @@
 
 			<div id="update_title_form">
 				<td align="right">제목:&nbsp;&nbsp; </td>
-				<input type="text" size="63" maxlength="100" name="inte_Title" value="${boardContents.inte_Title}"/>
+				<input type="text" size="63" maxlength="100" name="inte_Title" id="inte_Title" value="${boardContents.inte_Title}"/>
 			</div>
 
 			<div id="update_content">
 				내용:&nbsp;&nbsp; 
-					<textarea rows="10" cols="65" maxlength="5000" name="inte_Text" value="${boardContents.inte_Text}">${boardContents.inte_Text}
-					</textarea>
+					<textarea rows="10" cols="65" maxlength="5000" name="inte_Text" id="inte_Text" value="${boardContents.inte_Text}">${boardContents.inte_Text}</textarea>
 			</div>
+			
+			<div id="board_img">
+					<div class="inteImg">
+						<div class="inteMain">
+							<label for="inteboard_Image">
+								<p>수정 할 사진을 선택해주세요.</p></label><br>
+							<img id="preview" src="/board/${boardContents.user_Id}/${boardContents.inte_Image}"  onerror="no_image()"/>
+							<input type="file" id="inteboard_Image" name="inte_Image" accept="image/*" multiple>
+							<h1 class="imgh2"></h1>
+						</div>
+					</div>
+			</div>
+			<input type="hidden" name="originalFileName" value="${boardContents.inte_Image}">
+            <input type="hidden" name="inte_Num" value="${boardContents.inte_Num}">
+
 			
 			
 		</div>
        
 			<div>
 				<div id="update_btn">
-				<button type="submit" id="submit_btn" class="btn btn-success" onClick="fn_modify_article(frmArticle)" >수정 완료</button>
+				<button type="submit" id="submit_btn" class="btn btn-success">수정 완료</button>
 				<button type="button" id="cancel_btn"><a href="/board/read?inte_Num=${boardContents.inte_Num}" class="btn btn-danger" style="text-decoration: none;">취소</a></button>		
 				</div>
         </form>
+		
 </body>
 </html>

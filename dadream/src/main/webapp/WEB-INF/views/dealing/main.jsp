@@ -21,10 +21,25 @@
     <!-- css -->
     <link rel="stylesheet" type="text/css" href="/css/main.css">
 
+    <style>
+        #main1 {
+            background-image: url("../image/livingRoom.jpg");
+            background-repeat: no-repeat;
+            background-size: cover;
+            margin-bottom: 50px;
+        }
+
+        #main2 {
+            justify-content: center;
+            justify-items: center;
+        }
+    </style>
 </head>
 
 <body>
+    <!-- <div style="display:none;"><%= application.getRealPath("/image") %></div> -->
     <div id="main1">
+        <!--아래 form 부분 중앙정렬 검토필요-->
         <ul class="search">
             <li>
                 <form method="get" action="${contextPath}/map.do"><button type="submit" name="dl_Form"
@@ -53,9 +68,9 @@
         </ul>
         <div id="search">
             <form method="get" action="${contextPath}/map.do" id="mapForm">
-                <input class="dealingsearch" type="search"name="dl_Address"
+                <input class="dealingsearch" type="search" style="outline: none;" name="dl_Address"
                     placeholder="검색어를 입력하세요." />
-                <input type="submit" value="검색" id="main_search"></form>
+                <input type="submit" value="검색" style="font-weight:bold;"></form>
             </form>
         </div>
     </div>
@@ -63,11 +78,34 @@
     <div id="main2">
         <form>
             <!-- 위치기반 API 추천매물 -->
-            <h1>현위치 추천 매물</h1>
+            <h1 style="font-weight:bold; font-size:x-large; margin-bottom: 40px;">현위치 추천 매물</h1>
             <div id="mainList"></div>
         </form>
+        <!-- 추천매물 리스트
+        <div id="main2_1" style="display: flex;">
+            <a class="img-button" href="${contextPath}/dealingview.do">
+            </a>
+            <a class="img-button" href="${contextPath}/dealingview.do">
+            </a>
+            <a class="img-button" style="background-color: green;" href="${contextPath}/dealingview.do">
+            </a>
+            <a class="img-button" href="${contextPath}/dealingview.do">
+            </a>
+            <a class="img-button" href="${contextPath}/dealingview.do">
+            </a>
+        </div> -->
     </div>
-    <h1 id="Tip">부동산 가이드</h1>
+
+    <!-- <div id="main3">
+        <div id="avg-dong-price"> -->
+    <!-- OO동 평균월세 API 연동필요 -->
+    <!-- </div>
+        <div id="avg-dong-price1"> -->
+    <!-- OO동의 주변동 평균월세 API 연동필요 -->
+    <!-- </div>
+    </div> -->
+
+    <h1 style="font-size: 30px; font-weight: bolder;margin: 30px 0 40px 45%; ">부동산 가이드</h1>
     <div id="main4">
         <ul>
             <li class="a1">

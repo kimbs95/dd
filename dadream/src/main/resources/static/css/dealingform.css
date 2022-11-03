@@ -94,4 +94,11 @@
 	        margin-top:10px;
 	        display:none
 	
-}
+		}
+		.note-editable{
+			width:960px;
+			height:300px;
+			height: 500px;
+            min-Height: 500px;
+            max-Height: 500px;
+		}

@@ -7,13 +7,7 @@
 		#writer{
 			display: inherit;
 		}
-		
-		#board-Title{
-			
-		}
-		#board_Context{
-			
-		}
+
 		#board_img{
 			display: inline-grid;
 		}
@@ -31,4 +25,13 @@
 		}
 		#inteboard_Image{
 			margin-bottom: 7px;
+		}
+		#file-upload-button{
+			width:68px;
+		}
+		#sub,#List{
+			width:74px;
+		}
+		#inte_Text{
+			resize: none;
 		}

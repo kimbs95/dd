@@ -36,19 +36,25 @@
 		 
 	</select>
 	
+	<!-- 인테리어 게시글 상세보기 -->
 	<select id="getBoardContents" parameterType="boardVO" resultType="boardVO">
 		SELECT * FROM interior_t
 		WHERE inte_Num = #{inte_Num}
 	</select>
 	
-	<update id="updateBoard" parameterType="boardVO">
+	<!-- 인테리어 게시글 수정 -->
+	<update id="updateArticle" parameterType="java.util.Map">
 		UPDATE interior_t SET
 		inte_Title = #{inte_Title},
 		inte_Text = #{inte_Text},
 		user_Id = #{user_Id}
-		WHERE inte_Num = #{inte_Num}
+		<if test="inte_Image != null and inte_Image != ''"> 
+			, inte_Image = #{inte_Image} 
+		</if>
+			WHERE inte_Num = #{inte_Num}
 	</update>
 	
+	<!-- 인테리어 게시글 삭제 -->
 	<delete id="deleteArticle"  parameterType="boardVO" >
 		<![CDATA[
 			DELETE
@@ -59,7 +65,7 @@
 			]]>
 	</delete>
 	
-	<!-- 조회수 증가 -->
+	<!-- 인테리어 게시글 조회수 증가 -->
 	<update id="updateView" parameterType="int">
 		UPDATE interior_t 
 		SET
@@ -68,6 +74,8 @@
 		inte_Num = #{inte_Num}
 	</update>
 	
+	
+	<!-- 마이페이지 내가 쓴 게시글 목록 -->
 	<select id="myboardList" resultMap="boardResult" parameterType="String">
 		
 		<![CDATA[

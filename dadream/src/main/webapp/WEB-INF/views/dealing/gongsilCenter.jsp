@@ -17,16 +17,28 @@
         <title>공실센터</title>
         <!-- 제이쿼리 -->
         <script src="http://code.jquery.com/jquery-latest.js"></script>
-        <!--CSS-->
-        <link rel="stylesheet" href="/css/gongsilCenter.css">
-        <!--JS-->
-        <script src="/js/dealingJS/gongsilCenter.js"></script>
-       
+        <style>
+            body {
+                margin: 20px;
+                padding: 0;
+            }
+
+            #locationChk {
+                margin: 0 0 50px 50px;
+            }
+
+            #formChk {
+                text-align: center;
+                padding-top: 15px;
+            }
+
+        </style>
     </head>
+
     <body>
-        <h1 id="mainName">공실센터</h1>
+        <h1 style="margin-bottom: 100px;">공실센터</h1>
         <form id="dlSearch2">
-            <div id="formChkmain">
+            <div class="" style="display: flex;">
                 <div id="formChk">
                     <input type="checkbox" id="dl_Form" name="dl_Form" onclick="selectAll(this)">전체
                     <input type="checkbox" id="dl_Form" name="dl_Form" value="아파트">아파트
@@ -38,8 +50,10 @@
         </form>
         <form id="dlSearch3">
                 <div id="locationChk">
-                    <input type="text" id="dealingsearch" size="30px" name="dl_Address" placeholder="지역을 입력해주세요">
-                    <button id="dl_search" type="button" value="매물검색" onclick="dlBtn2()">매물검색</button>
+                    <input type="text" id="dealingsearch" size="30px" name="dl_Address"
+                        style="height: 27px;line-height:27px;margin-right:5px;border:none;border-bottom: 1px solid black;outline:none;"
+                        placeholder="지역을 입력해주세요">
+                    <button type="button" style="height:27px;" value="매물검색" onclick="dlBtn2()">매물검색</button>
                 </div>
             </div>
         </form>
@@ -84,12 +98,12 @@
 
                                 $.each(hereList, function (index, item) {
                                     mainList +=
-                                        '<a href="/dealingview.do?dl_Num=' + item.dl_Num + '" id="main1">' +
-                                        '<div id="main2">';
-                                    mainList += '<div id="main3">' + '<img src="/dealing/' + item.user_Id + '/' + item.dl_Image +
-                                        '" alt="매물사진" id="main4">' +
+                                        '<a href="/dealingview.do?dl_Num=' + item.dl_Num + '" style="color:black">' +
+                                        '<div style="display: inline-block; border: 1px solid #ccc; margin-bottom: 20px; margin-left: 30px; width:350px; height:485px;">';
+                                    mainList += '<div style="text-align:center;">' + '<img src="/dealing/' + item.user_Id + '/' + item.dl_Image +
+                                        '" alt="매물사진" width="300px" height="250px" style="margin: 20px 0 20px 0;border:0.5px solid #ccc">' +
                                         '</div>';
-                                    mainList += '<div id="main5">' + '<span id="main6">' + item.dl_Title + '</span>' +
+                                    mainList += '<div style="margin-left:15px;">' + '<span style="font-size:20px;font-weight:bold;">' + item.dl_Title + '</span>' +
                                         '<h4>' + item.dl_Form + '<br>' + item
                                         .dl_Address + '<br>' +
                                         item.dl_Form2 + '<br>￦ ' + item.dl_Price +
@@ -115,6 +129,58 @@
                     alert("현재위치를 불러올 수 없습니다.")
                 }
             });
+
+            /* 전체선택 */
+            function selectAll(selectAll) {
+                var checkboxes = document.getElementsByName('dl_Form');
+
+                checkboxes.forEach(function (checkbox) {
+                    checkbox.checked = selectAll.checked;
+                });
+            }
+
+            /* 검색기능 */
+            function dlBtn2() {
+                var dl_Form = $('#dlSearch2').serialize();
+                //var dlChk = $('#dealingsearch').val();
+                var dl_Address = $('#dlSearch3').serialize();
+                console.log(dl_Form);
+                console.log(dl_Address);
+
+                $.ajax({
+                    url: "/gongsilSearch.do",
+                    type: "get",
+                    data: unescape((dl_Form+'&'+dl_Address).replace(/%/g, '%25')),
+                    
+                    success: function(gsResult) {
+                        alert("성공");
+                        console.log(gsResult);
+
+                        var resultList = "";
+                            $.each(gsResult, function (index, item) {
+                                resultList +=
+                                        '<a href="/dealingview.do?dl_Num=' + item.dl_Num + '" style="color:black">' +
+                                        '<div style="display: inline-block; border: 1px solid #ccc; margin-bottom: 20px; margin-left: 30px; width:350px; height:485px;">';
+                                            resultList += '<div style="text-align:center;">' + '<img src="/dealing/' + item.user_Id + '/' + item.dl_Image +
+                                        '" alt="매물사진" width="300px" height="250px" style="margin: 20px 0 20px 0;border:0.5px solid #ccc">' +
+                                        '</div>';
+                                        resultList += '<div style="margin-left:15px;">' + '<span style="font-size:20px;font-weight:bold;">' + item.dl_Title + '</span>' +
+                                        '<h4>' + item.dl_Form + '<br>' + item
+                                        .dl_Address + '<br>' +
+                                        item.dl_Form2 + '<br>￦ ' + item.dl_Price +
+                                        '<br>옵션 : ' + item.dl_Option +
+                                        '</h4></div>' + '</div></a>';
+
+                            })
+                            //console.log(resultList);
+                            document.getElementById("resultList").innerHTML = resultList;
+                    },
+                    error: function() {
+                        alert("조건을 입력해주세요.");
+                    }
+                });
+            }
+            
         </script>
     </body>
 

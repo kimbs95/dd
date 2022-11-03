@@ -15,10 +15,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>부동산 매물보기</title>
-    <!--CSS-->
-    <link rel="stylesheet" href="/css/dealingview.css">
-    <!--JS-->
-	<script src="/js/dealingJS/dealingview.js"></script>
 
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <!--팝업창-->
@@ -78,8 +74,8 @@
                     <input type="text" value="${DealingContents.dl_Title}" name="dl_Title" disabled
                         style="text-align: center;">
                     <p>상세 주소</p>
-                    <input id="dl_Address1" type="text" value="${DealingContents.dl_Address}"
-                         name="dl_Address" maxlength="50" disabled>
+                    <input type="text" value="${DealingContents.dl_Address}" name="dl_Address" maxlength="50"
+                        style="width: 300px; height: 50px; text-align: center;" disabled>
                 </div>
                 <br><br>
                 <!-------------------------------방종류, 층수------------------------------->
@@ -91,7 +87,8 @@
                     </div>
                     <div class="">
                         <p>매물 유형</p>
-                        <input id="dl_Form2_1" type="text" value="${DealingContents.dl_Form2}" name="dl_Form2" disabled></td>
+                        <input type="text" value="${DealingContents.dl_Form2}" name="dl_Form2" disabled
+                            style="text-align: center; width: 106px;"></td>
                     </div>
                 </div>
 
@@ -99,11 +96,12 @@
                 <div id="dlComments3">
                     <div>
                         <p>옵션</p>
-                        <input id="" type="text" value="${DealingContents.dl_Option}" name="dl_Form2" disabled
+                        <input type="text" value="${DealingContents.dl_Option}" name="dl_Form2" disabled
                             style="text-align: center;">
                         <p>가격</p>
-                        <input id="dl_Price1" type="text" value="${DealingContents.dl_Price}" name="dl_Price" disabled>
-                        <div id="JJim">
+                        <input type="text" value="${DealingContents.dl_Price}" name="dl_Price" disabled
+                            style="text-align: center;">
+                        <div style="display: flex; justify-content:center">
                             <!-- 하트 찜  -->
                             <div class="heart"></div>
                             <button type="button" id="call" class="btn btn-secondary btn-lg"
@@ -124,7 +122,7 @@
         </div>
     </div>
 
-    <!-------------------------------------------찜하기------------------------------------------->
+    <!-- 찜하기 -->
     <script>
         //처음 들어갈때 찜 여부 체크
         var dl_Num = "${DealingContents.dl_Num}";
@@ -164,7 +162,7 @@
             });
         });
 
-////////////////////////////////////////////좋아요 찜 클릭/////////////////////////////////////////
+        //좋아요 찜 클릭
         var user_Id = "${user_Id}";
         console.log(user_Id);
         $(".heart").click(function () {

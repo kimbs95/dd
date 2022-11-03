@@ -60,8 +60,8 @@
 			
 			<div id="board_Context">
 				<td align="right" valign="top">내용:&nbsp;&nbsp; </td>
-				<td colspan="2"><textarea rows="10" cols="65" maxlength="5000" name="inte_Text" id="inte_Text"></textarea>
-				</td>
+				<textarea rows="10" cols="65" maxlength="5000"name="inte_Text" id="inte_Text"></textarea>
+			
 			</div>	
 				
 			
@@ -78,8 +78,8 @@
 					</div>
 				</td>
                     <td colspan="2">
-                        <input type="submit" value="등록하기" />
-						<input type="button" value="목록보기" onClick="backToList(this.form)"/>
+                        <input type="submit" value="등록하기" id="sub" />
+						<input type="button" value="목록보기" id="List" onClick="backToList(this.form)"/>
                         </td>
                 	</div>	
 				</div>	
