@@ -20,6 +20,22 @@
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="/css/admin/styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+        <script>
+            document.addEventListener("DOMContentLoaded",()=>{
+    
+                <c:choose>
+                <c:when test="${member.user_Id == null}">
+                alert("로그인 후 작성 가능합니다.");
+                location.href="/login.do";           
+                </c:when>
+                <c:when test="${member.user_Level != 100}">
+                alert("관리자 권한이 아닙니다.")
+                location.href="/";
+                </c:when>
+                </c:choose>
+            })        
+    
+        </script>
     </head>
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">

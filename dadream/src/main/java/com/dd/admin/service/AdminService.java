@@ -44,6 +44,10 @@ public interface AdminService {
 	/* 공지사항 수정 */
 	public void modNotice(NoticeVO noticeVO) throws DataAccessException;
 
+	public void deleteNotice(Map<String, Object> ntsMap) throws DataAccessException;
+
+	public void addNotice(NoticeVO noticeVO) throws DataAccessException;
+
 //	허위 매물 막기 변경
 	public int levelPost(Map<String, Object> mem) throws Exception;
 }

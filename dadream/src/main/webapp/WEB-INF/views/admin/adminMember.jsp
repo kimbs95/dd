@@ -42,6 +42,22 @@
             text-decoration: underline;
         }
     </style>
+    <script>
+        document.addEventListener("DOMContentLoaded",()=>{
+
+            <c:choose>
+            <c:when test="${member.user_Id == null}">
+            alert("로그인 후 작성 가능합니다.");
+            location.href="/login.do";           
+            </c:when>
+            <c:when test="${member.user_Level != 100}">
+            alert("관리자 권한이 아닙니다.")
+            location.href="/";
+            </c:when>
+            </c:choose>
+        })        
+
+    </script>
 </head>
 
 <body class="sb-nav-fixed">

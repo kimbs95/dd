@@ -376,6 +376,9 @@
             alert("상세설명 을 입력해주세요");
             summernote.focus();
             return ;
+        }else if("${member.pending}"==='y'){
+            alert("등록 권한이 없습니다 문제있으면 1:1 문의주세요");
+            return;
         }FORMTAG.submit();
             
     }

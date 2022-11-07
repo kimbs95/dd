@@ -91,7 +91,7 @@
                         <div style="display: flex;">
                             <div>
                                 <img src="/dealing/${myDealing.user_Id}/${myDealing.dl_Image}" alt="매물사진"
-                                    style="width:300px; height: 320px;">
+                                    style="width:300px; height: 300px;">
                             </div>
                             <div id="mydl">
                                 <p>매물이름 : ${myDealing.dl_Title}</p><br>
@@ -124,9 +124,9 @@
                     <c:forEach var="jjimList" items="${myJjim}">
                         <c:forEach var="myDealing2" items="${jjimList.dealing}">
                             <div style="display: flex; margin-right: 20px;">
-                                <div>
+                                <div style="height: 249px;">
                                     <img src="/dealing/${jjimList.user_Id}/${myDealing2.dl_Image}" alt="매물사진"
-                                        style="width:200px; height:200px">
+                                        style="width:200px; height:249px">
                                 </div>
                                 <div class="jjimContents">
                                     <p>매물이름 : ${myDealing2.dl_Title}</p><br>

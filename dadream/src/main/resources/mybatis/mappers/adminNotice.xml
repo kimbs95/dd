@@ -43,4 +43,27 @@
 		Notice_Category = #{notice_Category} 
 		WHERE Notice_Num = #{notice_Num}
 	</update>
+	
+	<!-- 공지사항 삭제 -->
+	<delete id="deleteNotice" parameterType="java.util.Map">
+		DELETE
+		FROM notice_t
+		<where>
+			<if test="ntsList != null and ntsList.size != 0">
+				Notice_Num IN
+				<foreach collection="ntsList" item="item" open="(" close=")" separator=",">
+					#{item}
+				</foreach>
+			</if>
+		</where>
+	</delete>
+
+
+	<!-- 공지사항 등록 현재db에 뷰컬럼이 없어서 빼놈 -->
+	<insert id="addNotice"  parameterType="noticeVO">
+		<![CDATA[
+			insert into notice_t(notice_Num,notice_Title,notice_Text,notice_Date,notice_Category,user_Id, viewCnt)
+			values(#{notice_Num},#{notice_Title},#{notice_Text},#{notice_Date},#{notice_Category},#{user_Id},#{viewCnt})
+		]]>  
+	</insert>
 </mapper>

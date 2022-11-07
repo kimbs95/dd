@@ -64,6 +64,7 @@
 	#chat{
 		width: 480px;
 		height: auto;
+		margin-top: 35px;
 	}
 	#write_form{
 		width: 480px;
@@ -78,12 +79,12 @@
 		 resize: none;
 	}
 	#writer_Date{
-		
+		display: inline-flex;
 		align-items: baseline;
 	}
 	#Replyeachform{
 		margin: 3px;
-		display:flex;
+		display: block;
 	}
 	#line{
 		width: 450px;
@@ -97,3 +98,36 @@
 	#Eachform{
 		display: flex;
 	}
+	
+	.content_area{
+		width:448px;
+		height:70px;
+		resize:none;
+		border:0.5px solid gray;
+		padding:10px;
+		
+	}
+	
+	#Date{
+		width: 110px;
+		font-size:small;
+	}
+	
+	#Modify_Delete{
+		width: 90px;
+		margin-left: 200px;
+	}
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	

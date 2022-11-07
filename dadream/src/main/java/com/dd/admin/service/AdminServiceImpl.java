@@ -98,6 +98,19 @@ public class AdminServiceImpl implements AdminService {
 	public void modNotice(NoticeVO noticeVO) throws DataAccessException {
 		adminDAO.modNotice(noticeVO);
 	}
+
+	/* 공지사항 삭제 */
+	@Override
+	public void deleteNotice(Map<String, Object> ntsMap) throws DataAccessException {
+		adminDAO.deleteNotice(ntsMap);
+	}
+
+	/* 공지사항 글쓰기 */
+	@Override
+	public void addNotice(NoticeVO noticeVO) throws DataAccessException {
+		adminDAO.addNotice(noticeVO);
+	}
+
 //	허위 매물 막기 변경
 	@Override
 	public int levelPost(Map<String, Object> mem) throws Exception {

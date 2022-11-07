@@ -3,10 +3,11 @@
     isELIgnored="false" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:set var="contextPath" value="${pageContext.request.contextPath}" />
+
 <%
   request.setCharacterEncoding("UTF-8");
 %>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -16,13 +17,6 @@
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>다드림 관리자페이지</title>
-        <style>
-            * {
-                margin: 0;
-                padding: 0;
-            }
-
-        </style>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="/css/admin/styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
@@ -43,6 +37,12 @@
     
         </script>
     </head>
+    <script>
+        function backToList(obj){
+	 	 obj.action="${contextPath}/admin/noticeList.do";
+		 obj.submit();
+	 }
+    </script>
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- Navbar Brand-->
@@ -50,12 +50,8 @@
             <!-- Sidebar Toggle-->
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
             <!-- Navbar Search-->
-            <!-- <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0"> -->
-                <div class="input-group">
-                    <!-- <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" /> -->
-                    <!-- <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button> -->
+                <div class="input-group">            
                 </div>
-            <!-- </form> -->
             <!-- Navbar-->
             <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
                 <li class="nav-item dropdown">
@@ -79,36 +75,7 @@
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 매출관리
                             </a>
-                            <div class="sb-sidenav-menu-heading">Interface</div>
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                                Layouts
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="${contextPath}/admin/layout-static.do">고정 Menu</a>
-                                    <a class="nav-link" href="${contextPath}/admin/layout-sidenav-light.do">흰색 Menu</a>
-                                </nav>
-                            </div>
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
-                                <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
-                                Pages
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
-                                        관리자 계정
-                                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                                    </a>
-                                    <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
-                                        <nav class="sb-sidenav-menu-nested nav">
-                                            <a class="nav-link" href="${contextPath}/admin/login.do">로그인</a>
-                                            <a class="nav-link" href="${contextPath}/admin/register.do">회원가입</a>
-                                            <a class="nav-link" href="${contextPath}/admin/password.do">비밀번호 찾기</a>
-                                        </nav>
-                                    </div>
                                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseProduct" aria-expanded="false" aria-controls="pagesCollapseProduct">
                                         상품관리
                                         <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
@@ -125,7 +92,7 @@
                                     </a>
                                     <div class="collapse" id="pagesCollapseDealing" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
                                         <nav class="sb-sidenav-menu-nested nav">
-                                            <a class="nav-link" href="${contextPath}/admin/dlList.do">매물목록</a>
+                                            <a class="nav-link" href="${contextPath}/admin/dealingsList.do">매물목록</a>
                                         </nav>
                                     </div>
                                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseMember" aria-expanded="false" aria-controls="pagesCollapseMember">
@@ -146,17 +113,10 @@
                                             <a class="nav-link" href="${contextPath}/admin/reportList.do">신고내역</a>
                                         </nav>
                                     </div>
+                                    <div>   
+                                        <a class="nav-link" href="${contextPath}/admin/noticeList.do">공지관리</a>
+                                    </div>
                                 </nav>
-                            </div>
-                            <div class="sb-sidenav-menu-heading">Addons</div>
-                            <a class="nav-link" href="charts.html">
-                                <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-                                Charts
-                            </a>
-                            <a class="nav-link" href="tables.html">
-                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                                Tables
-                            </a>
                         </div>
                     </div>
                     <div class="sb-sidenav-footer">
@@ -166,40 +126,24 @@
                 </nav>
             </div>
             <div id="layoutSidenav_content">
-                <main style="margin:40px 0 0 40px;">
-                    <div style="margin-bottom: 100px;">
-                        <h1>신고 상세내역</h1>
-                    </div>
-                    <div class="">
-                        <h3>신고자 : ${rpContents.user_Id}</h3>
-                        <h3>매물번호 : ${rpContents.dealing[0].dl_Num}&nbsp&nbsp매물명 : ${rpContents.dealing[0].dl_Title}</h3>
-                        <div style="display: flex;">
-                            <h3>제목 : ${rpContents.rp_Title}</h3><h5>신고날짜 : ${rpContents.rp_Date}</h5>
+                <main>
+                    <h3>공지 상세보기</h3>
+                    <form method="post" action="/admin/addNotice.do">
+                        <div class="">
+                            글쓴이 : <input type="text" value="${member.user_Id}" name="user_Id" disabled /><input type="hidden" value="${member.user_Id}" name="user_Id" />
                         </div>
-                    </div>
-                    <div style="margin-top: 150px;">
-                        <h3>내용 : ${rpContents.rp_Content}</h3>
-                    </div>
-                    <div class="">
-                        <form method="post" action="/admin/reportState.do">
-                            <button type="submit" name="rp_State" value="처리중">수락</button>
-                            <input type="hidden" name="dl_ReportNum" value="${rpContents.dl_ReportNum}">
-                        </form>
-                        <form method="post" action="/admin/reportState.do">
-                            <button type="submit" name="rp_State" value="반려">반려</button>
-                            <input type="hidden" name="dl_ReportNum" value="${rpContents.dl_ReportNum}">
-                        </form>
-                        <form method="post" action="/admin/reportState.do">
-                            <button type="submit" name="rp_State" value="처리완료">처리완료</button>
-                            <input type="hidden" name="dl_ReportNum" value="${rpContents.dl_ReportNum}">
-                        </form>
-                    </div>
-                    <div class="">
-                        <form method="post" action="/admin/deleteReport.do">
-                            <input type="hidden" name="dl_ReportNum" value="${rpContents.dl_ReportNum}">
-                            <input type="submit" value="삭제하기">
-                        </form>
-                    </div>
+                        <div class="">
+                            카테고리 : <select name="notice_Category"><option value="부동산">부동산</option><option value="가구">가구</option></select>
+                            제목 : <input type="text" name="notice_Title" />
+                        </div>
+                        <div style="display: flex;">
+                            내용: <textarea name="notice_Text" style="width: 900px; height:500px"></textarea>
+                        </div>
+                        <div class="">
+                            <input type="submit" value="등록하기"><input type="reset" value="다시쓰기">
+                            <input type="button" value="목록보기" onClick="backToList(this.form)"/>
+                        </div>
+                    </form>
                 </main>
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid px-4">

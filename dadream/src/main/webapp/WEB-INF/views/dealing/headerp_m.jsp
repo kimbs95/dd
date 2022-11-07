@@ -213,6 +213,10 @@
                                     <h6>${member.user_Name} 님</h6>
                                     </div>
                                 </li>
+                                <!--댓글 수정,삭제시 아이디값을 가져와야 함-->
+                                <li>
+                                    <h6 id="user_id">${member.user_Id}</h6>
+                                </li>
                                 <a href="${contextPath}/logout.do">
                                     <li>로그아웃</li>
                                 </a>

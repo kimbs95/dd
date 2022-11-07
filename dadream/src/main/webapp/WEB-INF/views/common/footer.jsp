@@ -29,6 +29,9 @@
             <div class="footerinfo">
                 <span>저희 다드림 은 집을 계약하고 가구 도 함께 구매할수있는 사이트 입니다 .</span> <br>
                 <span>이용해주셔서 감사합니다.</span> <br> <br>
+                <c:if test="${member.user_Level == 100}">
+                    <a href="/admin/admin.do">관리자페이지</a>
+                </c:if>
                 <span>팀장 : 육주영</span><br>
                 <span>팀원 : 안형수, 김병성, 이재욱</span>
             </div>

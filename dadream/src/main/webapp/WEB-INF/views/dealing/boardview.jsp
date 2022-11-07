@@ -8,6 +8,7 @@
 <%
 	request.setCharacterEncoding("UTF-8");
 %>
+
 <c:set var="member" value="${member.user_Id}"/>
 <c:set var="contextPath" value="${pageContext.request.contextPath }" />
 <c:set var="article" value="${articleMap.article }" />

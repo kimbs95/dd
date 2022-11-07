@@ -5,6 +5,7 @@
 		}
  		.mypage {
            	margin-top: 40px;
+           	
 
         }
         .mypage p{
@@ -33,12 +34,12 @@
 		#mydl {
             border-right:0.5px  solid rgb(102, 102, 102);
             width: 300px;
-            height: 320px;
+            height: 300px;
             padding: 10px;
             }
         .modelete{
             display: inline-flex;
-            margin-top: 33px;
+            margin-top:14px;
             }
             
 /*------------------------------관심목록------------------------------*/	
@@ -51,7 +52,7 @@
         .jjimContents {
                 border: 1px solid #ccc;
                 width: 300px;
-                height: 200px;
+                height: 249px;
                 padding: 10px;
             }
             

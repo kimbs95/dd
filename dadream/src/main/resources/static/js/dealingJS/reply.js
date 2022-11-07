@@ -10,36 +10,36 @@
 //		alert(inte_Num);
 		
 		$.getJSON("/replies/"+inte_Num, function(data){
+			
 			var str ="";
 			var datalistr = data[0].user_Id;
 			if(data.length > 0){
 			
 			for(var i=0; i < data.length; i++){		//for 안에 넣으면 댓글 수만큼 반복되게 됨.
-			str +=`<div id="Replyeachform>"`
+			
+			str +=`<div id="Replyeachform">`
 			str += `<div id="writer_Date">`
-			str += `<li style="font-size:larger; font-weight:bolder;">${data[i].user_Id}</li>`
-			str += `<li style="font-size:small">${data[i].reply_regDate}</li>`
-			str += `</div>`
+			str += `<li style="font-size:larger; font-weight:bolder;">${data[i].user_Id}</li>&nbsp;&nbsp;`
+			str += `<li id="Date">${data[i].reply_regDate}</li>`
+			if($('#user_id').text() === data[i].user_Id){
 			
-			str += `<li><textarea  id="replycontent${data[i].reply_Num}">${data[i].reply_content}</textarea></li>`
-			str += `</div>`
-			
-			str +=`<div id="re_reply">`
-			str +=`<button type="button" id="reComment">답글달기</button>`
-			str +=`</div>`
-			
-			
-		if($('#user_id').text() === data[i].user_Id){
 			
 			str += `<div id="mod_del">`
-			str += `<li><button type="button" class="update" data-reply_Num=${data[i].reply_Num} value=${data[i].reply_Num}>수정</button>` //value값에 넣어서 던져줌
+			str += `<li id="Modify_Delete"><button type="button" class="update" data-reply_Num=${data[i].reply_Num} value=${data[i].reply_Num}>수정</button>` //value값에 넣어서 던져줌
 			str += `<button type="button" class="remove" data-reply_Num=${data[i].reply_Num} value=${data[i].reply_Num}>삭제</button></li>`
 			str += `</div>`
 			
-			}
 			
-			str +=`<hr id="line">`
+			}
+			str += `</div>`
+			
+			str += `<li><textarea class="content_area" id="replycontent${data[i].reply_Num}">${data[i].reply_content}</textarea></li>`
+			str += `</div>`
+			
+			
 
+			str +=`<hr id="line">`
+			
 			}
 		}else{
 			str += `<div class="No_reply">`;
@@ -97,6 +97,7 @@
 		
 ///////////////////////////////////댓글 수정  함수///////////////////////////////////////
 		$("#chat").on("click", ".update", function(){		//수정 버튼을 클릭하면
+		
 			var reply_Num = this.value;  //value라는 애를 num에다가 넣어준다
 			var reply_content = $("#replycontent"+reply_Num).val();  //"#replycontent"+reply_Num    ->이 자체가 id
 			
@@ -185,3 +186,4 @@
 	
 			
 })
+

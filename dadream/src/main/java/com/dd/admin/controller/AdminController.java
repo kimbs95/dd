@@ -237,6 +237,41 @@ public class AdminController {
 		out.flush();
 	}
 
+	/* 공지사항 삭제 */
+	@RequestMapping(value = "/admin/deleteNotice.do", method = RequestMethod.POST)
+	private void deleteNotice(@RequestParam("checkAll") List<Integer> ntsList, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		System.out.println("체크된 공지번호 : " + ntsList);
+		Map<String, Object> ntsMap = new HashMap<String, Object>();
+		ntsMap.put("ntsList", ntsList);
+		adminService.deleteNotice(ntsMap);
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		out.println("<script>alert('삭제가 완료되었습니다.'); location.href='/admin/noticeList.do'</script>");
+		out.flush();
+	}
+
+	/* 공지사항 글쓰기 창 */
+	@RequestMapping(value = "/admin/noticeForm.do", method = RequestMethod.GET)
+	private ModelAndView noticeForm(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String viewName = (String) request.getAttribute("viewName");
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName(viewName);
+		return mav;
+	}
+
+	/* 공지사항 글쓰기 */
+	@RequestMapping(value = "/admin/addNotice.do", method = RequestMethod.POST)
+	private void addNotice(NoticeVO noticeVO, HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		System.out.println("공지글 쓰기 : " + noticeVO);
+		adminService.addNotice(noticeVO);
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		out.println("<script>alert('글을 등록했습니다.'); location.href='/admin/noticeList.do'</script>");
+		out.flush();
+	}
+
 //	허위매물 막기
 	@RequestMapping(value = "/admin/level.do", method = { RequestMethod.GET, RequestMethod.POST })
 	private String adminlevel(HttpServletRequest req, Model mo) throws Exception {
