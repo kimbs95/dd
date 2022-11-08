@@ -33,7 +33,14 @@
             justify-content: center;
             justify-items: center;
         }
+        *{
+            font-family: 'Merriweather Sans', sans-serif !important;
+        }
     </style>
+    <!-- 글꼴 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" 교차 출처>
+    <link href="https: //fonts.googleapis.com/css2? family= Merriweather+Sans:wght@500 & display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -105,7 +112,7 @@
     <!-- </div>
     </div> -->
 
-    <h1 style="font-size: 30px; font-weight: bolder;margin: 30px 0 40px 45%; ">부동산 가이드</h1>
+    <h1 style="font-size: 30px; font-weight: bolder;margin: 100px 0 40px 45%; ">부동산 가이드</h1>
     <div id="main4">
         <ul>
             <li class="a1">

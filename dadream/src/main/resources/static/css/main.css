@@ -71,6 +71,7 @@
 	            justify-content: center;
             	justify-items: center;
 	            /* margin: 15px; */
+	            /*background-color: #ccc;*/
 	            
 	        }
 	        #main2_1{
@@ -85,7 +86,9 @@
 				margin-top:15px;
 				margin-left: 10px;
 				font-weight:bold; 
-				 margin-bottom: 40px;
+				margin-bottom: 40px;
+				line-height: 150%;
+				 
 			}
 	        
 	        #main3{
@@ -162,7 +165,7 @@
 			}
 	         
 	        #Tip{
-				font-size: 30px; 
+				font-size: 30px;
 				font-weight: bolder;
 				margin: 30px 0 40px 45%; 
 			}

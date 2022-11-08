@@ -17,7 +17,10 @@ request.setCharacterEncoding("UTF-8");
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
+  <!-- js -->
+  <!-- <script defer src="/js/product/imgside.js"></script> -->
   <script>
+    
     var bxSlider1;
     $(document).ready(function () {
       bxSlider1 = $('.slider').bxSlider({
@@ -33,6 +36,7 @@ request.setCharacterEncoding("UTF-8");
         controls: true, // 이전 다음 버튼 노출 여부
       });
     });
+    
   </script>
   <!-- css -->
   <link rel="stylesheet" href="/css/product.css">
@@ -44,7 +48,7 @@ request.setCharacterEncoding("UTF-8");
 
   <div class=" slider">
     <!-- 추후 아이디 삭제 -->
-    <div class="slide_item" style="border: 1px solid #ccc;"><img class="bx_slide_image" id="slide_image" src="../image/메인로고.png"></div>
+    <div class="slide_item" style="border: 1px solid #ccc;"><img class="bx_slide_image" id="slide_image" src="../image/slide_information.png"></div>
     <!-- <div class="slide_item"><img class="bx_slide_image" id="slide_image" src="../image/han.jpg"></div> -->
   </div>
 

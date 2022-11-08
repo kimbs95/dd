@@ -176,10 +176,10 @@
 
                 <div class="dlMain">
                     <img src="/product/${result.user_Id}/${result.product_Image}" class="img-fluid" alt=""
-                        width="650px">
+                        width="650px" height="420px">
                 </div>
 
-                <div class="dlThumbnail1">
+                <!-- <div class="dlThumbnail1">
                     <div class="dlThumbnail2">
                         <img src="../image/메인로고.png" class="img-thumbnail" alt="">
                     </div>
@@ -192,7 +192,7 @@
                     <div class="dlThumbnail2">
                         <img src="../image/메인로고.png" class="img-thumbnail" alt="">
                     </div>
-                </div>
+                </div> -->
             </div>
 
             <!--상품 설명-->

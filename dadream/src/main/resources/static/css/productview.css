@@ -120,6 +120,10 @@
         }
 
 /* --------------상품상세정보, 고객상품평, 상품Q&A, 배송/반품/교환 --------------*/
+
+		.stickydiv {
+			margin-top: 50px;
+		}
         ul.detail_tab:after {
             content: "";
             display: block;

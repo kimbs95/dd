@@ -199,10 +199,10 @@
 	<![CDATA[
 		SELECT *
 		FROM dealing_t
-		WHERE dl_Lat BETWEEN (#{lat}-0.01) AND (#{lat}+0.01) 
-		AND dl_Lng BETWEEN (#{lng}-0.01) AND (#{lng}+0.01)
+		WHERE dl_Lat BETWEEN (#{lat}-0.02) AND (#{lat}+0.02) 
+		AND dl_Lng BETWEEN (#{lng}-0.02) AND (#{lng}+0.02)
 		ORDER BY dl_Views DESC
-		LIMIT 4
+		LIMIT 8
 	]]>
 	</select>
 

@@ -25,6 +25,9 @@
             font-size: 18px;
             cursor: pointer;
         }
+        .bx-wrapper {
+            box-shadow: none;
+        }
     </style>
 </head>
 
@@ -143,8 +146,10 @@
     </div>
     <!-- 메인이미지슬라이더 -->
     <div class="pro_slider">
-        <img class="pro_slider_image" src="../image/메인로고.png">
-        <img class="pro_slider_image" src="../image/han.jpg">
+        <img class="pro_slider_image" src="../image/event1.png">
+        <img class="pro_slider_image" src="../image/event2.png">
+        <img class="pro_slider_image" src="../image/event3.png">
+        <img class="pro_slider_image" src="../image/event4.png">
     </div>
 
     <!-- 이미지 슬라이드 스크립트-->

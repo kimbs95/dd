@@ -109,7 +109,7 @@
         </form>
         <!--지도-->
         <div style="display: flex;">
-            <div id="map" style="width:1100px; height:1000px; right: 10px; top:3px; border: 1px solid #ccc;"></div>
+            <div id="map" style="width:1100px; height:800px; right: 10px; top:3px; border: 1px solid #ccc;"></div>
             <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d1a9a1b185a416c4c43f9c88915f8650&libraries=services">
             </script>
             <script>
@@ -296,16 +296,12 @@
                             var resultList = "";
                             $.each(dlReq, function (index, item) {
                                 resultList += '<form action="${contextPath}/dealingview.do" method="get">'
-                                resultList += '<input type="hidden" value="${item.dl_Num}" >'
-                                resultList += '<button type="submit" style="width:450px; height:300px; background-color:white; border:outset;">'
-                                    
-                                resultList += '<div style="display: flex; border-bottom: 1px solid #ccc; margin-bottom: 20px; margin-left: 30px;">';
-                                resultList += '<div>' +
-                                    '<img src="../image/sample01.jpg" alt="" width="200px" height="190px">' +
-                                    '</div>';
-                                resultList += '<div style="flex-grow:1; margin:auto; line-height:14px; font-weight:bold; color:darkorange">'+'매물번호'+'<br>'+ item.dl_Num +'<br><br>'+'매물이름'+'<br>' + item.dl_Title + '<br><br>' + item.dl_Form +
-                                    '<br><br>'+'거래유형'+'<br>' + item.dl_Form2 + '<br><br>' +'가격'+'<br>'+
-                                    item.dl_Price + '</div>' + '</div>'+'</button>'+'</form>';
+                                resultList += '<input type="hidden" name ="dl_Num" value="' + item.dl_Num + '">';
+                                resultList += '<button style="cursor:pointer; border:none; background-color:white;" type="submit" >';
+                                resultList += '<div style="width:400px; height:350px;border:0.1px solid #ccc;  "><img src="/dealing/'+item.user_Id+'/'+item.dl_Image+'" alt="매물사진" style="margin:5px 0; border:1px solid #ccc;" width="380px;"  height="190px">' ;
+                                resultList += '<p style="font-size:18px; font-weight:bold; margin:10px 0 5px 0;">'+ item.dl_Title +'</p><p style="font-weight:bold;">'+item.dl_Address +'</p><span style="margin-right:5px; font-weight:bold;">'+item.dl_Form 
+                                   +'</span>'+ item.dl_Form2 +'<p style="font-weight:bold;">옵션 : '+item.dl_Option+'</p><p style="font-weight:bold;">￦ '+
+                                    item.dl_Price +'</p></div></button>'+'</form>';
 
                             })
                             //console.log(resultList);
@@ -321,7 +317,7 @@
 
             </script>
 
-            <div style="width: 500px; height:1000px; overflow-y: auto;">
+            <div style="width: 500px; height:800px; overflow-y: auto;">
                 
                 <div id="resultList"></div>
                 

@@ -28,7 +28,11 @@
             color: red;
             display: block;
         }
-        #user_Id-error, #user_Pwd-error,#user_Pwd2-error ,#user_Email-error{
+
+        #user_Id-error,
+        #user_Pwd-error,
+        #user_Pwd2-error,
+        #user_Email-error {
             margin-top: 5px;
         }
 
@@ -47,9 +51,11 @@
             height: 32px;
 
         }
-        .form1 input{
+
+        .form1 input {
             height: 32px;
         }
+
         .userformbtn {
             height: 55px;
         }
@@ -57,7 +63,7 @@
 </head>
 
 <body>
-    <form id="userform" action="${contextPath}/addMember.do" method="post" onsubmit="return check()">
+    <form id="userform" action="/addMember.do" method="post" onsubmit="return check()">
         <fieldset>
             <h1>회원가입</h1>
             <br><br>
@@ -69,7 +75,7 @@
                     <input type="text" id="user_Name" name="user_Name" size="40" /><br><br>
                 </div>
                 <h3>아이디</h3>
-                <div class="userformbtn" >
+                <div class="userformbtn">
                     <div class="id">
                         <div>
                             <input type="text" id="user_Id" name="user_Id" size="40" />
@@ -140,7 +146,7 @@
                     </c:when>
                 </c:choose>
                 <input id="userSubmit" type="submit" value="회원가입"
-                    style="margin-left: 135px; margin-top: 20px; width: 100px; height: 40px;">
+                    style="margin-left: 135px; margin-top: 20px; width: 100px; height: 40px; ">
 
         </fieldset>
     </form>
@@ -149,7 +155,6 @@
 <!-- 회원가입 유효성 검사(alert)-->
 <script type="text/javascript">
     function check() {
-
 
         //값 불러오기
         let getId = document.getElementById("user_Id");
@@ -205,7 +210,10 @@
             getName.value = "";
             getName.focus();
             return false;
-        } else {
+        }else if(ID !== 0){
+            alert("아이디 중복체크 하여 주십쇼")
+        } 
+        else {
             document.querySelector("#userform").submit();
         }
 
@@ -278,8 +286,8 @@
 </script>
 <!-- 아이디 중복체크 -->
 <script>
-    document.addEventListener("DOMContentLoaded", () => {
-        let ID ='';
+   
+        let ID = '';
         const idcheck = document.querySelector("#idcheck");
         idcheck.addEventListener("click", async (e) => {
             const idcheckresult = document.querySelector(".idcheckresult");
@@ -305,23 +313,16 @@
                     return;
                 } else if (jsondata.resultCode === 0) {
                     alert("사용가능한 아이디입니다.");
-                    ID =0;
+                    ID = 0;
                 }
             } else {
                 alert('예상치 못한 오류가 발생하였습니다.');
             }
 
 
-        });
+      
 
-        document.querySelector("#userSubmit").addEventListener("click",(e)=>{
-            e.preventDefault();
-            if(ID === 0 ){
-                document.querySelector("#userform").submit();
-            }else{
-                alert("id 중복체크를 해주세요")
-            }
-        })
+     
     });
 </script>
 

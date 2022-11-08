@@ -28,8 +28,14 @@
         #totalP{
             display: inline;
         }
-        
+        * {
+            font-family: 'Merriweather Sans', sans-serif
+        }
     </style>
+    <!-- 글꼴 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" 교차 출처>
+    <link href="https: //fonts.googleapis.com/css2? family= Merriweather+Sans:wght@500 & display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -40,14 +46,14 @@
                 <button type="button" class="pro_togglebtn" onclick="pro_dealing()">부동산</button>
                 <button type="button" class="pro_togglebtn" onclick="pro_household()">가구</button>
             </div>
-            <form id="pro_dealing" action="" class="input-group">
+            <form id="pro_dealing" action="" class="input-group" style="margin: 0 auto;">
                 <ul>
                     <li>
                         <div id="proDljjim"></div>
                     </li>
                 </ul>
             </form>
-            <div id="pro_household" class="input-group" >
+            <div id="pro_household" class="input-group " >
                 <ul>
                     <c:forEach var="cart" items="${info}" varStatus="status">
                         <c:forEach var="pro" items="${cart.product}">
@@ -85,6 +91,7 @@
         </div>
     </div>
     <script>
+    
         var x = document.getElementById("pro_dealing");
         var y = document.getElementById("pro_household");
         var z = document.getElementById("pro_side_btn");
@@ -98,6 +105,7 @@
         //     $(".slide_").attr("src", "../image/han.jpg");
 
         // });
+        
 
         function pro_dealing() {
             x.style.left = "50px";
@@ -116,9 +124,9 @@
                     var proDljjim = "";
 
                     $.each(proDlList, function (index, item) {
-                        proDljjim += '<div id="dlRadio" style="display:flex;">';
+                        proDljjim += '<div id="dlRadio" style="display:flex; margin-right:20px; margin-top:10px; margin-bottom:30px;">';
                         proDljjim +=
-                            '<div style="margin-right:20px; margin-top:25px;"><button type="button" onclick="show_slide(proDl_Num=' +
+                            '<div><button type="button" style="padding:0; margin-top:15px; margin-right:20px; border:0; outline:0; width:50px; height:50px;" onclick="show_slide(proDl_Num=' +
                             item.dl_Num + ', proUser_Id=' + "'" + item.user_Id + "', proDl_img='" +
                             item.dealing[0].dl_Image + "'" + ')">';// style="width:45px; height:35px;"
                         proDljjim += '<img src="/dealing/'+item.user_Id+'/'+item.dealing[0].dl_Image+'" style="width:50px; height:50px" >'+'</button></div>';
@@ -271,6 +279,11 @@
                 }
             })
         }
+        })
+        document.addEventListener("DOMContentLoaded",()=>{
+        
+            pro_dealing();
+        
         })
     </script>
 </body>
