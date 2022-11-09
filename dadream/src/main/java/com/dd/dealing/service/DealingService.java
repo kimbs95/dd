@@ -144,6 +144,9 @@ public interface DealingService {
 	// 마이페이지 매물리스트
 	public List<DealingVO> myDealing(String user_Id) throws DataAccessException;
 
+	// 마이페이지 내가 쓴 게시글
+	public List<BoardVO> myboardList(String user_Id) throws Exception;
+
 	// 마이페이지 찜 목록
 	public List<JjimVO> myJjim(String user_Id) throws DataAccessException;
 

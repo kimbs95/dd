@@ -19,7 +19,7 @@
         <script src="http://code.jquery.com/jquery-latest.js"></script>
         <style>
             body {
-                margin: 20px;
+                margin: 0;
                 padding: 0;
             }
 
@@ -32,13 +32,49 @@
                 padding-top: 15px;
             }
 
+            #gs_head {
+                margin: 50px 0 50px 0;
+            }
+            #gs_head h1 {
+                font-weight: bold;
+                font-size: xx-large;
+            }
+            #gs_search {
+                margin-top: 20px;
+            }
+            #gs_main1 {
+                width: 100%;
+                border-bottom: #ccc 1px solid;
+            }
+            #mainList h1{
+                margin: 15px 0 40px 10px;
+                font-weight: bold;
+                line-height: 150%;
+            }
+            #resultList h1{
+                margin: 15px 0 40px 10px;
+                font-weight: bold;
+                line-height: 150%;
+            }
+            #gs_main1 h2 {
+                font-weight: bold;
+                font-size: x-large;
+                margin-bottom: 30px;
+            }
+            #gs_main2 h2 {
+                font-weight: bold;
+                font-size: x-large;
+                margin-top: 100px;
+                margin-bottom: 30px;
+            }
         </style>
     </head>
 
     <body>
-        <h1 style="margin-bottom: 100px;">공실센터</h1>
+        <div id="gs_head">
+        <h1>공실센터</h1>
         <form id="dlSearch2">
-            <div class="" style="display: flex;">
+            <div id="gs_search" style="display: flex;">
                 <div id="formChk">
                     <input type="checkbox" id="dl_Form" name="dl_Form" onclick="selectAll(this)">전체
                     <input type="checkbox" id="dl_Form" name="dl_Form" value="아파트">아파트
@@ -57,17 +93,19 @@
                 </div>
             </div>
         </form>
-
-        <h1>내 주변 추천 매물</h1>
-        <div id="">
-            <div id="mainList"></div>
         </div>
-        <hr>
-        <h1>검색 매물</h1>
-        <div>               
-            <div id="resultList"></div>
+        <div id="gs_main1">
+                <h2>내 주변 추천 매물</h2>
+            <div id="">
+                <div id="mainList"></div>
+            </div>
         </div>
-
+        <div id="gs_main2">
+            <h2>검색 매물</h2>
+            <div>               
+                <div id="resultList"></div>
+            </div>
+        </div>
         <script>
             /* 위치기반 매물목록 */
             $(document).ready(function () {
@@ -98,18 +136,17 @@
 
                                 $.each(hereList, function (index, item) {
                                     mainList +=
-                                        '<a href="/dealingview.do?dl_Num=' + item.dl_Num + '" style="color:black">' +
+                                    '<a href="/dealingview.do?dl_Num='+item.dl_Num+'" style="color:black" target="_blank">'+
                                         '<div style="display: inline-block; border: 1px solid #ccc; margin-bottom: 20px; margin-left: 30px; width:350px; height:485px;">';
-                                    mainList += '<div style="text-align:center;">' + '<img src="/dealing/' + item.user_Id + '/' + item.dl_Image +
+                                    mainList += '<div style="text-align:center;">' +
+                                        '<img src="/dealing/' + item.user_Id + '/' +
+                                        item.dl_Image +
                                         '" alt="매물사진" width="300px" height="250px" style="margin: 20px 0 20px 0;border:0.5px solid #ccc">' +
                                         '</div>';
-                                    mainList += '<div style="margin-left:15px;">' + '<span style="font-size:20px;font-weight:bold;">' + item.dl_Title + '</span>' +
-                                        '<h4>' + item.dl_Form + '<br>' + item
-                                        .dl_Address + '<br>' +
-                                        item.dl_Form2 + '<br>￦ ' + item.dl_Price +
-                                        '<br>옵션 : ' + item.dl_Option +
-                                        '</h4></div>' + '</div></a>';
-
+                                    mainList += '<div style="margin-left:15px;">' +
+                                        '<span style="font-size:20px;font-weight:bold;margin-left:10px;">'+item.dl_Title+'</span>'+
+                                        '<h1>'+ item.dl_Form + '<br>'+item.dl_Address+'<br>'+
+                                        item.dl_Form2  +'<br>￦ '+ item.dl_Price + '<br>옵션 : '+item.dl_Option+'</h1></div>' + '</div></a>';
                                 });
 
                                 document.getElementById("mainList").innerHTML = mainList;
@@ -159,17 +196,17 @@
                         var resultList = "";
                             $.each(gsResult, function (index, item) {
                                 resultList +=
-                                        '<a href="/dealingview.do?dl_Num=' + item.dl_Num + '" style="color:black">' +
+                                    '<a href="/dealingview.do?dl_Num='+item.dl_Num+'" style="color:black" target="_blank">'+
                                         '<div style="display: inline-block; border: 1px solid #ccc; margin-bottom: 20px; margin-left: 30px; width:350px; height:485px;">';
-                                            resultList += '<div style="text-align:center;">' + '<img src="/dealing/' + item.user_Id + '/' + item.dl_Image +
+                                            resultList += '<div style="text-align:center;">' +
+                                        '<img src="/dealing/' + item.user_Id + '/' +
+                                        item.dl_Image +
                                         '" alt="매물사진" width="300px" height="250px" style="margin: 20px 0 20px 0;border:0.5px solid #ccc">' +
                                         '</div>';
-                                        resultList += '<div style="margin-left:15px;">' + '<span style="font-size:20px;font-weight:bold;">' + item.dl_Title + '</span>' +
-                                        '<h4>' + item.dl_Form + '<br>' + item
-                                        .dl_Address + '<br>' +
-                                        item.dl_Form2 + '<br>￦ ' + item.dl_Price +
-                                        '<br>옵션 : ' + item.dl_Option +
-                                        '</h4></div>' + '</div></a>';
+                                        resultList += '<div style="margin-left:15px;">' +
+                                        '<span style="font-size:20px;font-weight:bold;margin-left:10px;">'+item.dl_Title+'</span>'+
+                                        '<h1>'+ item.dl_Form + '<br>'+item.dl_Address+'<br>'+
+                                        item.dl_Form2  +'<br>￦ '+ item.dl_Price + '<br>옵션 : '+item.dl_Option+'</h1></div>' + '</div></a>';
 
                             })
                             //console.log(resultList);

@@ -312,6 +312,12 @@ public class DealingServiceImpl implements DealingService {
 		return dealingDAO.myDealing(user_Id);
 	}
 
+	// 마이페이지 내가 쓴 글
+	@Override
+	public List<BoardVO> myboardList(String user_Id) throws Exception {
+		return dealingDAO.myboardList(user_Id);
+	}
+
 	/* 마이페이지 찜 목록 */
 	@Override
 	public List<JjimVO> myJjim(String user_Id) throws DataAccessException {

@@ -9,10 +9,7 @@ function readURL(input) {
 		reader.readAsDataURL(input.files[0]);
 	}
 }
-/*function backToList(obj){
-	  obj.action="${contextPath}/inteboardlist.do";
-	obj.submit();
-}*/
+
 var cnt = 1;
 function fn_addFile() {
 	$("#d_file").append("<br>" + "<input type='file' name='file" + cnt + "' />");
@@ -64,4 +61,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	// })
 });
+function backToList(obj){
+	 	 obj.action="${contextPath}/inteboardlist.do";
+		 obj.submit();
+	 }
+	 ////이미지 업로드전 엑박 표시 제거 할 대체 이미지
+	 function no_image(){
+            $("img").attr("src","choice.png");
+        }
 

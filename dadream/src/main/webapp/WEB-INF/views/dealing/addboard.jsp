@@ -27,17 +27,7 @@
 
     <!-- 부트스트랩 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-	<script>
-		function backToList(obj){
-	 	 obj.action="${contextPath}/inteboardlist.do";
-		 obj.submit();
-	 }
-	 ////이미지 업로드전 엑박 표시 제거 할 대체 이미지
-	 function no_image(){
-            $("img").attr("src","choice.png");
-        }
 
-	</script>
 
 	
 </head>

@@ -163,6 +163,9 @@ public interface DealingDAO {
 	// 신고하기 DB전송
 	public int insertReport(Map rpMap) throws DataAccessException;
 
+	// 마이페이지 내가 쓴 게시글
+	public List<BoardVO> myboardList(String user_Id) throws Exception;
+
 	// 마이페이지 찜 목록
 	public List<JjimVO> myJjim(String user_Id) throws DataAccessException;
 

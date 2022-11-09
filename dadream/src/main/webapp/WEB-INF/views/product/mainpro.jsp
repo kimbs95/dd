@@ -19,16 +19,9 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
     <!-- css -->
     <link rel="stylesheet" href="/css/mainpro.css">
-    <style>
-        .pro_category_image button{
-            font-weight: bold;
-            font-size: 18px;
-            cursor: pointer;
-        }
-        .bx-wrapper {
-            box-shadow: none;
-        }
-    </style>
+    <!-- jc -->
+    <script src="/js/product/mainpro.js" defer></script>
+
 </head>
 
 <body>
@@ -152,21 +145,8 @@
         <img class="pro_slider_image" src="../image/event4.png">
     </div>
 
-    <!-- 이미지 슬라이드 스크립트-->
-    <script>
-        $(document).ready(function () {
-            $('.pro_slider').bxSlider({
-                slideWidth: 1130,
-                auto: true,
-                speed: 500,
-                pause: 3000,
-                mode: 'fade',
-                autoHover: true,
-                pager: true,
-                controls: false
-            });
-        });
-    </script>
+   
+   
 
     <!-- 메인 베스트상품 -->
     <div class="pro_best_item">
@@ -203,10 +183,6 @@
             </c:forEach>
         </ul>
     </div>
-
-
-
-
 
 </body>
 

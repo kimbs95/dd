@@ -1,3 +1,4 @@
+/*--------------------------------카테고리 & 검색---------------------------------------*/
 		 #main1{
             background-image:url("../image/livingRoom.jpg");
             background-repeat: no-repeat;
@@ -27,6 +28,9 @@
 	            height: 40px;
 	          	border:0.5px solid skyblue;
 	          	outline: none;
+			}
+			.searching{
+				font-weight:bold;
 			}
 	
 	        ul{display: inline-block;
@@ -62,33 +66,66 @@
 	            margin: 15px;
 	            
 	        }
+	        .MainSearch{
+				font-weight:bold;
+			}
+/*---------------------------------위치기반리스트---------------------------------------*/	
+		
 	        #mainList{
 				width:1550px;
 			}
-			
 	        #main2{
 	            width: 1130px;
 	            justify-content: center;
             	justify-items: center;
-	            /* margin: 15px; */
-	            /*background-color: #ccc;*/
 	            
+	            
+	        }
+	        
+	        .hereMe{
+	       font-weight:bold; 
+	       font-size:x-large; 
+	       margin-bottom: 40px;
+	       
 	        }
 	        #main2_1{
 	            justify-content: center; /* 중앙 정렬*/ 
 	        }
 	        
-	        #main2_1 > input {
-			cursor:pointer;
-			}
+	        
 			
 			#main2 h1{
 				margin-top:15px;
 				margin-left: 10px;
+				line-height: 25px;
 				font-weight:bold; 
-				margin-bottom: 40px;
-				line-height: 150%;
-				 
+				
+			}
+			
+			#dealingListImg{
+				width:300px;
+				height:250px; 
+				margin: 20px 0 20px 0;
+			}
+			#ListNum{
+				color:black;
+			}
+			
+			#Listeachform{
+				display: inline-block; 
+				border: 1px solid #ccc; 
+				margin-bottom: 20px; 
+				margin-left: 30px; 
+				width:350px; 
+				height:485px;
+			}
+			#List_infoform{
+				margin-left:15px;
+			}
+			#ListName{
+				font-size:20px;
+				font-weight:bold;
+				margin-left:10px;
 			}
 	        
 	        #main3{
@@ -101,25 +138,9 @@
 	            display: table;
 	           border-collapse: collapse;
 	        }
-	        #avg-dong-price{
-	            /* background:url(images/pro.JPG); */
-	            width: 50%;
-	            height: 200px;
-	            margin: 50px 0 0 40px;
-	            border: 1px solid black;
-	            border-collapse: collapse;
-	            display: table-cell;
-	           
-	        }
-	        #avg-dong-price1{
-	            /* background:url(images/pro.JPG); */
-	            width: 50%;
-	            height: 200px;
-	            margin: 50px 40px 0 0px;
-	            border: 1px solid black;
-	            border-collapse: collapse;
-	            display: table-cell;
-	        }
+	        
+/*---------------------------------부동산 가이드---------------------------------------*/  
+	      
 	        #main4 ul{
 	            width: 1130;
 	            /* margin: 15px; */
@@ -143,7 +164,7 @@
 				background-color: rgb(178, 240, 149);
 			}
 			.a4{
-				background-color:rgb(236, 81, 75);
+				background-color: rgb(236, 81, 75);
 			}
 	        #main4 > div{
 	            display: flex;
@@ -164,14 +185,17 @@
 				
 			}
 	         
-	        #Tip{
-				font-size: 30px;
+	        .Tip{
+				font-size: 30px; 
 				font-weight: bolder;
 				margin: 30px 0 40px 45%; 
 			}
-	       h2{
+	       	h2{
 	        margin-left: 50px;
 	       	}
+	       	
+	       	
+	       	
 	       
        
        

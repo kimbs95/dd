@@ -351,9 +351,11 @@ public class DealingControllerImpl {
 		List<ReportVO> myReport = new ArrayList<ReportVO>();
 		List<DealingVO> myDealing = new ArrayList<DealingVO>();
 		List<JjimVO> myJjim = new ArrayList<JjimVO>();
+		List<BoardVO> myboardList = new ArrayList<BoardVO>();
 		myReport = dealingService.myReport(user_Id);
 		myDealing = dealingService.myDealing(user_Id);
 		myJjim = dealingService.myJjim(user_Id);
+		myboardList = dealingService.myboardList(user_Id);
 		System.out.println("찜 목록 : " + myJjim);
 		mav.addObject("myReport", myReport);
 		mav.addObject("myDealing", myDealing);
@@ -361,6 +363,7 @@ public class DealingControllerImpl {
 		mav.addObject("user_Pwd", user_Pwd);
 		mav.addObject("user_Id", user_Id);
 		mav.addObject("members", members);
+		mav.addObject("myboardList", myboardList);
 		mav.setViewName(viewName);
 		System.out.println("interceptor에서 온 viewName:" + viewName);
 		return mav;

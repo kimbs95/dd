@@ -15,31 +15,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Map</title>
     <script src="http://code.jquery.com/jquery-latest.js"></script>
-    <style>
-        #range1::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            appearance: none;
-        }
-
-        .dealingcontent>* {
-            margin-bottom: 5px;
-        }
-
-        #dlli {
-            border-bottom: 1px solid #ccc;
-            margin-bottom: 10px;
-        }
-       
-    </style>
-
+    <link rel="stylesheet" href="/css/Map.css">
+    
 </head>
 
 <body>
     <div>
         <form id="dlReq2">
             <div id="category-menubar">
-                <div id="selectbox" style="display: flex; height: 30px;margin: 30px 0 20px 31%;">
-                    <select id="asd" name="dl_Form" style="width: 100px; height: 25px; text-align: center; margin-right: 8px;">
+                <div id="selectbox">
+                    <select class="dl_Form1" name="dl_Form">
                         <option value="">건물종류</option>
                         <option value="아파트">아파트</option>
                         <option value="원룸">원룸</option>
@@ -48,7 +33,7 @@
                         <option value="주택">주택</option>
                     </select>
 
-                    <select name="dl_Form2" style="width: 100px; height: 25px; text-align: center; margin-right: 8px;">
+                    <select class="dl_Form2" name="dl_Form2">
                         <option value="">거래유형</option>
                         <option value="월세">월세</option>
                         <option value="전세">전세</option>
@@ -56,7 +41,7 @@
                         <option value="단기임대">단기임대</option>
                     </select>
 
-                    <select name="dl_Room" style="width: 100px; height: 25px; text-align: center; margin-right: 8px;">
+                    <select class="dl_Room" name="dl_Room">
                         <option value="">방 개수</option>
                         <option value=1>1개</option>
                         <option value=2>2개</option>
@@ -65,18 +50,7 @@
                         <option value=2>5개</option>
                     </select>
 
-                    <!-- db에 층수에 관한 컬럼이 없음 -->
-                    <!-- <select style="width: 100px; height: 25px; text-align: center;">
-                <optgroup label="층수">
-                    <option>1~5층</option>
-                    <option>6층이상</option>
-                    <option>옥탑</option>
-                    <option>지하</option>
-                    <option>반지하</option>
-                </optgroup>
-            </select> -->
-
-                    <select name="dl_Option" style="width: 100px; height: 25px; text-align: center;margin-right: 8px;">
+                    <select class="dl_Opt" name="dl_Option">
                         <option value="">옵션선택</option>
                         <option value="풀옵션">풀옵션</option>
                         <option value="엘레베이터">엘레베이터</option>
@@ -86,18 +60,19 @@
                     </select>
                     
                 </div>
-                <div style="margin-left:30%; margin-bottom:15px;height: 29px;">
-                    <input name="dl_Price" type="number" placeholder="최대가격을 적어주세요." style=" text-align:center;margin-right:3px;height: 27px; line-height: 27px;border:none;border-bottom: 1px solid black;outline:none;" >원
-                    <input type="text" id="dealingsearch" size="30px" name="dl_Address"style="height: 27px;line-height:27px;margin-right:5px;border:none;border-bottom: 1px solid black;outline:none;" placeholder="지역을 입력해주세요">
-                    <button type="button"style="height:27px;" value="매물검색" onclick="dlBtn()">매물검색</button>
+                <div class="Price_place">
+                    <input type="number" class="PriceInput" name="dl_Price"placeholder="최대가격을 적어주세요.">원
+                    <input type="text" class="dealingsearch" size="30px" name="dl_Address" placeholder="지역을 입력해주세요">
+                    <button type="button" class="DealingSearch_Btn" value="매물검색" onclick="dlBtn()">매물검색</button>
                 </div>
             </div>
-            <div id="prs-position" style="display:flex; width: 700px;">
+            <div class="prs-position">
                 
                 <!--코드 생성 해야함-->
                 
                     <script>
-                            document.querySelector("#dealingsearch").addEventListener("keydown",(e)=>{
+                        
+                            document.querySelector(".dealingsearch").addEventListener("keydown",(e)=>{
                                 console.log(e);
                                 if(e.code ==="Enter"){
                                     
@@ -108,8 +83,8 @@
             </div>
         </form>
         <!--지도-->
-        <div style="display: flex;">
-            <div id="map" style="width:1100px; height:800px; right: 10px; top:3px; border: 1px solid #ccc;"></div>
+        <div class="MapForm">
+            <div id="map"></div>
             <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d1a9a1b185a416c4c43f9c88915f8650&libraries=services">
             </script>
             <script>
@@ -205,14 +180,14 @@
                         var resultList = "";
                         $.each(dlMap, function (index, item) {
 
-                            resultList += '<form action="${contextPath}/dealingview.do" method="get">'
+                                resultList += '<form action="${contextPath}/dealingview.do" method="get">'
                                 resultList += '<input type="hidden" name ="dl_Num" value="' + item.dl_Num + '">';
-                                resultList += '<button style="cursor:pointer; border:none; background-color:white;" type="submit" >';
-                                resultList += '<div style="width:400px; height:350px;border:0.1px solid #ccc;  "><img src="/dealing/'+item.user_Id+'/'+item.dl_Image+'" alt="매물사진" style="margin:5px 0; border:1px solid #ccc;" width="380px;"  height="190px">' ;
-                                resultList += '<p style="font-size:18px; font-weight:bold; margin:10px 0 5px 0;">'+ item.dl_Title +'</p><p style="font-weight:bold;">'+item.dl_Address +'</p><span style="margin-right:5px; font-weight:bold;">'+item.dl_Form 
-                                   +'</span>'+ item.dl_Form2 +'<p style="font-weight:bold;">옵션 : '+item.dl_Option+'</p><p style="font-weight:bold;">￦ '+
+                                resultList += '<button type="submit" class="viewgo_btn">';
+                                resultList += '<div id="res1"><img class="ListviewImg" src="/dealing/'+item.user_Id+'/'+item.dl_Image+'" alt="매물사진">' ;
+                                resultList += '<p id="infocontext1" >'+ item.dl_Title +'</p><p id="infocontext2">'+item.dl_Address +'</p><span id="infocontext3">'+item.dl_Form 
+                                   +'</span>'+ item.dl_Form2 +'<p id="infocontext4">옵션 : '+item.dl_Option+'</p><p id="infocontext5">￦ '+
                                     item.dl_Price +'</p></div></button>'+'</form>';
-
+      
                         })
                         //console.log(resultList);
                         document.getElementById("resultList").innerHTML = resultList;
@@ -297,10 +272,10 @@
                             $.each(dlReq, function (index, item) {
                                 resultList += '<form action="${contextPath}/dealingview.do" method="get">'
                                 resultList += '<input type="hidden" name ="dl_Num" value="' + item.dl_Num + '">';
-                                resultList += '<button style="cursor:pointer; border:none; background-color:white;" type="submit" >';
-                                resultList += '<div style="width:400px; height:350px;border:0.1px solid #ccc;  "><img src="/dealing/'+item.user_Id+'/'+item.dl_Image+'" alt="매물사진" style="margin:5px 0; border:1px solid #ccc;" width="380px;"  height="190px">' ;
-                                resultList += '<p style="font-size:18px; font-weight:bold; margin:10px 0 5px 0;">'+ item.dl_Title +'</p><p style="font-weight:bold;">'+item.dl_Address +'</p><span style="margin-right:5px; font-weight:bold;">'+item.dl_Form 
-                                   +'</span>'+ item.dl_Form2 +'<p style="font-weight:bold;">옵션 : '+item.dl_Option+'</p><p style="font-weight:bold;">￦ '+
+                                resultList += '<button type="submit" class="viewgo_btn">';
+                                resultList += '<div id="res1"><img class="ListviewImg" src="/dealing/'+item.user_Id+'/'+item.dl_Image+'" alt="매물사진">' ;
+                                resultList += '<p id="infocontext1" >'+ item.dl_Title +'</p><p id="infocontext2">'+item.dl_Address +'</p><span id="infocontext3">'+item.dl_Form 
+                                   +'</span>'+ item.dl_Form2 +'<p id="infocontext4">옵션 : '+item.dl_Option+'</p><p id="infocontext5">￦ '+
                                     item.dl_Price +'</p></div></button>'+'</form>';
 
                             })
@@ -313,35 +288,14 @@
                     });
                     
                 }
-                
 
             </script>
 
-            <div style="width: 500px; height:800px; overflow-y: auto;">
+            <div id="ListScroll">
                 
                 <div id="resultList"></div>
-                
-        
-            </div>
-            <!-- <div id="resultList"></div>
-            <div id="mapside"
-                style="background:rgb(116, 111, 111);margin-left: 30px; width:700px; margin-top:18px;height: 1000px; overflow-y: scroll;">
-                <c:forEach var="allListdealing" items="${allListdealing}">
-                    <div class="dealing_list" style="display: flex; margin-top: 10px;">
 
-                        <div class="dealingimg">
-                            <a href="${contextPath}/dealingview.do">
-                                <img src="../메인 카테고리 사진/스텐드.png" alt="" width="200px" height="170px">
-                            </a>
-                        </div>
-                        <div class="dealingcontent">
-                            <h1 style="font-weight: bold; font-size: 19px;">${allListdealing.dl_Title}</h1>
-                            <h3><span style="font-weight: bold;">가격 : </span>${allListdealing.dl_Price}</h3>
-                            <p>${allListdealing.dl_Content}</p>
-                        </div>
-                    </div>
-                </c:forEach>
-            </div> -->
+            </div>
         </div>
     </div>
 </body>

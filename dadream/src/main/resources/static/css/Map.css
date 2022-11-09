@@ -1,3 +1,12 @@
+		#map{
+			width:1536px; 
+			height:671px; 
+			right: 10px; 
+			top:3px; 
+			border: 1px solid #ccc;
+		}
+		
+		
 		#range1::-webkit-slider-thumb {
             -webkit-appearance: none;
             appearance: none;
@@ -14,43 +23,22 @@
         #selectbox{
 			display: flex; 
 			height: 30px;
-			margin: 30px 0 20px 31%;
+			margin: -15px 0 20px 31%;
 		}
         
-        #dl_Form1{
+        .dl_Form1,.dl_Form2,.dl_Room,.dl_Opt{
 			width: 100px; 
 			height: 25px; 
 			text-align: center; 
 			margin-right: 8px;
-}
-
-		#dl_Form2{
-			width: 100px; 
-			height: 25px; 
-			text-align: center; 
-			margin-right: 8px;
-		}
-		
-		#dl_Room{
-			width: 100px; 
-			height: 25px; 
-			text-align: center; 
-			margin-right: 8px;
-		}
-		
-		#dl_Option{
-			width: 100px; 
-			height: 25px; 
-			text-align:center;
-			margin-right: 8px;
-		}
-		
-		#PriceForm{
+			}
+			
+		.Price_place{
 			margin-left:30%; 
 			margin-bottom:15px;
 			height: 29px;
 		}
-		#dl_Price_p{
+		.PriceInput{
 			text-align:center;
 			margin-right:3px;
 			height: 27px; 
@@ -60,7 +48,7 @@
 			outline:none;
 		}
 		
-		#dealingsearch{
+		.dealingsearch{
 			height: 27px;
 			line-height:27px;
 			margin-right:5px;
@@ -68,75 +56,24 @@
 			border-bottom: 1px solid black;
 			outline:none;
 		}
-		#dl_Search_Btn{
+		.DealingSearch_Btn{
 			height:27px;
 		}
 		
-		#prs-position{
+		.prs-position{
 			display:flex; 
 			width: 700px;
 		}
 		
-		#MapForm{
+		.MapForm{
 			display: flex;
 		}
-		
-		#map{
-			width:1100px; 
-			height:1000px; 
-			right: 10px; 
-			top:3px; 
-			border: 1px solid #ccc;
-		}
-/*------------------------------resultList----------------------------------*/
 
-		#result1{
-			cursor:pointer; 
-			border:none; 
-			background-color:white;
-		}
-		
-		#result2{
-			width:400px;
-			height:350px;
-			border:0.1px solid #ccc;
-		}
-		
-		#result3{
-			margin:5px 0; 
-			border:1px solid #ccc; 
-			width:380px;  
-			height:190px
-		}
-		
-		#result4{
-			font-size:18px; 
-			font-weight:bold; 
-			margin:10px 0 5px 0;
-		}
-		
-		#result5{
-			font-weight:bold;
-		}
-		
-		#result6{
-			margin-right:5px; 
-			font-weight:bold;
-		}
-		
-		#result7{
-			font-weight:bold;
-		}
-		
-		#result8{
-			font-weight:bold;
-		}
-		
-/*------------------------------resultList2---------------------------------*/
+/*------------------------------resultList---------------------------------*/
 		
 		#res1{
-			width:450px; 
-			height:300px; 
+			width:319px; 
+			height:320px; 
 			background-color:white; 
 			border:outset;
 		}
@@ -148,24 +85,45 @@
 			margin-left: 30px;
 		}
 		
-		#res3{
+		.res3{
 			width:200px; 
 			height:190px;
 		}
 		
-		#res4{
-			flex-grow:1; 
-			margin:auto; 
-			line-height:14px; 
+		.viewgo_btn{
+			margin:3px; 
+			cursor:pointer; 
+			border:none; 
+			background-color:white;
+		}
+		.ListviewImg{
+			width:310px;
+			height:180px;
+		}
+		#infocontext1{
+			font-size:18px; 
 			font-weight:bold; 
-			color:darkorange
+			margin:10px 0 5px 0;
+		}
+		#infocontext2{
+			font-weight:bold;
+		}
+		#infocontext3{
+			margin-right:5px; 
+			font-weight:bold;
+		}
+		#infocontext4{
+			font-weight:bold;
+		}
+		#infocontext5{
+			font-weight:bold;
 		}
 		
 /*------------------------------resultList2 END---------------------------*/
 
-		#resultListForm{
-			width: 500px; 
-			height:1000px; 
+		#ListScroll{
+			width: 360px; 
+			height:671px; 
 			overflow-y: auto;
 		}
 		

@@ -22,6 +22,7 @@
 
         #rp_Content  {
             margin-top: 5px;
+            resize: none;
         }
 
         #rpBtn {
@@ -39,3 +40,6 @@
         #reform{
             margin-left: 10px;
         }
+        .report_h1{
+			margin: 20px 0 20px 10px;
+		}

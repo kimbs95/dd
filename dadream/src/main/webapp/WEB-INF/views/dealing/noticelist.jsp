@@ -30,12 +30,34 @@
   <script src="/js/dealingJS/noticelist.js"></script>
 </head>
 <script  src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-<script  type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.11.4/r-2.2.9/datatables.min.js">
+<script  type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.11.4/r-2.2.9/datatables.min.js"></script>
+<style>
+	.nt_header {
+		display: flex;
+		margin-top: 50px;
+		margin-bottom: 50px;
+	}
+	.nt_header h1 {
+		font-weight: bold;
+		font-size: x-large;
+		margin: 20px 0 20px 20px;
+	}
+	.nt_header h3 {
+		margin: 20px 0 0 20px;
+		line-height: 130%;
+	}
+</style>
 
-
-	
-</script>
 <body>
+	<div class="nt_header">
+		<img src="../image/promote.png">
+		<div id="">
+			<h1>공지사항</h1>
+			<h3>부동산과 가구에 관한 공지사항 게시판 입니다.<br>
+			공지사항을 통해서 다양한 공지를 확인해주세요!!!</h3>
+
+		</div>
+	</div>
 	<form action="${contextPath}/noticeform.do" method="get" id="noticeForm">
 	<table id="noticeTable">
 		<tr>

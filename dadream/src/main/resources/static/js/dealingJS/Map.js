@@ -207,8 +207,8 @@ var mapContainer = document.getElementById('map'), // 지도를 표시할 div
                 
                 
                 
-                //-----------------  ???  -----------------//
-                document.querySelector("#dealingsearch").addEventListener("keydown",(e)=>{
+                //-----------------  검색창에 엔터 치면 검색  -----------------//
+                document.querySelector(".dealingsearch").addEventListener("keydown",(e)=>{
                                 console.log(e);
                                 if(e.code ==="Enter"){
                                     

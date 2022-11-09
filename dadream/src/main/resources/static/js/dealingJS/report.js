@@ -1,4 +1,6 @@
-document.querySelector("#rep").addEventListener("click", async (e) => {
+window.onload = function(){
+	
+document.querySelector("#rep").addEventListener("click", async () => {
             let dl_Num = +document.querySelector("#dl_Num").value;
             let rp_Title = document.querySelector("#rp_Title").value;
             let rp_Content = document.querySelector("#rp_Content").value;
@@ -31,4 +33,5 @@ document.querySelector("#rep").addEventListener("click", async (e) => {
                 alert("서버 오류");
                 return;
             }
-        })
+        });
+};

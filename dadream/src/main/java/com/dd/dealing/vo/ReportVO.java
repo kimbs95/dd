@@ -1,6 +1,7 @@
 package com.dd.dealing.vo;
 
 import java.sql.Date;
+import java.util.List;
 
 import org.springframework.stereotype.Component;
 
@@ -13,6 +14,7 @@ public class ReportVO {
 	private String user_Id;
 	private int dl_Num;
 	private String rp_State;
+	private List<DealingVO> dealing;
 
 	public ReportVO() {
 	}
@@ -83,6 +85,14 @@ public class ReportVO {
 
 	public void setRp_State(String rp_State) {
 		this.rp_State = rp_State;
+	}
+
+	public List<DealingVO> getDealing() {
+		return dealing;
+	}
+
+	public void setDealing(List<DealingVO> dealing) {
+		this.dealing = dealing;
 	}
 
 }

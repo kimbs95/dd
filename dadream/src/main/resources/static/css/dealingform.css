@@ -102,3 +102,31 @@
             min-Height: 500px;
             max-Height: 500px;
 		}
+		.Address_search_btn{
+			height: 27px;
+		}
+		.imgh1{
+			color:red;
+		}
+		.Ad_Search_btn{
+			width: 95px;
+			height: 26px;
+		}
+/*------------------------------------moddealing-----------------------------------------*/		
+		.dropdown-toggle::after {
+            display: none;
+        }
+
+        .first {
+            font-weight: 50px;
+            font-family: 'Jua', sans-serif;
+        }
+        #summernote{
+			width: 971px;
+		    height: 500px;
+		    resize: none;
+		}
+		#FORMTAG{
+			display: table-caption;
+		}
+        

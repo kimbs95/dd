@@ -47,25 +47,9 @@
 				info : false,
 				searching:true,
 				displayLength:13,
-				
-		
-		
-    });
-    		
-	// let table = $('#table_id').DataTable();
-	// if(! table.data().count()){
-	// 	alert('글이 없습니다. 새로운 글을 작성해주세요.');
-	// }else{
-	// 	return false;
-	// }
-} );
-	/*$(document).ready(function(){
-		var msg = "${msg}";
-
-		if(msg !=""){
-			alert(msg);
-		}
-	});*/
+					});
+			} );
+	
 	</script>
 
 <body>
@@ -94,60 +78,10 @@
 				<td>${board.viewCounts}</td>
 				
 			</tr>
-		</c:forEach>
-	</tbody>
+		 </c:forEach>
+		</tbody>
 	</table>
-	
-	
-	<!-- <div class="cls2">
-		<c:if test="${totArticles != null }" >
-			<c:choose>
-				<c:when test="${totArticles > 5 }"> 
-					<c:forEach var="page" begin="1" end="10" step="1">
-						<c:if test="${section > 1 && page == 1 }">
-							<a class="no-uline" href="${contextPath }/selectInteboardlist.do?section=${section-1} & pageNum = ${(section-1) * 10 + 1}">&nbsp; pre </a>
-						</c:if>
-						<a class="no-uline" href="${contextPath }/selectInteboardlist.do?section=${section} & pageNum = ${page }" > ${(section-1) * 10 + page}"> </a>
-						<c:if test="${page == 10 }">
-							<a class="no-uline" href="${contextPath }/selectInteboardlist.do?section=${section+1} & pageNum = ${section * 10 + 1}">&nbsp; next </a>
-						</c:if>
-					</c:forEach>
-				</c:when>
-				<c:when test="${totArticles == 100 }">
-					<c:forEach var="page" begin="1" end="10" step="1">
-						<a class="no-uline" href="#">${page}</a>
-					</c:forEach>
-				</c:when>
-				
-				<c:when test="${totArticles < 20 }">  
-					<c:forEach var="page" begin="1" end="${totArticles/10 + 1 }" step="1">
-						<c:choose>
-							<c:when test="${page == pageNum }">
-								<a class="sel-page" href="${contextPath }/selectInteboardlist.do?section=${section }&pageNum=${page }">${page }</a>
-							</c:when>
-							<c:otherwise>
-								<a class="no-uline" href="${contextPath }/selectInteboardlist.do?section=${section }&pageNum=${page }">${page }</a>
-							</c:otherwise>
-						</c:choose>
-					</c:forEach>
-				</c:when>
-			</c:choose>
-		</c:if>
-		
-	</div> -->
-	
-
-	<br><br>
-	
-	<button type="button"><a class="write-btn" href="javascript:fn_addboard('${isLogOn }','${contextPath }/inteboardform.do', '${contextPath }/login.do')">글 작성</a></button>
-	
-	<!-- <div class="card-header py-3">
-		<input type="text" id="searchKeyword" name="searchKeyword" value="${boardVO.searchKeyword}" style="width: 250px; height: 30px;" placeholder="검색어를 입력하세요."/>
-		<a href="#" onclick="fn_search();" class="btn btn-primary">검색</a>
-	</div> -->
-		
-	
-    
+	<input type="button" class="write-btn" onclick="javascript:fn_addboard('${isLogOn }','${contextPath }/inteboardform.do', '${contextPath }/login.do')" value="글작성">
 </form>
 </body>
 </html>
