@@ -11544,10 +11544,13 @@ body {
 
 .dataTable-wrapper.no-header .dataTable-container {
   border-top: none;
+  
 }
 
 .dataTable-wrapper.no-footer .dataTable-container {
   border-bottom: none;
+  text-align-last: center;
+  width: 1375px;
 }
 
 .dataTable-top {
@@ -11698,4 +11701,34 @@ body {
   width: 20px !important;
   font-size: 0.75rem;
   border-radius: 0.25rem !important;
+}
+/*------------------------------------------공지부분------------------------------------------------------ */
+.NoticeMain{
+width:970px;
+margin: 40px;
+}
+.NoticeContentForm{
+width:970px;
+display: flex;
+}
+.Writer_Cate_Title{
+margin-bottom: 10px;
+}
+.Text{
+margin-left: 27px;
+width: 900px; 
+height:500px;
+resize:none;
+}
+.Btns{
+display: flex;
+margin-top:15px;
+margin-left:63px;
+}
+
+/*------------------------------------------공지리스트------------------------------------------------------ */
+
+.NoticeList{
+width: 1448px;
+margin-left: 63px;
 }

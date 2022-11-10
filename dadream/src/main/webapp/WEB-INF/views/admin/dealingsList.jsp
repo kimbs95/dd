@@ -190,7 +190,7 @@
                                                 </td>
                                                 <td>${dl.dl_Num}</td>
                                                 <td><a
-                                                        href="${contextPath}/admin/adminDlView.do?dl_Num=${dl.dl_Num}">${dl.dl_Title}</a>
+                                                        href="${contextPath}/dealingview.do?dl_Num=${dl.dl_Num}">${dl.dl_Title}</a>
                                                 </td>
                                                 <td>${dl.dl_Form}</a></td>
                                                 <td>${dl.dl_Form2}</td>

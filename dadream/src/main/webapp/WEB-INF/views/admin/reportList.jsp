@@ -174,7 +174,6 @@
                                     <tr>
                                         <th style="width: 3%;">체크</th>
                                         <th>신고번호</th>
-                                        <th>매물번호</th>
                                         <th>신고사유</th>
                                         <th>신고일</th>
                                         <th>처리상태</th>
@@ -188,7 +187,6 @@
                                                     value="${rp.dl_ReportNum}">
                                             </td>
                                             <td>${rp.dl_ReportNum}</td>
-                                            <td>${rp.dl_Num}</td>
                                             <td><a
                                                     href="${contextPath}/admin/reportView.do?rp_Num=${rp.dl_ReportNum}">${rp.rp_Title}</a>
                                             </td>

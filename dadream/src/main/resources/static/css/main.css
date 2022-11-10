@@ -38,16 +38,33 @@
 	            justify-content: center;
 	        }
 	        li button{
-	            width: 100px;
-	           background-color: rgb(0, 0, 0);
-	           color:white;
-	           margin-right: 1px;
-	           height:28px;
-	           border-radius: 3px;
+	          	cursor:pointer;
+				width:100px;
+				height:28px;
+				background:linear-gradient(to bottom, rgb(64,64,64) 5%, rgb(125,80,8) 100%);
+				background-color:#bddbfa;
+				border-radius:5px;
+				margin-left: 3px;
+				border:1px solid black;
+				display:inline-block;
+				cursor:pointer;
+				color:white;
+				font-family:Arial;
+				font-size:13px;
+				/*font-weight:bold;*/
+				padding:2px;
+				text-decoration:none;
+				text-shadow:0px 1px 0px #528ecc;
 	        }
 	        
 	        li button:hover{
 				cursor:pointer;
+				background:linear-gradient(to bottom, rgb(125,80,8) 5%, lightgray 100%);
+				background-color:#80b5ea;
+			}
+			li button:active{
+				position:relative;
+				top:1px;
 			}
 	        #search{
 	            text-align: center;
@@ -67,8 +84,31 @@
 	            
 	        }
 	        .MainSearch{
+				
+				cursor:pointer;
+				width:100px;
+				height:40px;
+				background:linear-gradient(to bottom, rgb(64,64,64) 5%, rgb(125,80,8) 100%);
+				background-color:#bddbfa;
+				border:1px solid black;
+				display:inline-block;
+				cursor:pointer;
+				color:white;
+				font-family:Arial;
+				font-size:17px;
 				font-weight:bold;
+				padding:2px;
+				text-decoration:none;
+				text-shadow:0px 1px 0px #528ecc;
 			}
+			.MainSearch:hover{
+				background:linear-gradient(to bottom, rgb(125,80,8) 5%, lightgray 100%);
+				background-color:#80b5ea;
+	}
+			.MainSearch:active{
+				position:relative;
+				top:1px;
+	}
 /*---------------------------------위치기반리스트---------------------------------------*/	
 		
 	        #mainList{

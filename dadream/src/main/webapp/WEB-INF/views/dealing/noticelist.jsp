@@ -86,8 +86,6 @@
 		</tbody>
 	</table>
 	
-	<!-- <button type="submit" ><a class="write-btn" href="javascript:fn_addnotice('${isLogOn }','${contextPath}/noticeform.do', '${contextPath }/login.do')" style="text-decoration: none;"><p class="cls2">등록</p></a></button> -->
-			<button type="submit" id="notice_add_btn">등록하기</button>
 	
 </form>
 </body>

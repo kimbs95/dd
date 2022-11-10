@@ -172,7 +172,7 @@
                     </div>
                     <div class="">
                         <h3>신고자 : ${rpContents.user_Id}</h3>
-                        <h3>매물번호 : ${rpContents.dealing[0].dl_Num}&nbsp&nbsp매물명 : ${rpContents.dealing[0].dl_Title}</h3>
+                        <h3>매물번호 : <a href="/dealingview.do?dl_Num=${rpContents.dealing[0].dl_Num}">${rpContents.dealing[0].dl_Num}</a>&nbsp&nbsp매물명 : ${rpContents.dealing[0].dl_Title}</h3>
                         <div style="display: flex;">
                             <h3>제목 : ${rpContents.rp_Title}</h3><h5>신고날짜 : ${rpContents.rp_Date}</h5>
                         </div>

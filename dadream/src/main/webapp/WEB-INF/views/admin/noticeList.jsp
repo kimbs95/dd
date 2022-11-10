@@ -69,48 +69,75 @@
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 매출관리
                             </a>
-                                <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseProduct" aria-expanded="false" aria-controls="pagesCollapseProduct">
-                                        상품관리
-                                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                                    </a>
-                                    <div class="collapse" id="pagesCollapseProduct" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
-                                        <nav class="sb-sidenav-menu-nested nav">
-                                            <a class="nav-link" href="#">상품조회</a>
-                                            <a class="nav-link" href="#">상품리뷰관리</a>
-                                        </nav>
-                                    </div>
-                                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseDealing" aria-expanded="false" aria-controls="pagesCollapseDealing">
-                                        매물관리
-                                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                                    </a>
-                                    <div class="collapse" id="pagesCollapseDealing" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
-                                        <nav class="sb-sidenav-menu-nested nav">
-                                            <a class="nav-link" href="${contextPath}/admin/dealingsList.do">매물목록</a>
-                                        </nav>
-                                    </div>
-                                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseMember" aria-expanded="false" aria-controls="pagesCollapseMember">
-                                        회원관리
-                                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                                    </a>
-                                    <div class="collapse" id="pagesCollapseMember" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
-                                        <nav class="sb-sidenav-menu-nested nav">
-                                            <a class="nav-link" href="#">회원조회</a>
-                                        </nav>
-                                    </div>
-                                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseReport" aria-expanded="false" aria-controls="pagesCollapseReport">
-                                        신고관리
-                                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                                    </a>
-                                    <div class="collapse" id="pagesCollapseReport" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
-                                        <nav class="sb-sidenav-menu-nested nav">
-                                            <a class="nav-link" href="${contextPath}/admin/reportList.do">신고내역</a>
-                                        </nav>
-                                    </div>
-                                    <div>   
-                                        <a class="nav-link" href="${contextPath}/admin/noticeList.do">공지관리</a>
-                                    </div>
-                                </nav>
+    
+                            <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
+    
+                                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+                                    data-bs-target="#pagesCollapseProduct" aria-expanded="false"
+                                    aria-controls="pagesCollapseProduct">
+                                    상품관리
+                                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                </a>
+                                <div class="collapse" id="pagesCollapseProduct" aria-labelledby="headingOne"
+                                    data-bs-parent="#sidenavAccordionPages">
+                                    <nav class="sb-sidenav-menu-nested nav">
+                                        <form action="/admin/pro.do" method="POST">
+                                            <p id="proList" class="nav-link">상품조회</p>
+                                        </form>
+                                        <a class="nav-link" href="#">상품리뷰관리</a>
+                                    </nav>
+                                </div>
+                                <script>
+                                    document.addEventListener("DOMContentLoaded", () => {
+                                        document.querySelector("#proList").addEventListener("click", (e) => {
+                                            e.target.parentElement.submit();
+                                        })
+                                        document.querySelector("#proMem").addEventListener("click", (e) => {
+                                            e.target.submit();
+                                        })
+                                    })
+                                </script>
+                                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+                                    data-bs-target="#pagesCollapseDealing" aria-expanded="false"
+                                    aria-controls="pagesCollapseDealing">
+                                    매물관리
+                                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                </a>
+                                <div class="collapse" id="pagesCollapseDealing" aria-labelledby="headingOne"
+                                    data-bs-parent="#sidenavAccordionPages">
+                                    <nav class="sb-sidenav-menu-nested nav">
+                                        <a class="nav-link" href="${contextPath}/admin/dealingsList.do">매물목록</a>
+                                    </nav>
+                                </div>
+                                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+                                    data-bs-target="#pagesCollapseMember" aria-expanded="false"
+                                    aria-controls="pagesCollapseMember">
+                                    회원관리
+                                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                </a>
+                                <div class="collapse" id="pagesCollapseMember" aria-labelledby="headingOne"
+                                    data-bs-parent="#sidenavAccordionPages">
+                                    <nav class="sb-sidenav-menu-nested nav">
+                                        <form id="proMem" class="nav-link" method="POST" action="/admin/member.do">회원조회
+                                        </form>
+                                    </nav>
+                                </div>
+                                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+                                    data-bs-target="#pagesCollapseReport" aria-expanded="false"
+                                    aria-controls="pagesCollapseReport">
+                                    신고관리
+                                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                </a>
+                                <div class="collapse" id="pagesCollapseReport" aria-labelledby="headingOne"
+                                    data-bs-parent="#sidenavAccordionPages">
+                                    <nav class="sb-sidenav-menu-nested nav">
+                                        <a class="nav-link" href="${contextPath}/admin/reportList.do">신고내역</a>
+                                    </nav>
+                                </div>
+    
+                                <a class="nav-link" href="/admin/noticeList.do">공지관리</a>
+                            </nav>
+    
                         </div>
                     </div>
                     <div class="sb-sidenav-footer">
@@ -120,7 +147,7 @@
                 </nav>
             </div>
             <div id="layoutSidenav_content">
-                <main>
+                <main class="NoticeList">
                     <h1>공지사항</h1>
                 <ol class="breadcrumb mb-4">
                     <li class="breadcrumb-item active">Notice Management</li>
