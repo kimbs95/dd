@@ -85,7 +85,7 @@
                 </div>
                 <h3>휴대폰 인증</h3>
                 <div class="userformbtn">
-                    <input type="text" id="user_Phone" name="user_Phone" size="40" /> <button>인증번호 받기</button><br><br>
+                    <input type="text" id="user_Phone" name="user_Phone" size="40" /> <button type="button" id="phoneCheck1">인증번호 받기</button><br><br>
                 </div>
                 <h3>인증번호 입력</h3>
                 <div class="userformbtn">
@@ -116,5 +116,25 @@
 
         </fieldset>
     </form>
+  
+    <script>
+            document.querySelector("#phoneCheck1").addEventListener("click", async (e) =>{
+                
+                let phoneNum =document.querySelector("#user_Phone");
+                let phone = phoneNum.value
+                console.log(phoneNum.value);
+                let phoneCheck = await fetch("/phoneCheck.do",{
+                    method:"post",
+                    headers:{"content-type":"application/json"},
+                    body:JSON.stringify({phone:phone})
+            })
+            if(phoneCheck.status == 200){
+                let phoneRes = await phoneCheck.json();
+                if(phoneRes.res===1){
+                    console.log("메세지 보냈다");
+                }
+            }
+        })
+    </script>
 </body>
 </html>

@@ -30,7 +30,7 @@ request.setCharacterEncoding("UTF-8");
 
   <div class=" slider">
     <!-- 추후 아이디 삭제 -->
-    <div class="slide_item" style="border: 1px solid #ccc;"><img class="bx_slide_image" id="slide_image" src="../image/slide_information.png"></div>
+    <div class="slide_item" ><img class="bx_slide_image" id="slide_image" src="../image/slide_information.png"></div>
     <!-- <div class="slide_item"><img class="bx_slide_image" id="slide_image" src="../image/han.jpg"></div> -->
   </div>
 

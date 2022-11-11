@@ -44,22 +44,19 @@
             </div> -->
             <div class="displayflex">
 
-                <div style="margin-left: 120px;">
+                <div id="df_1">
                     <div class="reviewTitle">
-                        <h4 style="margin-top: 0;">제목</h4>
-                        <input type="text" name="review_Title" id="title" style="width:500px; height: 30px;">
+                        <h4>제목</h4>
+                        <input type="text" name="review_Title" id="title">
                     </div>
                     <div class="review_contents">
                         <div class="warning_msg">5자 이상으로 작성해 주세요.</div>
                         <h4>내용</h4>
-                        <textarea rows="10" id="text" name="review_Text" class="review_textarea"
-                            style="width:500px; height: 250px;"></textarea>
+                        <textarea rows="10" id="text" name="review_Text" class="review_textarea"></textarea>
                     </div>
                 </div>
-
             </div>
-            <button id="save"
-                style="text-align: center; width: 300px; height: 50px; background-color: brown;color: #fff; margin: 100px 400px;">등록하기</button>
+            <button id="save">등록하기</button>
         </form>
         <script>
             document.addEventListener("DOMContentLoaded", () => {

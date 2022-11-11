@@ -74,9 +74,15 @@
         .headerleft {
             display: flex;
         }
+        .headerleft a {
+			width:200px;
+		}
         .ppcursor {
 			cursor: pointer;
 	
+		}
+		.ppcursor li a{
+			margin-top:10px;
 		}
     	.ppcursor li h6 {
 			text-decoration: underline;
@@ -86,7 +92,9 @@
 		.ppcursor li h6:hover{
 			color:gray;
 		}
-		
+		.search{
+			margin-left:50px;
+		}
         .search form {
             display: flex;
             margin-top: 2.5%;
@@ -97,8 +105,12 @@
             width: 350px;
             height: 40px;
         }
+        .search form button{
+			border: 1px solid;
+}
 
         .headerul ul {
+			display:flex;
             margin-top: 2%;
             font-size: 18px;
             height: 22.5px;
@@ -108,13 +120,27 @@
             display: inline-flex;
             font-weight: bold;
             margin-right: 30px;
+            margin-top:4px;
         }
 
         .headerul ul a {
             text-decoration: none;
             color: black;
+            margin-top: 4px;
         }
-
+        .headerul ul h6{
+			margin-top: 4px;
+		}
+        .headerppli{
+			display:block;
+		}
+		#path{
+			height: 30px; 
+			border:none; 
+			outline: none; 
+			font-weight: bold; 
+			font-size: 18px;
+		}
 /* --------------------------------------top버튼------------------------------------ */
         .top {
             text-decoration: none;

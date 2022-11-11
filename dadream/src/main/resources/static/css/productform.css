@@ -156,6 +156,9 @@
 			 .dropzone.dz3.dz-clickable {
 			     padding: 0 20px 20px 20px;
 			 }
+			 .xbox{
+            	display: none;
+        	}
 			
 			 .dropzone {
 			     padding: 0;
@@ -167,4 +170,20 @@
 			 .bds02 input{
 				height:40px;
 				width:100px
+			}
+			
+			.firstH1{
+				margin:20px 0 0 10px; 
+				font: bold;
+			}
+			.dlMainP{
+				width: 300px;
+				border: 1px solid;
+				height: 40px;
+				text-align: center;
+				line-height: 40px;
+			}
+			.imgh1{
+				font-weight: bold;
+				margin-top: 20px;
 			}

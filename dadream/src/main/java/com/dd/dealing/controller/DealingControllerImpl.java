@@ -20,6 +20,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FileUtils;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.jsoup.Connection.Method;
 import org.jsoup.Connection.Response;
 import org.jsoup.Jsoup;
@@ -56,6 +58,8 @@ import com.dd.dealing.vo.ReportVO;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+
+import net.nurigo.java_sdk.api.Message;
 
 @Controller("dealingController")
 public class DealingControllerImpl {
@@ -128,6 +132,35 @@ public class DealingControllerImpl {
 		String viewName = (String) request.getAttribute("viewName");
 		System.out.println("interceptor에서 온 viewName:" + viewName);
 		return viewName;
+	}
+
+//	핸드폰 인증
+	@RequestMapping(value = "/phoneCheck.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@ResponseBody
+	private Map<String, Object> phoneCheck(HttpServletRequest req, @RequestBody String phone) throws Exception {
+//		서버에서 받아온 api 키 
+		String api_Key = "NCS1HCKPZLWBLHYF";
+		String api_Secret = "K36DHC51VMA3TXP9QANEU6CTUYPFKX9Q";
+		Message coolsms = new Message(api_Key, api_Secret);
+		JSONParser jsonParser = new JSONParser();
+		JSONObject jsonObject = (JSONObject) jsonParser.parse(phone);
+		String phoneNum = (String) jsonObject.get("phone");
+		System.out.println("phone " + phoneNum);
+
+		HashMap<String, String> set = new HashMap<String, String>();
+
+		set.put("to", phoneNum);// 수신번호
+		set.put("from", "01097402124"); // 발신번호
+		set.put("type", "SMS"); // 문자타입
+		set.put("text", "저 먼저 가봐도 될까요?");// 문자내용
+
+		JSONObject result = (JSONObject) coolsms.send(set);// 보내기&전송결과받기
+		System.out.println(result);
+		System.out.println(set);
+
+		Map<String, Object> map = new HashMap<>();
+		map.put("res", 1);
+		return map;
 	}
 
 	/* 회원탈퇴 */

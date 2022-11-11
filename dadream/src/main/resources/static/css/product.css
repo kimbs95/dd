@@ -101,6 +101,9 @@
 	      /* 현재 슬라이드 색상은 투명도 없이 */
 	      color: #7fb5ff;
     }
+    .productcontent{
+		padding: 5px 0 0 5px;
+	}
     .pro_category_menu {
 	      display: flex;
 	      margin: 15px 0;
@@ -129,7 +132,18 @@
 		webkit-box-shadow: none;
 	    box-shadow: none;
 	}
-    
-    
+    .scroll{
+		margin-left: 270px;
+	}
+	.pro_category_padding{
+		width: 850px;
+		padding: 5px 5px;
+	}
+    .imgStyle{
+		border:1px solid #ccc;
+	}
+	.slid_item{
+		border: 1px solid #ccc;
+	}
     
     

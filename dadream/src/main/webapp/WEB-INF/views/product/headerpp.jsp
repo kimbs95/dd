@@ -36,31 +36,30 @@
             <!-- header -->
             <header class="header">
                 <div class="headerleft">
-                    <a href="${contextPath}/productmain.do" style="width:200px;"><img class="Main_Logo"
+                    <a href="${contextPath}/productmain.do" ><img class="Main_Logo"
                             src="../image/메인로고.png" alt="다드림 메인로고"></a>
                 </div>
-                <div class="search" style="margin-left:50px">
+                <div class="search" >
                     <form action="/product.do" method="get">
                         <input type="search" name="product_Name" placeholder="검색어 입력" style="appearance:auto ;">
-                        <button type="submit" style="border: 1px solid;">검색</button>
+                        <button type="submit" >검색</button>
                     </form>
                 </div>
                 <div class="headerul">
-                    <ul style="display:flex">
-                        <li style="margin-top: 4px;">
+                    <ul>
+                        <li>
                             <a href="${contextPath}/noticelist.do">
                                 공지사항
                             </a>
                         </li>
-                        <li style="margin-top: 4px;">
+                        <li>
                             <a href="/inteboardlist.do">
                                 인테리어
                             </a>
                         </li>
                         <li>
                             <form method="POST" id="result">
-                                <select name="path" id="path" onchange="search()"
-                                    style="height: 30px; border:none; outline: none; font-weight: bold; font-size: 18px;">
+                                <select name="path" id="path" onchange="search()">
                                     <option style="text-align: center;" value="">메뉴</option>
                                     <option value="${contextPath}/productform.do">상품등록</option>
                                     <option value="${contextPath}/productmanager.do">상품관리</option>
@@ -86,10 +85,10 @@
                         <c:choose>
                             <c:when test="${isLogOn == true  && member!= null}">
                                 <li>
-                                    <h6 style="margin-top: 4px;">${member.user_Name}님</h6>
+                                    <h6>${member.user_Name}님</h6>
                                 </li>
                                 <a href="${contextPath}/logout.do">
-                                    <li style="margin-top: 4px;">로그아웃</li>
+                                    <li >로그아웃</li>
                                 </a>
                             </c:when>
                             <c:otherwise>
@@ -113,17 +112,17 @@
             <!-- header -->
             <header class="header">
                 <div class="headerleft">
-                    <a href="${contextPath}/productmain.do" style="width:200px;"><img class="Main_Logo"
+                    <a href="${contextPath}/productmain.do" ><img class="Main_Logo"
                             src="../image/메인로고.png" alt="다드림 메인로고"></a>
                 </div>
-                <div class="search" style="margin-left:50px">
+                <div class="search" >
                     <form action="/product.do" method="get">
                         <input type="search" name="product_Name" placeholder="검색어 입력" style="appearance:auto ;">
-                        <button type="submit" style="border: 1px solid;">검색</button>
+                        <button type="submit" >검색</button>
                     </form>
                 </div>
                 <div class="headerul">
-                    <ul style="display: flex;">
+                    <ul>
                         <a href="${contextPath}/noticelist.do">
                             <li>공지사항</li>
                         </a>
@@ -136,18 +135,13 @@
                             <c:when test="${isLogOn == true  && member!= null}">
                                 <div class="ppcursor">
                                     <li>
-                                        <a href="/cartweb.do" style="margin-top:10px">
+                                        <a href="/cartweb.do" >
                                             장바구니
                                         </a>
                                     </li>
-                                    <li class="headerppli" style="display: block;">
+                                    <li class="headerppli">
                                         <h6>${member.user_Name}님</h6>
-                                        <!-- <div class="headerpp hidee">
-                                            <a href="/cartweb.do" style="margin-top:10px">
-                                                장바구니
-                                            </a>
-
-                                        </div> -->
+                                
                                     </li>
                                     
                                 </div>
@@ -180,17 +174,17 @@
             <!-- header -->
             <header class="header">
                 <div class="headerleft">
-                    <a href="${contextPath}/productmain.do" style="width:200px;"><img class="Main_Logo"
+                    <a href="${contextPath}/productmain.do" ><img class="Main_Logo"
                             src="../image/메인로고.png" alt="다드림 메인로고"></a>
                 </div>
-                <div class="search" style="margin-left:50px">
+                <div class="search" >
                     <form action="/product.do" method="get">
                         <input type="search" name="product_Name" placeholder="검색어 입력" style="appearance:auto ;">
-                        <button type="submit" style="border: 1px solid;">검색</button>
+                        <button type="submit" >검색</button>
                     </form>
                 </div>
                 <div class="headerul">
-                    <ul style="display: flex;">
+                    <ul >
                         <a href="${contextPath}/noticelist.do">
                             <li>공지사항</li>
                         </a>
@@ -213,7 +207,7 @@
                                     </a>
                                 </li>
                                 <div class="ppcursor">
-                                    <li class="headerppli" style="display: block;">
+                                    <li class="headerppli">
                                         <h6>${member.user_Name}님</h6>
                                     </li>
                                 </div>

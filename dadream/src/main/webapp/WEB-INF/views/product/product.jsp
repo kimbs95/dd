@@ -31,18 +31,16 @@ request.setCharacterEncoding("UTF-8");
   </div>
   <!-- 카테고리상품들 -->
   <!-- 함부로 inlinecss 건드리면 안돼요 깨져용 -->
-  <div class=scroll style="margin-left: 270px;">
+  <div class=scroll >
     <c:forEach var="product" items="${productsList}">
-      <div class="pro_category_padding" style="width: 850px; padding: 5px 5px;">
+      <div class="pro_category_padding" >
         <div class="pro_category_content">
           <div class="productimg">
             <a href="${contextPath}/productview.do?product_Num=${product.product_Num}">
-              <!-- <img src="../${contextPath}/product/${product.user_Id}/${product.product_Image}" alt="상품사진" width="200px" height="170px" style="margin-right: 10px;"> -->
-              <img src="/product/${product.user_Id}/${product.product_Image}" alt="상품사진" width="200px" height="170px"
-                style="border:1px solid #ccc;">
+              <img class="imgStyle" src="/product/${product.user_Id}/${product.product_Image}" alt="상품사진" width="200px" height="170px">
             </a>
           </div>
-          <div class="productcontent" style="padding: 5px 0 0 5px;">
+          <div class="productcontent" >
             <h1>상품명 : ${product.product_Name}</h1>
             <h3><span>가격 : </span>${product.product_Price}</h3>
             <p>상품 설명 : ${product.product_Content}</p>

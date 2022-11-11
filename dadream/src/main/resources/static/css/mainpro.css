@@ -89,6 +89,10 @@
             border:1px solid black;
             
         }
+        .PRONAME{
+			background: none; 
+			border: none;
+		}
 
 /*------------------------------ 인테리어 목록------------------------------ */
 		.pro_myhouse_introduce ul{

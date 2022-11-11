@@ -15,49 +15,9 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>상품관리</title>
-        <style>
-            #productInfo {}
-
-            .proImage {
-                width: 222px;
-                height: 222px;
-            }
-
-            #proform {
-                /* display: flex; */
-                
-            }
-            #proform>*{
-                margin: 10px;
-            }
-
-            .sun {
-                display: flex;
-                border-bottom: 1px solid #000;
-                margin: 10px;
-                padding: 10px;
-            }
-            #myproduct{
-                width: 700px;
-            }
-            .modelete{
-                display: flex;
-
-            }
-            .modelete > form{
-                margin-right: 10px;
-            }
-            .modman{
-                font-weight: bold;
-                font-size: 30px;
-            }
-            #myproduct{
-                border: 1px solid #000;
-                margin-top: 10px;
-            }
         
-        </style>
         <!-- css -->
+        <link rel="stylesheet" href="/css/productmanager.css">
         <!-- js -->
         <script src="/js/product/productmanager.js" defer></script>
     </head>

@@ -32,7 +32,7 @@
 
                 <form action="/product.do" class="submit">
                     <li onclick="">
-                        <button style="background: none; border: none;" type="submit" name="product_Name" value="책상">
+                        <button class="PRONAME" type="submit" name="product_Name" value="책상">
                             <!-- <img src="../메인 카테고리 사진/책상.png"> -->
                             책상
                         </button>
@@ -44,7 +44,7 @@
             <div class="pro_category_image">
                 <form action="/product.do" class="submit">
                     <li>
-                        <button style="background: none; border: none;" type="submit" name="product_Name" value="침대">
+                        <button class="PRONAME" type="submit" name="product_Name" value="침대">
                             <!-- <img src="../메인 카테고리 사진/침대.png"> -->
                             침대
                         </button>
@@ -56,7 +56,7 @@
             <div class="pro_category_image">
                 <form action="/product.do" class="submit">
                     <li>
-                        <button style="background: none; border: none;" type="submit" name="product_Name" value="의자">
+                        <button class="PRONAME" type="submit" name="product_Name" value="의자">
                             <!-- <img src="../메인 카테고리 사진/의자.png"> -->
                             의자
                         </button>
@@ -68,7 +68,7 @@
             <div class="pro_category_image">
                 <form action="/product.do" class="submit">
                     <li>
-                        <button style="background: none; border: none;" type="submit" name="product_Name" value="스탠드">
+                        <button class="PRONAME" type="submit" name="product_Name" value="스탠드">
                             <!-- <img src="../메인 카테고리 사진/스텐드.png"> -->
                             스텐드
                         </button>
@@ -80,7 +80,7 @@
             <div class="pro_category_image">
                 <form action="/product.do" class="submit">
                     <li>
-                        <button style="background: none; border: none;" type="submit" name="product_Name" value="거울">
+                        <button class="PRONAME" type="submit" name="product_Name" value="거울">
                             <!-- <img src="../메인 카테고리 사진/거울.png"> -->
                             거울
                         </button>
@@ -92,7 +92,7 @@
             <div class="pro_category_image">
                 <form action="/product.do" class="submit">
                     <li>
-                        <button style="background: none; border: none;" type="submit" name="product_Name" value="서랍장">
+                        <button class="PRONAME" type="submit" name="product_Name" value="서랍장">
                             <!-- <img src="../메인 카테고리 사진/서랍장.png"> -->
                             서랍장
                         </button>
@@ -104,7 +104,7 @@
             <div class="pro_category_image">
                 <form action="/product.do" class="submit">
                     <li>
-                        <button style="background: none; border: none;" type="submit" name="product_Name" value="소파">
+                        <button class="PRONAME" type="submit" name="product_Name" value="소파">
                             <!-- <img src="../메인 카테고리 사진/소파.png"> -->
                             소파
                         </button>
@@ -116,7 +116,7 @@
             <div class="pro_category_image">
                 <form action="/product.do" class="submit">
                     <li>
-                        <button style="background: none; border: none;" type="submit" name="product_Name" value="식탁">
+                        <button class="PRONAME" type="submit" name="product_Name" value="식탁">
                             <!-- <img src="../메인 카테고리 사진/식탁.png"> -->
                             식탁
                         </button>
@@ -128,7 +128,7 @@
             <div class="pro_category_image">
                 <form action="/product.do" class="submit">
                     <li>
-                        <button style="background: none; border: none;" type="submit" name="product_Name" value="옷장">
+                        <button class="PRONAME"  type="submit" name="product_Name" value="옷장">
                             <!-- <img src="../메인 카테고리 사진/옷장.png"> -->
                             옷장
                         </button>

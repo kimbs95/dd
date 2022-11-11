@@ -23,11 +23,7 @@
 
     <!-- css -->
     <link rel="stylesheet" href="/css/productform.css">
-    <style>
-        .xbox{
-            display: none;
-        }
-    </style>
+   
     <!-- js -->
     <script src="/js/product/productform.js" defer></script>
 </head>
@@ -35,7 +31,7 @@
 <body>
 
     <div class="first">
-        <h1 style="margin:20px 0 0 10px; font: bold;">상품등록</h1>
+        <h1 class="firstH1" >상품등록</h1>
         <br><br><br><br>
         <form class="product_form" method="post" action="/productpost.do" enctype="multipart/form-data">
             <div class="middle">
@@ -47,11 +43,9 @@
                             accept="image/*" multiple>
                         <img id="preview" class="xbox" src="" width=500 height=500 >
                         <label for="product_Image">
-                            <p
-                                style="width: 300px;border: 1px solid;height: 40px;text-align: center;line-height: 40px;">
-                                클릭 후 이미지 를 골라주세요</p>
+                            <p class="dlMainP">클릭 후 이미지 를 골라주세요</p>
                         </label>
-                        <h1 class="imgh1" style="font-weight: bold;margin-top: 20px;"></h1>
+                        <h1 class="imgh1"></h1>
                     </div>
                 </div>
 
