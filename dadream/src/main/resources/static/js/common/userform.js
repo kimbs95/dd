@@ -57,6 +57,8 @@ function check() {
 		return false;
 	} else if (ID !== 0) {
 		alert("아이디 중복 체크 하여 주십쇼")
+	}else if(success !== 1 ){
+		alert("휴대폰 인증을 하여주십쇼")
 	}
 	else {
 		document.querySelector("#userform").submit();

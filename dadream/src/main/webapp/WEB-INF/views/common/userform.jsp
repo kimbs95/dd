@@ -89,7 +89,7 @@
                 </div>
                 <h3>인증번호 입력</h3>
                 <div class="userformbtn">
-                    <input type="text" id="phoneCheck" name="휴대폰인증" size="40" /> <button>인증번호 확인</button>
+                    <input type="text" id="phoneCheck" name="휴대폰인증" size="40" /> <button type="button" id="tryCheck">인증번호 확인</button>
                 </div>
 
                 <!--판매자 ,중개사 전용 태그-->
@@ -118,10 +118,20 @@
     </form>
   
     <script>
+            let checkNum="";
+            let success = 0;
             document.querySelector("#phoneCheck1").addEventListener("click", async (e) =>{
-                
                 let phoneNum =document.querySelector("#user_Phone");
                 let phone = phoneNum.value
+                
+                if(phone === ""){
+                    alert("전화번호를 입력해주세요")
+                    return;
+                }
+                if(phone.length !== 11){
+                    alert("전화번호를 확인해주십쇼")
+                    return;
+                }
                 console.log(phoneNum.value);
                 let phoneCheck = await fetch("/phoneCheck.do",{
                     method:"post",
@@ -129,11 +139,27 @@
                     body:JSON.stringify({phone:phone})
             })
             if(phoneCheck.status == 200){
-                let phoneRes = await phoneCheck.json();
-                if(phoneRes.res===1){
-                    console.log("메세지 보냈다");
-                }
+                alert("인증번호가 전송 되었습니다.")
+                let response= await phoneCheck.json();
+                checkNum = response.res;
             }
+        })
+        // 인증번호 확인버튼
+        document.querySelector("#tryCheck").addEventListener("click",()=>{
+            let phoneCheck = document.querySelector("#phoneCheck")
+            if(phoneCheck.value ===""){
+                alert("인증번호를 입력해주세요");
+                return;
+            }
+            if(phoneCheck.value !== checkNum){
+                alert("인증번호를 다시한번 확인해주십쇼");
+                return;
+            }else{
+                alert("확인되었습니다.")
+                success = 1;
+                return;
+            }
+
         })
     </script>
 </body>

@@ -148,18 +148,24 @@ public class DealingControllerImpl {
 		System.out.println("phone " + phoneNum);
 
 		HashMap<String, String> set = new HashMap<String, String>();
+//		인증번호
+		String random = "";
+		for (int i = 0; i < 4; i++) {
+			int randomnum = (int) Math.floor(Math.random() * 10) + 0;
+			random += randomnum;
+		}
+		System.out.println(random);
 
 		set.put("to", phoneNum);// 수신번호
 		set.put("from", "01097402124"); // 발신번호
 		set.put("type", "SMS"); // 문자타입
-		set.put("text", "저 먼저 가봐도 될까요?");// 문자내용
+		set.put("text", "DaDream 입니다. 인증번호는 [ " + random + " ] 입니다");// 문자내용
 
 		JSONObject result = (JSONObject) coolsms.send(set);// 보내기&전송결과받기
 		System.out.println(result);
-		System.out.println(set);
 
 		Map<String, Object> map = new HashMap<>();
-		map.put("res", 1);
+		map.put("res", random);
 		return map;
 	}
 
